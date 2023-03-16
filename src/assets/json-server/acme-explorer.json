@@ -1,0 +1,28 @@
+{
+  "actors": [
+    {
+      "id": "1",
+      "name": "Alfredo",
+      "surname": "Perez",
+      "email": "alfredpez@explorer.com",
+      "password": "explorer",
+      "phone": "641856231",
+      "address": "Calle Imaginaria de la Santidad 2",
+      "role": [
+        "Explorer"
+      ],
+      "validated": true
+    },
+    {
+      "name": "Pedro",
+      "surname": "Picadpiedra",
+      "email": "pedropicad@explorer.com",
+      "password": "explorer",
+      "phone": "657125413",
+      "address": "Calle imaginaria",
+      "role": "EXPLORER",
+      "validated": "true",
+      "id": "GhXpjNt"
+    }
+  ]
+}

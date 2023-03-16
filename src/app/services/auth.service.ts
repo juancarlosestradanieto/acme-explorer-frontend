@@ -22,54 +22,67 @@ export class AuthService {
   ) { }
 
   registerUser(actor: Actor) {
-    console.log(actor);
-    /*
-        return new Promise<any>((resolve, reject) => {
-          this.fireAuth.auth.createUserWithEmailAndPassword(actor.email, actor.password)
-            .then(_ => {
-              const headers = new HttpHeaders();
-              headers.append('Content-Type', 'application/json');
-              const url = `${environment.backendApiBaseURL + '/actors'}`;
-              const body = JSON.stringify(actor);
-              this.http.post(url, body, httpOptions).toPromise()
-                .then(res => {
-                  resolve(res);
-                }, err => {
-                  reject(err);
-                });
-            }).catch(err => {
-              reject(err);
-            });
-        });
-        */
-  }
-
-  getRoles(): string[] {
-    return ['EXPLORER', 'MANAGER', 'ADMINISTRATOR'];
-  }
-
-  login(email: string, password: string) {
-    console.log(email + " - " + password);
-    /*return new Promise<any>((resolve, reject) => {
-      this.fireAuth.auth.signInWithEmailAndPassword(email, password)
-        .then(_ => {
-          resolve();
-        }).catch(err => {
+    return new Promise<any>((resolve, reject) => {
+      const headers = new HttpHeaders();
+      headers.append('Content-Type', 'application/json');
+      const url = `${environment.backendApiBaseURL + '/actors'}`;
+      console.log(actor);
+      const body = JSON.stringify(actor);
+      console.log(body);
+      this.http.post(url, body, httpOptions).toPromise()
+        .then(res => {
+          resolve(res);
+        }, err => {
           reject(err);
         });
-    });*/
-  }
+    });
+  /*
+      return new Promise<any>((resolve, reject) => {
+        this.fireAuth.auth.createUserWithEmailAndPassword(actor.email, actor.password)
+          .then(_ => {
+            const headers = new HttpHeaders();
+            headers.append('Content-Type', 'application/json');
+            const url = `${environment.backendApiBaseURL + '/actors'}`;
+            const body = JSON.stringify(actor);
+            this.http.post(url, body, httpOptions).toPromise()
+              .then(res => {
+                resolve(res);
+              }, err => {
+                reject(err);
+              });
+          }).catch(err => {
+            reject(err);
+          });
+      });
+      */
+}
 
-  logout() {
-    console.log("logged out");
-    /*return new Promise<any>((resolve, reject) => {
-      this.fireAuth.auth.signOut()
+getRoles(): string[] {
+  return ['EXPLORER', 'MANAGER', 'ADMINISTRATOR'];
+}
+
+login(email: string, password: string) {
+  console.log(email + " - " + password);
+  /*return new Promise<any>((resolve, reject) => {
+    this.fireAuth.auth.signInWithEmailAndPassword(email, password)
       .then(_ => {
         resolve();
       }).catch(err => {
         reject(err);
       });
-    });*/
-  }
+  });*/
+}
+
+logout() {
+  console.log("logged out");
+  /*return new Promise<any>((resolve, reject) => {
+    this.fireAuth.auth.signOut()
+    .then(_ => {
+      resolve();
+    }).catch(err => {
+      reject(err);
+    });
+  });*/
+}
 
 }
