@@ -23,6 +23,28 @@
       "role": "EXPLORER",
       "validated": "true",
       "id": "GhXpjNt"
+    },
+    {
+      "name": "Juan",
+      "surname": "Monedero",
+      "email": "juanmon@manager.com",
+      "password": "manager",
+      "phone": "456781238",
+      "address": "Calle claramente imaginaria",
+      "role": "MANAGER",
+      "validated": "true",
+      "id": "kEi1CDF"
+    },
+    {
+      "name": "Carlos ",
+      "surname": "Ramirez",
+      "email": "carlosram@admin.com",
+      "password": "administrator",
+      "phone": "426759183",
+      "address": "Calle no imaginaria",
+      "role": "ADMINISTRATOR",
+      "validated": "true",
+      "id": "ShfzGEg"
     }
   ]
 }

@@ -26,9 +26,9 @@ export class AuthService {
       const headers = new HttpHeaders();
       headers.append('Content-Type', 'application/json');
       const url = `${environment.backendApiBaseURL + '/actors'}`;
-      console.log(actor);
+      //console.log(actor);
       const body = JSON.stringify(actor);
-      console.log(body);
+      //console.log(body);
       this.http.post(url, body, httpOptions).toPromise()
         .then(res => {
           resolve(res);
