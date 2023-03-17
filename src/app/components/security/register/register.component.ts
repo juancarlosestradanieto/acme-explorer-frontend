@@ -15,7 +15,8 @@ export class RegisterComponent {
 
   constructor(
     private authService: AuthService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {
     this.roleList = this.authService.getRoles();
     this.registrationForm = this.createForm();
@@ -38,16 +39,27 @@ export class RegisterComponent {
 
   onRegister() {
     this.authService.registerUser(this.registrationForm.value)
-      /*.then(res => {
+      .then(res => {
         this.authService.registerUser(this.registrationForm.value)
           .then(res => {
             console.log(res);
+            this.cleanForm();
+            this.goLogin();
+
           }, err => {
             console.log(err);
           });
-      })*/
+      })
       ;
   }
 
+  cleanForm() {
+    this.registrationForm.reset();
+  }
+
+  //!Esto se cambiará en el futuro, ya que una vez que te registrar no será necesario ir al Login...o no (por ver)
+  goLogin() {
+    this.router.navigate(['/login']);
+  }
 
 }
