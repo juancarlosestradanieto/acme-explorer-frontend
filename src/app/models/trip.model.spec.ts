@@ -1,4 +1,4 @@
-import Trip from './trip.model';
+import {Trip} from './trip.model';
 
 describe('Trip', () => {
   it('should create an instance', () => {
