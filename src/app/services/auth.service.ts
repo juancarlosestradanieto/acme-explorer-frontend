@@ -42,11 +42,16 @@ export class AuthService {
       );
       const headers = new HttpHeaders();
       headers.append('Content-Type', 'application/json');
+      console.log("environment.backendApiBaseURL "+environment.backendApiBaseURL);
       const url = `${environment.backendApiBaseURL + '/actors'}`;
       const body = JSON.stringify(actor);
 
       this.http.post<any>(url, body, httpOptions).subscribe({
-        next: (_) => {window.alert('Registro Realizado Correctamente!')},
+        next: (_) => {
+          window.alert('Registro Realizado Correctamente!');
+          console.log("Prueba" , _);
+          //return _;
+       },
         error: (error_1) => {
           console.error('There was an error!', error_1);
         },

@@ -38,19 +38,17 @@ export class RegisterComponent {
   }
 
   onRegister() {
+
     this.authService.registerUser(this.registrationForm.value)
       .then(res => {
-        this.authService.registerUser(this.registrationForm.value)
-          .then(res => {
-            console.log(res);
-            this.cleanForm();
-            this.goLogin();
+        console.log(res);
+        this.cleanForm();
+        this.goLogin();
 
-          }, err => {
-            console.log(err);
-          });
-      })
-      ;
+      }, err => {
+        console.log(err);
+      });
+
   }
 
   cleanForm() {
