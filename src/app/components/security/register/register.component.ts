@@ -38,8 +38,6 @@ export class RegisterComponent {
   }
 
   onRegister() {
-    this.authService.registerUser(this.registrationForm.value)
-      .then(res => {
         this.authService.registerUser(this.registrationForm.value)
           .then(res => {
             console.log(res);
@@ -49,7 +47,6 @@ export class RegisterComponent {
           }, err => {
             console.log(err);
           });
-      })
       ;
   }
 
