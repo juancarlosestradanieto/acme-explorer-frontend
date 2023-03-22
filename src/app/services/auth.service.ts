@@ -58,6 +58,7 @@ export class AuthService {
 
   async registerUser(actor: Actor) {
 
+
     //? localStorage.removeItem('token');
     //? localStorage.removeItem('user');
     //? this.user = null;
@@ -140,6 +141,7 @@ export class AuthService {
         console.log("AuthService->logout: then response ", response);
         resolve(response);
 
+
       }).catch(err => {
 
         console.log("AuthService->logout: catch err", err);
@@ -147,6 +149,7 @@ export class AuthService {
 
       });
     });
+
 
   }
 
