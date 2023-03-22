@@ -100,28 +100,6 @@
       "role": "EXPLORER",
       "validated": "true",
       "id": "6DDe0jT"
-    },
-    {
-      "name": "asdadsasd",
-      "surname": "adasd",
-      "email": "juan2@gmail.com",
-      "password": "123456",
-      "phone": "asads",
-      "address": "asda",
-      "role": "EXPLORER",
-      "validated": "true",
-      "id": "tr5YN2t"
-    },
-    {
-      "name": "asdads",
-      "surname": "asdasd",
-      "email": "jcen2@gmail.com",
-      "password": "123456",
-      "phone": "asdasd",
-      "address": "asdasd",
-      "role": "ADMINISTRATOR",
-      "validated": "true",
-      "id": "KzBgUyZ"
     }
   ]
 }

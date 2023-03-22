@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-register',
@@ -27,14 +28,18 @@ export class RegisterComponent {
   ngOnInit(): void { }
 
   createForm() {
+
+    let production = environment.production;
+    console.log("production ", production);
+
     return this.fb.group({
-      name: 'test',
-      surname: 'test',
-      email: 'backend3@gmail.com',
-      password: '123456',
-      phone: '123456',
-      address: 'test',
-      role: ['EXPLORER'],
+      name: (production == true) ? '' : 'test',
+      surname: (production == true) ? '' : 'test',
+      email: (production == true) ? '' : 'test@test.test',
+      password: (production == true) ? '' : '123456',
+      phone: (production == true) ? '' : 'test',
+      address: (production == true) ? '' : 'test',
+      role: (production == true) ? [] : ['EXPLORER'],
       validated: true
     });
   }
