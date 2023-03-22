@@ -14,11 +14,18 @@ import { AngularFireModule} from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth'; 
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore'; 
 import { environment } from '../environments/environment';
+import { HeaderComponent } from './components/master/header/header.component';
+import { NotFoundComponent } from './components/shared/not-found/not-found.component';
+import { AllTripsComponent } from './components/pages/trips/all-trips/all-trips.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    HeaderComponent,
+    NotFoundComponent,
+    AllTripsComponent
   ],
   imports: [
     BrowserModule,

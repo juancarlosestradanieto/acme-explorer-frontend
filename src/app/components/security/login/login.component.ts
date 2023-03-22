@@ -10,10 +10,16 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  error_message!: string;
+  success_message!: string;
+
   constructor(
     private authService: AuthService,
     private router: Router
-  ) { }
+  ) 
+  { 
+    
+  }
 
   ngOnInit(): void { }
 
@@ -22,13 +28,41 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(form: NgForm) {
+
+    this.success_message = "";
+    this.error_message = "";
+
     const email = form.value.email;
     const password = form.value.password;
+
+    console.log("LoginComponent->onlogin email", email);
+    console.log("LoginComponent->onlogin password", password);
+
     this.authService.login(email, password)
-    /*.then(_ => {
+    .then(response => {
+
+      console.log("LoginComponent->onlogin then response", response);
+      let refreshToken = response.refreshToken;
+      console.log("LoginComponent->onlogin refreshToken", refreshToken);
+
+      this.success_message = `The user has been authenticated in firebase`;
+
       form.reset();
+      
+      this.goToTripList();
+      
     }).catch((err) => {
-      console.log(err);
-    });*/
+
+      console.log("LoginComponent->onlogin catch err", err);
+      this.error_message = err.message;
+
+    });
+
   }
+
+  goToTripList() 
+  {
+    this.router.navigate(['/trip-list']);
+  }
+
 }
