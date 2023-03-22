@@ -42,6 +42,7 @@ export class RegisterComponent {
     this.authService.registerUser(this.registrationForm.value)
       .then(res => {
         console.log(res);
+        window.alert('Registro Realizado Correctamente!');
         this.cleanForm();
         this.goLogin();
 

@@ -87,6 +87,415 @@
       "role": "EXPLORER",
       "validated": "true",
       "id": 8
+    },
+    {
+      "name": "fdhsehdsrjedrfkdrktgfrltgiygh424",
+      "surname": "ewghwhshsrhjrtdrjdefkrjfd784",
+      "email": "fdhseh@explorer78.com",
+      "password": "explorer",
+      "phone": "145236789",
+      "address": "aFSDGFHGHJGLGFDSDDNMNJ",
+      "role": "EXPLORER",
+      "validated": "true",
+      "id": 9
+    },
+    {
+      "name": "drhtjmyiyjthrgdsfnytf",
+      "surname": "erjtryu,il.,mhnbfgmjhngbf",
+      "email": "maetrhhhtrhtrtjjrjnager@explorer.com",
+      "password": "explorer",
+      "phone": "trytnhjhgfhgfwerybrerhbnytfgdsf",
+      "address": "rtdgfmhnbvfhyumytrhbfdc",
+      "role": "EXPLORER",
+      "validated": "true",
+      "id": 10
+    },
+    {
+      "name": "ewretjythgfaesnfd",
+      "surname": "bewfuibewuiwebiuwveiwevkwew",
+      "email": "hwefibweiuwfebiwfebfwwe@gaaaaaaaaaaaaamail.com",
+      "password": "explorer",
+      "phone": "nuiefwbuiweubwefuibfiukwef",
+      "address": "hwefibweiuwfebiwfebfwwe",
+      "role": "EXPLORER",
+      "validated": "true",
+      "id": 11
+    },
+    {
+      "name": "thetrgrhreghdrhr",
+      "surname": "grerrhhrreghrgegrherg",
+      "email": "regegrgreergergerergreh123@wffwgwg.com",
+      "password": "manager",
+      "phone": "gregreegrreggreegregtr",
+      "address": "regegrgreergergerergreh",
+      "role": "EXPLORER",
+      "validated": "true",
+      "id": 12
+    },
+    {
+      "name": "hykgygyjtftttjrtjr",
+      "surname": "aawawewaeewwe",
+      "email": "manpoweuoituwyiyprypwoyipiowywryager@gmail.com",
+      "password": "manager",
+      "phone": "adawwaaeaweaew",
+      "address": "awewarefeae",
+      "role": "EXPLORER",
+      "validated": "true",
+      "id": 13
+    },
+    {
+      "name": "efeef",
+      "surname": "efefeff",
+      "email": "4564123655jdjjdjdjkdfefe@gmail.com",
+      "password": "manager",
+      "phone": "egegegege",
+      "address": "egeggeegegeg",
+      "role": "EXPLORER",
+      "validated": "true",
+      "id": 14
+    },
+    {
+      "_id": "0",
+      "_version": 0,
+      "_trips": [],
+      "_name": "Prueba explorer",
+      "_surname": "Prueba",
+      "_email": "210rgrrre3@explorer.com",
+      "_password": "explorer",
+      "_phone": "123456789",
+      "_address": "Calle prueba",
+      "_role": [
+        "EXPLORER"
+      ],
+      "_validated": true,
+      "id": 15
+    },
+    {
+      "name": "egrrtjyjyjyukjyerewew",
+      "surname": "errhethhyjukuukkuyer",
+      "email": "m1ew55wanageewrerwwtetewrtr@gmail.com",
+      "password": "manager",
+      "phone": "thrthrjyytkulklierrerg",
+      "address": "rrehhtujikiilguftgrsshttr",
+      "role": "MANAGER",
+      "validated": "true",
+      "id": 16
+    },
+    {
+      "name": "thjtfhtdhthdth",
+      "surname": "rdythdhtthrtrjtrtrj",
+      "email": "manjyyjttyfuftyjfyjtjtfyag4534224237er@gmail.com",
+      "password": "manager",
+      "phone": "hdstththtrhtrutrjtrjetrh",
+      "address": "ryeesrhseyrehyreshyerrehyery",
+      "role": "EXPLORER",
+      "validated": "true",
+      "id": 17
+    },
+    {
+      "name": "jdjdkdkdkdkfkfgk",
+      "surname": "kfsdkfskfkfjkfdfjdfsjk",
+      "email": "mlfrkogrotrrhhrhanag596156161986er@gmail.com",
+      "password": "manager",
+      "phone": "iqiowoeorkdjdaj",
+      "address": "jasxjjdswkfekgfekegmjge",
+      "role": "ADMINISTRATOR",
+      "validated": "true",
+      "id": 18
+    },
+    {
+      "name": "fgfrgrehr",
+      "surname": "rejujtje",
+      "email": "mareerjrtrkrjrjtrktjtryrkger@gmail.com",
+      "password": "manager",
+      "phone": "etrjtjjtr",
+      "address": "erjhrtttrjr",
+      "role": "ADMINISTRATOR",
+      "validated": "true",
+      "id": 19
+    },
+    {
+      "name": "rytrjrrerrehjurejhre",
+      "surname": "rerejttjtrjefrj5rtjrt",
+      "email": "manartgfdtrhjnrtjntrtjtrnfgh5eger@getrhdfghjrtgftrnghtdregfdmail.com",
+      "password": "manager",
+      "phone": "jertktjermfr6tfnrtfgbntrdfnh",
+      "address": "trfgbrtfmgtygfjrntgfh5tr",
+      "role": "ADMINISTRATOR",
+      "validated": "true",
+      "id": 20
+    },
+    {
+      "_id": "0",
+      "_version": 0,
+      "_trips": [],
+      "_name": "Prueba explorer",
+      "_surname": "Prueba",
+      "_email": "210wfwfwrjrkrtkrk3@explorer.com",
+      "_password": "explorer",
+      "_phone": "123456789",
+      "_address": "Calle prueba",
+      "_role": [
+        "EXPLORER"
+      ],
+      "_validated": true,
+      "id": 21
+    },
+    {
+      "_id": "0",
+      "_version": 0,
+      "_trips": [],
+      "_name": "Prueba explorer",
+      "_surname": "Prueba",
+      "_email": "210wfwfwrjrkrteewhwhekrk3@explorer.com",
+      "_password": "explorer",
+      "_phone": "123456789",
+      "_address": "Calle prueba",
+      "_role": [
+        "EXPLORER"
+      ],
+      "_validated": true,
+      "id": 22
+    },
+    {
+      "_id": "0",
+      "_version": 0,
+      "_trips": [],
+      "_name": "Prueba explorer",
+      "_surname": "Prueba",
+      "_email": "210wfwfwrjrkwfwrteewhwhekrk3@explorer.com",
+      "_password": "explorer",
+      "_phone": "123456789",
+      "_address": "Calle prueba",
+      "_role": [
+        "EXPLORER"
+      ],
+      "_validated": true,
+      "id": 23
+    },
+    {
+      "_id": "0",
+      "_version": 0,
+      "_trips": [],
+      "_name": "Prueba explorer",
+      "_surname": "Prueba",
+      "_email": "210wfwfwrjrkweggegfwrteewhwhekrk3@explorer.com",
+      "_password": "explorer",
+      "_phone": "123456789",
+      "_address": "Calle prueba",
+      "_role": [
+        "EXPLORER"
+      ],
+      "_validated": true,
+      "id": 24
+    },
+    {
+      "_id": "0",
+      "_version": 0,
+      "_trips": [],
+      "_name": "Prueba explorer",
+      "_surname": "Prueba",
+      "_email": "210wfwfwrjrkweggegfwrteewhweeeekrk3@explorer.com",
+      "_password": "explorer",
+      "_phone": "123456789",
+      "_address": "Calle prueba",
+      "_role": [
+        "EXPLORER"
+      ],
+      "_validated": true,
+      "id": 25
+    },
+    {
+      "_id": "0",
+      "_version": 0,
+      "_trips": [],
+      "_name": "Prueba explorer",
+      "_surname": "Prueba",
+      "_email": "210wfwfwrjrkweggegfwrddteewhweeeekrk3@explorer.com",
+      "_password": "explorer",
+      "_phone": "123456789",
+      "_address": "Calle prueba",
+      "_role": [
+        "EXPLORER"
+      ],
+      "_validated": true,
+      "id": 26
+    },
+    {
+      "_id": "0",
+      "_version": 0,
+      "_trips": [],
+      "_name": "Prueba explorer",
+      "_surname": "Prueba",
+      "_email": "210wfwfwrjrkweggegfwrefeefddteewhweeeekrk3@explorer.com",
+      "_password": "explorer",
+      "_phone": "123456789",
+      "_address": "Calle prueba",
+      "_role": [
+        "EXPLORER"
+      ],
+      "_validated": true,
+      "id": 27
+    },
+    {
+      "_id": "0",
+      "_version": 0,
+      "_trips": [],
+      "_name": "Prueba explorer",
+      "_surname": "Prueba",
+      "_email": "210wfwfwrjrkweggegfwrefeefddteeffwhweeeekrk3@explorer.com",
+      "_password": "explorer",
+      "_phone": "123456789",
+      "_address": "Calle prueba",
+      "_role": [
+        "EXPLORER"
+      ],
+      "_validated": true,
+      "id": 28
+    },
+    {
+      "_id": "0",
+      "_version": 0,
+      "_trips": [],
+      "_name": "Prueba explorer",
+      "_surname": "Prueba",
+      "_email": "210wfwfwrjrkweggegfwrefeefddteef22fwhweeeekrk3@explorer.com",
+      "_password": "explorer",
+      "_phone": "123456789",
+      "_address": "Calle prueba",
+      "_role": [
+        "EXPLORER"
+      ],
+      "_validated": true,
+      "id": 29
+    },
+    {
+      "_id": "0",
+      "_version": 0,
+      "_trips": [],
+      "_name": "Prueba explorer",
+      "_surname": "Prueba",
+      "_email": "21wfgerheegnhmjgmhaddadnfbdvscaxz03@explorer.com",
+      "_password": "explorer",
+      "_phone": "123456789",
+      "_address": "Calle prueba",
+      "_role": [
+        "EXPLORER"
+      ],
+      "_validated": true,
+      "id": 30
+    },
+    {
+      "_id": "0",
+      "_version": 0,
+      "_trips": [],
+      "_name": "Prueba explorer 3",
+      "_surname": "Prueba",
+      "_email": "21wfgerheegnhmjgmhfffffaddadnfbdvscaxz03@explorer.com",
+      "_password": "explorer",
+      "_phone": "123456789",
+      "_address": "Calle prueba",
+      "_role": [
+        "EXPLORER"
+      ],
+      "_validated": true,
+      "id": 31
+    },
+    {
+      "_id": "0",
+      "_version": 0,
+      "_trips": [],
+      "_name": "Prueba explorer 3",
+      "_surname": "Prueba",
+      "_email": "21wfgerheegnhmjgmhfffffaddadnfbdvscax447747z03@explorer.com",
+      "_password": "explorer",
+      "_phone": "123456789",
+      "_address": "Calle prueba",
+      "_role": [
+        "EXPLORER"
+      ],
+      "_validated": true,
+      "id": 32
+    },
+    {
+      "_id": "0",
+      "_version": 0,
+      "_trips": [],
+      "_name": "Prueba explorer 3",
+      "_surname": "Prueba",
+      "_email": "21wfgerheegnhmjgmhfffffaddadegwgnfbdvscax447747z03@explorer.com",
+      "_password": "explorer",
+      "_phone": "123456789",
+      "_address": "Calle prueba",
+      "_role": [
+        "EXPLORER"
+      ],
+      "_validated": true,
+      "id": 33
+    },
+    {
+      "_id": "0",
+      "_version": 0,
+      "_trips": [],
+      "_name": "Prueba explorer 3",
+      "_surname": "Prueba",
+      "_email": "21wfgerheegnhmjgmhfffffaddadegwgwfwffnfbdvscax447747z03@explorer.com",
+      "_password": "explorer",
+      "_phone": "123456789",
+      "_address": "Calle prueba",
+      "_role": [
+        "EXPLORER"
+      ],
+      "_validated": true,
+      "id": 34
+    },
+    {
+      "_id": "0",
+      "_version": 0,
+      "_trips": [],
+      "_name": "Prueba explorer 3",
+      "_surname": "Prueba",
+      "_email": "bU5InGjJt4lh@gmail.com",
+      "_password": "explorer",
+      "_phone": "123456789",
+      "_address": "Calle prueba",
+      "_role": [
+        "EXPLORER"
+      ],
+      "_validated": true,
+      "id": 35
+    },
+    {
+      "_id": "0",
+      "_version": 0,
+      "_trips": [],
+      "_name": "Prueba explorer 3",
+      "_surname": "Prueba",
+      "_email": "7sxzQ9JU3wuE@gmail.com",
+      "_password": "explorer",
+      "_phone": "123456789",
+      "_address": "Calle prueba",
+      "_role": [
+        "EXPLORER"
+      ],
+      "_validated": true,
+      "id": 36
+    },
+    {
+      "_id": "0",
+      "_version": 0,
+      "_trips": [],
+      "_name": "Prueba explorer 3",
+      "_surname": "Prueba",
+      "_email": "ziqPTBKwPYuR@gmail.com",
+      "_password": "explorer",
+      "_phone": "123456789",
+      "_address": "Calle prueba",
+      "_role": [
+        "EXPLORER"
+      ],
+      "_validated": true,
+      "id": 37
     }
   ]
 }

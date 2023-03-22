@@ -12,6 +12,8 @@ import { Actor } from '../models/actor.model';
 describe('AuthService', () => {
   let service: AuthService;
 
+
+
   beforeEach( () => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule,
@@ -28,7 +30,7 @@ describe('AuthService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should register an user', () => {
+  it('should register an user', async() => {
     /*
    let actor:Actor = {
     name: "Prueba explorer",
@@ -43,16 +45,40 @@ describe('AuthService', () => {
     */
 
     let actor:Actor = new Actor;
-    actor.name = "Prueba explorer",
+    actor.name = "Prueba explorer 3",
     actor.surname = "Prueba",
-    actor.email = "2103@explorer.com",
+    actor.email = randomEmailGenerator(12),
     actor.password = "explorer",
     actor.phone = "123456789",
     actor.address = "Calle prueba",
     actor.role = ["EXPLORER"],
     actor.validated = true
+
+    const prevActors = await service.getUsers();
+
+    console.log("Prev Actors -> ", prevActors.length);
     
-    let created = service.registerUser(actor);
-    expect(created).toBeTruthy();
+    let created = await service.registerUser(actor);
+    console.log("Created ->", created)
+
+    const postActors = await service.getUsers();
+
+    console.log("Post Actors -> ", postActors.length);
+
+    expect(postActors.length).toBe(prevActors.length+1);
   });
 });
+
+
+function randomEmailGenerator(length:number): string {
+  var randomChars = 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890';
+  var result = '';
+  for (let i = 0; i < length; i++) {
+    result += randomChars.charAt(Math.floor(Math.random()*randomChars.length));
+  }
+
+  result += "@gmail.com";
+
+  return result;
+}
+
