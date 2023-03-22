@@ -1,17 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AllTripsComponent } from './components/pages/trips/all-trips/all-trips.component';
 import { LoginComponent } from './components/security/login/login.component';
 import { RegisterComponent } from './components/security/register/register.component';
+import { NotFoundComponent } from './components/shared/not-found/not-found.component';
 
 const routes: Routes = [
   {
-    path:'register', component:RegisterComponent
+    path:'register', component: RegisterComponent
   },
   {
-    path:'login', component:LoginComponent
+    path:'login', component: LoginComponent
   },
   {
-    path:'**', redirectTo: 'login'
+    path:'trip-list', component: AllTripsComponent
+  },
+  {
+    path:'', redirectTo: '/trip-list', pathMatch: 'full'
+  },
+  {
+    path:'**', component: NotFoundComponent
   }
 ];
 
