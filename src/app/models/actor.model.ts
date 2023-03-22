@@ -2,7 +2,7 @@
 import { Entity } from './entity.model';
 //import { Finder } from './finder';
 //import { Sponsorship } from './sponsorship';
-import { Trip } from './trip.model';
+//import { Trip } from './trip';
 
 export class Actor extends Entity {
   private _email!: string;
@@ -21,7 +21,7 @@ export class Actor extends Entity {
 
   private _role!: string[];
 
-  private _trips: Trip[] = [];
+  //private _trips: Trip[];
 
   //private _applications: Application[];
 
@@ -103,13 +103,13 @@ export class Actor extends Entity {
     this._role = value;
   }
 
-  public get trips(): Trip[] {
-    return this._trips;
-  }
+  //public get trips(): Trip[] {
+  //  return this._trips;
+  //}
 
-  public set trips(value: Trip[]) {
-    this._trips = value;
-  }
+  //public set trips(value: Trip[]) {
+  //  this._trips = value;
+  //}
 
   //public get applications(): Application[] {
   //  return this._applications;
