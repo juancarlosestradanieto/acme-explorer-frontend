@@ -1,0 +1,105 @@
+{
+  "actors": [
+    {
+      "id": "1",
+      "name": "Alfredo",
+      "surname": "Perez",
+      "email": "alfredpez@explorer.com",
+      "password": "explorer",
+      "phone": "641856231",
+      "address": "Calle Imaginaria de la Santidad 2",
+      "role": [
+        "Explorer"
+      ],
+      "validated": true
+    },
+    {
+      "name": "Pedro",
+      "surname": "Picadpiedra",
+      "email": "pedropicad@explorer.com",
+      "password": "explorer",
+      "phone": "657125413",
+      "address": "Calle imaginaria",
+      "role": "EXPLORER",
+      "validated": "true",
+      "id": "GhXpjNt"
+    },
+    {
+      "name": "Juan",
+      "surname": "Monedero",
+      "email": "juanmon@manager.com",
+      "password": "manager",
+      "phone": "456781238",
+      "address": "Calle claramente imaginaria",
+      "role": "MANAGER",
+      "validated": "true",
+      "id": "kEi1CDF"
+    },
+    {
+      "name": "Carlos ",
+      "surname": "Ramirez",
+      "email": "carlosram@admin.com",
+      "password": "administrator",
+      "phone": "426759183",
+      "address": "Calle no imaginaria",
+      "role": "ADMINISTRATOR",
+      "validated": "true",
+      "id": "ShfzGEg"
+    },
+    {
+      "name": "Manu",
+      "surname": "Garcia",
+      "email": "prueba1@gmail.com",
+      "password": "123456",
+      "phone": "603552244",
+      "address": "calle La palmera",
+      "role": "EXPLORER",
+      "validated": "true",
+      "id": "NDYun3-"
+    },
+    {
+      "name": "Antonio",
+      "surname": "Jimenez",
+      "email": "prueba2@prueba2.com",
+      "password": "123456",
+      "phone": "412412412",
+      "address": "calle Torreblanca",
+      "role": "EXPLORER",
+      "validated": "true",
+      "id": "IzZaJ3Z"
+    },
+    {
+      "name": "Illo",
+      "surname": "Juan",
+      "email": "pruebascdsadfadsfasd3321@gmail.com",
+      "password": "123456789",
+      "phone": "4165464641",
+      "address": "fuengirola",
+      "role": "EXPLORER",
+      "validated": "true",
+      "id": "_A3Lk9l"
+    },
+    {
+      "name": "Illo",
+      "surname": "Juan",
+      "email": "fjsdaofhjdoasijfoijndason@gmail.com",
+      "password": "123456789",
+      "phone": "4165464641",
+      "address": "fuengirola",
+      "role": "EXPLORER",
+      "validated": "true",
+      "id": "jcOhU1y"
+    },
+    {
+      "name": "Illo2",
+      "surname": "fjsadjf",
+      "email": "gjoihjgosd@gmail.com",
+      "password": "1234567",
+      "phone": "4564646",
+      "address": "palzafg",
+      "role": "EXPLORER",
+      "validated": "true",
+      "id": "6DDe0jT"
+    }
+  ]
+}
