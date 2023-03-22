@@ -27,7 +27,13 @@ measurementId=""
 .
 ```
 
-## 2. Instalar dependencia global
+## 2. Instalar dependencias
+
+```
+npm install
+```
+
+## 3. Instalar dependencia global
 
 Es necesaria para regenerar los archivos de variables de entorno.
 
@@ -35,7 +41,7 @@ Es necesaria para regenerar los archivos de variables de entorno.
 npm install --g ts-node
 ```
 
-## 3. Iniciar el backend
+## 4. Iniciar el backend
 
 Inicia el json server.
 
@@ -43,7 +49,7 @@ Inicia el json server.
 npm run fake-backend
 ```
 
-# 3. Iniciar la aplicación
+# 5. Iniciar la aplicación
 
 ```
 npm start

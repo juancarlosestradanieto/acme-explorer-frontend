@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
 
       form.reset();
       
-      this.goTripList();
+      this.goToTripList();
       
     }).catch((err) => {
 
@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
 
   }
 
-  goTripList() 
+  goToTripList() 
   {
     this.router.navigate(['/trip-list']);
   }

@@ -51,6 +51,8 @@ export class RegisterComponent {
       this.success_message = "User registered and logged in successfully"; 
       this.cleanForm();
 
+      this.goToTripList();
+
     })
     .catch((error) => {
 
@@ -63,6 +65,11 @@ export class RegisterComponent {
 
   cleanForm() {
     this.registrationForm.reset();
+  }
+
+  goToTripList() 
+  {
+    this.router.navigate(['/trip-list']);
   }
 
 }
