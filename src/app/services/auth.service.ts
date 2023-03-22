@@ -20,9 +20,8 @@ export class AuthService {
   //?user: any;
   //?auth: Subject<any> = new Subject<any>();
 
-  //pruebas para verificar que hace el logout
+  //para controlar el login y el logout
   firebase_user_is_logged_in: boolean = false;
-  firebase_user_logged_in: any = null;
 
   constructor(private http: HttpClient, private afAuth: AngularFireAuth) 
   {
@@ -31,65 +30,77 @@ export class AuthService {
     //?   localStorage.getItem('user') !== null ? JSON.parse(actor) : null;
     //? this.auth.next(this.user);
 
-    //para verificar el login y el logout
+    //para controlar el login y el logout
     this.afAuth.onAuthStateChanged((user) => {
 
       if (user) 
       {
         this.firebase_user_is_logged_in = true;
-        this.firebase_user_logged_in = user;
       } 
       else
       {
         this.firebase_user_is_logged_in = false;
-        this.firebase_user_logged_in = null;
+        user = null;
       }
-      console.log("onAuthStateChanged this.firebase_user_is_logged_in", this.firebase_user_is_logged_in);
-      console.log("onAuthStateChanged this.firebase_user_logged_in", this.firebase_user_logged_in);
+      console.log("AuthService constructor onAuthStateChanged this.firebase_user_is_logged_in", this.firebase_user_is_logged_in);
+      
+      localStorage.setItem('user', JSON.stringify(user));
 
     });
 
   }
 
-  //para verificar el login y el logout
+  //para controlar el login y el logout
   public isLoggedIn(): boolean 
   {
     return this.firebase_user_is_logged_in;
   }
 
   async registerUser(actor: Actor) {
+
     //? localStorage.removeItem('token');
     //? localStorage.removeItem('user');
     //? this.user = null;
     
-    try 
-    {
-
-      await this.afAuth.createUserWithEmailAndPassword(
+    return new Promise<any>((resolve, reject) => {
+      this.afAuth.createUserWithEmailAndPassword(
         actor.email,
         actor.password
-      );
+      )
+      .then((response1) => {
 
-      const headers = new HttpHeaders();
-      headers.append('Content-Type', 'application/json');
-      const url = `${environment.backendApiBaseURL + '/actors'}`;
-      const body = JSON.stringify(actor);
+        console.log('AuthService->registerUser->createUserWithEmailAndPassword then response', response1);
 
-      this.http.post<any>(url, body, httpOptions).subscribe({
-        next: (response) => {
-          console.log('AuthService->registerUser next response', response);
-          console.log('Registro Realizado Correctamente!');
-        },
-        error: (error_1) => {
-          console.error('AuthService->registerUser error', error_1);
-        },
+        const headers = new HttpHeaders();
+        headers.append('Content-Type', 'application/json');
+        const url = `${environment.backendApiBaseURL + '/actors'}`;
+        const body = JSON.stringify(actor);
+
+        this.http.post<any>(url, body, httpOptions).subscribe({
+          next: (response2) => {
+
+            console.log('AuthService->registerUser post next response', response2);
+            console.log('Registro Realizado Correctamente!');
+
+            resolve(response2);
+
+          },
+          error: (error2) => {
+
+            console.error('AuthService->registerUser post error', error2);
+            reject(error2);
+          }
+        });
+
+      })
+      .catch((error1) => {
+
+        console.error('AuthService->registerUser->createUserWithEmailAndPassword catch error', error1);
+        reject(error1);
+
       });
+    });
 
-    } 
-    catch (error_2) 
-    {
-      console.error('AuthService->registerUser catch', error_2);
-    }
   }
 
   getRoles(): string[] {
@@ -98,7 +109,7 @@ export class AuthService {
 
   login(email: string, password: string) {
 
-    //console.log(email + " - " + password);
+    console.log(email + " - " + password);
 
     return new Promise<any>((resolve, reject) => {
       this.afAuth.signInWithEmailAndPassword(email, password)

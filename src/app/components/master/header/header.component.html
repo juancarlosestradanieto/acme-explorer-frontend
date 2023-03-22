@@ -15,22 +15,22 @@
           <li class="nav-item">
             <a class="nav-link" routerLink="/trip-list" >Trips</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="user == null">
             <a class="nav-link active" routerLink="/register" >
                 <i class="fa fa-user-plus" aria-hidden="true"></i>
                 Register
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="user == null">
             <a class="nav-link active" routerLink="/login" >
                 <i class="fa fa-sign-in" aria-hidden="true"></i>
                 Login
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="user != null">
             <a class="nav-link" href="javascript: void(0);" (click)="logout()">
                 <i class="fa fa-sign-out" aria-hidden="true"></i>
-                Logout ({{user_email}})
+                Logout ({{user.email}})
               </a>
           </li>
           

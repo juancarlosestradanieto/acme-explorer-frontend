@@ -45,12 +45,12 @@ export class LoginComponent implements OnInit {
       let refreshToken = response.refreshToken;
       console.log("LoginComponent->onlogin refreshToken", refreshToken);
 
-      this.success_message = `El usuario se autenticó en firebase 
-      y se le asignó el refreshToken '`+refreshToken+`' \n
-      ¿Ahora qué?
-      `;
+      this.success_message = `The user has been authenticated in firebase`;
 
-      //form.reset();
+      form.reset();
+      
+      this.goTripList();
+      
     }).catch((err) => {
 
       console.log("LoginComponent->onlogin catch err", err);
@@ -58,6 +58,11 @@ export class LoginComponent implements OnInit {
 
     });
 
+  }
+
+  goTripList() 
+  {
+    this.router.navigate(['/trip-list']);
   }
 
 }

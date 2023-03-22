@@ -12,6 +12,8 @@ export class RegisterComponent {
 
   registrationForm: FormGroup;
   roleList: string[];
+  error_message!: string;
+  success_message!: string;
 
   constructor(
     private authService: AuthService,
@@ -26,37 +28,41 @@ export class RegisterComponent {
 
   createForm() {
     return this.fb.group({
-      name: [''],
-      surname: [''],
-      email: [''],
-      password: [''],
-      phone: [''],
-      address: [''],
-      role: [''],
-      validated: ['true']
+      name: 'test',
+      surname: 'test',
+      email: 'backend3@gmail.com',
+      password: '123456',
+      phone: '123456',
+      address: 'test',
+      role: ['EXPLORER'],
+      validated: true
     });
   }
 
   onRegister() {
-        this.authService.registerUser(this.registrationForm.value)
-          .then(res => {
-            console.log(res);
-            this.cleanForm();
-            //this.goLogin();
 
-          }, err => {
-            console.log(err);
-          });
-      ;
+    this.success_message = "";
+    this.error_message = "";
+     
+    this.authService.registerUser(this.registrationForm.value)
+    .then((response) => {
+
+      console.log("RegisterComponent->onRegister then response ", response);
+      this.success_message = "User registered and logged in successfully"; 
+      this.cleanForm();
+
+    })
+    .catch((error) => {
+
+      console.error("RegisterComponent->onRegister error ", error);
+      this.error_message = error.message;
+
+    });
+      
   }
 
   cleanForm() {
     this.registrationForm.reset();
-  }
-
-  //!Esto se cambiará en el futuro, ya que una vez que te registrar no será necesario ir al Login...o no (por ver)
-  goLogin() {
-    this.router.navigate(['/login']);
   }
 
 }

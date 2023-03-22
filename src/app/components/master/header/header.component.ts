@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -8,8 +10,13 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  user_email: string = "juan";
-  constructor(private authService: AuthService) 
+  user: any;
+
+  constructor (
+    private authService: AuthService, 
+    private router: Router,
+    private cdRef:ChangeDetectorRef
+  ) 
   {
   }
 
@@ -19,7 +26,14 @@ export class HeaderComponent implements OnInit {
 
   ngAfterViewChecked()
   {
+    let user_stored = localStorage.getItem('user');
+    //console.log("HeaderComponent->ngAfterViewChecked user_stored", user_stored);
 
+    if(user_stored != null)
+    {
+      this.user = JSON.parse(user_stored);
+      this.cdRef.detectChanges();
+    }
   }
 
   logout()
@@ -29,6 +43,7 @@ export class HeaderComponent implements OnInit {
     .then(response => {
 
       console.log("HeaderComponent->logout then response", response);
+      this.goLogin();
 
     }).catch((err) => {
 
@@ -36,6 +51,11 @@ export class HeaderComponent implements OnInit {
 
     });
 
+  }
+
+  goLogin() 
+  {
+    this.router.navigate(['/login']);
   }
 
 }
