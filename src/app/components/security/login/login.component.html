@@ -16,6 +16,15 @@
             <button type="submit" class="btn btn-primary">
               Login
             </button>
+
+            <div class="alert alert-danger" *ngIf="error_message">
+              {{error_message}}
+            </div>
+
+            <div class="alert alert-success" *ngIf="success_message">
+              {{success_message}}
+            </div>
+
           </fieldset>
         </form>
       </div>

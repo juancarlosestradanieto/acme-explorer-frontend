@@ -3,10 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "start": "npm run config-env && ng serve",
+    "build": "npm run config-env && ng build",
+    "watch": "npm run config-env && ng build --watch --configuration development",
+    "test": "npm run config-env && ng test",
+    "fake-backend": "json-server --watch src/assets/json-server/acme-explorer.json",
+    "config-env": "ts-node src/environments/set-env.ts"
   },
   "private": true,
   "dependencies": {
@@ -24,8 +26,10 @@
     "@ng-bootstrap/ng-bootstrap": "^13.0.0",
     "@popperjs/core": "^2.10.2",
     "bootstrap": "^5.2.3",
+    "dotenv": "^16.0.3",
     "rxjs": "~7.5.0",
-    "tslib": "^2.3.0",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.5.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

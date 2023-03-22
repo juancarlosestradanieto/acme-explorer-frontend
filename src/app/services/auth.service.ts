@@ -58,61 +58,50 @@ export class AuthService {
   }
 
 
-//   registerUser(actor: Actor) {
-//       return new Promise<any>((resolve, reject) => {
-//         this.afAuth.createUserWithEmailAndPassword(actor.email, actor.password)
-//           .then(_ => {
-//             const headers = new HttpHeaders();
-//             headers.append('Content-Type', 'application/json');
-//             const url = `${environment.backendApiBaseURL + '/actors'}`;
-//             const body = JSON.stringify(actor);
-//             this.http.post(url, body, httpOptions).toPromise()
-//               .then(res => {
-//                 resolve(res);
-//               }, err => {
-//                 reject(err);
-//               });
-//           }).catch(err => {
-//             if (err.code == "auth/email-already-in-use") {
-//               alert("The email address is already in use");
-//           } else if (err.code == "auth/invalid-email") {
-//               alert("The email address is not valid.");
-//           } else if (err.code == "auth/operation-not-allowed") {
-//               alert("Operation not allowed.");
-//           } else if (err.code == "auth/weak-password") {
-//               alert("The password is too weak.");
-//           }
-//           });
-//       });
-// }
-
 getRoles(): string[] {
   return ['EXPLORER', 'MANAGER', 'ADMINISTRATOR'];
 }
 
 //?Login y Logout preparados
+//L01-S03. Getting Started (III) - theory.pdf: página 95
 login(email: string, password: string) {
+
   console.log(email + " - " + password);
-  /*return new Promise<any>((resolve, reject) => {
-    this.fireAuth.auth.signInWithEmailAndPassword(email, password)
-      .then(_ => {
-        resolve();
+
+  return new Promise<any>((resolve, reject) => {
+    this.afAuth.signInWithEmailAndPassword(email, password)
+      .then(response => {
+
+        console.log("AuthService->login: then response ", response);
+        resolve(response.user);
+
       }).catch(err => {
+
+        console.log("AuthService->login: catch err", err);
         reject(err);
+
       });
-  });*/
+  });
+
 }
 
 logout() {
-  console.log("logged out");
-  /*return new Promise<any>((resolve, reject) => {
-    this.fireAuth.auth.signOut()
-    .then(_ => {
-      resolve();
+
+  return new Promise<any>((resolve, reject) => {
+    this.afAuth.signOut()
+    .then(response => {
+
+      console.log("AuthService->logout: then response ", response);
+      resolve(response);
+
     }).catch(err => {
+
+      console.log("AuthService->logout: catch err", err);
       reject(err);
+
     });
-  });*/
+  });
+  
 }
 
 }
