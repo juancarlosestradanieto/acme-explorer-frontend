@@ -8,12 +8,18 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
+  user_email: string = "juan";
   constructor(private authService: AuthService) 
-  { 
-
+  {
   }
 
   ngOnInit(): void {
+
+  }
+
+  ngAfterViewChecked()
+  {
+
   }
 
   logout()
@@ -22,14 +28,14 @@ export class HeaderComponent implements OnInit {
     this.authService.logout()
     .then(response => {
 
-      console.log("LoginComponent->onlogin then response", response);
+      console.log("HeaderComponent->logout then response", response);
 
     }).catch((err) => {
 
-      console.log("LoginComponent->onlogin catch err", err);
+      console.log("HeaderComponent->logout catch err", err);
 
     });
-    
+
   }
 
 }

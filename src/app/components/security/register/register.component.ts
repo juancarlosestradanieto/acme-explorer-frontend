@@ -42,7 +42,7 @@ export class RegisterComponent {
           .then(res => {
             console.log(res);
             this.cleanForm();
-            this.goLogin();
+            //this.goLogin();
 
           }, err => {
             console.log(err);
