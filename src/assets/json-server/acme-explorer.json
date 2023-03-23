@@ -592,6 +592,118 @@
       ],
       "_validated": true,
       "id": 43
+    },
+    {
+      "_id": "0",
+      "_version": 0,
+      "_trips": [],
+      "_name": "Prueba explorer 3",
+      "_surname": "Prueba",
+      "_email": "m4gOTRiGkUOr@gmail.com",
+      "_password": "explorer",
+      "_phone": "123456789",
+      "_address": "Calle prueba",
+      "_role": [
+        "EXPLORER"
+      ],
+      "_validated": true,
+      "id": 44
+    },
+    {
+      "_id": "0",
+      "_version": 0,
+      "_trips": [],
+      "_name": "Prueba explorer 3",
+      "_surname": "Prueba",
+      "_email": "TujwIbWnEDT3@gmail.com",
+      "_password": "explorer",
+      "_phone": "123456789",
+      "_address": "Calle prueba",
+      "_role": [
+        "EXPLORER"
+      ],
+      "_validated": true,
+      "id": 45
+    },
+    {
+      "_id": "0",
+      "_version": 0,
+      "_trips": [],
+      "_name": "Prueba explorer 3",
+      "_surname": "Prueba",
+      "_email": "iyk3bqs8prHO@gmail.com",
+      "_password": "explorer",
+      "_phone": "123456789",
+      "_address": "Calle prueba",
+      "_role": [
+        "EXPLORER"
+      ],
+      "_validated": true,
+      "id": 46
+    },
+    {
+      "_id": "0",
+      "_version": 0,
+      "_trips": [],
+      "_name": "Prueba explorer 3",
+      "_surname": "Prueba",
+      "_email": "3qZSdaCEzqZn@gmail.com",
+      "_password": "explorer",
+      "_phone": "123456789",
+      "_address": "Calle prueba",
+      "_role": [
+        "EXPLORER"
+      ],
+      "_validated": true,
+      "id": 47
+    },
+    {
+      "_id": "0",
+      "_version": 0,
+      "_trips": [],
+      "_name": "Prueba explorer 3",
+      "_surname": "Prueba",
+      "_email": "lIbboBGUCj4Q@gmail.com",
+      "_password": "explorer",
+      "_phone": "123456789",
+      "_address": "Calle prueba",
+      "_role": [
+        "EXPLORER"
+      ],
+      "_validated": true,
+      "id": 48
+    },
+    {
+      "_id": "0",
+      "_version": 0,
+      "_trips": [],
+      "_name": "Prueba explorer 3",
+      "_surname": "Prueba",
+      "_email": "xm7MIG55JphN@gmail.com",
+      "_password": "explorer",
+      "_phone": "123456789",
+      "_address": "Calle prueba",
+      "_role": [
+        "EXPLORER"
+      ],
+      "_validated": true,
+      "id": 49
+    },
+    {
+      "_id": "0",
+      "_version": 0,
+      "_trips": [],
+      "_name": "Prueba explorer 3",
+      "_surname": "Prueba",
+      "_email": "xTqIgyl5gE0F@gmail.com",
+      "_password": "explorer",
+      "_phone": "123456789",
+      "_address": "Calle prueba",
+      "_role": [
+        "EXPLORER"
+      ],
+      "_validated": true,
+      "id": 50
     }
   ]
 }
