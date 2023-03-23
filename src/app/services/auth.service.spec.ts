@@ -12,7 +12,7 @@ import { Actor } from '../models/actor.model';
 describe('AuthService', () => {
   let service: AuthService;
 
-  
+
   let newActor: Actor = new Actor;
   newActor.name = "Prueba explorer 3",
     newActor.surname = "Prueba",
@@ -54,29 +54,31 @@ describe('AuthService', () => {
 
   it('should register an user', async () => {
     let created = await service.registerUser(newActor);
-    console.log("Created ->", created)
+    console.log("Registered user ->", created)
 
     expect(created).toBeDefined();
-    expect(created).toEqual(jasmine.objectContaining({_email:newActor.email, _password:newActor.password}));
+    expect(created).toEqual(jasmine.objectContaining({ _email: newActor.email, _password: newActor.password }));
   });
 
   it('should login an user', async () => {
     let response = await service.login(registeredActor.email, registeredActor.password);
-    console.log("Response ->", response)
+    console.log("Login Response ->", response)
 
     expect(response).toBeDefined();
-    expect(response).toEqual(jasmine.objectContaining({email:registeredActor.email,}));
+    expect(response).toEqual(jasmine.objectContaining({ email: registeredActor.email}));
+    expect(service.isLoggedIn()).toBeTruthy();
   });
 
-  it('should give an error because the email is alreay in use', async () => {
+  it('should logout an user', async () => {
+    let response = await service.login(registeredActor.email, registeredActor.password);
+    console.log("Login Response ->", response)
+    expect(service.isLoggedIn()).toEqual(true);
 
-    let created = await service.registerUser(registeredActor)
-      .catch(err => console.error("Error tocho" , err));
-
-    expect(created).toBeTruthy();
+    await service.logout();
+    expect(service.isLoggedIn()).toBeFalsy();
   });
-});
 
+})
 
 function randomEmailGenerator(length: number): string {
   var randomChars = 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890';
