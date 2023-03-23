@@ -60,6 +60,14 @@ describe('AuthService', () => {
     expect(created).toEqual(jasmine.objectContaining({_email:newActor.email, _password:newActor.password}));
   });
 
+  it('should login an user', async () => {
+    let response = await service.login(registeredActor.email, registeredActor.password);
+    console.log("Response ->", response)
+
+    expect(response).toBeDefined();
+    expect(response).toEqual(jasmine.objectContaining({email:registeredActor.email,}));
+  });
+
   it('should give an error because the email is alreay in use', async () => {
 
     let created = await service.registerUser(registeredActor)
