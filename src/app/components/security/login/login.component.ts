@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
@@ -13,12 +13,14 @@ export class LoginComponent implements OnInit {
   error_message!: string;
   success_message!: string;
 
+  @ViewChild(NgForm)
+  f!: NgForm;
+
   constructor(
     private authService: AuthService,
     private router: Router
-  ) 
-  { 
-    
+  ) {
+
   }
 
   ngOnInit(): void { }
@@ -28,6 +30,8 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(form: NgForm) {
+
+    console.log("Formulario de login -> ", form)
 
     this.success_message = "";
     this.error_message = "";
@@ -39,29 +43,28 @@ export class LoginComponent implements OnInit {
     console.log("LoginComponent->onlogin password", password);
 
     this.authService.login(email, password)
-    .then(response => {
+      .then(response => {
 
-      console.log("LoginComponent->onlogin then response", response);
-      let refreshToken = response.refreshToken;
-      console.log("LoginComponent->onlogin refreshToken", refreshToken);
+        console.log("LoginComponent->onlogin then response", response);
+        let refreshToken = response.refreshToken;
+        console.log("LoginComponent->onlogin refreshToken", refreshToken);
 
-      this.success_message = `The user has been authenticated in firebase`;
+        this.success_message = `The user has been authenticated in firebase`;
 
-      form.reset();
-      
-      this.goToTripList();
-      
-    }).catch((err) => {
+        form.reset();
 
-      console.log("LoginComponent->onlogin catch err", err);
-      this.error_message = err.message;
+        this.goToTripList();
 
-    });
+      }).catch((err) => {
+
+        console.log("LoginComponent->onlogin catch err", err);
+        this.error_message = err.message;
+
+      });
 
   }
 
-  goToTripList() 
-  {
+  goToTripList() {
     this.router.navigate(['/trip-list']);
   }
 
