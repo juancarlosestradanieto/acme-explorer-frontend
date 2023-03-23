@@ -1,9 +1,10 @@
 import { HttpClient, HttpHandler } from '@angular/common/http';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
@@ -67,9 +68,10 @@ describe('RegisterComponent', () => {
     expect(registerForm.value).toEqual(registrationFormValues);
   });
 
-  it('should send register form', fakeAsync(() => {
+  it('should send register form', inject([Router], fakeAsync((mockRouter: Router) => {
     let authService = TestBed.inject(AuthService);
-    let spy = spyOn(authService, 'registerUser').and.returnValue(Promise.resolve({}));
+    let serviceSpy = spyOn(authService, 'registerUser').and.returnValue(Promise.resolve({}));
+    let navigatorSpy = spyOn(mockRouter, 'navigate').and.stub();
 
     component.onRegister();
 
@@ -77,5 +79,7 @@ describe('RegisterComponent', () => {
 
     expect(component.error_message).toEqual("");
     expect(component.success_message).toEqual("User registered and logged in successfully");
-  }));
+    expect(serviceSpy).toHaveBeenCalled();
+    expect(navigatorSpy.calls.first().args[0]).toContain('/trip-list');
+  })));
 });

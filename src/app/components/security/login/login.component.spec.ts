@@ -1,9 +1,10 @@
 import { HttpClient, HttpHandler } from '@angular/common/http';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormsModule, NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
@@ -48,7 +49,7 @@ describe('LoginComponent', () => {
     expect(buttons.length).toEqual(1);
   });
 
-  it('should send login form', fakeAsync(() => {
+  it('should send login form', inject([Router], fakeAsync((mockRouter: Router) => {
     const formElements = fixture.debugElement.nativeElement.querySelector('#loginForm');
     const emailInput = formElements.querySelector('#email');
     const passInput = formElements.querySelector('#password');
@@ -62,7 +63,8 @@ describe('LoginComponent', () => {
     passInput.dispatchEvent(new Event('input'));
 
     let authService = TestBed.inject(AuthService);
-    let spy = spyOn(authService, 'login').and.returnValue(Promise.resolve({refreshToken:""}));
+    let serviceSpy = spyOn(authService, 'login').and.returnValue(Promise.resolve({refreshToken:""}));
+    let navigatorSpy = spyOn(mockRouter, 'navigate').and.stub();
 
     component.onLogin(component.f);
 
@@ -70,5 +72,7 @@ describe('LoginComponent', () => {
 
     expect(component.error_message).toEqual("");
     expect(component.success_message).toEqual("The user has been authenticated in firebase");
-  }));
+    expect(serviceSpy).toHaveBeenCalled();
+    expect(navigatorSpy.calls.first().args[0]).toContain('/trip-list');
+  })));
 });
