@@ -27,8 +27,8 @@ describe('AuthService', () => {
   registeredActor.name = "Prueba explorer 3",
     registeredActor.surname = "Prueba",
     // Use already registered email
-    registeredActor.email = "tujwibwnedt3@gmail.com",
-    registeredActor.password = "explorer",
+    registeredActor.email = environment.TEST_EMAIL,
+    registeredActor.password = environment.TEST_PASSWORD,
     registeredActor.phone = "123456789",
     registeredActor.address = "Calle prueba",
     registeredActor.role = ["EXPLORER"],

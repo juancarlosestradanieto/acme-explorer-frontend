@@ -27,6 +27,19 @@ measurementId=""
 .
 ```
 
+Indicar el correo y password de pruebas, este correo debe ser registrado antes de ejecutar los tests ya que cierto test espera que este correo esté registrado en firebase.
+
+```
+.
+.
+.
+TEST_EMAIL=""
+TEST_PASSWORD=""
+.
+.
+.
+```
+
 ## 2. Instalar dependencias
 
 ```
@@ -53,4 +66,10 @@ npm run fake-backend
 
 ```
 npm start
+```
+
+# 6. ejecutar los tests
+
+```
+npm run test
 ```
