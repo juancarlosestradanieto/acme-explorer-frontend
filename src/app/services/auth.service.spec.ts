@@ -13,6 +13,28 @@ describe('AuthService', () => {
   let service: AuthService;
 
 
+  let newActor: Actor = new Actor;
+  newActor.name = "Prueba explorer 3",
+    newActor.surname = "Prueba",
+    newActor.email = randomEmailGenerator(12),
+    newActor.password = "explorer",
+    newActor.phone = "123456789",
+    newActor.address = "Calle prueba",
+    newActor.role = ["EXPLORER"],
+    newActor.validated = true
+
+  let registeredActor: Actor = new Actor;
+  registeredActor.name = "Prueba explorer 3",
+    registeredActor.surname = "Prueba",
+    // Use already registered email
+    registeredActor.email = environment.TEST_EMAIL,
+    registeredActor.password = environment.TEST_PASSWORD,
+    registeredActor.phone = "123456789",
+    registeredActor.address = "Calle prueba",
+    registeredActor.role = ["EXPLORER"],
+    registeredActor.validated = true
+
+
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -31,76 +53,34 @@ describe('AuthService', () => {
   });
 
   it('should register an user', async () => {
-    /*
-   let actor:Actor = {
-    name: "Prueba explorer",
-    surname: "Prueba",
-    email: "prueba@explorer.com",
-    password: "explorer",
-    phone: "123456789",
-    address: "Calle prueba",
-    role: ["EXPLORER"],
-    validated: true
-    }
-    */
+    let created = await service.registerUser(newActor);
+    console.log("Registered user ->", created)
 
-    let actor: Actor = new Actor;
-    actor.name = "Prueba explorer 3",
-      actor.surname = "Prueba",
-      actor.email = randomEmailGenerator(12),
-      actor.password = "explorer",
-      actor.phone = "123456789",
-      actor.address = "Calle prueba",
-      actor.role = ["EXPLORER"],
-      actor.validated = true
-
-    const prevActors = await service.getUsers();
-
-    console.log("Prev Actors -> ", prevActors.length);
-
-    let created = await service.registerUser(actor);
-    console.log("Created ->", created)
-
-    const postActors = await service.getUsers();
-
-    console.log("Post Actors -> ", postActors.length);
-
-    expect(postActors.length).toBe(prevActors.length + 1);
+    expect(created).toBeDefined();
+    expect(created).toEqual(jasmine.objectContaining({ _email: newActor.email, _password: newActor.password }));
   });
 
-  it('should give an error because the email is alreay in use', async () => {
-    /*
-   let actor:Actor = {
-    name: "Prueba explorer",
-    surname: "Prueba",
-    email: "prueba@explorer.com",
-    password: "explorer",
-    phone: "123456789",
-    address: "Calle prueba",
-    role: ["EXPLORER"],
-    validated: true
-    }
-    */
+  it('should login an user', async () => {
+    let response = await service.login(registeredActor.email, registeredActor.password);
+    console.log("Login Response ->", response)
 
-    let actor: Actor = new Actor;
-    actor.name = "Prueba explorer 3",
-      actor.surname = "Prueba",
-      actor.email = "fdhseh@explorer78.com",
-      actor.password = "explorer",
-      actor.phone = "123456789",
-      actor.address = "Calle prueba",
-      actor.role = ["EXPLORER"],
-      actor.validated = true
-
-    let created = await service.registerUser(actor)
-      .catch(err => console.error(err));
-
-    expect(created).toBeTruthy();
+    expect(response).toBeDefined();
+    expect(response).toEqual(jasmine.objectContaining({ email: registeredActor.email}));
+    expect(service.isLoggedIn()).toBeTruthy();
   });
-});
 
+  it('should logout an user', async () => {
+    let response = await service.login(registeredActor.email, registeredActor.password);
+    console.log("Login Response ->", response)
+    expect(service.isLoggedIn()).toEqual(true);
 
-/*function randomEmailGenerator(length: number): string {
+    await service.logout();
+    expect(service.isLoggedIn()).toBeFalsy();
+  });
+
+})
+
+function randomEmailGenerator(length: number): string {
   var randomChars = 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890';
   var result = '';
   for (let i = 0; i < length; i++) {
@@ -110,5 +90,5 @@ describe('AuthService', () => {
   result += "@gmail.com";
 
   return result;
-}*/
+}
 
