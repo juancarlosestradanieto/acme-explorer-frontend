@@ -1,27 +1,75 @@
 # AcmeExplorerFrontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.10.
+## 1. Variables de entorno
 
-## Development server
+Copiar el archivo de variables de entorno.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```
+cd src/environments
+cp .env.example .env
+```
 
-## Code scaffolding
+Indicar en este las credenciales de firebase.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+.
+.
+.
+apiKey=""
+authDomain=""
+projectId=""
+storageBucket=""
+messagingSenderId=""
+appId=""
+measurementId=""
+.
+.
+.
+```
 
-## Build
+Indicar el correo y password de pruebas, este correo debe ser registrado antes de ejecutar los tests ya que cierto test espera que este correo esté registrado en firebase.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```
+.
+.
+.
+TEST_EMAIL=""
+TEST_PASSWORD=""
+.
+.
+.
+```
 
-## Running unit tests
+## 2. Instalar dependencias
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+npm install
+```
 
-## Running end-to-end tests
+## 3. Instalar dependencia global
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Es necesaria para regenerar los archivos de variables de entorno.
 
-## Further help
+```
+npm install --g ts-node
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## 4. Iniciar el backend
+
+Inicia el json server.
+
+```
+npm run fake-backend
+```
+
+# 5. Iniciar la aplicación
+
+```
+npm start
+```
+
+# 6. ejecutar los tests
+
+```
+npm run test
+```
