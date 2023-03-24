@@ -1916,5 +1916,73 @@
       "_validated": true,
       "id": 126
     }
+  ],
+  "trips": [
+    {
+      "title": "El Salto Angel",
+      "description": "The description of El Salto Angel",
+      "price": 100,
+      "start_date": "2023-03-24T00:00:00+00:00",
+      "end_date": "2023-03-24T00:00:00+00:00",
+      "pictures": [
+        "assets/images/trips/el-salto-angel.jpg"
+      ],
+      "id": 1
+    },
+    {
+      "title": "Isla de Margarita",
+      "description": "The description of Isla de Margarita",
+      "price": 100,
+      "start_date": "2023-03-24T00:00:00+00:00",
+      "end_date": "2023-03-24T00:00:00+00:00",
+      "pictures": [
+        "assets/images/trips/isla-de-margarita.png"
+      ],
+      "id": 2
+    },
+    {
+      "title": "La Gran Sabana",
+      "description": "The description of La Gran Sabana",
+      "price": 100,
+      "start_date": "2023-03-24T00:00:00+00:00",
+      "end_date": "2023-03-24T00:00:00+00:00",
+      "pictures": [
+        "assets/images/trips/la-gran-sabana.jpg"
+      ],
+      "id": 3
+    },
+    {
+      "title": "Los Roques",
+      "description": "The description of Los Roques",
+      "price": 100,
+      "start_date": "2023-03-24T00:00:00+00:00",
+      "end_date": "2023-03-24T00:00:00+00:00",
+      "pictures": [
+        "assets/images/trips/los-roques.jpg"
+      ],
+      "id": 4
+    },
+    {
+      "title": "Los Médanos de Coro",
+      "description": "The description of Los Médanos de Coro",
+      "price": 100,
+      "start_date": "2023-03-24T00:00:00+00:00",
+      "end_date": "2023-03-24T00:00:00+00:00",
+      "pictures": [
+        "assets/images/trips/los-medanos-de-coro.jpg"
+      ],
+      "id": 5
+    },
+    {
+      "title": "Pico Espejo",
+      "description": "The description of Pico Espejo",
+      "price": 100,
+      "start_date": "2023-03-24T00:00:00+00:00",
+      "end_date": "2023-03-24T00:00:00+00:00",
+      "pictures": [
+        "assets/images/trips/pico-espejo.jpg"
+      ],
+      "id": 6
+    }
   ]
 }
