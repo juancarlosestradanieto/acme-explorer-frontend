@@ -27,7 +27,7 @@ measurementId=""
 .
 ```
 
-Indicar el correo y password de pruebas, este correo debe ser registrado antes de ejecutar los tests ya que cierto test espera que este correo esté registrado en firebase.
+Indicar el correo y password de pruebas.
 
 ```
 .
@@ -39,6 +39,8 @@ TEST_PASSWORD=""
 .
 .
 ```
+# IMPORTANTE: 
+Este usuario debe ser registrado en AcmeExplorerFrontend **ANTES** de ejecutar los tests ya que ciertos tests esperan que este usuario(y el password también) esté registrado en firebase.
 
 ## 2. Instalar dependencias
 
