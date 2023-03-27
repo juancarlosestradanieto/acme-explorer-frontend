@@ -17,6 +17,8 @@ import { environment } from '../environments/environment';
 import { HeaderComponent } from './components/master/header/header.component';
 import { NotFoundComponent } from './components/shared/not-found/not-found.component';
 import { AllTripsComponent } from './components/pages/trips/all-trips/all-trips.component';
+import { FooterComponent } from './components/master/footer/footer.component';
+import { TermsandconditionsComponent } from './components/master/termsandconditions/termsandconditions.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { AllTripsComponent } from './components/pages/trips/all-trips/all-trips.
     LoginComponent,
     HeaderComponent,
     NotFoundComponent,
-    AllTripsComponent
+    AllTripsComponent,
+    FooterComponent,
+    TermsandconditionsComponent
   ],
   imports: [
     BrowserModule,
