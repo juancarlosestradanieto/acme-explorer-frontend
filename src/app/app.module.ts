@@ -11,14 +11,24 @@ import { LoginComponent } from './components/security/login/login.component';
 
 //Firebase
 import { AngularFireModule} from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth'; 
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore'; 
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment';
 import { HeaderComponent } from './components/master/header/header.component';
 import { NotFoundComponent } from './components/shared/not-found/not-found.component';
 import { AllTripsComponent } from './components/pages/trips/all-trips/all-trips.component';
+import { LangSwitchComponent } from './components/shared/lang-switch/lang-switch.component';
 import { FooterComponent } from './components/master/footer/footer.component';
 import { TermsandconditionsComponent } from './components/master/termsandconditions/termsandconditions.component';
+
+//Traduccion
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {HttpClient} from '@angular/common/http';
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -29,7 +39,8 @@ import { TermsandconditionsComponent } from './components/master/termsandconditi
     NotFoundComponent,
     AllTripsComponent,
     FooterComponent,
-    TermsandconditionsComponent
+    TermsandconditionsComponent,
+    LangSwitchComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +51,17 @@ import { TermsandconditionsComponent } from './components/master/termsandconditi
     NgbModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    // ngx-translate and the loader module
+    HttpClientModule,
+    TranslateModule.forRoot({
+        loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient]
+        }
+    }),
+
   ],
   providers: [],
   bootstrap: [AppComponent]
