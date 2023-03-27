@@ -17,6 +17,7 @@ import { environment } from '../environments/environment';
 import { HeaderComponent } from './components/master/header/header.component';
 import { NotFoundComponent } from './components/shared/not-found/not-found.component';
 import { AllTripsComponent } from './components/pages/trips/all-trips/all-trips.component';
+import { LangSwitchComponent } from './components/shared/lang-switch/lang-switch.component';
 
 //Traduccion
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
@@ -37,7 +38,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     LoginComponent,
     HeaderComponent,
     NotFoundComponent,
-    AllTripsComponent
+    AllTripsComponent,
+    LangSwitchComponent
   ],
   imports: [
     BrowserModule,
