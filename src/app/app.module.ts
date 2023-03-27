@@ -25,6 +25,14 @@ import { TermsandconditionsComponent } from './components/master/termsandconditi
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClient} from '@angular/common/http';
+import { ActorProfileComponent } from './components/pages/actor-profile/actor-profile.component';
+import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
+import { CustomizeUiComponent } from './components/pages/customize-ui/customize-ui.component';
+import { SponsorshipComponent } from './components/pages/sponsorship/sponsorship.component';
+import { FavoriteTripsComponent } from './components/pages/favorite-trips/favorite-trips.component';
+import { FindersComponent } from './components/pages/finders/finders.component';
+import { TripSponsorshipsComponent } from './components/pages/trip-sponsorships/trip-sponsorships.component';
+import { TripApplicationsComponent } from './components/pages/trip-applications/trip-applications.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -40,7 +48,15 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AllTripsComponent,
     FooterComponent,
     TermsandconditionsComponent,
-    LangSwitchComponent
+    LangSwitchComponent,
+    ActorProfileComponent,
+    DashboardComponent,
+    CustomizeUiComponent,
+    SponsorshipComponent,
+    FavoriteTripsComponent,
+    FindersComponent,
+    TripSponsorshipsComponent,
+    TripApplicationsComponent
   ],
   imports: [
     BrowserModule,
