@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TermsandconditionsComponent } from './components/master/termsandconditions/termsandconditions.component';
 import { ActorProfileComponent } from './components/pages/actor-profile/actor-profile.component';
+import { ApplicationdisplayComponent } from './components/pages/applications/applicationdisplay/applicationdisplay.component';
+import { ApplicationslistComponent } from './components/pages/applications/applicationslist/applicationslist.component';
 import { CustomizeUiComponent } from './components/pages/customize-ui/customize-ui.component';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 import { FavoriteTripsComponent } from './components/pages/favorite-trips/favorite-trips.component';
@@ -12,58 +14,73 @@ import { TripSponsorshipsComponent } from './components/pages/trip-sponsorships/
 import { AllTripsComponent } from './components/pages/trips/all-trips/all-trips.component';
 import { LoginComponent } from './components/security/login/login.component';
 import { RegisterComponent } from './components/security/register/register.component';
+import { AccessdeniedComponent } from './components/shared/denied-access/accessdenied/accessdenied.component';
 import { NotFoundComponent } from './components/shared/not-found/not-found.component';
+import { ActorRoleGuard } from './guards/actor-role.guard';
 
 const routes: Routes = [
   {
-    path:'register', component: RegisterComponent
+    path: 'register', component: RegisterComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'anonymous' }
   },
   {
-    path:'login', component: LoginComponent
+    path: 'login', component: LoginComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'anonymous' }
   },
   {
-    path:'trip-list', component: AllTripsComponent
+    path: 'trip-list', component: AllTripsComponent
   },
   {
-    path:'termsandconditions', component: TermsandconditionsComponent
+    path: 'termsandconditions', component: TermsandconditionsComponent
   },
   {
     path: 'actor/:id', children: [
       {
-        path:'profile', component: ActorProfileComponent
+        path: 'profile', component: ActorProfileComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'EXPLORER|MANAGER|ADMINISTRATOR|SPONSOR' }
       },
       {
-        path:'customize-ui', component: CustomizeUiComponent
+        path: 'customize-ui', component: CustomizeUiComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'EXPLORER' }
       },
       {
-        path:'favorite_trips', component: FavoriteTripsComponent
+        path: 'favorite_trips', component: FavoriteTripsComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'EXPLORER' }
       },
       {
-        path:'finder', component: FindersComponent
+        path: 'finder', component: FindersComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'EXPLORER' }
       },
       {
-        path:'sponsorships', component: SponsorshipComponent
+        path: 'sponsorships', component: SponsorshipComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'SPONSOR' }
       },
     ]
   },
   {
     path: 'trip/:id', children: [
       {
-        path:'applications', component: TripApplicationsComponent
+        path: 'applications', component: TripApplicationsComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'MANAGER' }
       },
       {
-        path:'sponsorships', component: TripSponsorshipsComponent
+        path: 'sponsorships', component: TripSponsorshipsComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'MANAGER' }
       },
     ]
   },
   {
-    path:'dashboard', component: DashboardComponent
+    path: 'applications', children: [
+      {
+        path: ':id', component: ApplicationdisplayComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'EXPLORER|MANAGER' }
+      },
+      {
+        path: '', component: ApplicationslistComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'EXPLORER|MANAGER' }
+      }
+    ]
   },
   {
-    path:'', redirectTo: '/trip-list', pathMatch: 'full'
+    path: 'dashboard', component: DashboardComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'ADMINISTRATOR' }
   },
   {
-    path:'**', component: NotFoundComponent
+    path: 'denied-access', component: AccessdeniedComponent
+  },
+  {
+    path: '', redirectTo: '/trip-list', pathMatch: 'full'
+  },
+  {
+    path: '**', component: NotFoundComponent
   }
 ];
 

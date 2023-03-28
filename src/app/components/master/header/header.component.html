@@ -22,14 +22,14 @@
             </a>
           </li>
 
-          <div class="dropdown">
+          <div class="dropdown" *ngIf="user">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
               EL PLAN
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               
               <li class="nav-item">
-                <a class="nav-link" routerLink="/actor/1/profile" >
+                <a class="nav-link" routerLink="/actor/{{this.user.id}}/profile" >
                   Perfil
                 </a>
               </li>
@@ -66,7 +66,7 @@
               </li>
               
               <li class="nav-item">
-                <a class="nav-link" routerLink="/trip/1/dashboard" >
+                <a class="nav-link" routerLink="/dashboard" >
                   Dashboard
                 </a>
               </li>
@@ -75,19 +75,19 @@
             </ul>
           </div>
 
-          <li class="nav-item" *ngIf="user == null">
+          <li class="nav-item" *ngIf="!user">
             <a class="nav-link active" routerLink="/register" >
               <i class="fa fa-user-plus" aria-hidden="true"></i>
               {{'Register' | translate}}
             </a>
           </li>
-          <li class="nav-item" *ngIf="user == null">
+          <li class="nav-item" *ngIf="!user">
             <a class="nav-link active" routerLink="/login" >
               <i class="fa fa-sign-in" aria-hidden="true"></i>
               {{'Login'| translate}}
             </a>
           </li>
-          <li class="nav-item" *ngIf="user != null">
+          <li class="nav-item" *ngIf="user">
             <a class="nav-link" href="javascript: void(0);" (click)="logout()">
               <i class="fa fa-sign-out" aria-hidden="true"></i>
               Logout ({{user.email}})

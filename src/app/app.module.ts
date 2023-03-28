@@ -33,6 +33,9 @@ import { FavoriteTripsComponent } from './components/pages/favorite-trips/favori
 import { FindersComponent } from './components/pages/finders/finders.component';
 import { TripSponsorshipsComponent } from './components/pages/trip-sponsorships/trip-sponsorships.component';
 import { TripApplicationsComponent } from './components/pages/trip-applications/trip-applications.component';
+import { ApplicationslistComponent } from './components/pages/applications/applicationslist/applicationslist.component';
+import { ApplicationdisplayComponent } from './components/pages/applications/applicationdisplay/applicationdisplay.component';
+import { AccessdeniedComponent } from './components/shared/denied-access/accessdenied/accessdenied.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -56,7 +59,10 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     FavoriteTripsComponent,
     FindersComponent,
     TripSponsorshipsComponent,
-    TripApplicationsComponent
+    TripApplicationsComponent,
+    ApplicationslistComponent,
+    ApplicationdisplayComponent,
+    AccessdeniedComponent
   ],
   imports: [
     BrowserModule,
