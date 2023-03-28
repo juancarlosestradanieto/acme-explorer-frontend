@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
 
   protected user: Actor | undefined;
   protected activeRole: string = 'anonymous';
+  protected userId: string | undefined;
 
   constructor(
     private authService: AuthService,
@@ -26,11 +27,13 @@ export class HeaderComponent implements OnInit {
     this.authService.getStatus().subscribe(loggedIn => {
       if (loggedIn) {
         this.user = this.authService.getCurrentActor();
-        console.log("Logged user: " , this.user.id);
+        console.log("Logged user: " , this.user);
         this.activeRole = this.user.role.toString();
+        this.userId = this.user.id.toString();
       } else {
         this.activeRole = 'anonymous';
         this.user = undefined;
+        this.userId = undefined;
         console.log("Logged user: " , this.user);
       }
     });
