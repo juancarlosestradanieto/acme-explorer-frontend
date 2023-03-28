@@ -1999,6 +1999,39 @@
       ],
       "_validated": true,
       "id": 127
+    },
+    {
+      "name": "test",
+      "surname": "test",
+      "email": "test@test.manager",
+      "password": "123456",
+      "phone": "test",
+      "address": "test",
+      "role": "MANAGER",
+      "validated": true,
+      "id": 128
+    },
+    {
+      "name": "test",
+      "surname": "test",
+      "email": "test@test.admin",
+      "password": "123456",
+      "phone": "test",
+      "address": "test",
+      "role": "ADMINISTRATOR",
+      "validated": true,
+      "id": 129
+    },
+    {
+      "name": "test",
+      "surname": "test",
+      "email": "test@test.sponsor",
+      "password": "123456",
+      "phone": "test",
+      "address": "test",
+      "role": "SPONSOR",
+      "validated": true,
+      "id": 130
     }
   ]
 }
