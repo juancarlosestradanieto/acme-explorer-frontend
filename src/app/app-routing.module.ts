@@ -10,6 +10,7 @@ import { SponsorshipComponent } from './components/pages/sponsorship/sponsorship
 import { TripApplicationsComponent } from './components/pages/trip-applications/trip-applications.component';
 import { TripSponsorshipsComponent } from './components/pages/trip-sponsorships/trip-sponsorships.component';
 import { AllTripsComponent } from './components/pages/trips/all-trips/all-trips.component';
+import { SingleTripComponent } from './components/pages/trips/single-trip/single-trip.component';
 import { LoginComponent } from './components/security/login/login.component';
 import { RegisterComponent } from './components/security/register/register.component';
 import { NotFoundComponent } from './components/shared/not-found/not-found.component';
@@ -47,7 +48,9 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'trip/:id', children: [
+    path: 'trip/:id', 
+    component: SingleTripComponent,
+    children: [
       {
         path:'applications', component: TripApplicationsComponent
       },

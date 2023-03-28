@@ -33,6 +33,7 @@ import { FavoriteTripsComponent } from './components/pages/favorite-trips/favori
 import { FindersComponent } from './components/pages/finders/finders.component';
 import { TripSponsorshipsComponent } from './components/pages/trip-sponsorships/trip-sponsorships.component';
 import { TripApplicationsComponent } from './components/pages/trip-applications/trip-applications.component';
+import { SingleTripComponent } from './components/pages/trips/single-trip/single-trip.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -56,7 +57,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     FavoriteTripsComponent,
     FindersComponent,
     TripSponsorshipsComponent,
-    TripApplicationsComponent
+    TripApplicationsComponent,
+    SingleTripComponent
   ],
   imports: [
     BrowserModule,

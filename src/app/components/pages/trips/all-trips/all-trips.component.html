@@ -15,7 +15,15 @@
               <li class="list-group-item"><b>End date</b>: {{trip.end_date | date: 'dd/MM/yyyy'}}</li>
             </ul>
             <div class="card-body">
-              <a href="#" class="card-link">More</a>
+              <button type="button" class="btn btn-success" routerLink="/trip/{{trip.id}}">
+                  More
+              </button>
+              <button type="button" class="btn btn-warning" >
+                  Edit
+              </button>
+              <button type="button" class="btn btn-danger" >
+                  Delete
+              </button>
             </div>
         </div>
     </div>
