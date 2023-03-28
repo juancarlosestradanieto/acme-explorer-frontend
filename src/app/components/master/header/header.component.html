@@ -24,85 +24,112 @@
         </li>
 
         <div class="dropdown" *ngIf="activeRole == 'EXPLORER'">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            Explorer
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
+            aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
           </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/actor/{{userId}}/customize-ui">
-                <i class="fa-solid fa-user-gear"></i>
-                Customize
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="explorerDropdownMenuLink" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Explorer
               </a>
+              <ul class="dropdown-menu" aria-labelledby="explorerDropdownMenuLink">
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/actor/{{userId}}/customize-ui">
+                    <i class="fa-solid fa-user-gear"></i>
+                    Customize
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/actor/{{userId}}/favorite_trips">
+                    <i class="fa-solid fa-heart"></i>
+                    Favorite
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/actor/{{userId}}/finder">
+                    <i class="fa-brands fa-searchengin"></i>
+                    Finder
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/applications">
+                    <i class="fa-solid fa-envelope"></i>
+                    Applications
+                  </a>
+                </li>
+              </ul>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/actor/{{userId}}/favorite_trips">
-                <i class="fa-solid fa-heart"></i>
-                Favorite
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/actor/{{userId}}/finder">
-                <i class="fa-brands fa-searchengin"></i>
-                Finder
-              </a>
-
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/applications">
-                <i class="fa-solid fa-envelope"></i>
-                Applications
-              </a>
-            </li>
-
           </ul>
         </div>
 
         <div class="dropdown" *ngIf="activeRole == 'MANAGER'">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            Manager
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
+            aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
           </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/applications">
-                <i class="fa-solid fa-envelope"></i>
-                Applications
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="managerDropdownMenuLink" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Manager
               </a>
+              <ul class="dropdown-menu" aria-labelledby="managerDropdownMenuLink">
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/applications">
+                    <i class="fa-solid fa-envelope"></i>
+                    Applications
+                  </a>
+                </li>
+              </ul>
             </li>
-
           </ul>
         </div>
 
         <div class="dropdown" *ngIf="activeRole == 'SPONSOR'">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            Sponsor
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
+            aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
           </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/actor/{{userId}}/sponsorships">
-                <i class="fa-solid fa-hand-holding-dollar"></i>
-                Sponsorships
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="sponsorDropdownMenuLink" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Sponsor
               </a>
+              <ul class="dropdown-menu" aria-labelledby="sponsorDropdownMenuLink">
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/actor/{{userId}}/sponsorships">
+                    <i class="fa-solid fa-hand-holding-dollar"></i>
+                    Sponsorships
+                  </a>
+                </li>
+              </ul>
             </li>
-
           </ul>
         </div>
 
         <div class="dropdown" *ngIf="activeRole == 'ADMINISTRATOR'">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            Admin
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
+            aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
           </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/dashboard">
-                <i class="fa-solid fa-chalkboard"></i>
-                Dashboard
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="adminDropdownMenuLink" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Admin
               </a>
+              <ul class="dropdown-menu" aria-labelledby="adminDropdownMenuLink">
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/dashboard">
+                    <i class="fa-solid fa-chalkboard"></i>
+                    Dashboard
+                  </a>
+                </li>
+              </ul>
             </li>
-
           </ul>
         </div>
 
@@ -120,30 +147,34 @@
         </li>
 
         <div class="dropdown" *ngIf="user">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa-solid fa-user"></i>
-            ({{user.email}})
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
+            aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
           </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/actor/{{userId}}/profile">
-                Perfil
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdownMenuLink" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-user"></i>
+                ({{user.email}})
               </a>
+              <ul class="dropdown-menu" aria-labelledby="userDropdownMenuLink">
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/actor/{{userId}}/profile">
+                    Perfil
+                  </a>
+                </li>
+    
+                <li class="nav-item">
+                  <a class="nav-link" href="javascript: void(0);" (click)="logout()">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                    Logout
+                  </a>
+                </li>
+              </ul>
             </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="javascript: void(0);" (click)="logout()">
-                <i class="fa fa-sign-out" aria-hidden="true"></i>
-                Logout
-              </a>
-            </li>
-
           </ul>
         </div>
-
-
       </ul>
     </div>
   </div>
