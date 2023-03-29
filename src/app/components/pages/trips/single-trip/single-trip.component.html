@@ -1,5 +1,7 @@
 <div *ngIf="trip" class="card">
-    <img *ngIf="trip.pictures.length > 0" src="{{trip.pictures[0]}}" class="card-img-top" alt="...">
+    <div class="container">
+      <img *ngIf="trip.pictures.length > 0" src="{{trip.pictures[0]}}" class="card-img-top" alt="...">
+    </div>
     <div class="card-body">
       <h5 class="card-title">{{trip.title}}</h5>
       <p class="card-text">{{trip.description}}</p>
