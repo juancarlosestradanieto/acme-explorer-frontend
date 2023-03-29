@@ -61,7 +61,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     FindersComponent,
     TripSponsorshipsComponent,
     TripApplicationsComponent,
-    SingleTripComponent
+    SingleTripComponent,
     ApplicationslistComponent,
     ApplicationdisplayComponent,
     AccessdeniedComponent
