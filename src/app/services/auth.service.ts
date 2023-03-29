@@ -3,7 +3,7 @@ import { Actor } from '../models/actor.model';
 
 import { environment } from 'src/environments/environment';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, firstValueFrom, Observable, Subject } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import * as firebase from 'firebase/compat/app';
 import { User as FirebaseUser } from "firebase/auth";
@@ -22,6 +22,8 @@ export class AuthService {
 
   //para controlar el login y el logout
   firebase_user_is_logged_in: boolean = false;
+  private currentActor!: Actor;
+  private loginStatus = new Subject<Boolean>();
 
   constructor(private http: HttpClient, private afAuth: AngularFireAuth) 
   {
@@ -105,7 +107,7 @@ export class AuthService {
   }
 
   getRoles(): string[] {
-    return ['EXPLORER', 'MANAGER', 'ADMINISTRATOR'];
+    return ['EXPLORER', 'MANAGER', 'ADMINISTRATOR', 'SPONSOR'];
   }
 
   login(email: string, password: string) {
@@ -114,8 +116,11 @@ export class AuthService {
 
     return new Promise<any>((resolve, reject) => {
       this.afAuth.signInWithEmailAndPassword(email, password)
-        .then(response => {
-
+        .then(async response => {
+          const url = environment.backendApiBaseURL + '/actors?email=' + email;
+          const actor = await firstValueFrom(this.http.get<Actor[]>(url));
+          this.currentActor = actor[0];
+          this.loginStatus.next(true);
           console.log("AuthService->login: then response ", response);
           resolve(response.user);
 
@@ -129,6 +134,10 @@ export class AuthService {
 
   }
 
+  getCurrentActor(): Actor {
+    return this.currentActor;
+  }
+
   logout() {
 
     let isLoggedIn: boolean = this.isLoggedIn();
@@ -137,7 +146,8 @@ export class AuthService {
     return new Promise<any>((resolve, reject) => {
       this.afAuth.signOut()
       .then(response => {
-
+        console.log("AuthService->logout loginStatus ", this.loginStatus);
+        this.loginStatus.next(false);
         console.log("AuthService->logout: then response ", response);
         resolve(response);
 
@@ -149,8 +159,10 @@ export class AuthService {
 
       });
     });
+  }
 
-
+  getStatus(): Observable<Boolean> {
+    return this.loginStatus.asObservable();
   }
 
 }

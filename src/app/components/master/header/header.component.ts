@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { ChangeDetectorRef } from '@angular/core';
+import { Actor } from 'src/app/models/actor.model';
 
 @Component({
   selector: 'app-header',
@@ -10,51 +11,61 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  user: any;
+  protected user: Actor | undefined;
+  protected activeRole: string = 'anonymous';
+  protected userId: string | undefined;
 
-  constructor (
-    private authService: AuthService, 
+  constructor(
+    private authService: AuthService,
     private router: Router,
-    private cdRef:ChangeDetectorRef
-  ) 
-  {
+    private cdRef: ChangeDetectorRef
+  ) {
+
   }
 
   ngOnInit(): void {
-
+    this.authService.getStatus().subscribe(loggedIn => {
+      if (loggedIn) {
+        this.user = this.authService.getCurrentActor();
+        console.log("Logged user: " , this.user);
+        this.activeRole = this.user.role.toString();
+        this.userId = this.user.id.toString();
+      } else {
+        this.activeRole = 'anonymous';
+        this.user = undefined;
+        this.userId = undefined;
+        console.log("Logged user: " , this.user);
+      }
+    });
   }
 
-  ngAfterViewChecked()
-  {
+  ngAfterViewChecked() {
     let user_stored = localStorage.getItem('user');
     //console.log("HeaderComponent->ngAfterViewChecked user_stored", user_stored);
 
-    if(user_stored != null)
-    {
+    if (user_stored != null) {
       this.user = JSON.parse(user_stored);
       this.cdRef.detectChanges();
     }
   }
 
-  logout()
-  {
+  logout() {
 
     this.authService.logout()
-    .then(response => {
+      .then(response => {
 
-      console.log("HeaderComponent->logout then response", response);
-      this.goLogin();
+        console.log("HeaderComponent->logout then response", response);
+        this.goLogin();
 
-    }).catch((err) => {
+      }).catch((err) => {
 
-      console.log("HeaderComponent->logout catch err", err);
+        console.log("HeaderComponent->logout catch err", err);
 
-    });
+      });
 
   }
 
-  goLogin() 
-  {
+  goLogin() {
     this.router.navigate(['/login']);
   }
 

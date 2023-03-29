@@ -1983,6 +1983,55 @@
       ],
       "_validated": true,
       "id": 126
+    },
+    {
+      "_id": "0",
+      "_version": 0,
+      "_trips": [],
+      "_name": "Prueba explorer 3",
+      "_surname": "Prueba",
+      "_email": "DSLH1GenkJM9@gmail.com",
+      "_password": "explorer",
+      "_phone": "123456789",
+      "_address": "Calle prueba",
+      "_role": [
+        "EXPLORER"
+      ],
+      "_validated": true,
+      "id": 127
+    },
+    {
+      "name": "test",
+      "surname": "test",
+      "email": "test@test.manager",
+      "password": "123456",
+      "phone": "test",
+      "address": "test",
+      "role": "MANAGER",
+      "validated": true,
+      "id": 128
+    },
+    {
+      "name": "test",
+      "surname": "test",
+      "email": "test@test.admin",
+      "password": "123456",
+      "phone": "test",
+      "address": "test",
+      "role": "ADMINISTRATOR",
+      "validated": true,
+      "id": 129
+    },
+    {
+      "name": "test",
+      "surname": "test",
+      "email": "test@test.sponsor",
+      "password": "123456",
+      "phone": "test",
+      "address": "test",
+      "role": "SPONSOR",
+      "validated": true,
+      "id": 130
     }
   ]
 }
