@@ -33,6 +33,7 @@ import { FavoriteTripsComponent } from './components/pages/favorite-trips/favori
 import { FindersComponent } from './components/pages/finders/finders.component';
 import { TripSponsorshipsComponent } from './components/pages/trip-sponsorships/trip-sponsorships.component';
 import { TripApplicationsComponent } from './components/pages/trip-applications/trip-applications.component';
+import { SingleTripComponent } from './components/pages/trips/single-trip/single-trip.component';
 import { ApplicationslistComponent } from './components/pages/applications/applicationslist/applicationslist.component';
 import { ApplicationdisplayComponent } from './components/pages/applications/applicationdisplay/applicationdisplay.component';
 import { AccessdeniedComponent } from './components/shared/denied-access/accessdenied/accessdenied.component';
@@ -60,6 +61,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     FindersComponent,
     TripSponsorshipsComponent,
     TripApplicationsComponent,
+    SingleTripComponent
     ApplicationslistComponent,
     ApplicationdisplayComponent,
     AccessdeniedComponent

@@ -42,4 +42,30 @@ export class TripsService {
 
   }
 
+  getSingleTrip(trip_id: string)
+  {
+
+    const url = `${environment.backendApiBaseURL + '/trips/'+trip_id}`;
+
+    return new Promise<any>((resolve, reject) => {
+
+      this.http.get<any>(url, httpOptions).subscribe({
+        next: (response) => {
+  
+          console.log('TripsService->getSingleTrip get next response', response);
+          resolve(response);
+  
+        },
+        error: (error) => {
+  
+          console.error('TripsService->getSingleTrip get error', error);
+          reject(error);
+  
+        }
+      });
+    
+    });
+
+  }
+
 }
