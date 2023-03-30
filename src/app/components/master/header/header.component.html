@@ -13,13 +13,13 @@
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="#">
             <i class="fa fa-home" aria-hidden="true"></i>
-            {{'Home'|translate}}
+            {{'home' | translate}}
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/trip-list">
             <i class="fa fa-plane" aria-hidden="true"></i>
-            {{'Trips' | translate}}
+            {{'trips.title' | translate}}
           </a>
         </li>
 
@@ -32,31 +32,31 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="explorerDropdownMenuLink" role="button"
                 data-bs-toggle="dropdown" aria-expanded="false">
-                Explorer
+                {{'actor.role.explorer' | translate}}
               </a>
               <ul class="dropdown-menu" aria-labelledby="explorerDropdownMenuLink">
                 <li class="nav-item">
                   <a class="nav-link" routerLink="/actor/{{userId}}/customize-ui">
                     <i class="fa-solid fa-user-gear"></i>
-                    Customize
+                    {{'customize-ui' | translate}}
                   </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" routerLink="/actor/{{userId}}/favorite_trips">
                     <i class="fa-solid fa-heart"></i>
-                    Favorite
+                    {{'trips.favourites' | translate}}
                   </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" routerLink="/actor/{{userId}}/finder">
                     <i class="fa-brands fa-searchengin"></i>
-                    Finder
+                    {{'trips.finder' | translate}}
                   </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" routerLink="/applications">
                     <i class="fa-solid fa-envelope"></i>
-                    Applications
+                    {{'applications.title' | translate}}
                   </a>
                 </li>
               </ul>
@@ -73,13 +73,13 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="managerDropdownMenuLink" role="button"
                 data-bs-toggle="dropdown" aria-expanded="false">
-                Manager
+                {{'actor.role.manager' | translate}}
               </a>
               <ul class="dropdown-menu" aria-labelledby="managerDropdownMenuLink">
                 <li class="nav-item">
                   <a class="nav-link" routerLink="/applications">
                     <i class="fa-solid fa-envelope"></i>
-                    Applications
+                    {{'applications.title' | translate}}
                   </a>
                 </li>
               </ul>
@@ -96,13 +96,13 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="sponsorDropdownMenuLink" role="button"
                 data-bs-toggle="dropdown" aria-expanded="false">
-                Sponsor
+                {{'actor.role.sponsor' | translate}}
               </a>
               <ul class="dropdown-menu" aria-labelledby="sponsorDropdownMenuLink">
                 <li class="nav-item">
                   <a class="nav-link" routerLink="/actor/{{userId}}/sponsorships">
                     <i class="fa-solid fa-hand-holding-dollar"></i>
-                    Sponsorships
+                    {{'sponsorships.title' | translate}}
                   </a>
                 </li>
               </ul>
@@ -119,13 +119,13 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="adminDropdownMenuLink" role="button"
                 data-bs-toggle="dropdown" aria-expanded="false">
-                Admin
+                {{'actor.role.admin' | translate}}
               </a>
               <ul class="dropdown-menu" aria-labelledby="adminDropdownMenuLink">
                 <li class="nav-item">
                   <a class="nav-link" routerLink="/dashboard">
                     <i class="fa-solid fa-chalkboard"></i>
-                    Dashboard
+                    {{'dashboard.title' | translate}}
                   </a>
                 </li>
               </ul>
@@ -136,13 +136,13 @@
         <li class="nav-item" *ngIf="!user">
           <a class="nav-link active" routerLink="/register">
             <i class="fa fa-user-plus" aria-hidden="true"></i>
-            {{'Register' | translate}}
+            {{'auth.register' | translate}}
           </a>
         </li>
         <li class="nav-item" *ngIf="!user">
           <a class="nav-link active" routerLink="/login">
             <i class="fa fa-sign-in" aria-hidden="true"></i>
-            {{'Login'| translate}}
+            {{'auth.login' | translate}}
           </a>
         </li>
 
@@ -161,14 +161,14 @@
               <ul class="dropdown-menu" aria-labelledby="userDropdownMenuLink">
                 <li class="nav-item">
                   <a class="nav-link" routerLink="/actor/{{userId}}/profile">
-                    Perfil
+                    {{'actor.profile' | translate}}
                   </a>
                 </li>
     
                 <li class="nav-item">
                   <a class="nav-link" href="javascript: void(0);" (click)="logout()">
                     <i class="fa fa-sign-out" aria-hidden="true"></i>
-                    Logout
+                    {{'auth.logout'| translate}}
                   </a>
                 </li>
               </ul>

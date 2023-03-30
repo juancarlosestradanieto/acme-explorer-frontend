@@ -22,11 +22,10 @@ export class AuthService {
 
   //para controlar el login y el logout
   firebase_user_is_logged_in: boolean = false;
-  private currentActor!: Actor;
+  private currentActor!: Actor | null;
   private loginStatus = new Subject<Boolean>();
 
-  constructor(private http: HttpClient, private afAuth: AngularFireAuth) 
-  {
+  constructor(private http: HttpClient, private afAuth: AngularFireAuth) {
     //? const actor: any = localStorage.getItem('user');
     //? this.user =
     //?   localStorage.getItem('user') !== null ? JSON.parse(actor) : null;
@@ -35,17 +34,16 @@ export class AuthService {
     //para controlar el login y el logout
     this.afAuth.onAuthStateChanged((user) => {
 
-      if (user) 
-      {
+      if (user) {
         this.firebase_user_is_logged_in = true;
-      } 
-      else
-      {
+      }
+      else {
         this.firebase_user_is_logged_in = false;
         user = null;
       }
       console.log("AuthService constructor onAuthStateChanged this.firebase_user_is_logged_in", this.firebase_user_is_logged_in);
-      
+
+      localStorage.setItem('loggedIn', JSON.stringify(this.firebase_user_is_logged_in));
       localStorage.setItem('user', JSON.stringify(user));
 
     });
@@ -53,8 +51,7 @@ export class AuthService {
   }
 
   //para controlar el login y el logout
-  public isLoggedIn(): boolean 
-  {
+  public isLoggedIn(): boolean {
     return this.firebase_user_is_logged_in;
   }
 
@@ -64,44 +61,44 @@ export class AuthService {
     //? localStorage.removeItem('token');
     //? localStorage.removeItem('user');
     //? this.user = null;
-    
+
     return new Promise<any>((resolve, reject) => {
       this.afAuth.createUserWithEmailAndPassword(
         actor.email,
         actor.password
       )
-      .then((response1) => {
+        .then((response1) => {
 
-        console.log('AuthService->registerUser->createUserWithEmailAndPassword then response', response1);
+          console.log('AuthService->registerUser->createUserWithEmailAndPassword then response', response1);
 
-        const headers = new HttpHeaders();
-        headers.append('Content-Type', 'application/json');
-        const url = `${environment.backendApiBaseURL + '/actors'}`;
-        const body = JSON.stringify(actor);
+          const headers = new HttpHeaders();
+          headers.append('Content-Type', 'application/json');
+          const url = `${environment.backendApiBaseURL + '/actors'}`;
+          const body = JSON.stringify(actor);
 
-        this.http.post<any>(url, body, httpOptions).subscribe({
-          next: (response2) => {
+          this.http.post<any>(url, body, httpOptions).subscribe({
+            next: (response2) => {
 
-            console.log('AuthService->registerUser post next response', response2);
-            console.log('Registro Realizado Correctamente!');
+              console.log('AuthService->registerUser post next response', response2);
+              console.log('Registro Realizado Correctamente!');
 
-            resolve(response2);
+              resolve(response2);
 
-          },
-          error: (error2) => {
+            },
+            error: (error2) => {
 
-            console.error('AuthService->registerUser post error', error2);
-            reject(error2);
-          }
+              console.error('AuthService->registerUser post error', error2);
+              reject(error2);
+            }
+          });
+
+        })
+        .catch((error1) => {
+
+          console.error('AuthService->registerUser->createUserWithEmailAndPassword catch error', error1);
+          reject(error1);
+
         });
-
-      })
-      .catch((error1) => {
-
-        console.error('AuthService->registerUser->createUserWithEmailAndPassword catch error', error1);
-        reject(error1);
-
-      });
     });
 
   }
@@ -120,6 +117,7 @@ export class AuthService {
           const url = environment.backendApiBaseURL + '/actors?email=' + email;
           const actor = await firstValueFrom(this.http.get<Actor[]>(url));
           this.currentActor = actor[0];
+          localStorage.setItem('currentActor', JSON.stringify(this.currentActor));
           this.loginStatus.next(true);
           console.log("AuthService->login: then response ", response);
           resolve(response.user);
@@ -134,8 +132,28 @@ export class AuthService {
 
   }
 
-  getCurrentActor(): Actor {
-    return this.currentActor;
+  getCurrentActor(): Actor | null {
+    let loggedIn_stored = localStorage.getItem('loggedIn');
+    let loggedIn: boolean;
+    let user: Actor | null = null;
+    console.log("HeaderComponent->ngAfterViewChecked user_stored", loggedIn_stored);
+
+    if (loggedIn_stored != null) {
+      loggedIn = JSON.parse(loggedIn_stored);
+      if (loggedIn) {
+        let user_stored = localStorage.getItem('currentActor');
+        user = JSON.parse(user_stored!);
+      }
+    }
+
+    return user;
+
+    /*if (this.currentActor) {
+      return this.currentActor;
+    } else {
+      return null;
+    }*/
+
   }
 
   logout() {
@@ -145,23 +163,33 @@ export class AuthService {
 
     return new Promise<any>((resolve, reject) => {
       this.afAuth.signOut()
-      .then(response => {
-        console.log("AuthService->logout loginStatus ", this.loginStatus);
-        this.loginStatus.next(false);
-        console.log("AuthService->logout: then response ", response);
-        resolve(response);
+        .then(response => {
+          console.log("AuthService->logout loginStatus ", this.loginStatus);
+          this.loginStatus.next(false);
+          this.currentActor = null;
+          localStorage.setItem('currentActor', JSON.stringify(this.currentActor));
+          console.log("AuthService->logout: then response ", response);
+          resolve(response);
 
 
-      }).catch(err => {
+        }).catch(err => {
 
-        console.log("AuthService->logout: catch err", err);
-        reject(err);
+          console.log("AuthService->logout: catch err", err);
+          reject(err);
 
-      });
+        });
     });
   }
 
   getStatus(): Observable<Boolean> {
+    let loggedIn_stored = localStorage.getItem('loggedIn');
+    let loggedIn: boolean = false;
+    if (loggedIn_stored != null) {
+      loggedIn = JSON.parse(loggedIn_stored);
+      //console.log("AuthService->loggedIn:", loggedIn);
+    }
+    this.loginStatus.next(loggedIn);
+
     return this.loginStatus.asObservable();
   }
 
