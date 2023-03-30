@@ -5,7 +5,7 @@ import { TripsService } from 'src/app/services/trips.service';
 @Component({
   selector: 'app-all-trips',
   templateUrl: './all-trips.component.html',
-  styleUrls: ['./all-trips.component.css']
+  styleUrls: ['./all-trips.component.scss']
 })
 export class AllTripsComponent implements OnInit {
 

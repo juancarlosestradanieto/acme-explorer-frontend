@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-applicationdisplay',
   templateUrl: './applicationdisplay.component.html',
-  styleUrls: ['./applicationdisplay.component.css']
+  styleUrls: ['./applicationdisplay.component.scss']
 })
 export class ApplicationdisplayComponent implements OnInit {
 
