@@ -33,11 +33,18 @@ export class HeaderComponent implements OnInit {
       if (loggedIn) {
         let user_stored = localStorage.getItem('currentActor');
         this.user = JSON.parse(user_stored!);
-        //console.log("Logged user: ", this.user);
-        this.activeRole = this.user!.role.toString();
-        //console.log("Logged user role: ", this.activeRole);
-        this.userId = this.user!.id.toString();
-        //console.log("Logged user userId: ", this.userId);
+
+        if (this.user != null) {
+          this.activeRole = this.user!.role.toString();
+          //console.log("Logged user role: ", this.activeRole);
+          this.userId = this.user!.id.toString();
+          //console.log("Logged user userId: ", this.userId);
+        } else {
+          this.activeRole = 'anonymous';;
+          //console.log("Logged user role: ", this.activeRole);
+          this.userId = null;
+          //console.log("Logged user userId: ", this.userId);
+        }
       } else {
         this.activeRole = 'anonymous';
         this.user = null;
