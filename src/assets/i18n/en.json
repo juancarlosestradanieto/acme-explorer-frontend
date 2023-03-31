@@ -1,43 +1,73 @@
 {
-    "Register":"Register",
-    "Login":"Login",
-    "Home":"Home",
-    "Trips":"Trips",
-    "footer": {
-        "terms": "Terms and conditions"
+  "auth": {
+    "register": "Register",
+    "login": "Login",
+    "logout": "Logout",
+    "errors": {
+      "access-denied": "Restricted access to resource"
+    }
+  },
+  "home": "Home",
+  "trips": {
+    "title": "Trips",
+    "favourites": "Favourite trips",
+    "finder": "Trip finder"
+  },
+  "footer": {
+    "terms": "Terms and conditions"
+  },
+  "termsandconditions": {
+    "init": "This agreement describes the terms and conditions applicable to the use of the content, products and/or services of the Acme Explorer website. To make use of the content, products and/or services of the website, the user must abide by these terms and conditions.",
+    "last": "Acme Explorer is not responsible for the improper use of the content, products and/or services of the website and for the breach of these terms and conditions.",
+    "first": {
+      "title": "I. OBJECT",
+      "description": "The purpose is to regulate the access and use of the content, products and/or services available to the general public in the domain https://www.acmeexplorer.com. The owner reserves the right to make any type of modification to the website at any time and without prior notice, the user accepts said modifications. Access to the website by the user is free and free, the use of the content, products and/or services implies a subscription cost for the user. The website only admits access to people of legal age and is not responsible for the breach of this. The website is aimed at users residing in Spain and complies with the legislation established in said country. If the user resides in another country and decides to access the website, they will do so at their own risk. The administration of the website can be exercised by third parties, that is, people other than the owner, without affecting these terms and conditions."
     },
-    "termsandconditions": {
-      "init": "This agreement describes the terms and conditions applicable to the use of the content, products and/or services of the Acme Explorer website. To make use of the content, products and/or services of the website, the user must abide by these terms and conditions.",
-      "last": "Acme Explorer is not responsible for the improper use of the content, products and/or services of the website and for the breach of these terms and conditions.",
-      "first": {
-        "title": "I. OBJECT",
-        "description": "The purpose is to regulate the access and use of the content, products and/or services available to the general public in the domain https://www.acmeexplorer.com. The owner reserves the right to make any type of modification to the website at any time and without prior notice, the user accepts said modifications. Access to the website by the user is free and free, the use of the content, products and/or services implies a subscription cost for the user. The website only admits access to people of legal age and is not responsible for the breach of this. The website is aimed at users residing in Spain and complies with the legislation established in said country. If the user resides in another country and decides to access the website, they will do so at their own risk. The administration of the website can be exercised by third parties, that is, people other than the owner, without affecting these terms and conditions."
-      },
-      "second": {
-        "title": "II. USER",
-        "description": "User activity on the website such as posts or comments will be subject to these terms and conditions. The user agrees to use the content, products and/or services lawfully, without breaching morality or public order, refraining from any act that affects the rights of third parties or the operation of the website. The user agrees to provide true information in the forms on the website. Access to the website does not imply a relationship between the user and the owner of the website. The user declares to be of legal age and have the legal capacity to abide by these terms and conditions."
-      },
-      "third": {
-        "title": "III. ACCESS AND NAVIGATION ON THE WEBSITE",
-        "description": "The owner does not guarantee the continuity and availability of the content, products and/or services on the website, it will carry out actions that promote the proper functioning of said website without any responsibility. The owner is not responsible for the software being free of errors that may cause damage to the software and/or hardware of the equipment from which the user accesses the website. Likewise, it is not responsible for damages caused by access and/or use of the website."
-      },
-      "fourth": {
-        "title": "IV. PRIVACY POLICY AND DATA PROTECTION",
-        "description": "In accordance with the provisions of the General Law on the Protection of Personal Data Held by Private Parties, the owner undertakes to take the necessary measures to guarantee the user's safety, preventing the improper use of the personal data that the user provides in the website. The owner will verify that the personal data contained in the databases are correct, true and current, as well as that they are used only for the purpose for which they were collected. Acme Explorer reserves the right to make any type of modification to the Privacy Notice at any time and without prior notice, according to its needs or changes in the applicable legislation, the user accepts said modifications. The website involves the use of cookies that are small amounts of information that are stored in the browser used by the user such as login data, user preferences, date and time the website is accessed, sites visited and IP address, this information is anonymous and will only be used to improve the website. Cookies make browsing easier and more user-friendly, however, the user can deactivate them at any time from their browser with the understanding that this may affect some functions of the website."
-      },
-      "fifth": {
-        "title": "V. LINKS POLICY",
-        "description": "The website may contain links to other Internet sites belonging to third parties for which it is not responsible."
-      },
-      "sixth": {
-        "title": "VI. INTELLECTUAL AND INDUSTRIAL PROPERTY POLICY",
-        "description": "The owner declares to have the intellectual and industrial property rights of the website including images, audio or video files, logos, trademarks, colors, structures, fonts, designs and other elements that distinguish it, protected by Spanish and international legislation on the subject. of intellectual and industrial property. The user undertakes to respect the industrial and intellectual property rights of the owner, being able to view the elements of the website, store them, copy them and print them exclusively for personal use."
-      },
-      "seventh": {
-        "title": "VI. INTELLECTUAL AND INDUSTRIAL PROPERTY POLICY",
-        "description": "The relationship between the user and the owner will be governed by the laws applicable in Spain."
-      }
+    "second": {
+      "title": "II. USER",
+      "description": "User activity on the website such as posts or comments will be subject to these terms and conditions. The user agrees to use the content, products and/or services lawfully, without breaching morality or public order, refraining from any act that affects the rights of third parties or the operation of the website. The user agrees to provide true information in the forms on the website. Access to the website does not imply a relationship between the user and the owner of the website. The user declares to be of legal age and have the legal capacity to abide by these terms and conditions."
     },
-    "dark":"Dark theme activated",
-    "light":"Light theme activated"
+    "third": {
+      "title": "III. ACCESS AND NAVIGATION ON THE WEBSITE",
+      "description": "The owner does not guarantee the continuity and availability of the content, products and/or services on the website, it will carry out actions that promote the proper functioning of said website without any responsibility. The owner is not responsible for the software being free of errors that may cause damage to the software and/or hardware of the equipment from which the user accesses the website. Likewise, it is not responsible for damages caused by access and/or use of the website."
+    },
+    "fourth": {
+      "title": "IV. PRIVACY POLICY AND DATA PROTECTION",
+      "description": "In accordance with the provisions of the General Law on the Protection of Personal Data Held by Private Parties, the owner undertakes to take the necessary measures to guarantee the user's safety, preventing the improper use of the personal data that the user provides in the website. The owner will verify that the personal data contained in the databases are correct, true and current, as well as that they are used only for the purpose for which they were collected. Acme Explorer reserves the right to make any type of modification to the Privacy Notice at any time and without prior notice, according to its needs or changes in the applicable legislation, the user accepts said modifications. The website involves the use of cookies that are small amounts of information that are stored in the browser used by the user such as login data, user preferences, date and time the website is accessed, sites visited and IP address, this information is anonymous and will only be used to improve the website. Cookies make browsing easier and more user-friendly, however, the user can deactivate them at any time from their browser with the understanding that this may affect some functions of the website."
+    },
+    "fifth": {
+      "title": "V. LINKS POLICY",
+      "description": "The website may contain links to other Internet sites belonging to third parties for which it is not responsible."
+    },
+    "sixth": {
+      "title": "VI. INTELLECTUAL AND INDUSTRIAL PROPERTY POLICY",
+      "description": "The owner declares to have the intellectual and industrial property rights of the website including images, audio or video files, logos, trademarks, colors, structures, fonts, designs and other elements that distinguish it, protected by Spanish and international legislation on the subject. of intellectual and industrial property. The user undertakes to respect the industrial and intellectual property rights of the owner, being able to view the elements of the website, store them, copy them and print them exclusively for personal use."
+    },
+    "seventh": {
+      "title": "VI. INTELLECTUAL AND INDUSTRIAL PROPERTY POLICY",
+      "description": "The relationship between the user and the owner will be governed by the laws applicable in Spain."
+    }
+  },
+  "actor": {
+    "profile": "Profile",
+    "role": {
+      "title": "Rol",
+      "explorer": "Explorer",
+      "manager": "Manager",
+      "sponsor": "Sponsor",
+      "admin": "Administrator"
+    }
+  },
+  "customize-ui": "Customize UI",
+  "applications": {
+    "title": "Applications"
+  },
+  "sponsorships": {
+    "title": "Sponsorships"
+  },
+  "dashboard": {
+    "title": "Dashboard"
+  },
+  "dark":"Dark theme activated",
+  "light":"Light theme activated"
 }
