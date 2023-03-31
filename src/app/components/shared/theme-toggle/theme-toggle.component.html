@@ -2,7 +2,7 @@
     <p>{{storedTheme | translate}}</p>   
     <label
         class="theme-switcher"
-        [ngClass]="(storedTheme === 'theme-dark')? 'theme-switcher active':'theme-switcher'"
+        [ngClass]="(storedTheme === 'dark')? 'theme-switcher active':'theme-switcher'"
         (click)="setTheme()"
     >
     <div class="switch-path">
