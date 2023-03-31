@@ -1,0 +1,14 @@
+<div class="theme-switcher-wrap">
+    <p>{{storedTheme | translate}}</p>   
+    <label
+        class="theme-switcher"
+        [ngClass]="(storedTheme === 'theme-dark')? 'theme-switcher active':'theme-switcher'"
+        (click)="setTheme()"
+    >
+    <div class="switch-path">
+        <div class="switch-handle">
+        </div>
+    </div>
+</label>
+
+</div>

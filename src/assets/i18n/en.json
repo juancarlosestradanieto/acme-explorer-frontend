@@ -37,5 +37,7 @@
         "title": "VI. INTELLECTUAL AND INDUSTRIAL PROPERTY POLICY",
         "description": "The relationship between the user and the owner will be governed by the laws applicable in Spain."
       }
-    }
+    },
+    "theme-dark":"Theme Dark activated",
+    "theme-light":"Theme Light activated"
 }

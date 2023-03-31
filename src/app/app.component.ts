@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 
 @Component({
@@ -6,12 +6,18 @@ import {TranslateService} from "@ngx-translate/core";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'acme-explorer-frontend';
+  
+ 
 
   constructor(private translate: TranslateService) {
     this.translate.addLangs(['es','en']), //Lista de idiomas disponibles
     this.translate.setDefaultLang('es') //Por defecto dejamos establecido el Español
     // this._translate.use('en')    USO DEL IDIOMA INGLÉS en la APP 
   }
+
+  ngOnInit(): void {}
+
+
 }

@@ -37,6 +37,8 @@
           "title": "VI. POLÍTICA DE PROPIEDAD INTELECTUAL E INDUSTRIAL",
           "description": "La relación entre el usuario y el titular se regirá por las legislaciones aplicables en España."
         }
-    }
+    },
+    "theme-dark":"Modo Oscuro activado",
+    "theme-light":"Modo Claro activado"
 
 }

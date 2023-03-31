@@ -9,6 +9,7 @@ import { TripsService } from 'src/app/services/trips.service';
 })
 export class AllTripsComponent implements OnInit {
 
+  storeTheme:string = localStorage.getItem('theme-color')!;
   trips: Array<Trip> = [];
 
   constructor(tripsService: TripsService) {
