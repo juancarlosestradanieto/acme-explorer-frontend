@@ -60,12 +60,38 @@
   },
   "customize-ui": "Customize UI",
   "applications": {
-    "title": "Applications"
+    "title-plural": "Applications",
+    "title-sing": "Application",
+    "moment": "Creation",
+    "id": "Id",
+    "trip-id": "Trip Id",
+    "actor-id": "Explorer Id",
+    "comments": "Comments",
+    "create": "Create new application",
+    "accept": "Accept",
+    "reject": "Reject",
+    "pay": "Pay",
+    "cancel": "Cancel",
+    "add-comment": "Add comment",
+    "remove-comment": "Remove comment",
+    "status": {
+      "title": "Status",
+      "cancelled": "Cancelled",
+      "pending": "Pending",
+      "rejected": "Rejected",
+      "due": "Due",
+      "accepted": "Accepted"
+    }
   },
   "sponsorships": {
     "title": "Sponsorships"
   },
   "dashboard": {
     "title": "Dashboard"
+  },
+  "buttons": {
+    "create": "Create",
+    "more": "More",
+    "go_to_trip": "Go to trip"
   }
 }

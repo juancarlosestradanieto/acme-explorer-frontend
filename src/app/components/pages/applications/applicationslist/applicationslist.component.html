@@ -1,1 +1,171 @@
-<p>applicationslist works!</p>
+<h2>{{'applications.title-plural' | translate}} </h2>
+
+<div class="accordion" id="statusCancelledAccordion">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="statusCancelled">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCancelled"
+                aria-expanded="true" aria-controls="collapseCancelled">
+                {{'applications.status.cancelled' | translate}}
+            </button>
+        </h2>
+    </div>
+    <div id="collapseCancelled" class="accordion-collapse collapse" data-parent="statusCancelledAccordion">
+        <div class="accordion-body" *ngFor="let application of cancelledApplications">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"></li>
+                <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}</li>
+                <li class="list-group-item"><b>{{'applications.id' | translate}}</b>: {{application.id}}</li>
+                <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>: {{application.moment}}</li>
+                <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.actor}}</li>
+                <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip}}</li>
+                <li class="list-group-item">
+                    <button type="button" class="btn btn-primary" routerLink="/trip/{{application.trip}}">
+                        {{'buttons.go_to_trip' | translate}}
+                    </button>
+                    <button type="button" class="btn btn-primary" routerLink="/applications/{{application.id}}">
+                        {{'buttons.more' | translate}}
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="accordion" id="statusRejectedAccordion">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="statusRejected">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRejected"
+                aria-expanded="true" aria-controls="collapseRejected">
+                {{'applications.status.rejected' | translate}}
+            </button>
+        </h2>
+    </div>
+    <div id="collapseRejected" class="accordion-collapse collapse" data-parent="statusRejectedAccordion">
+        <div class="accordion-body" *ngFor="let application of rejectedApplications">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"></li>
+                <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}</li>
+                <li class="list-group-item"><b>{{'applications.id' | translate}}</b>: {{application.id}}</li>
+                <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>: {{application.moment}}</li>
+                <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.actor}}</li>
+                <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip}}</li>
+                <li class="list-group-item">
+                    <button type="button" class="btn btn-primary" routerLink="/trip/{{application.trip}}">
+                        {{'buttons.go_to_trip' | translate}}
+                    </button>
+                    <button type="button" class="btn btn-primary" routerLink="/applications/{{application.id}}">
+                        {{'buttons.more' | translate}}
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="accordion" id="statusPendingAccordion">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="statusPending">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePending"
+                aria-expanded="true" aria-controls="collapsePending">
+                {{'applications.status.pending' | translate}}
+            </button>
+        </h2>
+    </div>
+    <div id="collapsePending" class="accordion-collapse collapse" data-parent="statusPendingAccordion">
+        <div class="accordion-body" *ngFor="let application of pendingApplications">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"></li>
+                <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}</li>
+                <li class="list-group-item"><b>{{'applications.id' | translate}}</b>: {{application.id}}</li>
+                <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>: {{application.moment}}</li>
+                <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.actor}}</li>
+                <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip}}</li>
+                <li class="list-group-item">
+                    <button type="button" class="btn btn-primary" routerLink="/trip/{{application.trip}}">
+                        {{'buttons.go_to_trip' | translate}}
+                    </button>
+                    <button type="button" class="btn btn-primary" routerLink="/applications/{{application.id}}">
+                        {{'buttons.more' | translate}}
+                    </button>
+                    <button type="button" class="btn btn-danger" *ngIf="activeRole == 'EXPLORER'">
+                        {{'applications.cancel' | translate}}
+                    </button>
+                    <button type="button" class="btn btn-success" *ngIf="activeRole == 'MANAGER'">
+                        {{'applications.accept' | translate}}
+                    </button>
+                    <button type="button" class="btn btn-danger" *ngIf="activeRole == 'MANAGER'">
+                        {{'applications.reject' | translate}}
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="accordion" id="statusDueAccordion">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="statusDue">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDue"
+                aria-expanded="true" aria-controls="collapseDue">
+                {{'applications.status.due' | translate}}
+            </button>
+        </h2>
+    </div>
+    <div id="collapseDue" class="accordion-collapse collapse" data-parent="statusDueAccordion">
+        <div class="accordion-body" *ngFor="let application of dueApplications">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"></li>
+                <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}</li>
+                <li class="list-group-item"><b>{{'applications.id' | translate}}</b>: {{application.id}}</li>
+                <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>: {{application.moment}}</li>
+                <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.actor}}</li>
+                <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip}}</li>
+                <li class="list-group-item">
+                    <button type="button" class="btn btn-primary" routerLink="/trip/{{application.trip}}">
+                        {{'buttons.go_to_trip' | translate}}
+                    </button>
+                    <button type="button" class="btn btn-primary" routerLink="/applications/{{application.id}}">
+                        {{'buttons.more' | translate}}
+                    </button>
+                    <button type="button" class="btn btn-success" *ngIf="activeRole == 'EXPLORER'">
+                        {{'applications.pay' | translate}}
+                    </button>
+                    <button type="button" class="btn btn-danger" *ngIf="activeRole == 'EXPLORER'">
+                        {{'applications.cancel' | translate}}
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="accordion" id="statusAcceptedAccordion">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="statusAccepted">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAccepted"
+                aria-expanded="true" aria-controls="collapseAccepted">
+                {{'applications.status.accepted' | translate}}
+            </button>
+        </h2>
+    </div>
+    <div id="collapseAccepted" class="accordion-collapse collapse" data-parent="statusAcceptedAccordion">
+        <div class="accordion-body" *ngFor="let application of acceptedApplications">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"></li>
+                <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}</li>
+                <li class="list-group-item"><b>{{'applications.id' | translate}}</b>: {{application.id}}</li>
+                <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>: {{application.moment}}</li>
+                <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.actor}}</li>
+                <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip}}</li>
+                <li class="list-group-item">
+                    <button type="button" class="btn btn-primary" routerLink="/trip/{{application.trip}}">
+                        {{'buttons.go_to_trip' | translate}}
+                    </button>
+                    <button type="button" class="btn btn-primary" routerLink="/applications/{{application.id}}">
+                        {{'buttons.more' | translate}}
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

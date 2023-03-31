@@ -35,17 +35,6 @@ export class AllTripsComponent implements OnInit {
 
   }
 
-  createApplications(trip_id: string) {
-    let application = new Application();
-    this.applicationService.createApplication(application, trip_id, this.user!.id)
-    .then((response) => {
-      console.log("AllTripsComponent->createApplications then response ", response);
-    })
-    .catch((error) => {
-      console.error("AllTripsComponent->createApplications error ", error);
-    });
-  }
-
   ngOnInit(): void {
 
     this.user = this.authService.getCurrentActor();

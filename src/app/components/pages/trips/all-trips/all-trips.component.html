@@ -24,7 +24,7 @@
               <button type="button" class="btn btn-danger" >
                   Delete
               </button>
-              <button type="button" class="btn" *ngIf="activeRole == 'EXPLORER'" (click)="createApplications(trip.id)">
+              <button type="button" class="btn" *ngIf="activeRole == 'EXPLORER'" routerLink="/trip/{{trip.id}}/applications/create">
                 Create application
             </button>
             </div>

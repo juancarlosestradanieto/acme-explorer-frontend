@@ -60,12 +60,38 @@
   },
   "customize-ui": "Personalizar interfaz",
   "applications": {
-    "title": "Solicitudes"
+    "title-plural": "Solicitudes",
+    "title-sing": "Solicitud",
+    "moment": "Creación",
+    "id": "Id",
+    "trip-id": "Id del Viaje",
+    "actor-id": "Id del Explorador",
+    "comments": "Comentarios",
+    "create": "Crear nueva solicitud",
+    "accept": "Aceptar",
+    "reject": "Rechazar",
+    "pay": "Pagar",
+    "cancel": "Cancelar",
+    "add-comment": "Añadir comentario",
+    "remove-comment": "Eliminar comentario",
+    "status": {
+      "title": "Estado",
+      "cancelled": "Cancelada",
+      "pending": "Pendiente",
+      "rejected": "Denegada",
+      "due": "En espera de pago",
+      "accepted": "Aceptada"
+    }
   },
   "sponsorships": {
     "title": "Patrocinios"
   },
   "dashboard": {
     "title": "Panel de control"
+  },
+  "buttons": {
+    "create": "Crear",
+    "more": "Ver más",
+    "go_to_trip": "Ir al viaje"
   }
 }

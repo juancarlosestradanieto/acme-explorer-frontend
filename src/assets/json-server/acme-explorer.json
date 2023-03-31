@@ -2032,9 +2032,100 @@
       "role": "SPONSOR",
       "validated": true,
       "id": 130
+    },
+    {
+      "name": "test",
+      "surname": "test",
+      "email": "test@test.test2",
+      "password": "123456",
+      "phone": "test",
+      "address": "test",
+      "role": "EXPLORER",
+      "validated": true,
+      "id": 131
     }
   ],
   "applications": [
-    
+    {
+      "_id": "0",
+      "version": 0,
+      "actor": 83,
+      "trip": 1,
+      "comments": [],
+      "status": "REJECTED",
+      "id": 1
+    },
+    {
+      "_id": "0",
+      "version": 0,
+      "actor": 83,
+      "trip": 6,
+      "comments": [],
+      "status": "DUE",
+      "id": 2
+    },
+    {
+      "_id": "0",
+      "version": 0,
+      "actor": 83,
+      "trip": 5,
+      "comments": [],
+      "status": "ACCEPTED",
+      "id": 3
+    },
+    {
+      "_id": "0",
+      "version": 0,
+      "actor": 15,
+      "trip": 5,
+      "comments": [],
+      "status": "PENDING",
+      "id": 4
+    },
+    {
+      "status": "PENDING",
+      "trip": "2",
+      "actor": 83,
+      "comments": [
+        "dhhtrjt",
+        "erjererje"
+      ],
+      "id": 5
+    },
+    {
+      "status": "PENDING",
+      "trip": "1",
+      "actor": 83,
+      "comments": [
+        "ferhrejhejeje"
+      ],
+      "id": 6
+    },
+    {
+      "status": "PENDING",
+      "trip": "3",
+      "actor": 83,
+      "comments": [
+        "grhehdjd"
+      ],
+      "id": 7
+    },
+    {
+      "status": "PENDING",
+      "trip": "1",
+      "actor": 83,
+      "comments": [
+        "erjertkjkrtkrk",
+        "ejtetkekrkrekre"
+      ],
+      "id": 8
+    },
+    {
+      "status": "PENDING",
+      "trip": "2",
+      "actor": 83,
+      "comments": [],
+      "id": 9
+    }
   ]
 }
