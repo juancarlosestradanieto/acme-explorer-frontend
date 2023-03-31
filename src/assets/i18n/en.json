@@ -38,6 +38,6 @@
         "description": "The relationship between the user and the owner will be governed by the laws applicable in Spain."
       }
     },
-    "dark":"Theme Dark activated",
-    "light":"Theme Light activated"
+    "dark":"Dark theme activated",
+    "light":"Light theme activated"
 }
