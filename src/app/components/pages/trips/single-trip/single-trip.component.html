@@ -12,10 +12,14 @@
     <li class="list-group-item"><b>End date</b>: {{trip.end_date | date: 'dd/MM/yyyy'}}</li>
   </ul>
   <div class="card-body">
-    <button type="button" class="btn btn-primary" *ngIf="activeRole == 'EXPLORER'"
+    <button type="button" class="btn btn-primary" *ngIf="activeRole == 'EXPLORER' && trip.start_date.toString() > currentDateTime.toISOString()"
       routerLink="/trip/{{trip.id}}/applications/new">
       <i class="fa-solid fa-envelope"></i>
       {{'applications.apply-for' | translate}}
     </button>
+    <button type="button" class="btn btn-primary" *ngIf="activeRole == 'MANAGER'" routerLink="/trip/{{trip.id}}/applications/">
+      <i class="fa-solid fa-envelope"></i>
+      {{'applications.title-plural' | translate}}
+  </button>
   </div>
 </div>

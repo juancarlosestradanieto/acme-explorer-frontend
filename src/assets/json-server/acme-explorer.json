@@ -65,6 +65,39 @@
         "assets/images/trips/pico-espejo.jpg"
       ],
       "id": 6
+    },
+    {
+      "title": "Los Roques 2",
+      "description": "The description of Los Roques",
+      "price": 100,
+      "start_date": "2023-07-24T00:00:00+00:00",
+      "end_date": "2023-07-24T00:00:00+00:00",
+      "pictures": [
+        "assets/images/trips/los-roques.jpg"
+      ],
+      "id": 7
+    },
+    {
+      "title": "Los Médanos de Coro 2",
+      "description": "The description of Los Médanos de Coro",
+      "price": 100,
+      "start_date": "2023-07-24T00:00:00+00:00",
+      "end_date": "2023-07-24T00:00:00+00:00",
+      "pictures": [
+        "assets/images/trips/los-medanos-de-coro.jpg"
+      ],
+      "id": 8
+    },
+    {
+      "title": "Pico Espejo 2",
+      "description": "The description of Pico Espejo",
+      "price": 100,
+      "start_date": "2023-07-24T00:00:00+00:00",
+      "end_date": "2023-07-24T00:00:00+00:00",
+      "pictures": [
+        "assets/images/trips/pico-espejo.jpg"
+      ],
+      "id": 9
     }
   ],
   "actors": [

@@ -24,9 +24,13 @@
               <button type="button" class="btn btn-danger" >
                   Delete
               </button>
-              <button type="button" class="btn btn-primary" *ngIf="activeRole == 'EXPLORER'" routerLink="/trip/{{trip.id}}/applications/new">
+              <button type="button" class="btn btn-primary" *ngIf="activeRole == 'EXPLORER' && trip.start_date.toString() > currentDateTime.toISOString()" routerLink="/trip/{{trip.id}}/applications/new">
                 <i class="fa-solid fa-envelope"></i>
                 {{'applications.apply-for' | translate}}
+            </button>
+            <button type="button" class="btn btn-primary" *ngIf="activeRole == 'MANAGER'" routerLink="/trip/{{trip.id}}/applications/">
+                <i class="fa-solid fa-envelope"></i>
+                {{'applications.title-plural' | translate}}
             </button>
             </div>
         </div>

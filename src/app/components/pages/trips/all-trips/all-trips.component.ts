@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Actor } from 'src/app/models/actor.model';
 import { Application } from 'src/app/models/application.model';
@@ -17,15 +18,17 @@ export class AllTripsComponent implements OnInit {
   protected user!: Actor | null;
   protected activeRole: string = 'anonymous';
   protected userId!: string | null;
+  currentDateTime: Date;
 
   constructor(tripsService: TripsService, private authService: AuthService) {
+
+    this.currentDateTime = new Date;
 
     tripsService.getAllTrips()
       .then((response) => {
 
         console.log("AllTripsComponent->constructor tripsService.getAllTrips then response ", response);
         this.trips = response;
-
       })
       .catch((error) => {
 

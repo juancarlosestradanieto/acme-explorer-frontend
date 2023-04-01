@@ -17,9 +17,11 @@ export class SingleTripComponent implements OnInit {
   protected user!: Actor | null;
   protected activeRole: string = 'anonymous';
   protected userId!: string | null;
+  currentDateTime: Date;
 
   constructor(private tripService: TripsService, private route:ActivatedRoute, private authService: AuthService) 
   { 
+    this.currentDateTime = new Date;
     this.trip_id = this.route.snapshot.paramMap.get('id')!;
     console.log("this.trip_id ",this.trip_id);
 

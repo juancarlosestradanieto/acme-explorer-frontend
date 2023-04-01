@@ -58,7 +58,7 @@ const routes: Routes = [
         path: 'applications/new', component: ApplicationcreationComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'EXPLORER' }
       },
       {
-        path: 'applications', component: TripApplicationsComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'MANAGER' }
+        path: 'applications', component: ApplicationslistComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'MANAGER' }
       },
       {
         path: 'sponsorships', component: TripSponsorshipsComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'MANAGER' }
