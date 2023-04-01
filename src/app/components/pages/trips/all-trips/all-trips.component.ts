@@ -29,6 +29,8 @@ export class AllTripsComponent implements OnInit {
 
         console.log("AllTripsComponent->constructor tripsService.getAllTrips then response ", response);
         this.trips = response;
+
+        console.log(this.getDiffDays(this.trips[0].start_date.toString(), this.currentDateTime.toISOString()))
       })
       .catch((error) => {
 
@@ -47,6 +49,28 @@ export class AllTripsComponent implements OnInit {
       this.activeRole = 'anonymous';
     }
 
+  }
+  
+  getDiffDays(start: string, now: string) {
+    var startDate = new Date(start);
+    var endDate = new Date(now);
+  
+    var difference = startDate.getTime() - endDate.getTime();
+    return difference / (1000 * 3600 * 24);
+  }
+
+  getCurrentStyles(start: string, now: string) {
+    let difference = this.getDiffDays(start, now);
+    console.log(difference);
+    let soon = difference > 0 && difference <= 7;
+    console.log(soon);
+    let currenStyles = {
+      'font-weight': soon ? 'bold' : '',
+      'font-size': soon ? '115%' : '',
+      'background-color': soon ? 'indianred' : ''
+    };
+
+    return currenStyles;
   }
 
 }
