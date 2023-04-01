@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Application } from '../models/application.model';
@@ -18,9 +18,9 @@ export class ApplicationsService {
     const url = `${environment.backendApiBaseURL + '/applications'}`;
 
     return new Promise<any>((resolve, reject) => {
-  
+
       const body = JSON.stringify(application);
-  
+
       this.http.post<any>(url, body, httpOptions).subscribe({
         next: (response) => {
           console.log('ApplicationsService->createApplication post next response', response);
@@ -54,8 +54,17 @@ export class ApplicationsService {
   async getApplicationsByTripId(trip_id: string) {
     const url = `${environment.backendApiBaseURL + '/trips/' + trip_id + '/applications'}`;
 
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("trip", trip_id);
+
+    const httpOptionsByTrip = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      params: queryParams
+    };
+
     return new Promise<any>((resolve, reject) => {
-      this.http.get<any>(url, httpOptions).subscribe({
+      //this.http.get<any>(url, httpOptions).subscribe({
+      this.http.get<any>(url, httpOptionsByTrip).subscribe({
         next: (response) => {
           console.log('ApplicationsService->getApplicationsByTripId get next response: ', response);
           resolve(response);
@@ -71,8 +80,17 @@ export class ApplicationsService {
   getApplicationsByExplorerId(explorer_id: string) {
     const url = `${environment.backendApiBaseURL + '/actor/' + explorer_id + '/applications'}`;
 
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("actor", explorer_id);
+
+    const httpOptionsByExplorer = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      params: queryParams
+    };
+
     return new Promise<any>((resolve, reject) => {
-      this.http.get<any>(url, httpOptions).subscribe({
+      //this.http.get<any>(url, httpOptions).subscribe({
+      this.http.get<any>(url, httpOptionsByExplorer).subscribe({
         next: (response) => {
           console.log('ApplicationsService->getApplicationsByExplorerId get next response: ', response);
           console.log('ApplicationsService->getAllApplications get next response[0]: ', response[0]);

@@ -18,7 +18,7 @@ export class AllTripsComponent implements OnInit {
   protected activeRole: string = 'anonymous';
   protected userId!: string | null;
 
-  constructor(tripsService: TripsService, private applicationService: ApplicationsService, private authService: AuthService) {
+  constructor(tripsService: TripsService, private authService: AuthService) {
 
     tripsService.getAllTrips()
       .then((response) => {

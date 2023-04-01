@@ -12,19 +12,23 @@
         </div>
 
         <div formArrayName="comments" class="form-group has-danger">
-            <button type="button" class="btn btn-primary" (click)="addComment()">{{'applications.add-comment' | translate}}</button>
+            <button type="button" class="btn btn-primary" (click)="addComment()">
+                <i class="fa-solid fa-plus"></i>
+                {{'applications.add-comment' | translate}}</button>
             <div *ngFor="let comment of comments.controls; let i=index">
                 <label for="comment-{{ i }}">
                     {{'applications.comments' | translate}}:
                     <input id="comment-{{ i }}" type="text" formControlName="{{i}}">
                 </label>
                 <button type="button" class="btn btn-danger" (click)="removeComment(i)">
+                    <i class="fa-solid fa-trash"></i>
                     {{'applications.remove-comment' | translate}}
                 </button>
             </div>
         </div>
 
         <button class="btn btn-primary" type="submit">
+            <i class="fa-solid fa-envelope-open-text"></i>
             {{'buttons.create' | translate}}
         </button>
     </fieldset>

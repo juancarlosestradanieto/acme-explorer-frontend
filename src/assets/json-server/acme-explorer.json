@@ -2053,6 +2053,7 @@
       "trip": 1,
       "comments": [],
       "status": "REJECTED",
+      "rejection_reason": "Motivo claramente esclarecedor",
       "id": 1
     },
     {

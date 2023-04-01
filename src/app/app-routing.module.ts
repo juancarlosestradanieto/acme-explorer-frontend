@@ -55,7 +55,7 @@ const routes: Routes = [
   {
     path: 'trip/:id', children: [
       {
-        path: 'applications/create', component: ApplicationcreationComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'EXPLORER' }
+        path: 'applications/new', component: ApplicationcreationComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'EXPLORER' }
       },
       {
         path: 'applications', component: TripApplicationsComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'MANAGER' }

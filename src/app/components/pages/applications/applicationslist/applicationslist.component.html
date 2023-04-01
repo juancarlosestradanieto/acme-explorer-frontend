@@ -1,4 +1,5 @@
-<h2>{{'applications.title-plural' | translate}} </h2>
+<h2 *ngIf="activeRole == 'EXPLORER'">{{'applications.list-by-explorer' | translate}} </h2>
+<h2 *ngIf="activeRole == 'MANAGER'">{{'applications.list-by-trip' | translate}} </h2>
 
 <div class="accordion" id="statusCancelledAccordion">
     <div class="accordion-item">
@@ -10,19 +11,25 @@
         </h2>
     </div>
     <div id="collapseCancelled" class="accordion-collapse collapse" data-parent="statusCancelledAccordion">
+        <div class="accordion-body" *ngIf="cancelledApplications.length < 1">
+            <p>{{'applications.messages.cancelled-applications-not-found' | translate}}</p>
+        </div>
         <div class="accordion-body" *ngFor="let application of cancelledApplications">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"></li>
-                <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}</li>
+                <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}
+                </li>
                 <li class="list-group-item"><b>{{'applications.id' | translate}}</b>: {{application.id}}</li>
                 <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>: {{application.moment}}</li>
                 <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.actor}}</li>
                 <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip}}</li>
                 <li class="list-group-item">
                     <button type="button" class="btn btn-primary" routerLink="/trip/{{application.trip}}">
+                        <i class="fa fa-plane" aria-hidden="true"></i>
                         {{'buttons.go_to_trip' | translate}}
                     </button>
                     <button type="button" class="btn btn-primary" routerLink="/applications/{{application.id}}">
+                        <i class="fa-solid fa-magnifying-glass-plus"></i>
                         {{'buttons.more' | translate}}
                     </button>
                 </li>
@@ -41,19 +48,28 @@
         </h2>
     </div>
     <div id="collapseRejected" class="accordion-collapse collapse" data-parent="statusRejectedAccordion">
+        <div class="accordion-body" *ngIf="rejectedApplications.length < 1">
+            <p>{{'applications.messages.rejected-applications-not-found' | translate}}</p>
+        </div>
         <div class="accordion-body" *ngFor="let application of rejectedApplications">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"></li>
-                <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}</li>
+                <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}
+                </li>
+                <li class="list-group-item"><b>{{'applications.rejection_reason' | translate}}</b>:
+                    {{application.rejection_reason}}
+                </li>
                 <li class="list-group-item"><b>{{'applications.id' | translate}}</b>: {{application.id}}</li>
                 <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>: {{application.moment}}</li>
                 <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.actor}}</li>
                 <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip}}</li>
                 <li class="list-group-item">
                     <button type="button" class="btn btn-primary" routerLink="/trip/{{application.trip}}">
+                        <i class="fa fa-plane" aria-hidden="true"></i>
                         {{'buttons.go_to_trip' | translate}}
                     </button>
                     <button type="button" class="btn btn-primary" routerLink="/applications/{{application.id}}">
+                        <i class="fa-solid fa-magnifying-glass-plus"></i>
                         {{'buttons.more' | translate}}
                     </button>
                 </li>
@@ -72,22 +88,29 @@
         </h2>
     </div>
     <div id="collapsePending" class="accordion-collapse collapse" data-parent="statusPendingAccordion">
+        <div class="accordion-body" *ngIf="pendingApplications.length < 1">
+            <p>{{'applications.messages.pending-applications-not-found' | translate}}</p>
+        </div>
         <div class="accordion-body" *ngFor="let application of pendingApplications">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"></li>
-                <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}</li>
+                <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}
+                </li>
                 <li class="list-group-item"><b>{{'applications.id' | translate}}</b>: {{application.id}}</li>
                 <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>: {{application.moment}}</li>
                 <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.actor}}</li>
                 <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip}}</li>
                 <li class="list-group-item">
                     <button type="button" class="btn btn-primary" routerLink="/trip/{{application.trip}}">
+                        <i class="fa fa-plane" aria-hidden="true"></i>
                         {{'buttons.go_to_trip' | translate}}
                     </button>
                     <button type="button" class="btn btn-primary" routerLink="/applications/{{application.id}}">
+                        <i class="fa-solid fa-magnifying-glass-plus"></i>
                         {{'buttons.more' | translate}}
                     </button>
                     <button type="button" class="btn btn-danger" *ngIf="activeRole == 'EXPLORER'">
+                        <i class="fa-regular fa-rectangle-xmark"></i>
                         {{'applications.cancel' | translate}}
                     </button>
                     <button type="button" class="btn btn-success" *ngIf="activeRole == 'MANAGER'">
@@ -112,25 +135,33 @@
         </h2>
     </div>
     <div id="collapseDue" class="accordion-collapse collapse" data-parent="statusDueAccordion">
+        <div class="accordion-body" *ngIf="dueApplications.length < 1">
+            <p>{{'applications.messages.due-applications-not-found' | translate}}</p>
+        </div>
         <div class="accordion-body" *ngFor="let application of dueApplications">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"></li>
-                <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}</li>
+                <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}
+                </li>
                 <li class="list-group-item"><b>{{'applications.id' | translate}}</b>: {{application.id}}</li>
                 <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>: {{application.moment}}</li>
                 <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.actor}}</li>
                 <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip}}</li>
                 <li class="list-group-item">
                     <button type="button" class="btn btn-primary" routerLink="/trip/{{application.trip}}">
+                        <i class="fa fa-plane" aria-hidden="true"></i>
                         {{'buttons.go_to_trip' | translate}}
                     </button>
                     <button type="button" class="btn btn-primary" routerLink="/applications/{{application.id}}">
+                        <i class="fa-solid fa-magnifying-glass-plus"></i>
                         {{'buttons.more' | translate}}
                     </button>
                     <button type="button" class="btn btn-success" *ngIf="activeRole == 'EXPLORER'">
+                        <i class="fa-regular fa-credit-card"></i>
                         {{'applications.pay' | translate}}
                     </button>
                     <button type="button" class="btn btn-danger" *ngIf="activeRole == 'EXPLORER'">
+                        <i class="fa-regular fa-rectangle-xmark"></i>
                         {{'applications.cancel' | translate}}
                     </button>
                 </li>
@@ -149,19 +180,25 @@
         </h2>
     </div>
     <div id="collapseAccepted" class="accordion-collapse collapse" data-parent="statusAcceptedAccordion">
+        <div class="accordion-body" *ngIf="acceptedApplications.length < 1">
+            <p>{{'applications.messages.accepted-applications-not-found' | translate}}</p>
+        </div>
         <div class="accordion-body" *ngFor="let application of acceptedApplications">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"></li>
-                <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}</li>
+                <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}
+                </li>
                 <li class="list-group-item"><b>{{'applications.id' | translate}}</b>: {{application.id}}</li>
                 <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>: {{application.moment}}</li>
                 <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.actor}}</li>
                 <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip}}</li>
                 <li class="list-group-item">
                     <button type="button" class="btn btn-primary" routerLink="/trip/{{application.trip}}">
+                        <i class="fa fa-plane" aria-hidden="true"></i>
                         {{'buttons.go_to_trip' | translate}}
                     </button>
                     <button type="button" class="btn btn-primary" routerLink="/applications/{{application.id}}">
+                        <i class="fa-solid fa-magnifying-glass-plus"></i>
                         {{'buttons.more' | translate}}
                     </button>
                 </li>

@@ -67,11 +67,16 @@
     "trip-id": "Trip Id",
     "actor-id": "Explorer Id",
     "comments": "Comments",
+    "rejection_reason": "Rejection reason",
     "create": "Create new application",
+    "list-by-explorer": "Explorer applications",
+    "list-by-trip": "Trip applications",
     "accept": "Accept",
     "reject": "Reject",
     "pay": "Pay",
     "cancel": "Cancel",
+    "apply-for": "Apply for",
+    "edit-comments": "Edit comments",
     "add-comment": "Add comment",
     "remove-comment": "Remove comment",
     "status": {
@@ -81,6 +86,14 @@
       "rejected": "Rejected",
       "due": "Due",
       "accepted": "Accepted"
+    },
+    "messages": {
+      "comments-not-found": "There are no comments found",
+      "cancelled-applications-not-found": "There are no cancelled applications found",
+      "pending-applications-not-found": "There are no pending applications found",
+      "rejected-applications-not-found": "There are no rejected applications found",
+      "due-applications-not-found": "There are no due applications found",
+      "accepted-applications-not-found": "There are no accepted applications found"
     }
   },
   "sponsorships": {
