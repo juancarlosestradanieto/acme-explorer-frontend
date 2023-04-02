@@ -14,7 +14,7 @@ export class SingleTripComponent implements OnInit {
 
   constructor(private tripService: TripsService, private route:ActivatedRoute) 
   { 
-    this.trip_id = this.route.snapshot.paramMap.get('id')!;
+    this.trip_id = this.route.snapshot.params['id'];
     console.log("this.trip_id ",this.trip_id);
 
     tripService.getSingleTrip(this.trip_id)
