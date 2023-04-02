@@ -17,9 +17,9 @@
         <div class="accordion-body" *ngFor="let application of cancelledApplications">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"></li>
+                <li class="list-group-item"><b>{{'applications.title-sing' | translate}}</b>: #{{application.id}}</li>
                 <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}
                 </li>
-                <li class="list-group-item"><b>{{'applications.id' | translate}}</b>: {{application.id}}</li>
                 <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>: {{application.moment}}</li>
                 <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.actor}}</li>
                 <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip}}</li>
@@ -54,12 +54,12 @@
         <div class="accordion-body" *ngFor="let application of rejectedApplications">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"></li>
+                <li class="list-group-item"><b>{{'applications.title-sing' | translate}}</b>: #{{application.id}}</li>
                 <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}
                 </li>
                 <li class="list-group-item"><b>{{'applications.rejection_reason' | translate}}</b>:
                     {{application.rejection_reason}}
                 </li>
-                <li class="list-group-item"><b>{{'applications.id' | translate}}</b>: {{application.id}}</li>
                 <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>: {{application.moment}}</li>
                 <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.actor}}</li>
                 <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip}}</li>
@@ -94,9 +94,9 @@
         <div class="accordion-body" *ngFor="let application of pendingApplications">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"></li>
+                <li class="list-group-item"><b>{{'applications.title-sing' | translate}}</b>: #{{application.id}}</li>
                 <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}
                 </li>
-                <li class="list-group-item"><b>{{'applications.id' | translate}}</b>: {{application.id}}</li>
                 <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>: {{application.moment}}</li>
                 <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.actor}}</li>
                 <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip}}</li>
@@ -143,9 +143,9 @@
         <div class="accordion-body" *ngFor="let application of dueApplications">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"></li>
+                <li class="list-group-item"><b>{{'applications.title-sing' | translate}}</b>: #{{application.id}}</li>
                 <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}
-                </li>
-                <li class="list-group-item"><b>{{'applications.id' | translate}}</b>: {{application.id}}</li>
+                </li>                
                 <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>: {{application.moment}}</li>
                 <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.actor}}</li>
                 <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip}}</li>
@@ -188,9 +188,9 @@
         <div class="accordion-body" *ngFor="let application of acceptedApplications">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"></li>
+                <li class="list-group-item"><b>{{'applications.title-sing' | translate}}</b>: #{{application.id}}</li>
                 <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}
                 </li>
-                <li class="list-group-item"><b>{{'applications.id' | translate}}</b>: {{application.id}}</li>
                 <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>: {{application.moment}}</li>
                 <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.actor}}</li>
                 <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip}}</li>

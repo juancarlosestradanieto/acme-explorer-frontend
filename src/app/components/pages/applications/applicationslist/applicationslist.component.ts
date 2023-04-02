@@ -50,10 +50,6 @@ export class ApplicationslistComponent implements OnInit {
         console.log("ApplicationslistComponent->constructor authService.getApplicationsByExplorerId this.applications.length ", this.applications.length);
 
         console.log("ApplicationslistComponent->constructor authService.getApplicationsByExplorerId this.applications ", this.applications);
-        for (let index = 0; index < this.applications.length; index++) {
-          console.log("Application id -> ", this.applications[index].id);
-          console.log("Application status -> ", this.applications[index].status);
-        }
 
         this.cancelledApplications = this.applications.filter(a => a.status == "CANCELLED");
         this.pendingApplications = this.applications.filter(a => a.status == "PENDING");
@@ -74,10 +70,6 @@ export class ApplicationslistComponent implements OnInit {
         console.log("ApplicationslistComponent->constructor authService.getApplicationsByTripId this.applications.length ", this.applications.length);
 
         console.log("ApplicationslistComponent->constructor authService.getApplicationsByTripId this.applications ", this.applications);
-        for (let index = 0; index < this.applications.length; index++) {
-          console.log("Application id -> ", this.applications[index].id);
-          console.log("Application status -> ", this.applications[index].status);
-        }
 
         this.cancelledApplications = this.applications.filter(a => a.status == "CANCELLED");
         this.pendingApplications = this.applications.filter(a => a.status == "PENDING");
