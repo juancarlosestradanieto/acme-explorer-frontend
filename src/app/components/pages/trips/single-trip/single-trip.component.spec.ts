@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClient, HttpHandler } from '@angular/common/http';
 import { SingleTripComponent } from './single-trip.component';
+import { ActivatedRoute } from '@angular/router';
 
 describe('SingleTripComponent', () => {
   let component: SingleTripComponent;
@@ -8,7 +9,17 @@ describe('SingleTripComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SingleTripComponent ]
+      declarations: [ SingleTripComponent ],
+      providers: [
+        HttpClient, 
+        HttpHandler,
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {params: {id: '1'}}
+          }
+        }
+      ]
     })
     .compileComponents();
 
