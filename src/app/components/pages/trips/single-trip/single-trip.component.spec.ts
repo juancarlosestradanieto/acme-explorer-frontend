@@ -1,7 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClient, HttpHandler } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
 import { SingleTripComponent } from './single-trip.component';
 import { ActivatedRoute } from '@angular/router';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from 'src/environments/environment';
 
 describe('SingleTripComponent', () => {
   let component: SingleTripComponent;
@@ -9,6 +11,9 @@ describe('SingleTripComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [
+        HttpClientModule,
+        AngularFireModule.initializeApp(environment.firebase)],
       declarations: [ SingleTripComponent ],
       providers: [
         HttpClient, 
