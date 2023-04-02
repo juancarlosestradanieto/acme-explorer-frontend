@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClient, HttpHandler } from '@angular/common/http';
 import { SingleTripComponent } from './single-trip.component';
 
 describe('SingleTripComponent', () => {
@@ -8,7 +8,8 @@ describe('SingleTripComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SingleTripComponent ]
+      declarations: [ SingleTripComponent ],
+      providers: [HttpClient, HttpHandler]
     })
     .compileComponents();
 
