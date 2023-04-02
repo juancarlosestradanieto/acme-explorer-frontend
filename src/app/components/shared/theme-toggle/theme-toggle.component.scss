@@ -2,6 +2,12 @@
     width: 95%;
     text-align: right;
 
+    .img-size-fix{
+        height: 35px;
+        width: 65px;
+        margin-left: 17px;
+    }
+
     
     .theme-switcher{
         display: inline-block;
@@ -12,6 +18,7 @@
             height: 20px;
             border-radius: 10px;
             background-color: #ccc;
+            margin-right: 10px;
 
             .switch-handle{
                 background-color: #999;

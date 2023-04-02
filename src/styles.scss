@@ -13,6 +13,7 @@ body{
     background-color: var(--background);
     padding: 20px;
     height: 100vh;
+    color: var(--font-color);
     .card, nav{
         background-color: var(--background);
         .card-body{
@@ -20,6 +21,9 @@ body{
             color: var(--font-color);
             border-color: var(--font-color);
         }
+    }
+    p,h1,h2,h3,h4,h5,legend,label{
+        color: var(--font-color);
     }
 }
 

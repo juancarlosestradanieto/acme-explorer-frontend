@@ -1,6 +1,25 @@
 {
-    "Register":"Registrar",
-    "Login":"Ingresar",
+  "REGISTER":{
+    "REGISTER":"Registrarse",
+    "NEW_ACTOR":"Registro de nuevo actor",
+    "ROLE":"Rol",
+    "NAME":"Nombre",
+    "SURNAME":"Apellido/s",
+    "PHONE":"Número de teléfono",
+    "ADDRESS":"Dirección",
+    "EMAIL":"Correo electrónico/email",
+    "PASSWORD":"Contraseña",
+    "ALREADY_REGISTER":"¿Estás ya registrado/a",
+    "LOGIN":"¡Inicia sesión ya!"
+  },
+  "LOGIN":{
+    "LOGIN_ACTION":"Inicio de sesión",
+    "LOGIN":"Iniciar sesión",
+    "EMAIL":"Introduce tu correo electrónico/email",
+    "PASSWORD":"Introduce tu contraseña",
+    "NOT_ALREADY_REGISTER":"¿No te has registrado todavía?",
+    "REGISTER_NOW":"¡Regístrate ya!"
+  },
     "Home":"Inicio",
     "Trips":"Viajes",
     "footer": {
