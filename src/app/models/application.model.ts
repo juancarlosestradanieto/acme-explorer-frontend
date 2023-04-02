@@ -11,6 +11,8 @@ export class Application extends Entity {
 
     private _trip!: string;
 
+    private _rejection_reason!: string;
+
     constructor() {
         super();
     }
@@ -53,5 +55,13 @@ export class Application extends Entity {
 
     public set trip(value: string) {
         this._trip = value;
+    }
+
+    public get rejection_reason(): string {
+        return this._rejection_reason;
+    }
+    
+    public set rejection_reason(value: string) {
+        this._rejection_reason = value;
     }
 }

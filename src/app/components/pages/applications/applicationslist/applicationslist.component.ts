@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Actor } from 'src/app/models/actor.model';
+import { Application } from 'src/app/models/application.model';
+import { ApplicationsService } from 'src/app/services/applications.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-applicationslist',
@@ -7,9 +12,76 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ApplicationslistComponent implements OnInit {
 
-  constructor() { }
+  protected applications: Array<Application> = [];
+  cancelledApplications: Array<Application> = [];
+  pendingApplications: Array<Application> = [];
+  rejectedApplications: Array<Application> = [];
+  dueApplications: Array<Application> = [];
+  acceptedApplications: Array<Application> = [];
+
+  protected user!: Actor | null;
+  protected activeRole: string = 'anonymous';
+  protected trip_id!: string;
+
+  constructor(private applicationService: ApplicationsService, private authService: AuthService, private route:ActivatedRoute) {
+
+   }
 
   ngOnInit(): void {
+
+    this.user = this.authService.getCurrentActor();
+    if (this.user) {
+      this.activeRole = this.user.role.toString();
+    } else {
+      this.activeRole = 'anonymous';
+    }
+
+    this.getApplications();
+
+  }
+
+  getApplications() {
+    if (this.activeRole == "EXPLORER") {
+      this.applicationService.getApplicationsByExplorerId(this.user!.id)
+      .then((response) => {
+        console.log("ApplicationslistComponent->constructor authService.getApplicationsByExplorerId then response ", response);
+        this.applications.push(...response);
+
+        console.log("ApplicationslistComponent->constructor authService.getApplicationsByExplorerId this.applications.length ", this.applications.length);
+
+        console.log("ApplicationslistComponent->constructor authService.getApplicationsByExplorerId this.applications ", this.applications);
+
+        this.cancelledApplications = this.applications.filter(a => a.status == "CANCELLED");
+        this.pendingApplications = this.applications.filter(a => a.status == "PENDING");
+        this.rejectedApplications = this.applications.filter(a => a.status == "REJECTED");
+        this.dueApplications = this.applications.filter(a => a.status == "DUE");
+        this.acceptedApplications = this.applications.filter(a => a.status == "ACCEPTED");
+      })
+      .catch((error) => {
+        console.log("ApplicationslistComponent->constructor authService.getApplicationsByExplorerId catch ", error);
+      });
+    } else if (this.activeRole == "MANAGER") {
+      this.trip_id = this.route.snapshot.paramMap.get('id')!;
+      this.applicationService.getApplicationsByTripId(this.trip_id)
+      .then((response) => {
+        console.log("ApplicationslistComponent->constructor authService.getApplicationsByTripId then response ", response);
+        this.applications.push(...response);
+
+        console.log("ApplicationslistComponent->constructor authService.getApplicationsByTripId this.applications.length ", this.applications.length);
+
+        console.log("ApplicationslistComponent->constructor authService.getApplicationsByTripId this.applications ", this.applications);
+
+        this.cancelledApplications = this.applications.filter(a => a.status == "CANCELLED");
+        this.pendingApplications = this.applications.filter(a => a.status == "PENDING");
+        this.rejectedApplications = this.applications.filter(a => a.status == "REJECTED");
+        this.dueApplications = this.applications.filter(a => a.status == "DUE");
+        this.acceptedApplications = this.applications.filter(a => a.status == "ACCEPTED");
+      })
+      .catch((error) => {
+        console.log("ApplicationslistComponent->constructor authService.getApplicationsByTripId catch ", error);
+      });
+    }
+
   }
 
 }

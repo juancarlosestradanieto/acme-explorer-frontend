@@ -60,12 +60,51 @@
   },
   "customize-ui": "Personalizar interfaz",
   "applications": {
-    "title": "Solicitudes"
+    "title-plural": "Solicitudes",
+    "title-sing": "Solicitud",
+    "moment": "Creación",
+    "id": "Id",
+    "trip-id": "Id del Viaje",
+    "actor-id": "Id del Explorador",
+    "comments": "Comentarios",
+    "rejection_reason": "Motivo del rechazo",
+    "create": "Crear nueva solicitud",
+    "list-by-explorer": "Solicitudes de explorador",
+    "list-by-trip": "Solicitudes del viaje",
+    "accept": "Aceptar",
+    "reject": "Rechazar",
+    "pay": "Pagar",
+    "cancel": "Cancelar",
+    "apply-for": "Solicitar",
+    "edit-comments": "Editar comentarios",
+    "add-comment": "Añadir comentario",
+    "remove-comment": "Eliminar comentario",
+    "status": {
+      "title": "Estado",
+      "cancelled": "Cancelada",
+      "pending": "Pendiente",
+      "rejected": "Denegada",
+      "due": "En espera de pago",
+      "accepted": "Aceptada"
+    },
+    "messages": {
+      "comments-not-found": "No se han encontrado comentarios",
+      "cancelled-applications-not-found": "No se han encontrado solicitudes canceladas",
+      "pending-applications-not-found": "No se han encontrado solicitudes pendientes",
+      "rejected-applications-not-found": "No se han encontrado solicitudes rechazadas",
+      "due-applications-not-found": "No se han encontrado solicitudes en espera de pago",
+      "accepted-applications-not-found": "No se han encontrado solicitudes aceptadas"
+    }
   },
   "sponsorships": {
     "title": "Patrocinios"
   },
   "dashboard": {
     "title": "Panel de control"
+  },
+  "buttons": {
+    "create": "Crear",
+    "more": "Ver más",
+    "go_to_trip": "Ir al viaje"
   }
 }
