@@ -21,7 +21,7 @@ export class ApplicationcreationComponent implements OnInit {
   }
 
   createForm() {
-    this.trip_id = this.route.snapshot.paramMap.get('id')!;
+    this.trip_id = this.route.snapshot.params['id'];
     let user = this.authService.getCurrentActor();
 
     let formGroup = this.fb.group({
