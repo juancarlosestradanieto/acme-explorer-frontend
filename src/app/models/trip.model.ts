@@ -4,142 +4,128 @@ import { Entity } from "./entity.model";
 import { Stage } from "./stage.model";
 
 export class Trip extends Entity {
-    private _ticker!: string;
 
-    private _title!: string;
-
-    private _description!: string;
-
-    private _price!: number;
-
-    private _requirements!: string[];
-
-    private _start_date!: Date;
-
-    private _end_date!: Date;
-
-    private _pictures!: string[];
-
-    private _is_cancelled!: boolean;
-
-    private _cancel_reason!: string;
-
-    private _stages!: Stage[];
-
-    private _applications: Application[] = [];
-
-    private _manager!: string;
-
-    //private _is_published: boolean;
-
-    //private _sponsorships: Sponsorship[];
-
-    constructor() {
+    constructor()
+    {
         super();
-      }
-
-    public get ticker(): string {
-        return this._ticker;
     }
 
-    public set ticker(value: string) {
-        this._ticker = value;
+    private ticker!: string;
+    private title!: string;
+    private description!: string;
+    private price!: number;
+    private requirements!: string[];
+    private startDate!: Date;
+    private endDate!: Date;
+    private publicationDate!: Date;
+    private pictures!: string[];
+    private canceled!: boolean;
+    private cancelReason!: string;
+    private stages!: Stage[];
+    private managerId!: string;
+
+    public getTicker(): string {
+        return this.ticker;
     }
 
-    public get title(): string {
-        return this._title;
+    public setTicker(ticker: string): void {
+        this.ticker = ticker;
     }
 
-    public set title(value: string) {
-        this._title = value;
+    public getTitle(): string {
+        return this.title;
     }
 
-    public get description(): string {
-        return this._description;
+    public setTitle(title: string): void {
+        this.title = title;
     }
 
-    public set description(value: string) {
-        this._description = value;
+    public getDescription(): string {
+        return this.description;
     }
 
-    public get price(): number {
-        return this._price;
+    public setDescription(description: string): void {
+        this.description = description;
     }
 
-    public set price(value: number) {
-        this._price = value;
+    public getPrice(): number {
+        return this.price;
     }
 
-    public get requirements(): string[] {
-        return this._requirements;
+    public setPrice(price: number): void {
+        this.price = price;
     }
 
-    public set requirements(value: string[]) {
-        this._requirements = value;
+    public getRequirements(): string[] {
+        return this.requirements;
     }
 
-    public get start_date(): Date {
-        return this._start_date;
+    public setRequirements(requirements: string[]): void {
+        this.requirements = requirements;
     }
 
-    public set start_date(value: Date) {
-        this._start_date = value;
+    public getStartDate(): Date {
+        return this.startDate;
     }
 
-    public get end_date(): Date {
-        return this._end_date;
+    public setStartDate(startDate: Date): void {
+        this.startDate = startDate;
     }
 
-    public set end_date(value: Date) {
-        this._end_date = value;
+    public getEndDate(): Date {
+        return this.endDate;
     }
 
-    public get pictures(): string[] {
-        return this._pictures;
+    public setEndDate(endDate: Date): void {
+        this.endDate = endDate;
     }
 
-    public set pictures(value: string[]) {
-        this._pictures = value;
+    public getPublicationDate(): Date {
+        return this.publicationDate;
     }
 
-    public get is_cancelled(): boolean {
-        return this._is_cancelled;
+    public setPublicationDate(publicationDate: Date): void {
+        this.publicationDate = publicationDate;
     }
 
-    public set is_cancelled(value: boolean) {
-        this._is_cancelled = value;
+    public getPictures(): string[] {
+        return this.pictures;
     }
 
-    public get cancel_reason(): string {
-        return this._cancel_reason;
+    public setPictures(pictures: string[]): void {
+        this.pictures = pictures;
     }
 
-    public set cancel_reason(value: string) {
-        this._cancel_reason = value;
+    public isCanceled(): boolean {
+        return this.canceled;
     }
 
-    public get stages(): Stage[] {
-        return this._stages;
-    }
-    
-    public set stages(value: Stage[]) {
-        this._stages = value;
+    public setCanceled(canceled: boolean): void {
+        this.canceled = canceled;
     }
 
-    public get applications(): Application[] {
-        return this._applications;
-    }
-    
-    public set applications(value: Application[]) {
-        this._applications = value;
+    public getCancelReason(): string {
+        return this.cancelReason;
     }
 
-    public get manager(): string {
-        return this._manager;
+    public setCancelReason(cancelReason: string): void {
+        this.cancelReason = cancelReason;
     }
-    
-    public set manager(value: string) {
-        this._manager = value;
+
+    public getStages(): Stage[] {
+        return this.stages;
+    }
+
+    public setStages(stages: Stage[]): void {
+        this.stages = stages;
+    }
+
+    public getManagerId(): string {
+        return this.managerId;
+    }
+
+    public setManagerId(managerId: string): void {
+        this.managerId = managerId;
     }
 
 }

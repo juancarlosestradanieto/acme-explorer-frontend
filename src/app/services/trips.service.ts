@@ -23,7 +23,8 @@ export class TripsService {
 
     return new Promise<any>((resolve, reject) => {
 
-      this.http.get<any>(url, httpOptions).subscribe({
+      this.http.get<any>(url, httpOptions)
+      .subscribe({
         next: (response) => {
   
           console.log('TripsService->getAllTrips get next response', response);

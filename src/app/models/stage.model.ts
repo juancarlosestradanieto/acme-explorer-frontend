@@ -1,47 +1,38 @@
 import { Entity } from "./entity.model";
 
 export class Stage extends Entity {
-    private _title!: string;
 
-    private _description!: string;
-
-    private _price!: number;
-
-    private _trip!: string;
-
-    constructor() {
+    constructor() 
+    {
         super();
     }
 
-    public get title(): string {
-        return this._title;
+    private title!: string;
+    private description!: string;
+    private price!: number;
+
+    public getTitle(): string {
+        return this.title!;
     }
 
-    public set title(value: string) {
-        this._title = value;
+    public setTitle(title: string): void {
+        this.title! = title!;
     }
 
-    public get description(): string {
-        return this._description;
+    public getDescription(): string {
+        return this.description!;
     }
 
-    public set description(value: string) {
-        this._description = value;
+    public setDescription(description: string): void {
+        this.description! = description!;
     }
 
-    public get price(): number {
-        return this._price;
+    public getPrice(): number {
+        return this.price!;
     }
 
-    public set price(value: number) {
-        this._price = value;
+    public setPrice(price: number): void {
+        this.price! = price!;
     }
 
-    public get trip(): string {
-        return this._trip;
-    }
-
-    public set trip(value: string) {
-        this._trip = value;
-    }
 }

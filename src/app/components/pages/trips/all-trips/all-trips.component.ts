@@ -17,8 +17,17 @@ export class AllTripsComponent implements OnInit {
     .then((response) => {
 
       console.log("AllTripsComponent->constructor tripsService.getAllTrips then response ", response);
-      this.trips = response;
+      this.trips = response.docs;
+      this.trips = response.docs as Array<Trip>;
 
+      /*
+      let pictures: Array<string> = ["uno", "dos"];
+      let test_trip = this.trips[0];
+      console.log("test_trip", test_trip);
+      
+      test_trip.setPictures(pictures);
+      this.trips.push(test_trip);
+      */
     })
     .catch((error) => {
 
