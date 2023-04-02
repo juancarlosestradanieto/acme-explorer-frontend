@@ -29,8 +29,10 @@ export class SingleTripComponent implements OnInit {
     .then((response) => {
 
       console.log("SingleTripComponent->constructor tripsService.getAllTrips then response ", response);
-      this.trip = response;
-
+      let trip = response;
+      let casted_trip = new Trip(trip);
+      this.trip = casted_trip;
+      
     })
     .catch((error) => {
 

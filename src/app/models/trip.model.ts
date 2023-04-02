@@ -5,9 +5,11 @@ import { Stage } from "./stage.model";
 
 export class Trip extends Entity {
 
-    constructor()
+    constructor(obj: any) 
     {
         super();
+
+        obj && Object.assign(this, obj);
     }
 
     private ticker!: string;
@@ -41,6 +43,8 @@ export class Trip extends Entity {
     }
 
     public getDescription(): string {
+        console.log("getDescription ", this.description);
+        
         return this.description;
     }
 

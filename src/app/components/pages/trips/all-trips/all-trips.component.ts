@@ -28,17 +28,13 @@ export class AllTripsComponent implements OnInit {
       .then((response) => {
 
       console.log("AllTripsComponent->constructor tripsService.getAllTrips then response ", response);
-      this.trips = response.docs;
-      this.trips = response.docs as Array<Trip>;
-
-      /*
-      let pictures: Array<string> = ["uno", "dos"];
-      let test_trip = this.trips[0];
-      console.log("test_trip", test_trip);
+      let json_trips = response.docs;
+      let casted_trips = json_trips.map((trip: any) => {
+        return new Trip(trip);
+      });
+      // console.log("casted_trips ", casted_trips);
+      this.trips = casted_trips;
       
-      test_trip.setPictures(pictures);
-      this.trips.push(test_trip);
-      */
       //console.log(this.getDiffDays(this.trips[0].start_date.toString(), this.currentDateTime.toISOString()))
     })
     .catch((error) => {
