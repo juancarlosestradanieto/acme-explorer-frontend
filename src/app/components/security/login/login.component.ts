@@ -46,6 +46,8 @@ export class LoginComponent implements OnInit {
     console.log("LoginComponent->onlogin email", email);
     console.log("LoginComponent->onlogin password", password);
 
+    this.authService.login(email, password);
+    /*
     this.authService.login(email, password)
       .then(response => {
 
@@ -69,6 +71,7 @@ export class LoginComponent implements OnInit {
         this.error_message = err.message;
 
       });
+      */
 
   }
 

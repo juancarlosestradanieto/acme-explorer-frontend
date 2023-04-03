@@ -72,7 +72,7 @@ export class HeaderComponent implements OnInit {
 
   ngAfterViewChecked() {
     this.ngOnInit();
-    /*//let user_stored = localStorage.getItem('user');
+    /*
     let user_stored = localStorage.getItem('currentActor');
     console.log("HeaderComponent->ngAfterViewChecked user_stored", user_stored);
 
