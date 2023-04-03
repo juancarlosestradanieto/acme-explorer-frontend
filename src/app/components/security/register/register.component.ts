@@ -35,8 +35,8 @@ export class RegisterComponent {
     return this.fb.group({
       name: (production == true) ? '' : 'test',
       surname: (production == true) ? '' : 'test',
-      email: (production == true) ? '' : 'test@test.test',
-      password: (production == true) ? '' : '123456',
+      email: (production == true) ? '' : 'test'+(new Date().getTime())+'@gmail.com',
+      password: (production == true) ? '' : '1234567890',
       phone: (production == true) ? '' : 'test',
       address: (production == true) ? '' : 'test',
       role: (production == true) ? [] : ['EXPLORER'],
@@ -53,10 +53,10 @@ export class RegisterComponent {
     .then((response) => {
 
       console.log("RegisterComponent->onRegister then response ", response);
-      this.success_message = "User registered and logged in successfully"; 
+      
+      this.success_message = "User with email '"+response.email+"' registered successfully"; 
+      
       this.cleanForm();
-
-      this.goToTripList();
 
     })
     .catch((error) => {

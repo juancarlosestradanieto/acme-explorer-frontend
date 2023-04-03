@@ -76,19 +76,41 @@ export class AuthService {
               console.log('AuthService->registerUser post next response', response2);
               console.log('Registro Realizado Correctamente!');
 
+              console.log('Firebase login automatically after creating an account, so it has to be logged out explicitly because it is not the desired behaviour');
+              this.logout();
+
               resolve(response2);
 
             },
             error: (error2) => {
 
-              console.error('AuthService->registerUser post error', error2);
-              reject(error2);
+              console.error('AuthService->registerUser post error2', error2);
+
+              console.log("The user created in firebase has to be deleted because the attemp to create it in backend failed");
+              this.afAuth.currentUser.then((user) => {
+                user?.delete()
+                .then((response3) => {
+                  
+                  console.log("AuthService->registerUser->currentUser->delete then response3 ", response3);
+                  reject(error2.error);
+            
+                })
+                .catch((error3) => {
+            
+                  console.error("AuthService->registerUser->currentUser->delete error3 ", error3);
+                  let errorMessage = error3.message;
+
+                  reject(error3);
+            
+                });
+              });
+
             }
           });
 
         })
         .catch((error1) => {
-
+            
           console.error('AuthService->registerUser->createUserWithEmailAndPassword catch error', error1);
           reject(error1);
 
