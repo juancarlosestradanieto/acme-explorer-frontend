@@ -62,7 +62,19 @@ export class RegisterComponent {
     .catch((error) => {
 
       console.error("RegisterComponent->onRegister error ", error);
+        
       this.error_message = error.message;
+
+      console.error("RegisterComponent->onRegister error.status ", error.status);
+      console.error("RegisterComponent->onRegister error.error.message ", error.error.message);
+      if(error.status === 422 && typeof error.error.message !== 'undefined')
+      {
+        this.error_message = error.error.message;
+      }
+      if(error.status === 403 && typeof error.error !== 'undefined')
+      {
+        this.error_message = error.error;
+      }
 
     });
       

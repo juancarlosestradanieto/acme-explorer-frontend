@@ -65,8 +65,6 @@ export class AuthService {
 
           console.log('AuthService->registerUser->createUserWithEmailAndPassword then response', response1);
 
-          const headers = new HttpHeaders();
-          headers.append('Content-Type', 'application/json');
           const url = `${environment.backendApiBaseURL + '/actors'}`;
           const body = JSON.stringify(actor);
 
@@ -92,7 +90,7 @@ export class AuthService {
                 .then((response3) => {
                   
                   console.log("AuthService->registerUser->currentUser->delete then response3 ", response3);
-                  reject(error2.error);
+                  reject(error2);
             
                 })
                 .catch((error3) => {
