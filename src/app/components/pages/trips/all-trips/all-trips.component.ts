@@ -29,9 +29,7 @@ export class AllTripsComponent implements OnInit {
 
       console.log("AllTripsComponent->constructor tripsService.getAllTrips then response ", response);
       let json_trips = response.docs;
-      let casted_trips = json_trips.map((trip: any) => {
-        return new Trip(trip);
-      });
+      let casted_trips = Trip.castJsonTrips(json_trips);
       // console.log("casted_trips ", casted_trips);
       this.trips = casted_trips;
       

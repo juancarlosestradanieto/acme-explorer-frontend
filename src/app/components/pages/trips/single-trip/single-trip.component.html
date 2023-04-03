@@ -23,4 +23,21 @@
       {{'applications.title-plural' | translate}}
   </button>
   </div>
+  <div class="card-body">
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Stages</h5>
+
+        <ul>
+          <li *ngFor="let stage of trip.getStages()">
+            <h6 class="card-subtitle mb-2 text-muted">{{stage.getTitle()}} - Price: {{stage.getPrice()}}</h6>
+            <p class="card-text">{{stage.getDescription()}}</p>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+
+  </div>
 </div>

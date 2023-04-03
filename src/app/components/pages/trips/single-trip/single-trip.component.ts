@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actor } from 'src/app/models/actor.model';
+import { Stage } from 'src/app/models/stage.model';
 import { Trip } from 'src/app/models/trip.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { TripsService } from 'src/app/services/trips.service';
@@ -29,10 +30,10 @@ export class SingleTripComponent implements OnInit {
     .then((response) => {
 
       console.log("SingleTripComponent->constructor tripsService.getAllTrips then response ", response);
-      let trip = response;
-      let casted_trip = new Trip(trip);
+      let json_trip = response;
+      let casted_trip: Trip = Trip.castJsonTrip(json_trip);
       this.trip = casted_trip;
-      
+
     })
     .catch((error) => {
 

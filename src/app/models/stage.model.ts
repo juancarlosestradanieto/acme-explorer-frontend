@@ -2,9 +2,10 @@ import { Entity } from "./entity.model";
 
 export class Stage extends Entity {
 
-    constructor() 
+    constructor(obj: any) 
     {
         super();
+        obj && Object.assign(this, obj);
     }
 
     private title!: string;

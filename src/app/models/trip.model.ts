@@ -132,4 +132,25 @@ export class Trip extends Entity {
         this.managerId = managerId;
     }
 
+    public static castJsonTrip(json_trip: any): Trip
+    {
+        let casted_trip = new Trip(json_trip);
+
+        let json_stages = json_trip.stages;
+        let casted_stages = json_stages.map((stage: any) => {
+          return new Stage(stage);
+        });
+  
+        casted_trip.setStages(casted_stages);
+        return casted_trip;
+    }
+
+    public static castJsonTrips(json_trips: any): Array<Trip>
+    {
+        let casted_trips: Array<Trip> = json_trips.map((json_trip: any) => {
+            return Trip.castJsonTrip(json_trip);
+        });
+        return casted_trips;
+    }
+
 }
