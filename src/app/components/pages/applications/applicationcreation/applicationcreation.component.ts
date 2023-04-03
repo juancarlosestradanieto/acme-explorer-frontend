@@ -69,7 +69,7 @@ export class ApplicationcreationComponent implements OnInit {
   }
 
   goToTripList() {
-    this.router.navigate(['/trip-list']);
+    this.router.navigate(['/trips/list']);
   }
 
   ngOnInit(): void {

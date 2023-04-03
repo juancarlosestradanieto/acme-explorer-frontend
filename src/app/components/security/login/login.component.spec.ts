@@ -22,7 +22,7 @@ describe('LoginComponent', () => {
       declarations: [LoginComponent],
       imports: [FormsModule, AngularFireModule.initializeApp(environment.firebase),
         RouterTestingModule.withRoutes(
-          [{path: 'trip-list', component: AllTripsComponent}]
+          [{path: 'trips/list', component: AllTripsComponent}]
         )],
       providers: [HttpClient, HttpHandler, AngularFirestore, AngularFireAuth]
     })
@@ -73,6 +73,6 @@ describe('LoginComponent', () => {
     expect(component.error_message).toEqual("");
     expect(component.success_message).toEqual("The user has been authenticated in firebase");
     expect(serviceSpy).toHaveBeenCalled();
-    //expect(navigatorSpy.calls.first().args[0]).toContain('/trip-list');
+    //expect(navigatorSpy.calls.first().args[0]).toContain('/trips/list');
   })));
 });

@@ -76,4 +76,10 @@ export class AllTripsComponent implements OnInit {
     return currenStyles;
   }
 
+  deleteTrip(trip: Trip)
+  {
+    console.log("deleteTrip", trip.id);
+    
+  }
+
 }

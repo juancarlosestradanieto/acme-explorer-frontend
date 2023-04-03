@@ -1,5 +1,13 @@
-<p>Available trips just for you!</p>
 
+<div class="row">
+    <div class="col-md-6"><p>Available trips just for you!</p></div>
+    <div class="col-md-3 offset-md-3">
+        <button type="button" class="btn btn-success" routerLink="/trips/add">
+            <i class="fa-solid fa-plus"></i>
+            Add trip
+        </button>
+    </div>
+</div>
 <div class="row">
 
     <div class="col-md-4 col-xs-12" *ngFor="let trip of trips">
@@ -21,23 +29,26 @@
                 <li class="list-group-item"><b>End date</b>: {{trip.getEndDate() | date: 'dd/MM/yyyy'}}</li>
             </ul>
             <div class="card-body">
-                <button type="button" class="btn btn-success" routerLink="/trip/{{trip.id}}">
+                <button type="button" class="btn btn-success" routerLink="/trips/{{trip.id}}">
+                    <i class="fa-solid fa-magnifying-glass"></i>
                     More
                 </button>
-                <button type="button" class="btn btn-warning">
+                <button type="button" class="btn btn-warning" routerLink="/trips/edit">
+                    <i class="fas fa-edit"></i>
                     Edit
                 </button>
-                <button type="button" class="btn btn-danger">
+                <button type="button" class="btn btn-danger" (click)="deleteTrip(trip)">
+                    <i class="fa-solid fa-trash"></i>
                     Delete
                 </button>
                 <button type="button" class="btn btn-primary"
                     *ngIf="activeRole == 'EXPLORER' && trip.getStartDate().toString() > currentDateTime.toISOString()"
-                    routerLink="/trip/{{trip.id}}/applications/new">
+                    routerLink="/trips/{{trip.id}}/applications/new">
                     <i class="fa-solid fa-envelope"></i>
                     {{'applications.apply-for' | translate}}
                 </button>
                 <button type="button" class="btn btn-primary" *ngIf="activeRole == 'MANAGER'"
-                    routerLink="/trip/{{trip.id}}/applications/">
+                    routerLink="/trips/{{trip.id}}/applications/">
                     <i class="fa-solid fa-envelope"></i>
                     {{'applications.title-plural' | translate}}
                 </button>

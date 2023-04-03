@@ -21,7 +21,7 @@ describe('RegisterComponent', () => {
       declarations: [RegisterComponent],
       imports: [FormsModule, AngularFireModule.initializeApp(environment.firebase), ReactiveFormsModule,
         RouterTestingModule.withRoutes(
-          [{path: 'trip-list', component: AllTripsComponent}]
+          [{path: 'trips/list', component: AllTripsComponent}]
         )],
       providers: [HttpClient, HttpHandler, AngularFirestore, AngularFireAuth, FormBuilder]
     })
@@ -80,6 +80,6 @@ describe('RegisterComponent', () => {
     expect(component.error_message).toEqual("");
     expect(component.success_message).toEqual("User registered and logged in successfully");
     expect(serviceSpy).toHaveBeenCalled();
-    expect(navigatorSpy.calls.first().args[0]).toContain('/trip-list');
+    expect(navigatorSpy.calls.first().args[0]).toContain('/trips/list');
   })));
 });

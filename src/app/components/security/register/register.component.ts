@@ -87,7 +87,7 @@ export class RegisterComponent {
 
   goToTripList() 
   {
-    this.router.navigate(['/trip-list']);
+    this.router.navigate(['/trips/list']);
   }
 
 }
