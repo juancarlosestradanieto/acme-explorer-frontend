@@ -43,7 +43,7 @@ export class AuthService {
       console.log("AuthService constructor onAuthStateChanged this.firebase_user_is_logged_in", this.firebase_user_is_logged_in);
 
       localStorage.setItem('loggedIn', JSON.stringify(this.firebase_user_is_logged_in));
-      localStorage.setItem('firebase_user', JSON.stringify(user));
+      localStorage.setItem('firebaseUser', JSON.stringify(user));
 
     });
 
@@ -55,11 +55,6 @@ export class AuthService {
   }
 
   async registerUser(actor: Actor) {
-
-
-    //? localStorage.removeItem('token');
-    //? localStorage.removeItem('user');
-    //? this.user = null;
 
     return new Promise<any>((resolve, reject) => {
       this.afAuth.createUserWithEmailAndPassword(
@@ -127,7 +122,6 @@ export class AuthService {
             // Signed in
             let user = userCredential.user;
             console.log('afAuth->signInWithCustomToken then userCredential', userCredential);
-            console.log('afAuth->signInWithCustomToken then user?.getIdToken()', );
 
             user?.getIdToken()
             .then((response3) => {
@@ -136,13 +130,17 @@ export class AuthService {
 
               localStorage.setItem('currentActor', JSON.stringify(this.currentActor));
               localStorage.setItem('idToken', idToken);
+
               this.loginStatus.next(true);
+
+              resolve(this.currentActor);
 
             })
             .catch((error3) => {
               //let errorCode = error3.code;
               //let errorMessage = error3.message;
               console.error('user->getIdToken catch error3', error3);
+              reject(error3);
             });
 
           })
@@ -150,41 +148,22 @@ export class AuthService {
             //let errorCode = error2.code;
             //let errorMessage = error2.message;
             console.error('afAuth->signInWithCustomToken catch error2', error2);
+            reject(error2);
           });
-          //resolve(response);
 
         },
         error: (error1: any) => {
 
           console.error('AuthService->login get error1', error1);
-          //reject(error1);
+          reject(error1);
         }
       });
     });
 
-    /*
-    return new Promise<any>((resolve, reject) => {
-      this.afAuth.signInWithEmailAndPassword(email, password)
-        .then(async response => {
-          const url = environment.backendApiBaseURL + '/actors?email=' + email;
-          const actor = await firstValueFrom(this.http.get<Actor[]>(url));
-          this.currentActor = actor[0];
-          localStorage.setItem('currentActor', JSON.stringify(this.currentActor));
-          this.loginStatus.next(true);
-          console.log("AuthService->login: then response ", response);
-          resolve(response.user);
-
-        }).catch(err => {
-
-          console.log("AuthService->login: catch err", err);
-          reject(err);
-
-        });
-    });
-    */
   }
 
   getCurrentActor(): Actor | null {
+
     let loggedIn_stored = localStorage.getItem('loggedIn');
     let loggedIn: boolean;
     let user: Actor | null = null;
@@ -200,12 +179,6 @@ export class AuthService {
 
     return user;
 
-    /*if (this.currentActor) {
-      return this.currentActor;
-    } else {
-      return null;
-    }*/
-
   }
 
   logout() {
@@ -216,13 +189,16 @@ export class AuthService {
     return new Promise<any>((resolve, reject) => {
       this.afAuth.signOut()
         .then(response => {
+
+          console.log("AuthService->logout: then response ", response);
           console.log("AuthService->logout loginStatus ", this.loginStatus);
+
           this.loginStatus.next(false);
           this.currentActor = null;
           localStorage.setItem('currentActor', JSON.stringify(this.currentActor));
-          console.log("AuthService->logout: then response ", response);
-          resolve(response);
+          localStorage.removeItem('idToken');
 
+          resolve(response);
 
         }).catch(err => {
 

@@ -47,13 +47,13 @@ export class LoginComponent implements OnInit {
     console.log("LoginComponent->onlogin password", password);
 
     this.authService.login(email, password);
-    /*
+    
     this.authService.login(email, password)
       .then(response => {
 
         console.log("LoginComponent->onlogin then response", response);
-        let refreshToken = response.refreshToken;
-        console.log("LoginComponent->onlogin refreshToken", refreshToken);
+        let idToken = response.idToken;
+        console.log("LoginComponent->onlogin idToken", idToken);
 
         this.success_message = `The user has been authenticated in firebase`;
 
@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
         this.error_message = err.message;
 
       });
-      */
+      
 
   }
 
