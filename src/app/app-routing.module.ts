@@ -18,6 +18,7 @@ import { RegisterComponent } from './components/security/register/register.compo
 import { AccessdeniedComponent } from './components/shared/denied-access/accessdenied/accessdenied.component';
 import { NotFoundComponent } from './components/shared/not-found/not-found.component';
 import { ActorRoleGuard } from './guards/actor-role.guard';
+import { ApplicationcreationComponent } from './components/pages/applications/applicationcreation/applicationcreation.component';
 
 const routes: Routes = [
   {
@@ -52,15 +53,19 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'trip/:id', 
-    component: SingleTripComponent,
-    children: [
+    path: 'trip/:id', children: [
       {
-        path: 'applications', component: TripApplicationsComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'MANAGER' }
+        path: 'applications/new', component: ApplicationcreationComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'EXPLORER' }
+      },
+      {
+        path: 'applications', component: ApplicationslistComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'MANAGER' }
       },
       {
         path: 'sponsorships', component: TripSponsorshipsComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'MANAGER' }
       },
+      {
+        path: '', component: SingleTripComponent
+      }
     ]
   },
   {

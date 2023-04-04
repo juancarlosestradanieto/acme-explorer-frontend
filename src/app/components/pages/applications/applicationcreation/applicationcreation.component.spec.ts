@@ -1,26 +1,28 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ApplicationdisplayComponent } from './applicationdisplay.component';
+import { ApplicationcreationComponent } from './applicationcreation.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { AngularFireModule } from '@angular/fire/compat';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { AngularFireModule } from '@angular/fire/compat';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { environment } from 'src/environments/environment';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
 
-describe('ApplicationdisplayComponent', () => {
-  let component: ApplicationdisplayComponent;
-  let fixture: ComponentFixture<ApplicationdisplayComponent>;
+describe('ApplicationcreationComponent', () => {
+  let component: ApplicationcreationComponent;
+  let fixture: ComponentFixture<ApplicationcreationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         HttpClientModule,
         RouterTestingModule,
+        ReactiveFormsModule,
         AngularFireModule.initializeApp(environment.firebase),
         TranslateModule.forRoot({
           loader: {
@@ -30,11 +32,11 @@ describe('ApplicationdisplayComponent', () => {
           }
         })
       ],
-      declarations: [ ApplicationdisplayComponent ]
+      declarations: [ ApplicationcreationComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ApplicationdisplayComponent);
+    fixture = TestBed.createComponent(ApplicationcreationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

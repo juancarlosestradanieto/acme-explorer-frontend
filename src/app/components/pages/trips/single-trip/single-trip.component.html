@@ -1,17 +1,25 @@
 <div *ngIf="trip" class="card">
-    <div class="container">
-      <img *ngIf="trip.pictures.length > 0" src="{{trip.pictures[0]}}" class="card-img-top" alt="...">
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">{{trip.title}}</h5>
-      <p class="card-text">{{trip.description}}</p>
-    </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item"><b>Price</b>: {{trip.price}}</li>
-      <li class="list-group-item"><b>Start date</b>: {{trip.start_date | date: 'dd/MM/yyyy'}}</li>
-      <li class="list-group-item"><b>End date</b>: {{trip.end_date | date: 'dd/MM/yyyy'}}</li>
-    </ul>
-    <div class="card-body">
-      <a routerLink="/trip/{{trip.id}}" class="card-link">More</a>
-    </div>
+  <div class="container">
+    <img *ngIf="trip.pictures.length > 0" src="{{trip.pictures[0]}}" class="card-img-top" alt="...">
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{trip.title}}</h5>
+    <p class="card-text">{{trip.description}}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><b>Price</b>: {{trip.price}}</li>
+    <li class="list-group-item"><b>Start date</b>: {{trip.start_date | date: 'dd/MM/yyyy'}}</li>
+    <li class="list-group-item"><b>End date</b>: {{trip.end_date | date: 'dd/MM/yyyy'}}</li>
+  </ul>
+  <div class="card-body">
+    <button type="button" class="btn btn-primary" *ngIf="activeRole == 'EXPLORER' && trip.start_date.toString() > currentDateTime.toISOString()"
+      routerLink="/trip/{{trip.id}}/applications/new">
+      <i class="fa-solid fa-envelope"></i>
+      {{'applications.apply-for' | translate}}
+    </button>
+    <button type="button" class="btn btn-primary" *ngIf="activeRole == 'MANAGER'" routerLink="/trip/{{trip.id}}/applications/">
+      <i class="fa-solid fa-envelope"></i>
+      {{'applications.title-plural' | translate}}
+  </button>
+  </div>
 </div>

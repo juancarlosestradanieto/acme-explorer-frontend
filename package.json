@@ -8,6 +8,7 @@
     "watch": "npm run config-env && ng build --watch --configuration development",
     "test": "npm run config-env && ng test",
     "fake-backend": "json-server --watch src/assets/json-server/acme-explorer.json",
+    "fake-backend-routes": "json-server --watch src/assets/json-server/acme-explorer.json routes src/assets/json-server/routes.json",
     "config-env": "ts-node src/environments/set-env.ts"
   },
   "private": true,

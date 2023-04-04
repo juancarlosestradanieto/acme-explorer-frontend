@@ -38,6 +38,7 @@ import { ApplicationslistComponent } from './components/pages/applications/appli
 import { ApplicationdisplayComponent } from './components/pages/applications/applicationdisplay/applicationdisplay.component';
 import { AccessdeniedComponent } from './components/shared/denied-access/accessdenied/accessdenied.component';
 import { ThemeToggleComponent } from './components/shared/theme-toggle/theme-toggle.component';
+import { ApplicationcreationComponent } from './components/pages/applications/applicationcreation/applicationcreation.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -66,7 +67,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ApplicationslistComponent,
     ApplicationdisplayComponent,
     AccessdeniedComponent,
-    ThemeToggleComponent
+    ThemeToggleComponent,
+    ApplicationcreationComponent
   ],
   imports: [
     BrowserModule,
