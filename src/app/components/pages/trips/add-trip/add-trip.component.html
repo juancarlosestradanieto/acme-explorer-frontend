@@ -1,1 +1,259 @@
-<p>add-trip works!</p>
+<p>Add new trip</p>
+
+<form [formGroup]="tripForm" (ngSubmit)="onSubmit()" >
+
+    <div class="form-group has-danger">
+
+        <label for="title" class="form-control-label">Title:</label>
+
+        <input 
+        id="title"
+        type="text"
+        class="form-control" 
+        placeholder="Indicate trip's title"
+        formControlName="title"
+        [class.is-valid]="tripForm.get('title')?.valid && ( tripForm.get('title')?.dirty || tripForm.get('title')?.touched )"
+        [class.is-invalid]="tripForm.get('title')?.invalid && ( tripForm.get('title')?.dirty || tripForm.get('title')?.touched )" 
+        />
+
+    </div>
+
+    <div *ngIf="tripForm.get('title')?.invalid && tripForm.get('title')?.errors && ( tripForm.get('title')?.dirty || tripForm.get('title')?.touched )"
+        >
+        <small class="text-danger"
+            *ngIf="tripForm.get('title')?.hasError('required')">
+            This field is required.
+        </small>
+    </div>
+
+    <div class="form-group has-danger">
+        
+        <label for="description" class="form-control-label">Description:</label>
+
+        <input 
+        id="description"
+        type="text"
+        class="form-control" 
+        placeholder="Indicate trip's description"
+        formControlName="description"
+        [class.is-valid]="tripForm.get('description')?.valid && ( tripForm.get('description')?.dirty || tripForm.get('description')?.touched )"
+        [class.is-invalid]="tripForm.get('description')?.invalid && ( tripForm.get('description')?.dirty || tripForm.get('description')?.touched )" 
+        />
+
+    </div>
+
+    <div *ngIf="tripForm.get('description')?.invalid && tripForm.get('description')?.errors && ( tripForm.get('description')?.dirty || tripForm.get('description')?.touched )"
+        >
+        <small class="text-danger"
+            *ngIf="tripForm.get('description')?.hasError('required')">
+            This field is required.
+        </small>
+    </div>
+
+    <div class="form-group has-danger">
+        
+        <label for="price" class="form-control-label">price:</label>
+    
+        <input 
+        id="price"
+        type="text"
+        class="form-control" 
+        placeholder="Indicate trip's price"
+        formControlName="price"
+        [class.is-valid]="tripForm.get('price')?.valid && ( tripForm.get('price')?.dirty || tripForm.get('price')?.touched )"
+        [class.is-invalid]="tripForm.get('price')?.invalid && ( tripForm.get('price')?.dirty || tripForm.get('price')?.touched )" 
+        />
+    
+    </div>
+    
+    <div *ngIf="tripForm.get('price')?.invalid && tripForm.get('price')?.errors && ( tripForm.get('price')?.dirty || tripForm.get('price')?.touched )"
+        >
+        <small class="text-danger"
+            *ngIf="tripForm.get('price')?.hasError('required')">
+            This field is required.
+        </small>
+    </div>
+
+    <div class="form-group has-danger">
+        
+        <label for="requirements" class="form-control-label">requirements:</label>
+    
+        <input 
+        id="requirements"
+        type="text"
+        class="form-control" 
+        placeholder="Indicate trip's requirements"
+        formControlName="requirements"
+        [class.is-valid]="tripForm.get('requirements')?.valid && ( tripForm.get('requirements')?.dirty || tripForm.get('requirements')?.touched )"
+        [class.is-invalid]="tripForm.get('requirements')?.invalid && ( tripForm.get('requirements')?.dirty || tripForm.get('requirements')?.touched )" 
+        />
+    
+    </div>
+    
+    <div *ngIf="tripForm.get('requirements')?.invalid && tripForm.get('requirements')?.errors && ( tripForm.get('requirements')?.dirty || tripForm.get('requirements')?.touched )"
+        >
+        <small class="text-danger"
+            *ngIf="tripForm.get('requirements')?.hasError('required')">
+            This field is required.
+        </small>
+    </div>
+
+    <div class="form-group has-danger">
+        
+        <label for="startDate" class="form-control-label">startDate:</label>
+    
+        <input 
+        id="startDate"
+        type="text"
+        class="form-control" 
+        placeholder="Indicate trip's startDate"
+        formControlName="startDate"
+        [class.is-valid]="tripForm.get('startDate')?.valid && ( tripForm.get('startDate')?.dirty || tripForm.get('startDate')?.touched )"
+        [class.is-invalid]="tripForm.get('startDate')?.invalid && ( tripForm.get('startDate')?.dirty || tripForm.get('startDate')?.touched )" 
+        />
+    
+    </div>
+    
+    <div *ngIf="tripForm.get('startDate')?.invalid && tripForm.get('startDate')?.errors && ( tripForm.get('startDate')?.dirty || tripForm.get('startDate')?.touched )"
+        >
+        <small class="text-danger"
+            *ngIf="tripForm.get('startDate')?.hasError('required')">
+            This field is required.
+        </small>
+    </div>
+
+    <div class="form-group has-danger">
+        
+        <label for="endDate" class="form-control-label">endDate:</label>
+    
+        <input 
+        id="endDate"
+        type="text"
+        class="form-control" 
+        placeholder="Indicate trip's endDate"
+        formControlName="endDate"
+        [class.is-valid]="tripForm.get('endDate')?.valid && ( tripForm.get('endDate')?.dirty || tripForm.get('endDate')?.touched )"
+        [class.is-invalid]="tripForm.get('endDate')?.invalid && ( tripForm.get('endDate')?.dirty || tripForm.get('endDate')?.touched )" 
+        />
+    
+    </div>
+    
+    <div *ngIf="tripForm.get('endDate')?.invalid && tripForm.get('endDate')?.errors && ( tripForm.get('endDate')?.dirty || tripForm.get('endDate')?.touched )"
+        >
+        <small class="text-danger"
+            *ngIf="tripForm.get('endDate')?.hasError('required')">
+            This field is required.
+        </small>
+    </div>
+
+    <div class="form-group has-danger">
+        
+        <label for="publicationDate" class="form-control-label">publicationDate:</label>
+    
+        <input 
+        id="publicationDate"
+        type="text"
+        class="form-control" 
+        placeholder="Indicate trip's publicationDate"
+        formControlName="publicationDate"
+        [class.is-valid]="tripForm.get('publicationDate')?.valid && ( tripForm.get('publicationDate')?.dirty || tripForm.get('publicationDate')?.touched )"
+        [class.is-invalid]="tripForm.get('publicationDate')?.invalid && ( tripForm.get('publicationDate')?.dirty || tripForm.get('publicationDate')?.touched )" 
+        />
+    
+    </div>
+    
+    <div *ngIf="tripForm.get('publicationDate')?.invalid && tripForm.get('publicationDate')?.errors && ( tripForm.get('publicationDate')?.dirty || tripForm.get('publicationDate')?.touched )"
+        >
+        <small class="text-danger"
+            *ngIf="tripForm.get('publicationDate')?.hasError('required')">
+            This field is required.
+        </small>
+    </div>
+
+    <div class="form-group has-danger">
+        
+        <label for="pictures" class="form-control-label">pictures:</label>
+    
+        <input 
+        id="pictures"
+        type="text"
+        class="form-control" 
+        placeholder="Indicate trip's pictures"
+        formControlName="pictures"
+        [class.is-valid]="tripForm.get('pictures')?.valid && ( tripForm.get('pictures')?.dirty || tripForm.get('pictures')?.touched )"
+        [class.is-invalid]="tripForm.get('pictures')?.invalid && ( tripForm.get('pictures')?.dirty || tripForm.get('pictures')?.touched )" 
+        />
+    
+    </div>
+    
+    <div *ngIf="tripForm.get('pictures')?.invalid && tripForm.get('pictures')?.errors && ( tripForm.get('pictures')?.dirty || tripForm.get('pictures')?.touched )"
+        >
+        <small class="text-danger"
+            *ngIf="tripForm.get('pictures')?.hasError('required')">
+            This field is required.
+        </small>
+    </div>
+
+    <div class="form-group has-danger">
+        
+        <label for="stages" class="form-control-label">stages:</label>
+    
+        <input 
+        id="stages"
+        type="text"
+        class="form-control" 
+        placeholder="Indicate trip's stages"
+        formControlName="stages"
+        [class.is-valid]="tripForm.get('stages')?.valid && ( tripForm.get('stages')?.dirty || tripForm.get('stages')?.touched )"
+        [class.is-invalid]="tripForm.get('stages')?.invalid && ( tripForm.get('stages')?.dirty || tripForm.get('stages')?.touched )" 
+        />
+    
+    </div>
+    
+    <div *ngIf="tripForm.get('stages')?.invalid && tripForm.get('stages')?.errors && ( tripForm.get('stages')?.dirty || tripForm.get('stages')?.touched )"
+        >
+        <small class="text-danger"
+            *ngIf="tripForm.get('stages')?.hasError('required')">
+            This field is required.
+        </small>
+    </div>
+
+    <div class="form-group has-danger">
+        
+        <label for="managerId" class="form-control-label">managerId:</label>
+    
+        <input 
+        id="managerId"
+        type="text"
+        class="form-control" 
+        placeholder="Indicate trip's managerId"
+        formControlName="managerId"
+        [class.is-valid]="tripForm.get('managerId')?.valid && ( tripForm.get('managerId')?.dirty || tripForm.get('managerId')?.touched )"
+        [class.is-invalid]="tripForm.get('managerId')?.invalid && ( tripForm.get('managerId')?.dirty || tripForm.get('managerId')?.touched )" 
+        />
+    
+    </div>
+    
+    <div *ngIf="tripForm.get('managerId')?.invalid && tripForm.get('managerId')?.errors && ( tripForm.get('managerId')?.dirty || tripForm.get('managerId')?.touched )"
+        >
+        <small class="text-danger"
+            *ngIf="tripForm.get('managerId')?.hasError('required')">
+            This field is required.
+        </small>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="tripForm.invalid">
+        Add
+    </button>
+
+    <div class="alert alert-success" *ngIf="success_message">
+    {{success_message}}
+    </div>
+
+    <div class="alert alert-danger" *ngIf="error_message">
+    {{error_message}}
+    </div>
+
+</form>
+
+<p>Form Status: {{ tripForm.status }}</p>
