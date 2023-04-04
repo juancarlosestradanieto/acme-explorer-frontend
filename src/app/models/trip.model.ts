@@ -8,7 +8,6 @@ export class Trip extends Entity {
     constructor(obj: any) 
     {
         super();
-
         obj && Object.assign(this, obj);
     }
 

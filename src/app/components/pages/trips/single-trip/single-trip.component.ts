@@ -47,7 +47,7 @@ export class SingleTripComponent implements OnInit {
 
     this.user = this.authService.getCurrentActor();
     if (this.user) {
-      this.activeRole = this.user.role.toString();
+      this.activeRole = this.user.getRole().toString();
     } else {
       this.activeRole = 'anonymous';
     }

@@ -21,7 +21,7 @@ export class ActorRoleGuard implements CanActivate {
       const currentActor = this.authService.getCurrentActor();
       let result = false;
       if (currentActor) {
-        const activeRole = new RegExp(currentActor.role.toString(), 'i');
+        const activeRole = new RegExp(currentActor.getRole().toString(), 'i');
         if(expectedRole.search(activeRole) !== -1) {
           result = true;
         } else {

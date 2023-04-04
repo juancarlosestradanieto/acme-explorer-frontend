@@ -58,8 +58,8 @@ export class AuthService {
 
     return new Promise<any>((resolve, reject) => {
       this.afAuth.createUserWithEmailAndPassword(
-        actor.email,
-        actor.password
+        actor.getEmail(),
+        actor.getPassword()
       )
         .then((response1) => {
 
@@ -193,7 +193,7 @@ export class AuthService {
       loggedIn = JSON.parse(loggedIn_stored);
       if (loggedIn) {
         let user_stored = localStorage.getItem('currentActor');
-        user = JSON.parse(user_stored!);
+        user = Actor.castJsonActor(JSON.parse(user_stored!));
       }
     }
 
