@@ -40,7 +40,7 @@ export class RegisterComponent {
       phone: (production == true) ? '' : 'test',
       address: (production == true) ? '' : 'test',
       role: (production == true) ? [] : ['EXPLORER'],
-      validated: true
+      isActive: true
     });
   }
 

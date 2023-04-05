@@ -23,29 +23,43 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
     let loggedIn_stored = localStorage.getItem('loggedIn');
     let loggedIn: boolean;
-    console.log("HeaderComponent->ngAfterViewChecked user_stored", loggedIn_stored);
+    //console.log("HeaderComponent->ngAfterViewChecked user_stored", loggedIn_stored);
 
     if (loggedIn_stored != null) {
       loggedIn = JSON.parse(loggedIn_stored);
-      if (loggedIn) {
+      if (loggedIn) 
+      {
         let user_stored = localStorage.getItem('currentActor');
-        this.user = Actor.castJsonActor(JSON.parse(user_stored!));
+        let parsed_used_stored = JSON.parse(user_stored!);
+        //console.log("HeaderComponent->ngOnInit parsed_used_stored ", parsed_used_stored);
 
-        if (this.user != null) {
+        if(parsed_used_stored != null)
+        {
+          this.user = Actor.castJsonActor(JSON.parse(user_stored!));
+        }
+        //console.log("HeaderComponent->ngOnInit this.user ", this.user);
+
+        if(this.user != null) 
+        {
           this.activeRole = this.user!.getRole().toString();
           //console.log("Logged user role: ", this.activeRole);
           this.userId = this.user!.id.toString();
           //console.log("Logged user userId: ", this.userId);
-        } else {
+        } 
+        else 
+        {
           this.activeRole = 'anonymous';
           //console.log("Logged user role: ", this.activeRole);
           this.userId = null;
           //console.log("Logged user userId: ", this.userId);
         }
-      } else {
+      } 
+      else 
+      {
         this.activeRole = 'anonymous';
         this.user = null;
         this.userId = null;

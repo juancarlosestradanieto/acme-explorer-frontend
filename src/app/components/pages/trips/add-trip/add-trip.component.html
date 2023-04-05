@@ -167,7 +167,7 @@
     
         <input 
         id="startDate"
-        type="text"
+        type="date"
         class="form-control" 
         placeholder="Indicate trip's startDate"
         formControlName="startDate"
@@ -198,7 +198,7 @@
     
         <input 
         id="endDate"
-        type="text"
+        type="date"
         class="form-control" 
         placeholder="Indicate trip's endDate"
         formControlName="endDate"
@@ -229,7 +229,7 @@
     
         <input 
         id="publicationDate"
-        type="text"
+        type="date"
         class="form-control" 
         placeholder="Indicate trip's publicationDate"
         formControlName="publicationDate"
@@ -253,7 +253,7 @@
     </div>
     <!--PUBLICATION DATE END-->
 
-    <!--PICTURES START-->
+    <!--PICTURES START
     <div class="form-group has-danger">
         
         <label for="pictures" class="form-control-label">pictures:</label>
@@ -279,8 +279,70 @@
             This field is required.
         </small>
 
+    </div>-->
+    <!--PICTURES END-->
+
+    <!--PICTURES START-->
+    <div class="form-group has-danger">
+
+        <label for="pictures" class="form-control-label">Pictures:</label>
+    
+        <button type="button" class="btn btn-success" (click)="onAddPicture()">
+            <i class="fa-solid fa-plus"></i>
+            Add
+        </button>
+        
+        <div class="col-md-10 offset-md-2 ">
+    
+            <div formArrayName="pictures">
+                <div *ngFor="let row of tripForm.controls.pictures.controls; let i=index">
+                    <div [formGroupName]="i">
+
+                        <label >Picture {{i + 1}}</label>
+
+                        <div class="form-group">
+    
+                            <label for="picture[{{i}}]" class="form-control-label" >Picture</label>
+    
+                            <input
+                            id="picture[{{i}}]"
+                            type="file"
+                            accept="image/png, image/jpeg"
+                            class="form-control" 
+                            placeholder="Indicate trip's pictures"
+                            formControlName="picture"
+                            [class.is-valid]="row.get('picture')?.valid && 
+                            ( row.get('picture')?.dirty || row.get('picture')?.touched )"
+                            [class.is-invalid]="row.get('picture')?.invalid && 
+                            ( row.get('picture')?.dirty || row.get('picture')?.touched )" 
+                            />
+                            
+                            <div *ngIf="row.get('picture')?.invalid && 
+                                row.get('picture')?.errors && 
+                                ( row.get('picture')?.dirty || row.get('picture')?.touched )" 
+                            >
+
+                                <small class="text-danger" *ngIf="row.get('picture')?.hasError('required')">
+                                    This field is required.
+                                </small>
+
+                            </div>
+    
+                        </div>
+                        <button class="btn btn-danger" (click)="onRemovePicture(i)">
+                            <i class="fa-solid fa-trash"></i>
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    
     </div>
     <!--PICTURES END-->
+
+    <hr>
 
     <!--STAGES START-->
     <div class="form-group has-danger">
@@ -364,7 +426,7 @@
     
                             <input
                             id="price[{{i}}]"
-                            type="text"
+                            type="number"
                             class="form-control" 
                             placeholder="Indicate stage's price"
                             formControlName="price"
@@ -401,8 +463,8 @@
     <!--STAGES END-->
 
     <!--MANAGER ID START-->
-    <div class="form-group has-danger">
-        
+    <div class="form-group has-danger " [hidden]="true" >
+    
         <label for="managerId" class="form-control-label">managerId:</label>
     
         <input 
@@ -434,6 +496,7 @@
     <button type="submit" class="btn btn-primary" 
         [disabled]="tripForm.invalid
         || tripForm.controls.requirements.controls.length < 1
+        || tripForm.controls.pictures.controls.length < 1
         || tripForm.controls.stages.controls.length < 1
         ">
         Add

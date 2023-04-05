@@ -54,12 +54,12 @@ export class AuthService {
     return this.firebase_user_is_logged_in;
   }
 
-  async registerUser(actor: Actor) {
-
+  async registerUser(actor: any) {
+    
     return new Promise<any>((resolve, reject) => {
       this.afAuth.createUserWithEmailAndPassword(
-        actor.getEmail(),
-        actor.getPassword()
+        actor.email,
+        actor.password
       )
         .then((response1) => {
 
