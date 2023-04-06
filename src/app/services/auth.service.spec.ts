@@ -13,28 +13,25 @@ describe('AuthService', () => {
   let service: AuthService;
 
 
-  let newActor: Actor = new Actor;
-  newActor.name = "Prueba explorer 3",
-    newActor.surname = "Prueba",
-    newActor.email = randomEmailGenerator(12),
-    newActor.password = "explorer",
-    newActor.phone = "123456789",
-    newActor.address = "Calle prueba",
-    newActor.role = ["EXPLORER"],
-    newActor.validated = true
+  let newActor: Actor = new Actor(null);
+  newActor.setName("Prueba explorer 3");
+  newActor.setSurname("Prueba");
+  newActor.setEmail(randomEmailGenerator(12));
+  newActor.setPassword("explorer");
+  newActor.setPhone_number("123456789");
+  newActor.setAddress("Calle prueba");
+  newActor.setRole(["EXPLORER"]);
+  newActor.setIsActive(true);
 
-  let registeredActor: Actor = new Actor;
-  registeredActor.name = "Prueba explorer 3",
-    registeredActor.surname = "Prueba",
-    // Use already registered email
-    registeredActor.email = environment.TEST_EMAIL,
-    registeredActor.password = environment.TEST_PASSWORD,
-    registeredActor.phone = "123456789",
-    registeredActor.address = "Calle prueba",
-    registeredActor.role = ["EXPLORER"],
-    registeredActor.validated = true
-
-
+  let registeredActor: Actor = new Actor(null);
+  registeredActor.setName("Prueba explorer 3");
+  registeredActor.setSurname("Prueba");
+  registeredActor.setEmail(environment.TEST_EMAIL);
+  registeredActor.setPassword(environment.TEST_PASSWORD);
+  registeredActor.setPhone_number("123456789");
+  registeredActor.setAddress("Calle prueba");
+  registeredActor.setRole(["EXPLORER"]);
+  registeredActor.setIsActive(true);
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -57,20 +54,20 @@ describe('AuthService', () => {
     console.log("Registered user ->", created)
 
     expect(created).toBeDefined();
-    expect(created).toEqual(jasmine.objectContaining({ _email: newActor.email, _password: newActor.password }));
+    expect(created).toEqual(jasmine.objectContaining({ _email: newActor.getEmail(), _password: newActor.getPassword() }));
   });
 
   it('should login an user', async () => {
-    let response = await service.login(registeredActor.email, registeredActor.password);
+    let response = await service.login(registeredActor.getEmail(), registeredActor.getPassword());
     console.log("Login Response ->", response)
 
     expect(response).toBeDefined();
-    expect(response).toEqual(jasmine.objectContaining({ email: registeredActor.email}));
+    expect(response).toEqual(jasmine.objectContaining({ email: registeredActor.getEmail()}));
     expect(service.isLoggedIn()).toBeTruthy();
   });
 
   it('should logout an user', async () => {
-    let response = await service.login(registeredActor.email, registeredActor.password);
+    let response = await service.login(registeredActor.getEmail(), registeredActor.getPassword());
     console.log("Login Response ->", response)
     expect(service.isLoggedIn()).toEqual(true);
 

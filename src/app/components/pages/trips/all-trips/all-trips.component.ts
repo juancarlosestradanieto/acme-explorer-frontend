@@ -65,9 +65,9 @@ export class AllTripsComponent implements OnInit {
 
   getCurrentStyles(start: string, now: string) {
     let difference = this.getDiffDays(start, now);
-    console.log(difference);
+    //console.log(difference);
     let soon = difference > 0 && difference <= 7;
-    console.log(soon);
+    //console.log(soon);
     let currenStyles = {
       'font-weight': soon ? 'bold' : '',
       'font-size': soon ? '115%' : '',
