@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-applicationslist',
   templateUrl: './applicationslist.component.html',
-  styleUrls: ['./applicationslist.component.css']
+  styleUrls: ['./applicationslist.component.scss']
 })
 export class ApplicationslistComponent implements OnInit {
 

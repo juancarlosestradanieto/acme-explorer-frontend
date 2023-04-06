@@ -10,6 +10,13 @@ import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
 import { AllTripsComponent } from '../../pages/trips/all-trips/all-trips.component';
 
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}
+
 import { RegisterComponent } from './register.component';
 
 describe('RegisterComponent', () => {
@@ -22,7 +29,14 @@ describe('RegisterComponent', () => {
       imports: [FormsModule, AngularFireModule.initializeApp(environment.firebase), ReactiveFormsModule,
         RouterTestingModule.withRoutes(
           [{path: 'trips/list', component: AllTripsComponent}]
-        )],
+        ),
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient]
+          }
+        })],
       providers: [HttpClient, HttpHandler, AngularFirestore, AngularFireAuth, FormBuilder]
     })
       .compileComponents();

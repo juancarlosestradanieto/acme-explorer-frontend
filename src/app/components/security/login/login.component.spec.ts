@@ -10,6 +10,12 @@ import { of } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
 import { AllTripsComponent } from '../../pages/trips/all-trips/all-trips.component';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}
 
 import { LoginComponent } from './login.component';
 
@@ -23,7 +29,14 @@ describe('LoginComponent', () => {
       imports: [FormsModule, AngularFireModule.initializeApp(environment.firebase),
         RouterTestingModule.withRoutes(
           [{path: 'trips/list', component: AllTripsComponent}]
-        )],
+        ),
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient]
+          }
+        })],
       providers: [HttpClient, HttpHandler, AngularFirestore, AngularFireAuth]
     })
       .compileComponents();

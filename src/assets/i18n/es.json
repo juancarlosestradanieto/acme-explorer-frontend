@@ -1,4 +1,27 @@
 {
+  "REGISTER":{
+    "REGISTER":"Registrarse",
+    "NEW_ACTOR":"Registro de nuevo actor",
+    "ROLE":"Rol",
+    "NAME":"Nombre",
+    "SURNAME":"Apellido/s",
+    "PHONE":"Número de teléfono",
+    "ADDRESS":"Dirección",
+    "EMAIL":"Correo electrónico/email",
+    "PASSWORD":"Contraseña",
+    "ALREADY_REGISTER":"¿Estás ya registrado/a",
+    "LOGIN":"¡Inicia sesión ya!"
+  },
+  "LOGIN":{
+    "LOGIN_ACTION":"Inicio de sesión",
+    "LOGIN":"Iniciar sesión",
+    "EMAIL":"Introduce tu correo electrónico/email",
+    "PASSWORD":"Introduce tu contraseña",
+    "NOT_ALREADY_REGISTER":"¿No te has registrado todavía?",
+    "REGISTER_NOW":"¡Regístrate ya!"
+  },
+    "Home":"Inicio",
+    "Trips":"Viajes",
   "auth": {
     "register": "Registrar",
     "login": "Ingresar",
@@ -35,6 +58,7 @@
       "title": "IV. POLÍTICA DE PRIVACIDAD Y PROTECCIÓN DE DATOS",
       "description": "Conforme a lo establecido en la Ley General de Protección de Datos Personales en Posesión de Particulares, el titular de compromete a tomar las medidas necesarias que garanticen la seguridad del usuario, evitando que se haga uso indebido de los datos personales que el usuario proporcione en el sitio web. El titular corroborará que los datos personales contenidos en las bases de datos sean correctos, verídicos y actuales, así como que se utilicen únicamente con el fin con el que fueron recabados. Acme Explorer se reserva el derecho de realizar cualquier tipo de modificación en el Aviso de Privacidad en cualquier momento y sin previo aviso, de acuerdo con sus necesidades o cambios en la legislación aplicable, el usuario acepta dichas modificaciones. El sitio web implica la utilización de cookies que son pequeñas cantidades de información que se almacenan en el navegador utilizado por el usuario como datos de ingreso, preferencias del usuario, fecha y hora en que se accede al sitio web, sitios visitados y dirección IP, esta información es anónima y solo se utilizará para mejorar el sitio web. Los cookies facilitan la navegación y la hacen más amigable, sin embargo, el usuario puede desactivarlos en cualquier momento desde su navegador en el entendido de que esto puede afectar algunas funciones del sitio web."
     },
+
     "fifth": {
       "title": "V. POLÍTICA DE ENLACES",
       "description": "En el sitio web puede contener enlaces a otros sitios de internet pertenecientes a terceros de los cuales no se hace responsable."
@@ -102,6 +126,8 @@
   "dashboard": {
     "title": "Panel de control"
   },
+  "dark":"Modo Oscuro activado",
+  "light":"Modo Claro activado",
   "buttons": {
     "create": "Crear",
     "more": "Ver más",

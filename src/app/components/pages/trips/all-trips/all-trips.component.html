@@ -22,8 +22,8 @@
                 <li class="list-group-item"><b>Price</b>: {{trip.getPrice()}}</li>
                 <li class="list-group-item"
                     [ngStyle]="getCurrentStyles(trip.getStartDate().toString(), currentDateTime.toISOString())">
-                    <b>Start date</b>: {{trip.getStartDate() | date: 'dd/MM/yyyy'}} 
-                    <p *ngIf="getDiffDays(trip.getStartDate().toString(), currentDateTime.toISOString()) > 0 
+                    <b>Start date</b>: {{trip.getStartDate() | date: 'dd/MM/yyyy'}}
+                    <p *ngIf="getDiffDays(trip.getStartDate().toString(), currentDateTime.toISOString()) > 0
                         && getDiffDays(trip.getStartDate().toString(), currentDateTime.toISOString()) <= 7"><b>Soon!</b></p>
                 </li>
                 <li class="list-group-item"><b>End date</b>: {{trip.getEndDate() | date: 'dd/MM/yyyy'}}</li>
