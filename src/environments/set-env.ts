@@ -21,7 +21,6 @@ const envConfigFile = `export const environment = {
       storageBucket: "${process.env['storageBucket']}",
       messagingSenderId: "${process.env['messagingSenderId']}",
       appId: "${process.env['appId']}",
-      measurementId: "${process.env['measurementId']}",
     },
     TEST_EMAIL: '${process.env['TEST_EMAIL']}',
     TEST_PASSWORD: '${process.env['TEST_PASSWORD']}'
@@ -48,8 +47,7 @@ const envProdConfigFile = `export const environment = {
       projectId: "${process.env['projectId']}",
       storageBucket: "${process.env['storageBucket']}",
       messagingSenderId: "${process.env['messagingSenderId']}",
-      appId: "${process.env['appId']}",
-      measurementId: "${process.env['measurementId']}",
+      appId: "${process.env['appId']}"
     },
     TEST_EMAIL: '${process.env['TEST_EMAIL']}',
     TEST_PASSWORD: '${process.env['TEST_PASSWORD']}'
