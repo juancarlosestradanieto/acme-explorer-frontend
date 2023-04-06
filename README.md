@@ -57,13 +57,13 @@ npm install --g ts-node
 
 Go to the backend deployment documentation [here](https://github.com/juancarlosestradanieto/acme-explorer-backend/tree/main/docker).
 
-# 5. Start the application
+## 5. Start the application
 
 ```
 npm start
 ```
 
-# 6. Run the tests
+## 6. Run the tests
 
 ```
 npm run test
