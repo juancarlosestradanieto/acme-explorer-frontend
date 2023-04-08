@@ -28,6 +28,7 @@
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
     "@popperjs/core": "^2.10.2",
+    "aws-sdk": "^2.1353.0",
     "bootstrap": "^5.2.3",
     "dotenv": "^16.0.3",
     "rxjs": "~7.5.0",

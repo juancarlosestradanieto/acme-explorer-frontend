@@ -302,30 +302,40 @@
 
                         <div class="form-group">
     
-                            <label for="picture[{{i}}]" class="form-control-label" >Picture</label>
-    
-                            <input
-                            id="picture[{{i}}]"
-                            type="file"
-                            accept="image/png, image/jpeg"
-                            class="form-control" 
-                            placeholder="Indicate trip's pictures"
-                            formControlName="picture"
-                            [class.is-valid]="row.get('picture')?.valid && 
-                            ( row.get('picture')?.dirty || row.get('picture')?.touched )"
-                            [class.is-invalid]="row.get('picture')?.invalid && 
-                            ( row.get('picture')?.dirty || row.get('picture')?.touched )" 
-                            />
-                            
-                            <div *ngIf="row.get('picture')?.invalid && 
-                                row.get('picture')?.errors && 
-                                ( row.get('picture')?.dirty || row.get('picture')?.touched )" 
-                            >
-
-                                <small class="text-danger" *ngIf="row.get('picture')?.hasError('required')">
-                                    This field is required.
-                                </small>
-
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="picture[{{i}}]" class="form-control-label" >Picture</label>
+        
+                                    <input
+                                    id="picture[{{i}}]"
+                                    type="file"
+                                    accept="image/png, image/jpeg"
+                                    class="form-control" 
+                                    placeholder="Indicate trip's pictures"
+                                    formControlName="picture"
+                                    [class.is-valid]="row.get('picture')?.valid && 
+                                    ( row.get('picture')?.dirty || row.get('picture')?.touched )"
+                                    [class.is-invalid]="row.get('picture')?.invalid && 
+                                    ( row.get('picture')?.dirty || row.get('picture')?.touched )" 
+        
+                                    (change)="selectFile($event, i)"
+                                    />
+                                    
+                                    <div *ngIf="row.get('picture')?.invalid && 
+                                        row.get('picture')?.errors && 
+                                        ( row.get('picture')?.dirty || row.get('picture')?.touched )" 
+                                    >
+        
+                                        <small class="text-danger" *ngIf="row.get('picture')?.hasError('required')">
+                                            This field is required.
+                                        </small>
+        
+                                    </div>
+                                </div>
+        
+                                <div class="col-md-6">
+                                    <img id="picture-previsualization[{{i}}]" height="150" >
+                                </div>
                             </div>
     
                         </div>

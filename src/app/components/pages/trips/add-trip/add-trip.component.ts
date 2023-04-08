@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Trip } from 'src/app/models/trip.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { S3UploadService } from 'src/app/services/s3-upload/s3-upload.service';
 import { TripsService } from 'src/app/services/trips.service';
 import { environment } from 'src/environments/environment';
+
+interface HTMLInputEvent extends Event {
+  target: HTMLInputElement & EventTarget;
+}
 
 @Component({
   selector: 'app-add-trip',
@@ -16,12 +22,14 @@ export class AddTripComponent implements OnInit {
   error_message!: string;
   success_message!: string;
   production: boolean = false;
+  files: Array<File> = [];
 
   constructor(
     private fb: FormBuilder, 
     private authService: AuthService, 
     private tripService: TripsService,
-    private router: Router
+    private router: Router,
+    private s3UploadService: S3UploadService
   )
   { 
     this.production = environment.production;
@@ -103,8 +111,6 @@ export class AddTripComponent implements OnInit {
 
   private getPicture()
   {
-    let production = this.production;
-
     return this.fb.group({
       picture: [ '' , Validators.required],
     });
@@ -118,6 +124,36 @@ export class AddTripComponent implements OnInit {
   onRemovePicture(i: number) {
     const control = <FormArray>this.tripForm.controls['pictures'];
     control.removeAt(i);
+    this.files.splice(i, 1);
+    console.log("this.files ", this.files);
+    
+  }
+
+  selectFile(event: Event, i: number)
+  {
+
+    let casted_event = event as HTMLInputEvent;
+    
+    let filesList: FileList | null = casted_event.target.files;
+    const fileToUpload = filesList?.item(0);
+    console.log("fileToUpload "+fileToUpload);
+    console.log("fileToUpload?.name "+fileToUpload?.name);
+
+    if (casted_event != null && casted_event.target != null && fileToUpload != null) 
+    {
+      var reader = new FileReader();
+      reader.readAsDataURL(fileToUpload);
+      reader.onload = () => {
+        let image_element = document.getElementById("picture-previsualization\["+i+"\]");
+        let test = reader.result as string;
+        image_element?.setAttribute("src", test);
+      };
+
+      this.files[i] = fileToUpload;
+      console.log("this.files ", this.files);
+
+    }
+    
   }
 
   onSubmit()
@@ -134,15 +170,35 @@ export class AddTripComponent implements OnInit {
     //console.log(formatted_requirements);
     let newFormaData = JSON.parse(JSON.stringify(formData));
     newFormaData["requirements"] = formatted_requirements;
-    //console.log("newFormaData ", newFormaData);
+    console.log("newFormaData ", newFormaData);
     
+    //return 0;
+
     this.tripService.createTrip(newFormaData)
     .then((response) => {
 
       console.log("AddTripComponent->onSubmit then response ", response);
 
-      this.tripForm.reset();
-      this.goToTripList();
+      let trip_casteado = new Trip(response);
+      console.log("trip_casteado ", trip_casteado);
+
+      let trip_id = trip_casteado.id;
+      let folder: string = "trips/"+trip_id;
+      console.log("folder ", folder);
+      
+      this.files.forEach( (element, index) => {
+        console.log("index ", index);
+        console.log("element ", element);
+        let file = element;
+        let fileName = file.name;
+        var extension =  fileName.split('.').pop();
+        let path = folder+"/"+index+"."+extension;
+        console.log("path ", path);
+        this.s3UploadService.uploadFile(path, file);
+      });
+
+      //this.tripForm.reset();
+      //this.goToTripList();
 
     })
     .catch((error) => {
