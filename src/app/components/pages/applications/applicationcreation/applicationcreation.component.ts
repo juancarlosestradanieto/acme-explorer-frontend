@@ -26,8 +26,8 @@ export class ApplicationcreationComponent implements OnInit {
 
     let formGroup = this.fb.group({
       status: ['PENDING'],
-      trip: [this.trip_id],
-      actor: [user!.id],
+      trip_Id: [this.trip_id],
+      explorer_Id: [user!.id],
       comments: this.fb.array([
         this.fb.control('')
       ])

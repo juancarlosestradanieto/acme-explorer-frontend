@@ -8,10 +8,29 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { environment } from 'src/environments/environment';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
+import { Actor } from 'src/app/models/actor.model';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
+
+const mockActor = Actor.castJsonActor({
+  "_id": "64304c9dae7efef4708a796f",
+  "phone": "test",
+  "name": "test",
+  "surname": "test",
+  "email": "test168086733ergehreh6269@gmail.com",
+  "password": "$2b$05$4jsKd5Z0wHz68ybBUL5Ec.XHvFPtJWoV9o6pKlqXAMCj9Rzt/T0fS",
+  "language": [],
+  "address": "test",
+  "isActive": true,
+  "role": [
+    "EXPLORER"
+  ],
+  "deleted": false,
+  "__v": 0,
+});
 
 describe('ApplicationcreationComponent', () => {
   let component: ApplicationcreationComponent;
@@ -32,9 +51,13 @@ describe('ApplicationcreationComponent', () => {
           }
         })
       ],
-      declarations: [ ApplicationcreationComponent ]
+      declarations: [ApplicationcreationComponent]
     })
-    .compileComponents();
+      .compileComponents();
+
+    let authService = TestBed.inject(AuthService);
+
+    spyOn(authService, 'getCurrentActor').and.returnValue(mockActor);
 
     fixture = TestBed.createComponent(ApplicationcreationComponent);
     component = fixture.componentInstance;

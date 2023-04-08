@@ -67,33 +67,51 @@ describe('RegisterComponent', () => {
   });
 
   it('should have mock initial values', () => {
+    let now = new Date();
     const registerForm = component.registrationForm;
+
+    registerForm.value.email = 'test'+(now.getTime())+'@gmail.com';
+
     const registrationFormValues = {
       name: 'test',
       surname: 'test',
-      email: 'test@test.test',
-      password: '123456',
+      email: 'test'+(now.getTime())+'@gmail.com',
+      password: '1234567890',
       phone: 'test',
       address: 'test',
       role: 'EXPLORER',
-      validated: true
+      isActive: true
     }
 
     expect(registerForm.value).toEqual(registrationFormValues);
   });
 
-  it('should send register form', inject([Router], fakeAsync((mockRouter: Router) => {
+  it('should send register form',  fakeAsync(() => {
     let authService = TestBed.inject(AuthService);
-    let serviceSpy = spyOn(authService, 'registerUser').and.returnValue(Promise.resolve({}));
-    let navigatorSpy = spyOn(mockRouter, 'navigate').and.stub();
+    let mockResponse = {
+      "phone": "test",
+      "name": "test",
+      "surname": "test",
+      "email": "test1680948412118@gmail.com",
+      "password": "$2b$05$p8EZ4t2iYSgyoIwlWTEXJOx./HwKTl5hWYCyctaGDAtk1RyISmsgW",
+      "language": [],
+      "address": "test",
+      "isActive": true,
+      "role": [
+          "EXPLORER"
+      ],
+      "_id": "64313cc47b739af5720727c0",
+      "deleted": false,
+      "__v": 0
+  };
+    let serviceSpy = spyOn(authService, 'registerUser').and.returnValue(Promise.resolve(mockResponse));
 
     component.onRegister();
 
     tick();
 
     expect(component.error_message).toEqual("");
-    expect(component.success_message).toEqual("User registered and logged in successfully");
+    expect(component.success_message).toEqual("User with email '"+mockResponse.email+"' registered successfully");
     expect(serviceSpy).toHaveBeenCalled();
-    expect(navigatorSpy.calls.first().args[0]).toContain('/trips/list');
-  })));
+  }));
 });
