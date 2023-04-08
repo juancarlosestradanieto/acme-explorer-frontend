@@ -5,7 +5,7 @@ import { Application } from 'src/app/models/application.model';
 import { Trip } from 'src/app/models/trip.model';
 import { ApplicationsService } from 'src/app/services/applications.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { TripsService } from 'src/app/services/trips.service';
+import { TripsService } from 'src/app/services/trips/trips.service';
 
 @Component({
   selector: 'app-all-trips',

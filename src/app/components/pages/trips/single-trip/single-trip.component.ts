@@ -4,7 +4,7 @@ import { Actor } from 'src/app/models/actor.model';
 import { Stage } from 'src/app/models/stage.model';
 import { Trip } from 'src/app/models/trip.model';
 import { AuthService } from 'src/app/services/auth.service';
-import { TripsService } from 'src/app/services/trips.service';
+import { TripsService } from 'src/app/services/trips/trips.service';
 
 @Component({
   selector: 'app-single-trip',

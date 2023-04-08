@@ -4,11 +4,17 @@ import { Router } from '@angular/router';
 import { Trip } from 'src/app/models/trip.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { S3UploadService } from 'src/app/services/s3-upload/s3-upload.service';
-import { TripsService } from 'src/app/services/trips.service';
+import { TripsService } from 'src/app/services/trips/trips.service';
 import { environment } from 'src/environments/environment';
 
 interface HTMLInputEvent extends Event {
   target: HTMLInputElement & EventTarget;
+}
+
+export interface CustomFileToUpload
+{
+  path: string;
+  file: File;
 }
 
 @Component({
@@ -23,6 +29,8 @@ export class AddTripComponent implements OnInit {
   success_message!: string;
   production: boolean = false;
   files: Array<File> = [];
+  filesToUpload: Array<CustomFileToUpload> = [];
+  trip_created!: Trip;
 
   constructor(
     private fb: FormBuilder, 
@@ -170,35 +178,31 @@ export class AddTripComponent implements OnInit {
     //console.log(formatted_requirements);
     let newFormaData = JSON.parse(JSON.stringify(formData));
     newFormaData["requirements"] = formatted_requirements;
-    console.log("newFormaData ", newFormaData);
+    //console.log("newFormaData ", newFormaData);
     
-    //return 0;
-
     this.tripService.createTrip(newFormaData)
     .then((response) => {
 
       console.log("AddTripComponent->onSubmit then response ", response);
 
       let trip_casteado = new Trip(response);
-      console.log("trip_casteado ", trip_casteado);
+      //console.log("trip_casteado ", trip_casteado);
+      this.trip_created = trip_casteado;
 
-      let trip_id = trip_casteado.id;
-      let folder: string = "trips/"+trip_id;
-      console.log("folder ", folder);
-      
-      this.files.forEach( (element, index) => {
-        console.log("index ", index);
-        console.log("element ", element);
-        let file = element;
-        let fileName = file.name;
-        var extension =  fileName.split('.').pop();
-        let path = folder+"/"+index+"."+extension;
-        console.log("path ", path);
-        this.s3UploadService.uploadFile(path, file);
+      this.uploadFiles()    
+      .then((response) => {
+
+        console.log("AddTripComponent->onSubmit->uploadFiles then response ", response);
+       
+        this.tripForm.reset();
+        this.goToTripList();
+  
+      })
+      .catch((error) => {
+  
+        console.error("AddTripComponent->onSubmit->uploadFiles error ", error);
+  
       });
-
-      //this.tripForm.reset();
-      //this.goToTripList();
 
     })
     .catch((error) => {
@@ -206,6 +210,33 @@ export class AddTripComponent implements OnInit {
       console.error("AddTripComponent->onSubmit error ", error);
 
     });
+  }
+
+  uploadFiles()
+  {
+    let trip: Trip = this.trip_created;
+
+    let folder: string = "trips/"+trip.id;
+    //console.log("folder ", folder);
+    
+    this.files.forEach( (element, index) => {
+      //console.log("index ", index);
+      //console.log("element ", element);
+      let file = element;
+      let fileName = file.name;
+      var extension =  fileName.split('.').pop();
+      let path = folder+"/"+index+"."+extension;
+      //console.log("path ", path);
+
+      let customFileToUpload: CustomFileToUpload = {
+        'path': path,
+        'file': file
+      };
+      this.filesToUpload.push(customFileToUpload);
+
+    });
+
+    return this.s3UploadService.uploadMultipleFiles(this.filesToUpload);
   }
 
   goToTripList() {

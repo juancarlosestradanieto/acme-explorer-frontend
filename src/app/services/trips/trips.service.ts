@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Trip } from '../models/trip.model';
+import { Trip } from 'src/app/models/trip.model';
 
 import { environment } from 'src/environments/environment';
 
