@@ -13,15 +13,16 @@ describe('AuthService', () => {
   let service: AuthService;
 
 
-  let newActor: Actor = new Actor(null);
-  newActor.setName("Prueba explorer 3");
-  newActor.setSurname("Prueba");
-  newActor.setEmail(randomEmailGenerator(12));
-  newActor.setPassword("explorer");
-  newActor.setPhone_number("123456789");
-  newActor.setAddress("Calle prueba");
-  newActor.setRole(["EXPLORER"]);
-  newActor.setIsActive(true);
+  let newActor: Actor = Actor.castJsonActor({
+    "phone": "123456789",
+    "name": "Prueba explorer 3",
+    "surname": "Prueba",
+    "email": randomEmailGenerator(12),
+    "password": "explorer123456",
+    "address": "Calle prueba",
+    "isActive": true,
+    "role": ["EXPLORER"]
+  });
 
   let registeredActor: Actor = new Actor(null);
   registeredActor.setName("Prueba explorer 3");
@@ -37,7 +38,7 @@ describe('AuthService', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule,
         AngularFireModule.initializeApp(environment.firebase)],
-      providers: [AuthService, HttpClient, AngularFirestore, AngularFireAuth]
+      providers: [AuthService, AngularFirestore, AngularFireAuth]
     });
 
     service = TestBed.get(AuthService);
