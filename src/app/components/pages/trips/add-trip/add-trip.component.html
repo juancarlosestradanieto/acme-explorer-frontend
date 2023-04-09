@@ -1,4 +1,4 @@
-<p>Add new trip</p>
+<p>{{title}}</p>
 
 <form [formGroup]="tripForm" (ngSubmit)="onSubmit()" >
 
@@ -101,6 +101,8 @@
     </div>
     <!--PRICE END-->
 
+    <hr>
+
     <!--REQUIREMENTS START-->
     <div class="form-group has-danger">
 
@@ -159,6 +161,8 @@
     
     </div>
     <!--REQUIREMENTS END-->
+
+    <hr>
     
     <!--START DATE START-->
     <div class="form-group has-danger">
@@ -253,34 +257,7 @@
     </div>
     <!--PUBLICATION DATE END-->
 
-    <!--PICTURES START
-    <div class="form-group has-danger">
-        
-        <label for="pictures" class="form-control-label">pictures:</label>
-    
-        <input 
-        id="pictures"
-        type="text"
-        class="form-control" 
-        placeholder="Indicate trip's pictures"
-        formControlName="pictures"
-        [class.is-valid]="tripForm.get('pictures')?.valid && ( tripForm.get('pictures')?.dirty || tripForm.get('pictures')?.touched )"
-        [class.is-invalid]="tripForm.get('pictures')?.invalid && ( tripForm.get('pictures')?.dirty || tripForm.get('pictures')?.touched )" 
-        />
-    
-    </div>
-    
-    <div *ngIf="tripForm.get('pictures')?.invalid && 
-        tripForm.get('pictures')?.errors && 
-        ( tripForm.get('pictures')?.dirty || tripForm.get('pictures')?.touched )"
-    >
-
-        <small class="text-danger" *ngIf="tripForm.get('pictures')?.hasError('required')">
-            This field is required.
-        </small>
-
-    </div>-->
-    <!--PICTURES END-->
+    <hr>
 
     <!--PICTURES START-->
     <div class="form-group has-danger">
@@ -334,7 +311,7 @@
                                 </div>
         
                                 <div class="col-md-6">
-                                    <img id="picture-previsualization[{{i}}]" height="150" >
+                                    <img id="picture-previsualization-{{i}}" height="150" >
                                 </div>
                             </div>
     
@@ -349,6 +326,34 @@
 
         </div>
     
+    </div>
+
+    <hr>
+    
+    <div class="row" *ngIf="edit_mode == true && editing_trip">
+    
+        Previously uploaded pictures
+
+        <div class="row ">
+
+            <div class="col-md-3 text-center" *ngFor="let picture of editing_trip.getPictures(); let i=index">
+                <div class="card" style="width: 18rem;" >
+                    <div class="card-body">
+                        <img src="{{picture.getPicture()}}" class="rounded img-thumbnail" style="max-height: 100px;">
+                    </div>
+                    <div class="card-body">
+                        <button type="button" class="btn btn-danger" (click)="onRemovePreviouslySelectedPicture(picture)">
+                            <i class="fa-solid fa-trash"></i>
+                            Delete
+                        </button>
+                    </div>
+                </div>
+                <br>
+            </div>
+
+
+        </div>
+        
     </div>
     <!--PICTURES END-->
 
@@ -506,7 +511,6 @@
     <button type="submit" class="btn btn-primary" 
         [disabled]="tripForm.invalid
         || tripForm.controls.requirements.controls.length < 1
-        || tripForm.controls.pictures.controls.length < 1
         || tripForm.controls.stages.controls.length < 1
         ">
         Add

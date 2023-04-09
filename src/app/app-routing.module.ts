@@ -83,7 +83,7 @@ const routes: Routes = [
       {
         path: ':id', children: [
           {
-            path: 'edit', component: EditTripComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'MANAGER|ADMINISTRATOR' }
+            path: 'edit', component: AddTripComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'MANAGER|ADMINISTRATOR' }
           },
           {
             path: 'applications/new', component: ApplicationcreationComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'EXPLORER' }

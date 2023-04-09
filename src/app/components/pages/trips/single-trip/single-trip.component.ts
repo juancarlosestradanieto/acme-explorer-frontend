@@ -51,7 +51,7 @@ export class SingleTripComponent implements OnInit {
     this.tripService.getSingleTrip(this.trip_id)
     .then((response) => {
 
-      console.log("SingleTripComponent->constructor tripsService.getAllTrips then response ", response);
+      console.log("SingleTripComponent->constructor tripsService.getSingleTrip then response ", response);
       let json_trip = response;
       let casted_trip: Trip = Trip.castJsonTrip(json_trip);
       this.trip = casted_trip;
@@ -59,7 +59,7 @@ export class SingleTripComponent implements OnInit {
     })
     .catch((error) => {
 
-      console.error("SingleTripComponent->constructor tripsService.getAllTrips catch ", error);
+      console.error("SingleTripComponent->constructor tripsService.getSingleTrip catch ", error);
 
     });
   }

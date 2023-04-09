@@ -125,11 +125,11 @@ export class TripsService {
 
       this.http.put<any>(url, body, httpOptions).subscribe({
         next: (response) => {
-          console.log('TripsService->createTrip put next response', response);
+          console.log('TripsService->updateTrip put next response', response);
           resolve(response);
         },
         error: (error) => {
-          console.error('TripsService->createTrip put error: ', error);
+          console.error('TripsService->updateTrip put error: ', error);
           reject(error);
         }
       });

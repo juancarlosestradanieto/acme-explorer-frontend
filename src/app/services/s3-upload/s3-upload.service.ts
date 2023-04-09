@@ -121,4 +121,52 @@ export class S3UploadService {
 
   }
 
+  deleteFile(path: string)
+  {
+
+    var params = {
+      Bucket: environment.s3.bucket,
+      Key: path
+      /* 
+         where value for 'Key' equals 'pathName1/pathName2/.../pathNameN/fileName.ext'
+         - full path name to your file without '/' at the beginning
+      */
+    };
+    
+    return new Promise<any>(async (resolve, reject) => {
+
+      //verify that the object is in the bucket
+      this.s3.headObject(params, (error1, response1) => {
+        if(error1)
+        {
+          //an error occurred
+          console.error("S3UploadService -> deleteFile -> headObject -> error1 ", error1);
+          reject(error1);
+        }
+        else
+        {
+          //successful response
+          console.log("S3UploadService -> deleteFile -> headObject -> response1 ", response1);
+
+          this.s3.deleteObject(params, (error2, response2) => {
+            if(error2)
+            {
+              //an error occurred
+              console.error("S3UploadService -> deleteFile -> deleteObject -> error2 ", error2);
+              reject(error2);
+            }
+            else
+            {
+              //successful response
+              console.log("S3UploadService -> deleteFile -> deleteObject -> response2 ", response2);
+              resolve(response2);
+            }
+          });
+
+        }
+      });
+
+    });
+  }
+
 }
