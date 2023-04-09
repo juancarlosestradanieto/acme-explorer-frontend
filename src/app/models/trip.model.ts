@@ -2,6 +2,7 @@
 import { Application } from "./application.model";
 import { Entity } from "./entity.model";
 import { Stage } from "./stage.model";
+import { TripPicture } from "./trip-picture.model";
 
 export class Trip extends Entity {
 
@@ -19,7 +20,7 @@ export class Trip extends Entity {
     private startDate!: Date;
     private endDate!: Date;
     private publicationDate!: Date;
-    private pictures!: string[];
+    private pictures!: TripPicture[];
     private canceled!: boolean;
     private cancelReason!: string;
     private stages!: Stage[];
@@ -89,11 +90,11 @@ export class Trip extends Entity {
         this.publicationDate = publicationDate;
     }
 
-    public getPictures(): string[] {
+    public getPictures(): TripPicture[] {
         return this.pictures;
     }
 
-    public setPictures(pictures: string[]): void {
+    public setPictures(pictures: TripPicture[]): void {
         this.pictures = pictures;
     }
 
@@ -133,12 +134,20 @@ export class Trip extends Entity {
     {
         let casted_trip = new Trip(json_trip);
 
+        //stages
         let json_stages = json_trip.stages;
         let casted_stages = json_stages.map((stage: any) => {
           return new Stage(stage);
         });
-  
         casted_trip.setStages(casted_stages);
+
+        //pictures
+        let json_pictures = json_trip.pictures;
+        let casted_pictures = json_pictures.map((picture: any) => {
+          return new TripPicture(picture);
+        });
+        casted_trip.setPictures(casted_pictures);
+
         return casted_trip;
     }
 

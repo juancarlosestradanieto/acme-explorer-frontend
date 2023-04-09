@@ -8,11 +8,24 @@
         </button>
     </div>
 </div>
+
+<div class="row ">
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li *ngFor="let page of pages" class="page-item" >
+                <a href="javascript:void(null)" class="page-link" (click)="getTrips(page)" >{{page}}</a>
+            </li>
+        </ul>
+    </nav>
+
+</div>
+
 <div class="row">
 
     <div class="col-md-4 col-xs-12" *ngFor="let trip of trips">
         <div class="card">
-            <img *ngIf="trip.getPictures().length > 0" src="{{trip.getPictures()[0]}}" class="card-img-top" alt="...">
+            <img *ngIf="trip.getPictures().length > 0" src="{{trip.getPictures()[0]['picture']}}" class="card-img-top" alt="...">
             <img *ngIf="trip.getPictures().length == 0" src="assets/images/trips/default-trip.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">{{trip.getTitle()}}</h5>

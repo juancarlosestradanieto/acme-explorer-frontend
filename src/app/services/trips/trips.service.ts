@@ -20,9 +20,9 @@ export class TripsService {
   
   constructor(private http: HttpClient) { }
 
-  getAllTrips()
+  getAllTrips(page: number)
   {
-    const url = `${environment.backendApiBaseURL + '/trips'}`;
+    const url = `${environment.backendApiBaseURL + '/trips?page='+page}`;
 
     return new Promise<any>((resolve, reject) => {
 
@@ -76,7 +76,7 @@ export class TripsService {
     const url = `${environment.backendApiBaseURL + '/trips'}`;
     const idToken = localStorage.getItem('idToken') ?? '';
 
-    console.log("TripsService->createTrip idToken ", idToken);
+    //console.log("TripsService->createTrip idToken ", idToken);
     
     const httpOptions = {
       headers: new HttpHeaders({ 
@@ -97,6 +97,39 @@ export class TripsService {
         },
         error: (error) => {
           console.error('TripsService->createTrip post error: ', error);
+          reject(error);
+        }
+      });
+      
+    });
+
+  }
+
+  updateTrip(trip: any) {
+    const url = `${environment.backendApiBaseURL + '/trips/'+trip.id}`;
+    const idToken = localStorage.getItem('idToken') ?? '';
+
+    //console.log("TripsService->createTrip idToken ", idToken);
+    
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Accept-Language': 'es',
+        'idToken': idToken 
+      }),
+    };
+
+    return new Promise<any>((resolve, reject) => {
+
+      const body = JSON.stringify(trip);
+
+      this.http.put<any>(url, body, httpOptions).subscribe({
+        next: (response) => {
+          console.log('TripsService->createTrip put next response', response);
+          resolve(response);
+        },
+        error: (error) => {
+          console.error('TripsService->createTrip put error: ', error);
           reject(error);
         }
       });

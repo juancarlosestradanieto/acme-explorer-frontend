@@ -20,36 +20,56 @@ export class AllTripsComponent implements OnInit {
   protected activeRole: string = 'anonymous';
   protected userId!: string | null;
   currentDateTime: Date;
+  total_pages: number = 0;
+  pages: Array<number> = [];
 
-  constructor(tripsService: TripsService, private authService: AuthService) {
-
+  constructor(private tripsService: TripsService, private authService: AuthService)
+  {
     this.currentDateTime = new Date;
+  }
 
-    tripsService.getAllTrips()
-      .then((response) => {
+  getTrips(page: number)
+  {
+    this.tripsService.getAllTrips(page)
+      .then((response: any) => {
 
       console.log("AllTripsComponent->constructor tripsService.getAllTrips then response ", response);
+
+      this.total_pages = response.totalPages;
+
+      this.pages = [];
+      for (let page = 1; page <= this.total_pages; page ++)
+      {
+        this.pages.push(page);
+      }
+
       let json_trips = response.docs;
+      //console.log("json_trips ", json_trips);
       let casted_trips = Trip.castJsonTrips(json_trips);
-      // console.log("casted_trips ", casted_trips);
+      //console.log("casted_trips ", casted_trips);
+      
       this.trips = casted_trips;
       
       //console.log(this.getDiffDays(this.trips[0].start_date.toString(), this.currentDateTime.toISOString()))
     })
-    .catch((error) => {
+    .catch((error: any) => {
 
         console.error("AllTripsComponent->constructor tripsService.getAllTrips catch ", error);
 
-      });
-
+    });
   }
 
   ngOnInit(): void {
 
+    this.getTrips(1);
+
     this.user = this.authService.getCurrentActor();
-    if (this.user) {
+    if(this.user) 
+    {
       this.activeRole = this.user.getRole().toString();
-    } else {
+    } 
+    else 
+    {
       this.activeRole = 'anonymous';
     }
 
@@ -63,7 +83,8 @@ export class AllTripsComponent implements OnInit {
     return difference / (1000 * 3600 * 24);
   }
 
-  getCurrentStyles(start: string, now: string) {
+  getCurrentStyles(start: string, now: string) 
+  {
     let difference = this.getDiffDays(start, now);
     //console.log(difference);
     let soon = difference > 0 && difference <= 7;

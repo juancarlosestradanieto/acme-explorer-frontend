@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { S3UploadService } from 'src/app/services/s3-upload/s3-upload.service';
 import { TripsService } from 'src/app/services/trips/trips.service';
 import { environment } from 'src/environments/environment';
+import { forEachChild } from 'typescript';
 
 interface HTMLInputEvent extends Event {
   target: HTMLInputElement & EventTarget;
@@ -30,7 +31,7 @@ export class AddTripComponent implements OnInit {
   production: boolean = false;
   files: Array<File> = [];
   filesToUpload: Array<CustomFileToUpload> = [];
-  trip_created!: Trip;
+  created_trip!: Trip;
 
   constructor(
     private fb: FormBuilder, 
@@ -64,7 +65,7 @@ export class AddTripComponent implements OnInit {
       ]),
       startDate: [ ((production == true) ? '' : '2023-04-05') , Validators.required],
       endDate: [ ((production == true) ? '' : '2023-04-05') , Validators.required],
-      publicationDate: [ ((production == true) ? '' : '2023-04-05') , Validators.required],
+      publicationDate: [''],
       pictures: this.fb.array([
         //uncomment next line to initialize with one element
         this.getPicture()
@@ -179,42 +180,66 @@ export class AddTripComponent implements OnInit {
     let newFormaData = JSON.parse(JSON.stringify(formData));
     newFormaData["requirements"] = formatted_requirements;
     //console.log("newFormaData ", newFormaData);
+
+    let publicationDate = formData.publicationDate;
+    newFormaData["publicationDate"] = null;
     
     this.tripService.createTrip(newFormaData)
-    .then((response) => {
+    .then((response1) => {
 
-      console.log("AddTripComponent->onSubmit then response ", response);
+      console.log("AddTripComponent->onSubmit then response1 ", response1);
 
-      let trip_casteado = new Trip(response);
-      //console.log("trip_casteado ", trip_casteado);
-      this.trip_created = trip_casteado;
+      this.created_trip = new Trip(response1);
+      console.log("this.created_trip ", this.created_trip);
 
       this.uploadFiles()    
-      .then((response) => {
+      .then((response2) => {
 
-        console.log("AddTripComponent->onSubmit->uploadFiles then response ", response);
+        console.log("AddTripComponent->onSubmit->uploadFiles then response ", response2);
+        let responses = response2.responses;
+
+        let pictures: Array<any> = [];
+        responses.forEach((response: any) => {
+          pictures.push({picture: response.Location});
+        });
+        console.log("pictures ", pictures);
+        this.created_trip.setPictures(pictures);
+        this.created_trip.setPublicationDate(new Date(publicationDate!));
+        console.log("this.created_trip ", this.created_trip);
+
+        this.tripService.updateTrip(this.created_trip)
+        .then((response3) => {
+
+          console.log("AddTripComponent->onSubmit->uploadFiles->updateTrip then response3 ", response3);
+
+        })
+        .catch((error3) => {
+    
+          console.error("AddTripComponent->onSubmit->uploadFiles->updateTrip error3 ", error3);
+    
+        });
        
         this.tripForm.reset();
         this.goToTripList();
   
       })
-      .catch((error) => {
+      .catch((error2) => {
   
-        console.error("AddTripComponent->onSubmit->uploadFiles error ", error);
+        console.error("AddTripComponent->onSubmit->uploadFiles error2 ", error2);
   
       });
 
     })
-    .catch((error) => {
+    .catch((error1) => {
 
-      console.error("AddTripComponent->onSubmit error ", error);
+      console.error("AddTripComponent->onSubmit error1 ", error1);
 
     });
   }
 
   uploadFiles()
   {
-    let trip: Trip = this.trip_created;
+    let trip: Trip = this.created_trip;
 
     let folder: string = "trips/"+trip.id;
     //console.log("folder ", folder);
@@ -225,7 +250,9 @@ export class AddTripComponent implements OnInit {
       let file = element;
       let fileName = file.name;
       var extension =  fileName.split('.').pop();
-      let path = folder+"/"+index+"."+extension;
+      let new_file_name = ((new Date()).getTime())+"-"+(Math.random().toString()).split('.').pop();
+      //let path = folder+"/"+index+"."+extension;
+      let path = folder+"/"+new_file_name+"."+extension;
       //console.log("path ", path);
 
       let customFileToUpload: CustomFileToUpload = {
