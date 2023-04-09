@@ -5,11 +5,13 @@ import { Stage } from 'src/app/models/stage.model';
 import { Trip } from 'src/app/models/trip.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { TripsService } from 'src/app/services/trips/trips.service';
+import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-single-trip',
   templateUrl: './single-trip.component.html',
-  styleUrls: ['./single-trip.component.scss']
+  styleUrls: ['./single-trip.component.scss'],
+  providers: [NgbCarouselConfig]
 })
 export class SingleTripComponent implements OnInit {
   trip!: Trip;
@@ -20,13 +22,33 @@ export class SingleTripComponent implements OnInit {
   protected userId!: string | null;
   currentDateTime: Date;
 
-  constructor(private tripService: TripsService, private route:ActivatedRoute, private authService: AuthService) 
+  constructor(private tripService: TripsService, private route:ActivatedRoute, private authService: AuthService, config: NgbCarouselConfig) 
   { 
+    config.interval = 2000;
+    config.keyboard = true;
+    config.pauseOnHover = true;
+
     this.trip_id = this.route.snapshot.params['id'];
     this.currentDateTime = new Date;
     console.log("this.trip_id ",this.trip_id);
+  }
 
-    tripService.getSingleTrip(this.trip_id)
+  ngOnInit(): void {
+
+    this.user = this.authService.getCurrentActor();
+    if (this.user) {
+      this.activeRole = this.user.getRole().toString();
+    } else {
+      this.activeRole = 'anonymous';
+    }
+
+    this.getTrip();
+
+  }
+
+  getTrip()
+  {
+    this.tripService.getSingleTrip(this.trip_id)
     .then((response) => {
 
       console.log("SingleTripComponent->constructor tripsService.getAllTrips then response ", response);
@@ -40,18 +62,6 @@ export class SingleTripComponent implements OnInit {
       console.error("SingleTripComponent->constructor tripsService.getAllTrips catch ", error);
 
     });
-    
-  }
-
-  ngOnInit(): void {
-
-    this.user = this.authService.getCurrentActor();
-    if (this.user) {
-      this.activeRole = this.user.getRole().toString();
-    } else {
-      this.activeRole = 'anonymous';
-    }
-
   }
 
 }

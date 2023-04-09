@@ -1,8 +1,24 @@
 <div *ngIf="trip" class="card">
   <div class="container">
-    <img *ngIf="trip.getPictures().length > 0" src="{{trip.getPictures()[0]}}" class="card-img-top" alt="...">
-    <img *ngIf="trip.getPictures().length == 0" src="assets/images/trips/default-trip.jpg" class="card-img-top" alt="...">
+
+    <ngb-carousel *ngIf="trip.getPictures().length > 0" class="card-img-top">
+      <ng-template ngbSlide *ngFor="let picture of trip.getPictures()">
+        <div class="wrapper">
+          <img [src]="picture['picture']" alt="Random first slide">
+        </div>
+        <div class="carousel-caption">
+          <!--
+          <h3>Title Goes Here</h3>
+          <p>Consectetur tortor volutpat pretium.</p>
+          -->
+        </div>
+      </ng-template>
+    </ngb-carousel>
+    
+    <img *ngIf="trip.getPictures().length == 0" src="assets/images/trips/default-trip.jpg" class="card-img-top default-trip-image" alt="...">
+
   </div>
+
   <div class="card-body">
     <h5 class="card-title">{{trip.getTitle()}}</h5>
     <p class="card-text">{{trip.getDescription()}}</p>

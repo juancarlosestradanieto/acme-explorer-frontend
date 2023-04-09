@@ -1,11 +1,30 @@
-.container {
-    display: flex;
-  }
+.container 
+{
+  display: flex;
+}
   
-  .container > img {
-    margin: auto;
-  }
+.container > .default-trip-image 
+{
+  margin: auto;
+}
 
-img{
-    width: 50%;
+.default-trip-image 
+{
+  width: 50%;
+}
+
+ngb-carousel .wrapper 
+{
+  position: relative;
+  height: 0;
+  padding-top: 55%; /* Keep ratio for 900x500 images */
+}
+ngb-carousel .wrapper>img 
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%
 }
