@@ -7,16 +7,31 @@ import { DashboardService } from 'src/app/services/dashboard.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  private trips_by_manager:any = [];
-  private applications_by_trip:any = [];
-  private price_of_trips:any = [];
-  private applications_by_status:any = [];
-  private price_range_in_finder:any = [];
-  private top10_in_finder:any = [];
+  trips_by_manager:any = [];
+  applications_by_trip:any = [];
+  price_of_trips:any = [];
+  applications_by_status:any = [];
+  price_range_in_finder:any = [];
+  top10_in_finder:any = [];
 
   constructor(private dashboardService: DashboardService) { }
 
+  getLatestDashboard() {
+    this.dashboardService.getDashboard()
+      .then((response: any) => {
+
+      console.log("DashboardComponent->constructor dashboardService.getDashboard then response ", response);
+
+    })
+    .catch((error: any) => {
+
+        console.error("DashboardComponent->constructor dashboardService.getDashboard catch ", error);
+
+    });
+  }
+
   ngOnInit(): void {
+    this.getLatestDashboard();
   }
 
 }
