@@ -26,12 +26,31 @@ ngb-carousel .wrapper>img
   left: 0;
   bottom: 0;
   right: 0;
-  width: 100%
+  width: 100%;
 }
 
-/*
-ngb-carousel .carousel-control-next
+::ng-deep .carousel-indicators>buttom
 {
-
+  /*background-color: black !important;*/
+  background-image: linear-gradient(to bottom, transparent , black);
+  opacity: 0.2;
 }
-*/
+
+::ng-deep .carousel-control-next
+{
+  /*background-color: black !important;*/
+  background-image: linear-gradient(to right, transparent , black);
+  opacity: 0.2;
+}
+
+::ng-deep .carousel-control-prev
+{
+  /*background-color: black !important;*/
+  background-image: linear-gradient(to left, transparent , black);
+  opacity: 0.2;
+}
+
+::ng-deep .carousel-control-next:hover, ::ng-deep .carousel-control-prev:hover
+{
+  opacity: 0.4;
+}

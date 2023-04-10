@@ -3,7 +3,7 @@
 
   <div class="col-md-2 offset-md-10">
 
-    <button type="button" class="btn btn-success" *ngIf="activeRole == 'MANAGER'" routerLink="/trips/{{trip.id}}/edit/">
+    <button type="button" class="btn btn-success" *ngIf="trip && (activeRole == 'MANAGER')" routerLink="/trips/{{trip.id}}/edit/">
       <i class="fa-solid fa-edit"></i>
       Edit
     </button>
