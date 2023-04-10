@@ -124,7 +124,17 @@
     "title": "Patrocinios"
   },
   "dashboard": {
-    "title": "Panel de control"
+        "title": "Panel de control",
+    "trip_by_manager": "Número de viajes gestinados por gerente",
+    "applications_by_trip": "Número de solicitudes por viaje",
+    "price_of_trips": "Precio de los viajes",
+    "applications_by_status": "Solicitudes agrupadas por estado",
+    "price_range_in_finder": "Rango de precio promedio en descubridor de viajes",
+    "top10_in_finder": "10 palabras clave más utilizadas en descubridor de viajes",
+    "avg": "Promedio",
+    "min": "Mínimo",
+    "max": "Máximo",
+    "desv": "Desviación estándar"
   },
   "dark":"Modo Oscuro activado",
   "light":"Modo Claro activado",
