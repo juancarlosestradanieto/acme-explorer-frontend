@@ -16,6 +16,7 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 export class SingleTripComponent implements OnInit {
   trip!: Trip;
   trip_id!: string;
+  json_trip: any;
 
   protected user!: Actor | null;
   protected activeRole: string = 'anonymous';
@@ -52,8 +53,10 @@ export class SingleTripComponent implements OnInit {
     .then((response) => {
 
       console.log("SingleTripComponent->constructor tripsService.getSingleTrip then response ", response);
-      let json_trip = response;
-      let casted_trip: Trip = Trip.castJsonTrip(json_trip);
+      this.json_trip = response;
+      console.log("this.json_trip", this.json_trip);
+      
+      let casted_trip: Trip = Trip.castJsonTrip(this.json_trip);
       this.trip = casted_trip;
 
     })
