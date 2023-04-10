@@ -6,6 +6,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddTripComponent } from './add-trip.component';
 import { environment } from 'src/environments/environment';
+import { ActivatedRoute } from '@angular/router';
 
 describe('AddTripComponent', () => {
   let component: AddTripComponent;
@@ -15,7 +16,18 @@ describe('AddTripComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ AddTripComponent ],
       imports: [FormsModule, ReactiveFormsModule, AngularFireModule.initializeApp(environment.firebase)],
-      providers: [HttpClient, HttpHandler, AngularFirestore, AngularFireAuth]
+      providers: [
+        HttpClient, 
+        HttpHandler, 
+        AngularFirestore, 
+        AngularFireAuth,
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {params: {id: '1'}}
+          }
+        }
+      ]
     })
     .compileComponents();
 
