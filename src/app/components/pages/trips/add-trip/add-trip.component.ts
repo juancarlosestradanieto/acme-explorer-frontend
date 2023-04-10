@@ -148,6 +148,12 @@ export class AddTripComponent implements OnInit {
 
       //stages
       let original_stages = casted_trip.getStages();
+
+      for(let i = 0; i < (original_stages.length - 1); i++)
+      {
+        this.onAddStage();
+      }
+
       let formated_stages = original_stages.map((stage) => {
         return {
           title: stage.getTitle(),
@@ -259,7 +265,7 @@ export class AddTripComponent implements OnInit {
     
   }
 
-  onSubmit()
+  formatFormData()
   {
     let formData = this.tripForm.value;
 
@@ -271,41 +277,47 @@ export class AddTripComponent implements OnInit {
       return original_requirements![key]["requirement"];
     });
     //console.log(formatted_requirements);
-    let newFormaData = JSON.parse(JSON.stringify(formData));
-    newFormaData["requirements"] = formatted_requirements;
-    console.log("newFormaData ", newFormaData);
+    let newFormData = JSON.parse(JSON.stringify(formData));
+    newFormData["requirements"] = formatted_requirements;
+    console.log("newFormData ", newFormData);
 
-    /*
+    return newFormData;
+  }
 
-    let publicationDateBackup = formData.publicationDate;
+  formatPicturesData(trip: Trip)
+  {
+    let formatted = trip.getPictures().map((picture) => {
+      return {'picture': picture.getPicture()};
+    });
+    return formatted;
+  }
 
-    let stored_pictures_backup: Array<any> = []; 
+  onSubmit()
+  {
+    let newFormData = this.formatFormData();
+    let publicationDateBackup = newFormData["publicationDate"];
+
+    let previously_uploaded_pictures_backup: Array<any> = []; 
     
     let promise = null;
     if(this.edit_mode == false)
     {
-      newFormaData["publicationDate"] = null;
-      promise = this.tripService.createTrip(newFormaData);
+      //set publicationDate so taht the trip can be edited to add pictures information
+      newFormData["publicationDate"] = null;
+      newFormData["pictures"] = [];
+      console.log("newFormData ", newFormData);
+      promise = this.tripService.createTrip(newFormData);
     }
     else
     {
-      this.editing_trip.setDescription(newFormaData["description"]);
-      this.editing_trip.setTitle(newFormaData["title"]);
-      this.editing_trip.setPrice(newFormaData["price"]);
-      this.editing_trip.setStartDate(newFormaData["startDate"]);
-      this.editing_trip.setEndDate(newFormaData["endDate"]);
-      this.editing_trip.setPublicationDate(newFormaData["publicationDate"]);
-      this.editing_trip.setRequirements(newFormaData["requirements"]);
-      this.editing_trip.setStages(newFormaData["stages"]);
-
-      console.log("newFormaData.id", newFormaData.id);
-      stored_pictures_backup = this.editing_trip.getPictures().map((picture) => {
-        return {'picture': picture.getPicture()};
-      });
-      console.log("stored_pictures_backup", stored_pictures_backup);
-      console.log("newFormaData['pictures']", newFormaData['pictures']);
+      newFormData['id'] = this.editing_trip.id;
+      //console.log("newFormData.id", newFormData.id);
+      previously_uploaded_pictures_backup = this.formatPicturesData(this.editing_trip);
+      newFormData['pictures'] = previously_uploaded_pictures_backup;
+      //console.log("previously_uploaded_pictures_backup", previously_uploaded_pictures_backup);
+      console.log("newFormData ", newFormData);
       
-      promise = this.tripService.updateTrip(this.editing_trip);
+      promise = this.tripService.updateTrip(newFormData);
     }
     
     promise.then((response1) => {
@@ -315,49 +327,56 @@ export class AddTripComponent implements OnInit {
       this.created_trip = new Trip(response1);
       console.log("this.created_trip ", this.created_trip);
 
-      this.uploadFiles()    
-      .then((response2) => {
-
-        console.log("AddTripComponent->onSubmit->uploadFiles then response ", response2);
-        let responses = response2.responses;
-
-        let pictures: Array<any> = [];
-
-        if(this.edit_mode == true)
-        {
-          pictures = stored_pictures_backup;
-        }
-
-        responses.forEach((response: any) => {
-          pictures.push({picture: response.Location});
-        });
-
-        console.log("pictures ", pictures);
-        this.created_trip.setPictures(pictures);
-        this.created_trip.setPublicationDate(new Date(publicationDateBackup!));
-        console.log("this.created_trip ", this.created_trip);
-
-        this.tripService.updateTrip(this.created_trip)
-        .then((response3) => {
-
-          console.log("AddTripComponent->onSubmit->uploadFiles->updateTrip then response3 ", response3);
-
+      if(this.files.length == 0)
+      {
+        this.router.navigate(['/trips/'+this.created_trip.id]);
+      }
+      else
+      {
+        this.uploadFiles()    
+        .then((response2) => {
+  
+          console.log("AddTripComponent->onSubmit->uploadFiles then response ", response2);
+          let responses = response2.responses;
+  
+          let pictures: Array<any> = [];
+  
+          if(this.edit_mode == true)
+          {
+            pictures = previously_uploaded_pictures_backup;
+          }
+  
+          responses.forEach((response: any) => {
+            pictures.push({picture: response.Location});
+          });
+  
+          console.log("pictures ", pictures);
+          this.created_trip.setPictures(pictures);
+          this.created_trip.setPublicationDate(new Date(publicationDateBackup!));
+          console.log("this.created_trip ", this.created_trip);
+  
+          this.tripService.updateTrip(this.created_trip)
+          .then((response3) => {
+  
+            console.log("AddTripComponent->onSubmit->uploadFiles->updateTrip then response3 ", response3);
+            
+            //this.tripForm.reset();
+            this.router.navigate(['/trips/'+this.created_trip.id]);
+  
+          })
+          .catch((error3) => {
+      
+            console.error("AddTripComponent->onSubmit->uploadFiles->updateTrip error3 ", error3);
+      
+          });
+    
         })
-        .catch((error3) => {
+        .catch((error2) => {
     
-          console.error("AddTripComponent->onSubmit->uploadFiles->updateTrip error3 ", error3);
+          console.error("AddTripComponent->onSubmit->uploadFiles error2 ", error2);
     
         });
-       
-        this.tripForm.reset();
-        this.goToTripList();
-  
-      })
-      .catch((error2) => {
-  
-        console.error("AddTripComponent->onSubmit->uploadFiles error2 ", error2);
-  
-      });
+      }
 
     })
     .catch((error1) => {
@@ -366,7 +385,7 @@ export class AddTripComponent implements OnInit {
 
     });
 
-    */
+    
   }
 
   uploadFiles()
@@ -424,9 +443,13 @@ export class AddTripComponent implements OnInit {
         }
         this.editing_trip.setPictures(pictures);
         console.log("this.editing_trip", this.editing_trip);
-        
+        let formatted_pictures = this.formatPicturesData(this.editing_trip);
 
-        this.tripService.updateTrip(this.editing_trip)
+        let newFormData = this.formatFormData();
+        newFormData['id'] = this.editing_trip.id;
+        newFormData["pictures"] = formatted_pictures;
+        
+        this.tripService.updateTrip(newFormData)
         .then((response2) => {
 
           console.log("AddTripComponent->onRemovePreviouslySelectedPicture updateTrip response2 ", response2);
