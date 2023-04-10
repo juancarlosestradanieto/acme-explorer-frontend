@@ -1,4 +1,27 @@
 {
+    "REGISTER":{
+      "REGISTER":"Register",
+      "NEW_ACTOR":"Register a new actor",
+      "ROLE":"Role",
+      "NAME":"Name",
+      "SURNAME":"Surname",
+      "PHONE":"Telephone Number",
+      "ADDRESS":"Address",
+      "EMAIL":"Email",
+      "PASSWORD":"Password",
+      "ALREADY_REGISTER":"Already Registered?",
+      "LOGIN":"Log In!"
+    },
+    "LOGIN":{
+      "LOGIN_ACTION":"Log In",
+      "LOGIN":"Login",
+      "EMAIL":"Introduce your email",
+      "PASSWORD":"Introduce your password",
+      "NOT_ALREADY_REGISTER":"Not already registered?",
+      "REGISTER_NOW":"Register right now!"
+    },
+    "Home":"Home",
+    "Trips":"Trips",
   "auth": {
     "register": "Register",
     "login": "Login",
@@ -60,13 +83,47 @@
   },
   "customize-ui": "Customize UI",
   "applications": {
-    "title": "Applications"
+    "title-plural": "Applications",
+    "title-sing": "Application",
+    "moment": "Creation",
+    "id": "Id",
+    "trip-id": "Trip Id",
+    "actor-id": "Explorer Id",
+    "comments": "Comments",
+    "rejection_reason": "Rejection reason",
+    "create": "Create new application",
+    "list-by-explorer": "Explorer applications",
+    "list-by-trip": "Trip applications",
+    "accept": "Accept",
+    "reject": "Reject",
+    "pay": "Pay",
+    "cancel": "Cancel",
+    "apply-for": "Apply for",
+    "edit-comments": "Edit comments",
+    "add-comment": "Add comment",
+    "remove-comment": "Remove comment",
+    "status": {
+      "title": "Status",
+      "cancelled": "Cancelled",
+      "pending": "Pending",
+      "rejected": "Rejected",
+      "due": "Due",
+      "accepted": "Accepted"
+    },
+    "messages": {
+      "comments-not-found": "There are no comments found",
+      "cancelled-applications-not-found": "There are no cancelled applications found",
+      "pending-applications-not-found": "There are no pending applications found",
+      "rejected-applications-not-found": "There are no rejected applications found",
+      "due-applications-not-found": "There are no due applications found",
+      "accepted-applications-not-found": "There are no accepted applications found"
+    }
   },
   "sponsorships": {
     "title": "Sponsorships"
   },
   "dashboard": {
-    "title": "Dashboard",
+        "title": "Dashboard",
     "trip_by_manager": "Number of trips managed per manager",
     "applications_by_trip": "Number of applications per trip",
     "price_of_trips": "Price of the trips",
@@ -77,5 +134,13 @@
     "min": "Minimum",
     "max": "Maximum",
     "desv": "Standard desviation"
+  },
+  "dark":"Dark theme activated",
+  "light":"Light theme activated",
+  "buttons": {
+    "create": "Create",
+    "more": "More",
+    "go_to_trip": "Go to trip"
+
   }
 }

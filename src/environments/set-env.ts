@@ -21,10 +21,15 @@ const envConfigFile = `export const environment = {
       storageBucket: "${process.env['storageBucket']}",
       messagingSenderId: "${process.env['messagingSenderId']}",
       appId: "${process.env['appId']}",
-      measurementId: "${process.env['measurementId']}",
     },
     TEST_EMAIL: '${process.env['TEST_EMAIL']}',
-    TEST_PASSWORD: '${process.env['TEST_PASSWORD']}'
+    TEST_PASSWORD: '${process.env['TEST_PASSWORD']}',
+    s3 : {
+      accessKeyId: "${process.env['AWS_S3_ACCESS_KEY_ID']}",
+      secretAccessKey: "${process.env['AWS_S3_SECRET_ACCESS_KEY']}",
+      region: "${process.env['AWS_S3_REGION']}",
+      bucket: "${process.env['AWS_S3_BUCKET_NAME']}"
+    }
   };
 `;
 
@@ -48,11 +53,16 @@ const envProdConfigFile = `export const environment = {
       projectId: "${process.env['projectId']}",
       storageBucket: "${process.env['storageBucket']}",
       messagingSenderId: "${process.env['messagingSenderId']}",
-      appId: "${process.env['appId']}",
-      measurementId: "${process.env['measurementId']}",
+      appId: "${process.env['appId']}"
     },
     TEST_EMAIL: '${process.env['TEST_EMAIL']}',
-    TEST_PASSWORD: '${process.env['TEST_PASSWORD']}'
+    TEST_PASSWORD: '${process.env['TEST_PASSWORD']}',
+    s3 : {
+      accessKeyId: "${process.env['AWS_S3_ACCESS_KEY_ID']}",
+      secretAccessKey: "${process.env['AWS_S3_SECRET_ACCESS_KEY']}",
+      region: "${process.env['AWS_S3_REGION']}",
+      bucket: "${process.env['AWS_S3_BUCKET_NAME']}"
+    }
   };
 `;
 

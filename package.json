@@ -8,6 +8,7 @@
     "watch": "npm run config-env && ng build --watch --configuration development",
     "test": "npm run config-env && ng test",
     "fake-backend": "json-server --watch src/assets/json-server/acme-explorer.json",
+    "fake-backend-routes": "json-server --watch src/assets/json-server/acme-explorer.json routes src/assets/json-server/routes.json",
     "config-env": "ts-node src/environments/set-env.ts"
   },
   "private": true,
@@ -27,6 +28,7 @@
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
     "@popperjs/core": "^2.10.2",
+    "aws-sdk": "^2.1353.0",
     "bootstrap": "^5.2.3",
     "dotenv": "^16.0.3",
     "rxjs": "~7.5.0",
@@ -46,6 +48,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "schematics-scss-migrate": "^2.3.17",
     "typescript": "~4.7.2"
   }
 }

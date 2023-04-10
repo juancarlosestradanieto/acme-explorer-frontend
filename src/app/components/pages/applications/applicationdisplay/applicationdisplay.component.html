@@ -1,1 +1,63 @@
-<p>applicationdisplay works!</p>
+<div *ngIf="application" class="card">
+  <div class="card-header">
+    <h5 class="card-title"><b>{{'applications.title-sing' | translate}}</b>: #{{application.id}}</h5>
+    <p class="card-text"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}</p>
+    <p class="card-text" *ngIf="application.status == 'REJECTED'"><b>{{'applications.rejection_reason' |
+        translate}}</b>: {{application.rejection_reason}}</p>
+  </div>
+  <div class="card-body">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.explorer_Id}}</li>
+      <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip_Id}}</li>
+    </ul>
+    <div class="accordion" id="commentsAccordion">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="statusComments">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseComments"
+            aria-expanded="true" aria-controls="collapseComments">
+            {{'applications.comments' | translate}}
+          </button>
+        </h2>
+      </div>
+      <div id="collapseComments" class="accordion-collapse collapse" data-parent="commentsAccordion">
+        <button type="button" class="btn btn-primary" routerLink="/trips/" *ngIf="activeRole == 'EXPLORER'">
+          <i class="fa-solid fa-comments"></i>
+          {{'applications.edit-comments' | translate}}</button>
+        <div class="accordion-body" *ngIf="application.comments.length < 1">
+          <p>{{'applications.messages.comments-not-found' | translate}}</p>
+        </div>
+        <div class="accordion-body" *ngFor="let comment of application.comments; let i=index">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"></li>
+            <li class="list-group-item">{{comment}}</li>
+            <li class="list-group-item"></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-footer">
+    <button type="button" class="btn btn-primary" routerLink="/trip/{{application.trip_Id}}">
+      <i class="fa fa-plane" aria-hidden="true"></i>
+      {{'buttons.go_to_trip' | translate}}
+    </button>
+    <button type="button" class="btn btn-success" *ngIf="activeRole == 'EXPLORER' && application.status == 'DUE'">
+      <i class="fa-regular fa-credit-card"></i>
+      {{'applications.pay' | translate}}
+    </button>
+    <button type="button" class="btn btn-danger" *ngIf="activeRole == 'EXPLORER' && (application.status == 'PENDING' || 'DUE')">
+      <i class="fa-regular fa-rectangle-xmark"></i>
+      {{'applications.cancel' | translate}}
+    </button>
+    <button type="button" class="btn btn-success" *ngIf="activeRole == 'MANAGER' && application.status == 'PENDING'">
+      <i class="fa-solid fa-check"></i>
+      {{'applications.accept' | translate}}
+    </button>
+    <button type="button" class="btn btn-danger" *ngIf="activeRole == 'MANAGER' && application.status == 'PENDING'">
+      <i class="fa-solid fa-ban"></i>
+      {{'applications.reject' | translate}}
+    </button>
+  </div>
+
+</div>

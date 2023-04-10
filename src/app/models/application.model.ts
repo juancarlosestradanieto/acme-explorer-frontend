@@ -7,9 +7,11 @@ export class Application extends Entity {
 
     private _comments!: string[];
 
-    private _actor!: string;
+    private _explorer_Id!: string;
 
-    private _trip!: string;
+    private _trip_Id!: string;
+
+    private _rejection_reason!: string;
 
     constructor() {
         super();
@@ -39,19 +41,27 @@ export class Application extends Entity {
         this._comments = value;
     }
 
-    public get actor(): string {
-        return this._actor;
+    public get explorer_Id(): string {
+        return this._explorer_Id;
     }
 
-    public set actor(value: string) {
-        this._actor = value;
+    public set explorer_Id(value: string) {
+        this._explorer_Id = value;
     }
 
-    public get trip(): string {
-        return this._trip;
+    public get trip_Id(): string {
+        return this._trip_Id;
     }
 
-    public set trip(value: string) {
-        this._trip = value;
+    public set trip_Id(value: string) {
+        this._trip_Id = value;
+    }
+
+    public get rejection_reason(): string {
+        return this._rejection_reason;
+    }
+    
+    public set rejection_reason(value: string) {
+        this._rejection_reason = value;
     }
 }

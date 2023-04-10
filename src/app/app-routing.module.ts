@@ -18,6 +18,9 @@ import { RegisterComponent } from './components/security/register/register.compo
 import { AccessdeniedComponent } from './components/shared/denied-access/accessdenied/accessdenied.component';
 import { NotFoundComponent } from './components/shared/not-found/not-found.component';
 import { ActorRoleGuard } from './guards/actor-role.guard';
+import { ApplicationcreationComponent } from './components/pages/applications/applicationcreation/applicationcreation.component';
+import { AddTripComponent } from './components/pages/trips/add-trip/add-trip.component';
+import { EditTripComponent } from './components/pages/trips/edit-trip/edit-trip.component';
 
 const routes: Routes = [
   {
@@ -26,9 +29,9 @@ const routes: Routes = [
   {
     path: 'login', component: LoginComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'anonymous' }
   },
-  {
+  /*{
     path: 'trip-list', component: AllTripsComponent
-  },
+  },*/
   {
     path: 'termsandconditions', component: TermsandconditionsComponent
   },
@@ -51,15 +54,50 @@ const routes: Routes = [
       },
     ]
   },
+  /*
   {
-    path: 'trip/:id', 
-    component: SingleTripComponent,
-    children: [
+    path: 'trip/:id', children: [
       {
-        path: 'applications', component: TripApplicationsComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'MANAGER' }
+        path: 'applications/new', component: ApplicationcreationComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'EXPLORER' }
+      },
+      {
+        path: 'applications', component: ApplicationslistComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'MANAGER' }
       },
       {
         path: 'sponsorships', component: TripSponsorshipsComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'MANAGER' }
+      },
+      {
+        path: '', component: SingleTripComponent
+      }
+    ]
+  },
+  */
+  {
+    path: 'trips', children: [
+      {
+        path: 'list', component: AllTripsComponent
+      },
+      {
+        path: 'add', component: AddTripComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'MANAGER|ADMINISTRATOR' }
+      },
+      {
+        path: ':id', children: [
+          {
+            path: 'edit', component: AddTripComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'MANAGER|ADMINISTRATOR' }
+          },
+          {
+            path: 'applications/new', component: ApplicationcreationComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'EXPLORER' }
+          },
+          {
+            path: 'applications', component: ApplicationslistComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'MANAGER' }
+          },
+          {
+            path: 'sponsorships', component: TripSponsorshipsComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'MANAGER' }
+          },
+          {
+            path: '', component: SingleTripComponent
+          }
+        ]
       },
     ]
   },
@@ -80,7 +118,7 @@ const routes: Routes = [
     path: 'denied-access', component: AccessdeniedComponent
   },
   {
-    path: '', redirectTo: '/trip-list', pathMatch: 'full'
+    path: '', redirectTo: '/trips/list', pathMatch: 'full'
   },
   {
     path: '**', component: NotFoundComponent

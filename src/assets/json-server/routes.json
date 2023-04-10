@@ -1,0 +1,3 @@
+{
+    "/actor/:explorerId/applications": "/applications?actor=:explorerId"
+}
