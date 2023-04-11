@@ -39,6 +39,8 @@ TEST_PASSWORD=""
 .
 ```
 
+# Important: this user and password must be registerd in the system because some tests require them.
+
 ## 2. Install dependencies
 
 ```
