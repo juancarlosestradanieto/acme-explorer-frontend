@@ -42,7 +42,7 @@
     <li class="list-group-item"><b>End date</b>: {{trip.getEndDate() | date: 'dd/MM/yyyy'}}</li>
   </ul>
   <div class="card-body">
-    <button type="button" class="btn btn-primary" *ngIf="activeRole == 'EXPLORER' && trip.getStartDate().toString() > currentDateTime.toISOString()"
+    <button type="button" class="btn btn-primary" *ngIf="activeRole == 'EXPLORER' && trip.getStartDate().toString() > currentDateTime.toISOString() && !trip.isCanceled()"
       routerLink="/trip/{{trip.id}}/applications/new">
       <i class="fa-solid fa-envelope"></i>
       {{'applications.apply-for' | translate}}

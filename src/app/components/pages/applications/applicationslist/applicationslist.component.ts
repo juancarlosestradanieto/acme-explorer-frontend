@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Actor } from 'src/app/models/actor.model';
 import { Application } from 'src/app/models/application.model';
 import { ApplicationsService } from 'src/app/services/applications.service';
@@ -20,16 +20,17 @@ export class ApplicationslistComponent implements OnInit {
   dueApplications: Array<Application> = [];
   acceptedApplications: Array<Application> = [];
 
-  rejectionForm: FormGroup;
   protected user!: Actor | null;
   protected activeRole: string = 'anonymous';
   protected trip_id!: string;
 
+  @ViewChild(NgForm)
+  f!: NgForm;
+  
   constructor(private applicationService: ApplicationsService,
-    private fb: FormBuilder,
     private authService: AuthService,
+    private router: Router,
     private route: ActivatedRoute) {
-    this.rejectionForm = this.createForm();
   }
 
   ngOnInit(): void {
@@ -43,12 +44,6 @@ export class ApplicationslistComponent implements OnInit {
 
     this.getApplications();
 
-  }
-
-  createForm() {
-    return this.fb.group({
-      rejected_reason: ['']
-    });
   }
 
   getApplications() {
@@ -97,11 +92,19 @@ export class ApplicationslistComponent implements OnInit {
 
   }
 
-  onApplicationReject(applicationId: string) {
-    console.log("ApplicationslistComponent->constructor applicationService.onApplicationReject rejected_reason ", this.rejectionForm.value.rejected_reason);
-    this.applicationService.rejectApplication(applicationId, this.rejectionForm.value.rejected_reason).
+  reloadPage(){
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['./'], {
+      relativeTo: this.route
+    })
+  }
+
+  onApplicationReject(applicationId: string, rejectionForm: NgForm) {
+    console.log("ApplicationslistComponent->constructor applicationService.onApplicationReject rejected_reason ", rejectionForm.value.rejected_reason);
+    this.applicationService.rejectApplication(applicationId, rejectionForm.value.rejected_reason).
       then(() => {
-        this.ngOnInit();
+        this.reloadPage();
       }).catch((error: any) => {
         console.log("ApplicationslistComponent->constructor applicationService.onApplicationReject catch ", error);
       })
@@ -110,10 +113,11 @@ export class ApplicationslistComponent implements OnInit {
   onApplicationAccept(applicationId: string) {
     this.applicationService.acceptApplication(applicationId).
       then(() => {
-        this.ngOnInit();
+        this.reloadPage();
       }).catch((error: any) => {
         console.log("ApplicationslistComponent->constructor applicationService.onApplicationAccept catch ", error);
       })
   }
+
 
 }

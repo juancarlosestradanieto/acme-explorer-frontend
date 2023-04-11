@@ -112,6 +112,7 @@
       "accepted": "Aceptada"
     },
     "messages": {
+      "rejection-reason-required": "Es necesario un motivo para el rechazo",
       "comments-not-found": "No se han encontrado comentarios",
       "cancelled-applications-not-found": "No se han encontrado solicitudes canceladas",
       "pending-applications-not-found": "No se han encontrado solicitudes pendientes",

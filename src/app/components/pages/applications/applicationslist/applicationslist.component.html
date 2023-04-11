@@ -105,7 +105,7 @@
         <div class="accordion-body" *ngIf="pendingApplications.length < 1">
             <p>{{'applications.messages.pending-applications-not-found' | translate}}</p>
         </div>
-        <div class="accordion-body" *ngFor="let application of pendingApplications">
+        <div class="accordion-body" *ngFor="let application of pendingApplications; let iApp = index">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"></li>
                 <li class="list-group-item"><b>{{'applications.title-sing' | translate}}</b>: #{{application.id}}</li>
@@ -120,16 +120,21 @@
                     <p>{{i+1}} - {{comment}}</p>
                 </li>
                 <li class="list-group-item" *ngIf="activeRole == 'MANAGER'"><b>{{'applications.rejection_reason' |
-                        translate}}</b>:
-                    <form [formGroup]="rejectionForm" (ngSubmit)="onApplicationReject(application.id)">
-                        <div class="form-group has-danger">
-                            <input id="rejected_reason" type="text" formControlName="rejected_reason"
-                                class="form-control">
+                        translate}}*</b>:
+                    <form class="form-horizontal" (ngSubmit)="onApplicationReject(application.id, f)" #f="ngForm">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="rejected_reason{{iApp}}" name="rejected_reason"
+                                required #rejected_reason="ngModel" ngModel>
                         </div>
-                        <button type="submit" class="btn btn-danger">
-                            <i class="fa-solid fa-ban"></i>
-                            {{'applications.reject' | translate}}
-                        </button>
+                        <div *ngIf="rejected_reason!.errors?.['required'] && rejected_reason.dirty" class="alert alert-danger">
+                            {{'applications.messages.rejection-reason-required' | translate}}
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-danger" [disabled]="rejected_reason!.errors?.['required']">
+                                <i class="fa-solid fa-ban"></i>
+                                {{'applications.reject' | translate}}
+                            </button>
+                        </div>
                     </form>
                 </li>
                 <li class="list-group-item">

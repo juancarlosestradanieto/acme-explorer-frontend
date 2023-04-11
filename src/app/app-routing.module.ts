@@ -21,6 +21,7 @@ import { ActorRoleGuard } from './guards/actor-role.guard';
 import { ApplicationcreationComponent } from './components/pages/applications/applicationcreation/applicationcreation.component';
 import { AddTripComponent } from './components/pages/trips/add-trip/add-trip.component';
 import { EditTripComponent } from './components/pages/trips/edit-trip/edit-trip.component';
+import { ManagerApplicationsGuard } from './guards/manager-applications.guard';
 
 const routes: Routes = [
   {
@@ -89,7 +90,7 @@ const routes: Routes = [
             path: 'applications/new', component: ApplicationcreationComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'EXPLORER' }
           },
           {
-            path: 'applications', component: ApplicationslistComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'MANAGER' }
+            path: 'applications', component: ApplicationslistComponent, canActivate: [ManagerApplicationsGuard]
           },
           {
             path: 'sponsorships', component: TripSponsorshipsComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'MANAGER' }

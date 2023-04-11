@@ -111,6 +111,7 @@
       "accepted": "Accepted"
     },
     "messages": {
+      "rejection-reason-required": "A rejection reason is needed",
       "comments-not-found": "There are no comments found",
       "cancelled-applications-not-found": "There are no cancelled applications found",
       "pending-applications-not-found": "There are no pending applications found",
