@@ -1,4 +1,4 @@
-<form [formGroup]="registrationForm" (ngSubmit)="onRegister()" id="registerForm">
+<form [formGroup]="registrationForm" (ngSubmit)="onRegister()"  id="registerForm">
     <fieldset>
       <legend>{{'REGISTER.NEW_ACTOR' | translate}}</legend>
   
@@ -15,41 +15,50 @@
       <div class="form-group has-danger">
         <label for="name" class="form-control-label">{{'REGISTER.NAME' | translate}}</label>
         <input id="name" type="text" formControlName="name" class="form-control">
+        <small class="text-danger" *ngIf="registrationForm.get('name')?.hasError('required')">{{"Messages.field_required" | translate}}</small>
       </div>
       
       <div class="form-group has-danger">
         <label for="surname" class="form-control-label">{{'REGISTER.SURNAME' | translate}}</label>
         <input id="surname" type="text" formControlName="surname" class="form-control">
+        <small class="text-danger" *ngIf="registrationForm.get('surname')?.hasError('required')">{{"Messages.field_required" | translate}}</small>
       </div>
       
       <div class="form-group has-danger">
         <label for="phone" class="form-control-label">{{'REGISTER.PHONE' | translate}}</label>
         <input id="phone" type="text" formControlName="phone" class="form-control">
+        <small class="text-danger" *ngIf="registrationForm.get('phone')?.hasError('required')">{{"Messages.field_required" | translate}}</small>
+        <small class="text-danger" *ngIf="registrationForm.get('phone')?.hasError('pattern')">{{"Messages.9_digits_required" | translate}}</small>
       </div>
       
       <div class="form-group has-danger">
         <label for="address" class="form-control-label">{{'REGISTER.ADDRESS' | translate}}</label>
         <input id="address" type="text" formControlName="address" class="form-control">
+        <small class="text-danger" *ngIf="registrationForm.get('address')?.hasError('required')">{{"Messages.field_required" | translate}}</small>
+
       </div>
       
       <div class="form-group has-danger">
         <label for="email" class="form-control-label">{{'REGISTER.EMAIL' | translate}}</label>
         <input id="email" type="text" formControlName="email" class="form-control">
+        <small class="text-danger" *ngIf="registrationForm.get('email')?.hasError('required')">{{"Messages.field_required" | translate}}</small>
+        <small class="text-danger" *ngIf="registrationForm.get('email')?.hasError('pattern')">{{"Messages.email_required" | translate}}</small>
       </div>
       
       <div class="form-group has-danger">
         <label for="password" class="form-control-label">{{'REGISTER.PASSWORD' | translate}}</label>
         <input id="password" type="password" formControlName="password" class="form-control">
+        <small class="text-danger" *ngIf="registrationForm.get('password')?.hasError('required')">{{"Messages.field_required" | translate}}</small>
+        <small class="text-danger" *ngIf="registrationForm.get('password')?.hasError('minlength')">{{"Messages.10_digits_alphanumeric" | translate}}</small>
       </div>
       
-      <div class="spacing
-      ">
-      <button type="submit" class="btn btn-outline-primary">
+      <div class="spacing">
+      <button type="submit" class="btn btn-outline-primary" [disabled]="registrationForm.invalid">
         {{'REGISTER.REGISTER' | translate}}
       </button>
     </div>
-    
-      
+              
+  
       <div class="alert alert-success" *ngIf="success_message">
         {{success_message}}
       </div>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
 
@@ -33,14 +33,14 @@ export class RegisterComponent {
     console.log("production ", production);
 
     return this.fb.group({
-      name: (production == true) ? '' : 'test',
-      surname: (production == true) ? '' : 'test',
-      email: (production == true) ? '' : 'test'+(new Date().getTime())+'@gmail.com',
-      password: (production == true) ? '' : '1234567890',
-      phone: (production == true) ? '' : 'test',
-      address: (production == true) ? '' : 'test',
-      role: (production == true) ? [] : ['EXPLORER'],
-      isActive: true
+      name: [(production == true) ? '' : 'test',Validators.required],
+      surname: [(production == true) ? '' : 'test', Validators.required],
+      email: [(production == true) ? '' : 'test'+(new Date().getTime())+'@gmail.com',[Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}')]],
+      password: [(production == true) ? '' : '1234567890', [Validators.required, Validators.minLength(10)]],
+      phone: [(production == true) ? '' : 'test',[Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{9}$")]],
+      address: [(production == true) ? '' : 'test',Validators.required],
+      role: [(production == true) ? [] : ['EXPLORER']],
+      isActive: [true]
     });
   }
 

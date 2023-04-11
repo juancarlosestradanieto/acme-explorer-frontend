@@ -141,6 +141,11 @@
     "create": "Create",
     "more": "More",
     "go_to_trip": "Go to trip"
-
+  },
+  "Messages":{
+    "field_required":"This field is required.",
+    "9_digits_required":"This field requires 9 digits.",
+    "email_required":"This field requires an email syntax.",
+    "10_digits_alphanumeric":"This field requires a minimum of ten alphanumeric characters."
   }
 }

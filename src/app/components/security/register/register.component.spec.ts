@@ -79,7 +79,7 @@ describe('RegisterComponent', () => {
       password: '1234567890',
       phone: 'test',
       address: 'test',
-      role: 'EXPLORER',
+      role: ['EXPLORER'],
       isActive: true
     }
 
