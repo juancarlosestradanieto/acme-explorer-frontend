@@ -7,6 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
+import { FormBuilder } from '@angular/forms';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -30,7 +31,8 @@ describe('ApplicationslistComponent', () => {
           }
         })
       ],
-      declarations: [ ApplicationslistComponent ]
+      declarations: [ ApplicationslistComponent ],
+      providers: [FormBuilder]
     })
     .compileComponents();
 
