@@ -143,5 +143,11 @@
     "create": "Crear",
     "more": "Ver más",
     "go_to_trip": "Ir al viaje"
+  },
+  "Messages":{
+    "field_required":"Este campo es obligatorio.",
+    "9_digits_required":"Este campo require de 9 dígitos.",
+    "email_required":"Este campo require una sintaxis de email.",
+    "10_digits_alphanumeric":"Este campo require un mínimo de 10 caracteres alfanuméricos."
   }
 }
