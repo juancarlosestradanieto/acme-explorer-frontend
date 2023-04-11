@@ -77,7 +77,7 @@ describe('RegisterComponent', () => {
       surname: 'test',
       email: 'test'+(now.getTime())+'@gmail.com',
       password: '1234567890',
-      phone: 'test',
+      phone: '123456789',
       address: 'test',
       role: ['EXPLORER'],
       isActive: true
