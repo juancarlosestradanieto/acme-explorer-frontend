@@ -1,7 +1,7 @@
 import { Entity } from './entity.model';
 
 export class Application extends Entity {
-    private _moment!: Date;
+    private _applicationMoment!: Date;
 
     private _status!: string;
 
@@ -11,18 +11,19 @@ export class Application extends Entity {
 
     private _trip_Id!: string;
 
-    private _rejection_reason!: string;
+    private _rejected_reason!: string;
 
-    constructor() {
+    constructor(obj: any) {
         super();
+        obj && Object.assign(this, obj);
     }
 
-    public get moment(): Date {
-        return this._moment;
+    public get applicationMoment(): Date {
+        return this._applicationMoment;
     }
 
-    public set moment(value: Date) {
-        this._moment = value;
+    public set applicationMoment(value: Date) {
+        this._applicationMoment = value;
     }
 
     public get status(): string {
@@ -57,11 +58,23 @@ export class Application extends Entity {
         this._trip_Id = value;
     }
 
-    public get rejection_reason(): string {
-        return this._rejection_reason;
+    public get rejected_reason(): string {
+        return this._rejected_reason;
     }
-    
-    public set rejection_reason(value: string) {
-        this._rejection_reason = value;
+
+    public set rejected_reason(value: string) {
+        this._rejected_reason = value;
+    }
+
+    public static castJsonApplication(json_trip: any): Application {
+        let casted_application = new Application(json_trip);
+        return casted_application;
+    }
+
+    public static castJsonApplications(json_applications: any): Array<Application> {
+        let casted_applications: Array<Application> = json_applications.map((json_applications: any) => {
+            return Application.castJsonApplication(json_applications);
+        });
+        return casted_applications;
     }
 }

@@ -3,7 +3,7 @@
     <h5 class="card-title"><b>{{'applications.title-sing' | translate}}</b>: #{{application.id}}</h5>
     <p class="card-text"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}</p>
     <p class="card-text" *ngIf="application.status == 'REJECTED'"><b>{{'applications.rejection_reason' |
-        translate}}</b>: {{application.rejection_reason}}</p>
+        translate}}</b>: {{application.rejected_reason}}</p>
   </div>
   <div class="card-body">
     <ul class="list-group list-group-flush">

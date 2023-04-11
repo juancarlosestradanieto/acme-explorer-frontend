@@ -20,8 +20,10 @@
                 <li class="list-group-item"><b>{{'applications.title-sing' | translate}}</b>: #{{application.id}}</li>
                 <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}
                 </li>
-                <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>: {{application.moment}}</li>
-                <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.explorer_Id}}</li>
+                <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>:
+                    {{application.applicationMoment}}</li>
+                <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.explorer_Id}}
+                </li>
                 <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip_Id}}</li>
                 <li class="list-group-item">
                     <button type="button" class="btn btn-primary" routerLink="/trip/{{application.trip_Id}}">
@@ -58,10 +60,12 @@
                 <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}
                 </li>
                 <li class="list-group-item"><b>{{'applications.rejection_reason' | translate}}</b>:
-                    {{application.rejection_reason}}
+                    {{application.rejected_reason}}
                 </li>
-                <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>: {{application.moment}}</li>
-                <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.explorer_Id}}</li>
+                <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>:
+                    {{application.applicationMoment}}</li>
+                <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.explorer_Id}}
+                </li>
                 <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip_Id}}</li>
                 <li class="list-group-item">
                     <button type="button" class="btn btn-primary" routerLink="/trip/{{application.trip_Id}}">
@@ -97,9 +101,23 @@
                 <li class="list-group-item"><b>{{'applications.title-sing' | translate}}</b>: #{{application.id}}</li>
                 <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}
                 </li>
-                <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>: {{application.moment}}</li>
-                <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.explorer_Id}}</li>
+                <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>:
+                    {{application.applicationMoment}}</li>
+                <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.explorer_Id}}
+                </li>
                 <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip_Id}}</li>
+                <li class="list-group-item" *ngIf="activeRole == 'MANAGER'"><b>{{'applications.rejection_reason' | translate}}</b>:
+                    <form [formGroup]="rejectionForm" (ngSubmit)="onApplicationReject(application.id)">
+                        <div class="form-group has-danger">
+                            <input id="rejected_reason" type="text" formControlName="rejected_reason"
+                                class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fa-solid fa-ban"></i>
+                            {{'applications.reject' | translate}}
+                        </button>
+                    </form>
+                </li>
                 <li class="list-group-item">
                     <button type="button" class="btn btn-primary" routerLink="/trip/{{application.trip_Id}}">
                         <i class="fa fa-plane" aria-hidden="true"></i>
@@ -113,13 +131,10 @@
                         <i class="fa-regular fa-rectangle-xmark"></i>
                         {{'applications.cancel' | translate}}
                     </button>
-                    <button type="button" class="btn btn-success" *ngIf="activeRole == 'MANAGER'">
+                    <button type="button" (click)="onApplicationAccept(application.id)" class="btn btn-success"
+                        *ngIf="activeRole == 'MANAGER'">
                         <i class="fa-solid fa-check"></i>
                         {{'applications.accept' | translate}}
-                    </button>
-                    <button type="button" class="btn btn-danger" *ngIf="activeRole == 'MANAGER'">
-                        <i class="fa-solid fa-ban"></i>
-                        {{'applications.reject' | translate}}
                     </button>
                 </li>
             </ul>
@@ -145,9 +160,11 @@
                 <li class="list-group-item"></li>
                 <li class="list-group-item"><b>{{'applications.title-sing' | translate}}</b>: #{{application.id}}</li>
                 <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}
-                </li>                
-                <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>: {{application.moment}}</li>
-                <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.explorer_Id}}</li>
+                </li>
+                <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>:
+                    {{application.applicationMoment}}</li>
+                <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.explorer_Id}}
+                </li>
                 <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip_Id}}</li>
                 <li class="list-group-item">
                     <button type="button" class="btn btn-primary" routerLink="/trip/{{application.trip_Id}}">
@@ -191,8 +208,10 @@
                 <li class="list-group-item"><b>{{'applications.title-sing' | translate}}</b>: #{{application.id}}</li>
                 <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}
                 </li>
-                <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>: {{application.moment}}</li>
-                <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.explorer_Id}}</li>
+                <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>:
+                    {{application.applicationMoment}}</li>
+                <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.explorer_Id}}
+                </li>
                 <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip_Id}}</li>
                 <li class="list-group-item">
                     <button type="button" class="btn btn-primary" routerLink="/trip/{{application.trip_Id}}">

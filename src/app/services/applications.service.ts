@@ -16,10 +16,10 @@ export class ApplicationsService {
 
   createApplication(application: any) {
     console.log("ApplicationsService->createApplication application.comments ", application.comments);
-    let commentsString: string = application.comments.map((comment: string)=>comment).join("[/||/]");
+    let commentsString: string = application.comments.map((comment: string) => comment).join("[/||/]");
     console.log("ApplicationsService->createApplication string application.comments ", commentsString);
     application.comments = commentsString;
-    
+
     const url = `${environment.backendApiBaseURL + '/applications'}`;
 
     const idToken = localStorage.getItem('idToken') ?? '';
@@ -27,10 +27,10 @@ export class ApplicationsService {
     console.log("ApplicationsService->createApplication idToken ", idToken);
 
     const httpOptions = {
-      headers: new HttpHeaders({ 
+      headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Accept-Language': 'es',
-        'idToken': idToken 
+        'idToken': idToken
       }),
     };
 
@@ -59,10 +59,10 @@ export class ApplicationsService {
     console.log("ApplicationsService->getAllApplications idToken ", idToken);
 
     const httpOptions = {
-      headers: new HttpHeaders({ 
+      headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Accept-Language': 'es',
-        'idToken': idToken 
+        'idToken': idToken
       }),
     };
 
@@ -83,11 +83,19 @@ export class ApplicationsService {
   async getApplicationsByTripId(trip_id: string) {
     const url = `${environment.backendApiBaseURL + '/trips/' + trip_id + '/applications'}`;
 
+    const idToken = localStorage.getItem('idToken') ?? '';
+
+    console.log("ApplicationsService->getAllApplications idToken ", idToken);
+
     let queryParams = new HttpParams();
     queryParams = queryParams.append("trip", trip_id);
 
     const httpOptionsByTrip = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept-Language': 'es',
+        'idToken': idToken
+      }),
       params: queryParams
     };
 
@@ -115,13 +123,13 @@ export class ApplicationsService {
     console.log("ApplicationsService->getApplicationsByExplorerId idToken ", idToken);
 
     let queryParams = new HttpParams();
-    queryParams = queryParams.append("actor", explorer_id);
+    queryParams = queryParams.append("explorer_Id", explorer_id);
 
     const httpOptionsByExplorer = {
-      headers: new HttpHeaders({ 
+      headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Accept-Language': 'es',
-        'idToken': idToken 
+        'idToken': idToken
       }),
       params: queryParams
     };
@@ -160,4 +168,80 @@ export class ApplicationsService {
       })
     });
   }
+
+  cancelApplication(application_id: string) {
+    const url = `${environment.backendApiBaseURL + '/applications/' + application_id + '/cancel'}`;
+
+    return new Promise<any>((resolve, reject) => {
+      this.http.get<any>(url, httpOptions).subscribe({
+        next: (response) => {
+          console.log('ApplicationsService->getApplicationById get next response: ', response);
+          resolve(response);
+        },
+        error: (error) => {
+          console.error('ApplicationsService->getApplicationById get error: ', error);
+          reject(error);
+        }
+      })
+    });
+  }
+
+  rejectApplication(application_id: string, rejection_reason: any) {
+    const url = `${environment.backendApiBaseURL + '/applications/' + application_id + '/reject'}`;
+
+    const idToken = localStorage.getItem('idToken') ?? '';
+
+    console.log("ApplicationsService->rejectApplication idToken ", idToken);
+
+    const httpOptionsStatus = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept-Language': 'es',
+        'idToken': idToken
+      }),
+    };
+
+    return new Promise<any>((resolve, reject) => {
+      this.http.patch<any>(url, {rejected_reason: rejection_reason}, httpOptionsStatus).subscribe({
+        next: (response) => {
+          console.log('ApplicationsService->rejectApplication get next response: ', response);
+          resolve(response);
+        },
+        error: (error) => {
+          console.error('ApplicationsService->rejectApplication get error: ', error);
+          reject(error);
+        }
+      });
+    });
+  }
+
+  acceptApplication(application_id: string) {
+    const url = `${environment.backendApiBaseURL + '/applications/' + application_id + '/due'}`;
+
+    const idToken = localStorage.getItem('idToken') ?? '';
+
+    console.log("ApplicationsService->acceptApplication idToken ", idToken);
+
+    const httpOptionsStatus = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept-Language': 'es',
+        'idToken': idToken
+      }),
+    };
+
+    return new Promise<any>((resolve, reject) => {
+      this.http.patch<any>(url, {}, httpOptionsStatus).subscribe({
+        next: (response) => {
+          console.log('ApplicationsService->acceptApplication get next response: ', response);
+          resolve(response);
+        },
+        error: (error) => {
+          console.error('ApplicationsService->acceptApplication get error: ', error);
+          reject(error);
+        }
+      });
+    });
+  }
 }
+
