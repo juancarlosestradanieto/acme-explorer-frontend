@@ -60,7 +60,7 @@
                     <i class="fa-solid fa-envelope"></i>
                     {{'applications.apply-for' | translate}}
                 </button>
-                <button type="button" class="btn btn-primary" *ngIf="activeRole == 'MANAGER'"
+                <button type="button" class="btn btn-primary" *ngIf="activeRole == 'MANAGER' && user!.id == trip.getManagerId()"
                     routerLink="/trips/{{trip.id}}/applications/">
                     <i class="fa-solid fa-envelope"></i>
                     {{'applications.title-plural' | translate}}
