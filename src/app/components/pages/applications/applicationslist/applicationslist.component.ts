@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-applicationslist',
   templateUrl: './applicationslist.component.html',
-  styleUrls: ['./applicationslist.component.css']
+  styleUrls: ['./applicationslist.component.scss']
 })
 export class ApplicationslistComponent implements OnInit {
 
@@ -31,7 +31,7 @@ export class ApplicationslistComponent implements OnInit {
 
     this.user = this.authService.getCurrentActor();
     if (this.user) {
-      this.activeRole = this.user.role.toString();
+      this.activeRole = this.user.getRole().toString();
     } else {
       this.activeRole = 'anonymous';
     }

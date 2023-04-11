@@ -28,6 +28,7 @@
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
     "@popperjs/core": "^2.10.2",
+    "aws-sdk": "^2.1353.0",
     "bootstrap": "^5.2.3",
     "dotenv": "^16.0.3",
     "rxjs": "~7.5.0",
@@ -47,6 +48,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "schematics-scss-migrate": "^2.3.17",
     "typescript": "~4.7.2"
   }
 }

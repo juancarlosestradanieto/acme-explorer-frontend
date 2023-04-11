@@ -7,8 +7,8 @@
   </div>
   <div class="card-body">
     <ul class="list-group list-group-flush">
-      <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.actor}}</li>
-      <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip}}</li>
+      <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.explorer_Id}}</li>
+      <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip_Id}}</li>
     </ul>
     <div class="accordion" id="commentsAccordion">
       <div class="accordion-item">
@@ -38,7 +38,7 @@
   </div>
 
   <div class="card-footer">
-    <button type="button" class="btn btn-primary" routerLink="/trip/{{application.trip}}">
+    <button type="button" class="btn btn-primary" routerLink="/trip/{{application.trip_Id}}">
       <i class="fa fa-plane" aria-hidden="true"></i>
       {{'buttons.go_to_trip' | translate}}
     </button>

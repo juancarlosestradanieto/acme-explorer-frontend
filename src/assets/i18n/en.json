@@ -1,4 +1,27 @@
 {
+    "REGISTER":{
+      "REGISTER":"Register",
+      "NEW_ACTOR":"Register a new actor",
+      "ROLE":"Role",
+      "NAME":"Name",
+      "SURNAME":"Surname",
+      "PHONE":"Telephone Number",
+      "ADDRESS":"Address",
+      "EMAIL":"Email",
+      "PASSWORD":"Password",
+      "ALREADY_REGISTER":"Already Registered?",
+      "LOGIN":"Log In!"
+    },
+    "LOGIN":{
+      "LOGIN_ACTION":"Log In",
+      "LOGIN":"Login",
+      "EMAIL":"Introduce your email",
+      "PASSWORD":"Introduce your password",
+      "NOT_ALREADY_REGISTER":"Not already registered?",
+      "REGISTER_NOW":"Register right now!"
+    },
+    "Home":"Home",
+    "Trips":"Trips",
   "auth": {
     "register": "Register",
     "login": "Login",
@@ -100,11 +123,24 @@
     "title": "Sponsorships"
   },
   "dashboard": {
-    "title": "Dashboard"
+        "title": "Dashboard",
+    "trip_by_manager": "Number of trips managed per manager",
+    "applications_by_trip": "Number of applications per trip",
+    "price_of_trips": "Price of the trips",
+    "applications_by_status": "Applications grouped by status",
+    "price_range_in_finder": "Average price range in finders",
+    "top10_in_finder": "Top 10 keywords in finders",
+    "avg": "Average",
+    "min": "Minimum",
+    "max": "Maximum",
+    "desv": "Standard desviation"
   },
+  "dark":"Dark theme activated",
+  "light":"Light theme activated",
   "buttons": {
     "create": "Create",
     "more": "More",
     "go_to_trip": "Go to trip"
+
   }
 }

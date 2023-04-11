@@ -1,0 +1,56 @@
+.container 
+{
+  display: flex;
+}
+  
+.container > .default-trip-image 
+{
+  margin: auto;
+}
+
+.default-trip-image 
+{
+  width: 50%;
+}
+
+ngb-carousel .wrapper 
+{
+  position: relative;
+  height: 0;
+  padding-top: 55%; /* Keep ratio for 900x500 images */
+}
+ngb-carousel .wrapper>img 
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+}
+
+::ng-deep .carousel-indicators>buttom
+{
+  /*background-color: black !important;*/
+  background-image: linear-gradient(to bottom, transparent , black);
+  opacity: 0.2;
+}
+
+::ng-deep .carousel-control-next
+{
+  /*background-color: black !important;*/
+  background-image: linear-gradient(to right, transparent , black);
+  opacity: 0.2;
+}
+
+::ng-deep .carousel-control-prev
+{
+  /*background-color: black !important;*/
+  background-image: linear-gradient(to left, transparent , black);
+  opacity: 0.2;
+}
+
+::ng-deep .carousel-control-next:hover, ::ng-deep .carousel-control-prev:hover
+{
+  opacity: 0.4;
+}

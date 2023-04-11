@@ -1,15 +1,15 @@
 # AcmeExplorerFrontend
 
-## 1. Variables de entorno
+## 1. Environment Variables
 
-Copiar el archivo de variables de entorno.
+Copy the environment variables file.
 
 ```
 cd src/environments
 cp .env.example .env
 ```
 
-Indicar en este las credenciales de firebase.
+Indicate in this the firebase credentials.
 
 ```
 .
@@ -21,13 +21,12 @@ projectId=""
 storageBucket=""
 messagingSenderId=""
 appId=""
-measurementId=""
 .
 .
 .
 ```
 
-Indicar el correo y password de pruebas.
+Indicate the test email and password.
 
 ```
 .
@@ -39,38 +38,32 @@ TEST_PASSWORD=""
 .
 .
 ```
-# IMPORTANTE: 
-Este usuario debe ser registrado en AcmeExplorerFrontend **ANTES** de ejecutar los tests ya que ciertos tests esperan que este usuario(y el password también) esté registrado en firebase.
 
-## 2. Instalar dependencias
+## 2. Install dependencies
 
 ```
 npm install
 ```
 
-## 3. Instalar dependencia global
+## 3. Install global dependency
 
-Es necesaria para regenerar los archivos de variables de entorno.
+It is needed to regenerate the environment variable files.
 
 ```
 npm install --g ts-node
 ```
 
-## 4. Iniciar el backend
+## 4. Start the backend
 
-Inicia el json server.
+Go to the backend deployment documentation [here](https://github.com/juancarlosestradanieto/acme-explorer-backend/tree/main/docker).
 
-```
-npm run fake-backend
-```
-
-# 5. Iniciar la aplicación
+## 5. Start the application
 
 ```
 npm start
 ```
 
-# 6. ejecutar los tests
+## 6. Run the tests
 
 ```
 npm run test

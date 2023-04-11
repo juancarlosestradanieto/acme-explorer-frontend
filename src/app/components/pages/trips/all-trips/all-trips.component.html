@@ -1,42 +1,67 @@
-<p>Available trips just for you!</p>
+
+<div class="row">
+    <div class="col-md-6"><p>Available trips just for you!</p></div>
+    <div class="col-md-3 offset-md-3">
+        <button type="button" class="btn btn-success" routerLink="/trips/add">
+            <i class="fa-solid fa-plus"></i>
+            Add trip
+        </button>
+    </div>
+</div>
+
+<div class="row ">
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li *ngFor="let page of pages" class="page-item" >
+                <a href="javascript:void(null)" class="page-link" (click)="getTrips(page)" >{{page}}</a>
+            </li>
+        </ul>
+    </nav>
+
+</div>
 
 <div class="row">
 
     <div class="col-md-4 col-xs-12" *ngFor="let trip of trips">
         <div class="card">
-            <img src="{{trip.pictures[0]}}" class="card-img-top" alt="...">
+            <img *ngIf="trip.getPictures().length > 0" src="{{trip.getPictures()[0]['picture']}}" class="card-img-top" alt="...">
+            <img *ngIf="trip.getPictures().length == 0" src="assets/images/trips/default-trip.jpg" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">{{trip.title}}</h5>
-                <p class="card-text">{{trip.description}}</p>
+                <h5 class="card-title">{{trip.getTitle()}}</h5>
+                <p class="card-text">{{trip.getDescription() | slice:0:50}} ...</p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><b>Price</b>: {{trip.price}}</li>
+                <li class="list-group-item"><b>Price</b>: {{trip.getPrice()}}</li>
                 <li class="list-group-item"
-                    [ngStyle]="getCurrentStyles(trip.start_date.toString(), currentDateTime.toISOString())">
-                    <b>Start date</b>: {{trip.start_date | date: 'dd/MM/yyyy'}} 
-                    <p *ngIf="getDiffDays(trip.start_date.toString(), currentDateTime.toISOString()) > 0 
-                        && getDiffDays(trip.start_date.toString(), currentDateTime.toISOString()) <= 7"><b>Soon!</b></p>
+                    [ngStyle]="getCurrentStyles(trip.getStartDate().toString(), currentDateTime.toISOString())">
+                    <b>Start date</b>: {{trip.getStartDate() | date: 'dd/MM/yyyy'}}
+                    <p *ngIf="getDiffDays(trip.getStartDate().toString(), currentDateTime.toISOString()) > 0
+                        && getDiffDays(trip.getStartDate().toString(), currentDateTime.toISOString()) <= 7"><b>Soon!</b></p>
                 </li>
-                <li class="list-group-item"><b>End date</b>: {{trip.end_date | date: 'dd/MM/yyyy'}}</li>
+                <li class="list-group-item"><b>End date</b>: {{trip.getEndDate() | date: 'dd/MM/yyyy'}}</li>
             </ul>
             <div class="card-body">
-                <button type="button" class="btn btn-success" routerLink="/trip/{{trip.id}}">
+                <button type="button" class="btn btn-success" routerLink="/trips/{{trip.id}}">
+                    <i class="fa-solid fa-magnifying-glass"></i>
                     More
                 </button>
-                <button type="button" class="btn btn-warning">
+                <button type="button" class="btn btn-warning" routerLink="/trips/{{trip.id}}/edit">
+                    <i class="fas fa-edit"></i>
                     Edit
                 </button>
-                <button type="button" class="btn btn-danger">
+                <button type="button" class="btn btn-danger" (click)="deleteTrip(trip)">
+                    <i class="fa-solid fa-trash"></i>
                     Delete
                 </button>
                 <button type="button" class="btn btn-primary"
-                    *ngIf="activeRole == 'EXPLORER' && trip.start_date.toString() > currentDateTime.toISOString()"
-                    routerLink="/trip/{{trip.id}}/applications/new">
+                    *ngIf="activeRole == 'EXPLORER' && trip.getStartDate().toString() > currentDateTime.toISOString()"
+                    routerLink="/trips/{{trip.id}}/applications/new">
                     <i class="fa-solid fa-envelope"></i>
                     {{'applications.apply-for' | translate}}
                 </button>
                 <button type="button" class="btn btn-primary" *ngIf="activeRole == 'MANAGER'"
-                    routerLink="/trip/{{trip.id}}/applications/">
+                    routerLink="/trips/{{trip.id}}/applications/">
                     <i class="fa-solid fa-envelope"></i>
                     {{'applications.title-plural' | translate}}
                 </button>

@@ -15,7 +15,24 @@ export class ApplicationsService {
   constructor(private http: HttpClient) { }
 
   createApplication(application: any) {
+    console.log("ApplicationsService->createApplication application.comments ", application.comments);
+    let commentsString: string = application.comments.map((comment: string)=>comment).join("[/||/]");
+    console.log("ApplicationsService->createApplication string application.comments ", commentsString);
+    application.comments = commentsString;
+    
     const url = `${environment.backendApiBaseURL + '/applications'}`;
+
+    const idToken = localStorage.getItem('idToken') ?? '';
+
+    console.log("ApplicationsService->createApplication idToken ", idToken);
+
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Accept-Language': 'es',
+        'idToken': idToken 
+      }),
+    };
 
     return new Promise<any>((resolve, reject) => {
 
@@ -36,6 +53,18 @@ export class ApplicationsService {
 
   getAllApplications() {
     const url = `${environment.backendApiBaseURL + '/applications'}`;
+
+    const idToken = localStorage.getItem('idToken') ?? '';
+
+    console.log("ApplicationsService->getAllApplications idToken ", idToken);
+
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Accept-Language': 'es',
+        'idToken': idToken 
+      }),
+    };
 
     return new Promise<any>((resolve, reject) => {
       this.http.get<any>(url, httpOptions).subscribe({
@@ -78,13 +107,22 @@ export class ApplicationsService {
   }
 
   getApplicationsByExplorerId(explorer_id: string) {
-    const url = `${environment.backendApiBaseURL + '/actor/' + explorer_id + '/applications'}`;
+    const url = `${environment.backendApiBaseURL + '/applications/explorer/' + explorer_id}`;
+
+
+    const idToken = localStorage.getItem('idToken') ?? '';
+
+    console.log("ApplicationsService->getApplicationsByExplorerId idToken ", idToken);
 
     let queryParams = new HttpParams();
     queryParams = queryParams.append("actor", explorer_id);
 
     const httpOptionsByExplorer = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Accept-Language': 'es',
+        'idToken': idToken 
+      }),
       params: queryParams
     };
 
