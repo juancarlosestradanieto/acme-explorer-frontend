@@ -23,10 +23,10 @@
         <button type="button" class="btn btn-primary" routerLink="/trips/" *ngIf="activeRole == 'EXPLORER'">
           <i class="fa-solid fa-comments"></i>
           {{'applications.edit-comments' | translate}}</button>
-        <div class="accordion-body" *ngIf="application.comments.length < 1">
+        <div class="accordion-body" *ngIf="application.getComments().length < 1">
           <p>{{'applications.messages.comments-not-found' | translate}}</p>
         </div>
-        <div class="accordion-body" *ngFor="let comment of application.comments; let i=index">
+        <div class="accordion-body" *ngFor="let comment of application.getComments(); let i=index">
           <ul class="list-group list-group-flush">
             <li class="list-group-item"></li>
             <li class="list-group-item">{{comment}}</li>

@@ -56,7 +56,8 @@ export class ApplicationslistComponent implements OnInit {
       this.applicationService.getApplicationsByExplorerId(this.user!.id)
         .then((response) => {
           console.log("ApplicationslistComponent->constructor authService.getApplicationsByExplorerId then response ", response);
-          this.applications.push(...response);
+          let casted_application = Application.castJsonApplications(response);
+          this.applications.push(...casted_application);
 
           console.log("ApplicationslistComponent->constructor authService.getApplicationsByExplorerId this.applications.length ", this.applications.length);
 

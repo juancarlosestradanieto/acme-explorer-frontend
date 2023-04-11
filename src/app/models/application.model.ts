@@ -34,11 +34,11 @@ export class Application extends Entity {
         this._status = value;
     }
 
-    public get comments(): string[] {
+    public getComments(): string[] {
         return this._comments;
     }
 
-    public set comments(value: string[]) {
+    public setComments(value: string[]) {
         this._comments = value;
     }
 
@@ -66,8 +66,15 @@ export class Application extends Entity {
         this._rejected_reason = value;
     }
 
-    public static castJsonApplication(json_trip: any): Application {
-        let casted_application = new Application(json_trip);
+    public static castJsonApplication(json_application: any): Application {
+        let casted_application = new Application(json_application);
+
+        //comments
+        let json_comments = json_application.comments;
+        let casted_comments = json_comments.split("[/||/]");
+        casted_application.setComments(casted_comments);
+
+
         return casted_application;
     }
 
