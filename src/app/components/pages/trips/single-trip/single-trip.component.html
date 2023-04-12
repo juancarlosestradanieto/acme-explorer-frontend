@@ -5,7 +5,7 @@
 
     <button type="button" class="btn btn-success" *ngIf="trip && (activeRole == 'MANAGER')" routerLink="/trips/{{trip.id}}/edit/">
       <i class="fa-solid fa-edit"></i>
-      Edit
+      {{'trips.buttons.edit' | translate}}
     </button>
     
   </div>
@@ -37,9 +37,9 @@
     <p class="card-text">{{trip.getDescription()}}</p>
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item"><b>Price</b>: {{trip.getPrice()}}</li>
-    <li class="list-group-item"><b>Start date</b>: {{trip.getStartDate() | date: 'dd/MM/yyyy'}}</li>
-    <li class="list-group-item"><b>End date</b>: {{trip.getEndDate() | date: 'dd/MM/yyyy'}}</li>
+    <li class="list-group-item"><b>{{'trips.price' | translate}}</b>: {{trip.getPrice()}}</li>
+    <li class="list-group-item"><b>{{'trips.startDate' | translate}}</b>: {{trip.getStartDate() | date: 'dd/MM/yyyy'}}</li>
+    <li class="list-group-item"><b>{{'trips.endDate' | translate}}</b>: {{trip.getEndDate() | date: 'dd/MM/yyyy'}}</li>
   </ul>
   <div class="card-body">
     <button type="button" class="btn btn-primary" *ngIf="activeRole == 'EXPLORER' && trip.getStartDate().toString() > currentDateTime.toISOString() && !trip.isCanceled()"
@@ -66,11 +66,11 @@
 
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Stages</h5>
+        <h5 class="card-title">{{'trips.stages' | translate}}</h5>
 
         <ul>
           <li *ngFor="let stage of trip.getStages()">
-            <h6 class="card-subtitle mb-2 text-muted">{{stage.getTitle()}} - Price: {{stage.getPrice()}}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">{{stage.getTitle()}} - {{'trips.price' | translate}}: {{stage.getPrice()}}</h6>
             <p class="card-text">{{stage.getDescription()}}</p>
           </li>
         </ul>

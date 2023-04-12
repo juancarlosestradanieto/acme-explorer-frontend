@@ -33,11 +33,25 @@
   "home": "Inicio",
   "trips": {
     "title": "Viajes",
+    "price": "Precio",
+    "stages": "Etapas",
+    "startDate": "Fecha de inicio",
+    "endDate": "Fecha de fin",
     "favourites": "Viajes favoritos",
     "finder": "Descubridor de viajes",
     "buttons": {
       "add-favourite": "Añadir a favoritos",
-      "remove-favourite": "Eliminar de favoritos"
+      "remove-favourite": "Eliminar de favoritos",
+      "add": "Añadir viaje",
+      "more": "Detalles",
+      "edit": "Editar viaje",
+      "delete": "Borrar viaje"
+    },
+    "messages": {
+      "trips-available": "¡Viajes disponibles para ti!",
+      "favourite-trips-available": "¡Viajes favoritos disponibles para ti!",
+      "favourite-trips-not-found": "No se han encontrado viajes favoritos",
+      "disabled-trip": "El viaje ya ha comenzado o ha sido cancelado"
     }
   },
   "footer": {

@@ -33,11 +33,25 @@
   "home": "Home",
   "trips": {
     "title": "Trips",
+    "price": "Price",
+    "stages": "Stages",
+    "startDate": "Start date",
+    "endDate": "End date",
     "favourites": "Favourite trips",
     "finder": "Trip finder",
     "buttons": {
       "add-favourite": "Add to favourites",
-      "remove-favourite": "Remove from favourites"
+      "remove-favourite": "Remove from favourites",
+      "add": "Add trip",
+      "more": "More",
+      "edit": "Edit trip",
+      "delete": "Delete trip"
+    },
+    "messages": {
+      "trips-available": "Available trips just for you!",
+      "favourite-trips-available": "Available favourite trips just for you!",
+      "favourite-trips-not-found": "There are no favourite trips found",
+      "disabled-trip": "The trip has already started or  has been cancelled"
     }
   },
   "footer": {
