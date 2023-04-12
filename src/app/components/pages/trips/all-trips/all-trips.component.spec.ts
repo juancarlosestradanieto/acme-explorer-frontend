@@ -3,6 +3,14 @@ import { AllTripsComponent } from './all-trips.component';
 import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}
+
 
 describe('AllTripsComponent', () => {
   let component: AllTripsComponent;
@@ -11,7 +19,14 @@ describe('AllTripsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientModule,
-        AngularFireModule.initializeApp(environment.firebase)],
+        AngularFireModule.initializeApp(environment.firebase),
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient]
+          }
+        })],
       declarations: [ AllTripsComponent ],
       providers: [HttpClient, HttpHandler]
     })
