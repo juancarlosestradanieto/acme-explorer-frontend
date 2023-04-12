@@ -516,14 +516,12 @@
         Add
     </button>
 
-    <div class="alert alert-success" *ngIf="success_message">
-    {{success_message}}
+    <div class="alert alert-success" *ngIf="success_message && success_message != ''">
+        {{success_message}}
     </div>
 
-    <div class="alert alert-danger" *ngIf="error_message">
-    {{error_message}}
+    <div class="alert alert-danger" *ngIf="error_message && error_message != ''">
+        {{error_message}}
     </div>
 
 </form>
-
-<p>Form Status: {{ tripForm.status }}</p>

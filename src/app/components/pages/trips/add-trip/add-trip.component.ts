@@ -294,6 +294,9 @@ export class AddTripComponent implements OnInit {
 
   onSubmit()
   {
+    this.success_message = "";
+    this.error_message = "";
+
     let newFormData = this.formatFormData();
     let publicationDateBackup = newFormData["publicationDate"];
 
@@ -329,7 +332,11 @@ export class AddTripComponent implements OnInit {
 
       if(this.files.length == 0)
       {
-        this.router.navigate(['/trips/'+this.created_trip.id]);
+        if(this.edit_mode == false)
+        {
+          this.tripForm.reset();
+        }
+        this.success_message = "Trip successfully saved";
       }
       else
       {
@@ -360,13 +367,17 @@ export class AddTripComponent implements OnInit {
   
             console.log("AddTripComponent->onSubmit->uploadFiles->updateTrip then response3 ", response3);
             
-            //this.tripForm.reset();
-            this.router.navigate(['/trips/'+this.created_trip.id]);
+            if(this.edit_mode == false)
+            {
+              this.tripForm.reset();
+            }
+            this.success_message = "Trip successfully saved";
   
           })
           .catch((error3) => {
       
             console.error("AddTripComponent->onSubmit->uploadFiles->updateTrip error3 ", error3);
+            this.error_message = "Something went wrong";
       
           });
     
@@ -374,6 +385,7 @@ export class AddTripComponent implements OnInit {
         .catch((error2) => {
     
           console.error("AddTripComponent->onSubmit->uploadFiles error2 ", error2);
+          this.error_message = "Something went wrong";
     
         });
       }
@@ -382,10 +394,10 @@ export class AddTripComponent implements OnInit {
     .catch((error1) => {
 
       console.error("AddTripComponent->onSubmit error1 ", error1);
+      this.error_message = "Something went wrong";
 
     });
 
-    
   }
 
   uploadFiles()
@@ -415,10 +427,6 @@ export class AddTripComponent implements OnInit {
     });
 
     return this.s3UploadService.uploadMultipleFiles(this.filesToUpload);
-  }
-
-  goToTripList() {
-    this.router.navigate(['/trips/list']);
   }
 
   onRemovePreviouslySelectedPicture(picture: TripPicture)
