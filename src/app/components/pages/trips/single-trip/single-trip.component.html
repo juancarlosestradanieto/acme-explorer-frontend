@@ -52,6 +52,15 @@
       {{'applications.title-plural' | translate}}
     </button>
 
+    <button type="button" class="btn btn-success" *ngIf="activeRole == 'EXPLORER' && !checkTripInFavourites(trip)" (click)="favouriteTrip(trip)">
+      <i class="fa-solid fa-heart-circle-plus"></i>
+      {{'trips.buttons.add-favourite' | translate}}
+    </button>
+    <button type="button" class="btn btn-danger" *ngIf="activeRole == 'EXPLORER' && checkTripInFavourites(trip)" (click)="favouriteTrip(trip)">
+      <i class="fa-solid fa-heart-circle-xmark"></i>
+      {{'trips.buttons.remove-favourite' | translate}}
+     </button>
+
   </div>
   <div class="card-body">
 
