@@ -9,6 +9,65 @@ import { environment } from 'src/environments/environment';
 import { ActivatedRoute } from '@angular/router';
 import { TripsService } from 'src/app/services/trips/trips.service';
 
+let mockJungleTripTripFormData = {
+  managerId: "6435a0d99e47fd1155253783",
+  title: "Jungle party",
+  description: "Jungle party",
+  price: 1000,
+  requirements: [
+    "Requirement 1",
+    "Requirement 2"
+  ],
+  publicationDate: "2021-06-23",
+  startDate: "2021-07-01",
+  endDate: "2021-07-06",
+  pictures: [],
+  stages: [
+    {
+      title: "Title stage 1",
+      description: "Description stage 1",
+      price: 500
+    },
+    {
+      title: "Title stage 2",
+      description: "Description stage 2",
+      price: 500
+    }
+  ],
+};
+
+let mockJungleTripServiceResponse = {
+  _id: "6435e5969e47fd11552537ae",
+  managerId: "6435a0d99e47fd1155253783",
+  title: "Jungle party",
+  description: "Jungle party",
+  price: 1000,
+  requirements: [
+    "Requirement 1",
+    "Requirement 2"
+  ],
+  publicationDate: new Date("2021-06-23"),
+  startDate: new Date("2021-07-01"),
+  endDate: new Date("2021-07-06"),
+  pictures: [],
+  stages: [
+    {
+      title: "Title stage 1",
+      description: "Description stage 1",
+      price: 500
+    },
+    {
+      title: "Title stage 2",
+      description: "Description stage 2",
+      price: 500
+    }
+  ],
+  canceled: false,
+  ticker: "235611-NDXF",
+  __v: 0,
+  _version: 0
+};
+
 describe('AddTripComponent', () => {
   let component: AddTripComponent;
   let fixture: ComponentFixture<AddTripComponent>;
@@ -43,41 +102,10 @@ describe('AddTripComponent', () => {
 
   it('Should create a trip with description "Jungle Party"', fakeAsync(() => {
 
+    let formatFormDataSpy = spyOn(component, 'formatFormData').and.returnValue(mockJungleTripTripFormData);
+
     let tripService = TestBed.inject(TripsService);
-
-    let mockResponse = {
-      _id: "6435e5969e47fd11552537ae",
-      managerId: "6435a0d99e47fd1155253783",
-      title: "Jungle party",
-      description: "Jungle party",
-      price: 1000,
-      requirements: [
-        "Requirement 1",
-        "Requirement 2"
-      ],
-      publicationDate: new Date("2021-06-23"),
-      startDate: new Date("2021-07-01"),
-      endDate: new Date("2021-07-06"),
-      pictures: [],
-      stages: [
-        {
-          title: "Title stage 1",
-          description: "Description stage 1",
-          price: 500
-        },
-        {
-          title: "Title stage 2",
-          description: "Description stage 2",
-          price: 500
-        }
-      ],
-      canceled: false,
-      ticker: "235611-NDXF",
-      __v: 0,
-      _version: 0
-    };
-
-    let serviceSpy = spyOn(tripService, 'createTrip').and.returnValue(Promise.resolve(mockResponse));
+    let serviceSpy = spyOn(tripService, 'createTrip').and.returnValue(Promise.resolve(mockJungleTripServiceResponse));
 
     component.edit_mode = false;
     component.onSubmit();
@@ -85,6 +113,7 @@ describe('AddTripComponent', () => {
     tick();
 
     expect(serviceSpy).toHaveBeenCalled();
+    expect(formatFormDataSpy).toHaveBeenCalled();
     expect(component).toBeTruthy();
     expect(component.created_trip.getTitle()).toEqual("Jungle party");
     expect(component.created_trip.getPrice()).toEqual(1000);
@@ -95,34 +124,7 @@ describe('AddTripComponent', () => {
 
   it('Should fail to create a trip with description "Jungle Party"', fakeAsync(() => {
     
-    let mockFormData = {
-      managerId: "6435a0d99e47fd1155253783",
-      title: "Jungle party",
-      description: "Jungle party",
-      price: 1000,
-      requirements: [
-        "Requirement 1",
-        "Requirement 2"
-      ],
-      publicationDate: "2021-06-23",
-      startDate: "2021-07-01",
-      endDate: "2021-07-06",
-      pictures: [],
-      stages: [
-        {
-          title: "Title stage 1",
-          description: "Description stage 1",
-          price: 500
-        },
-        {
-          title: "Title stage 2",
-          description: "Description stage 2",
-          price: 500
-        }
-      ],
-      canceled: false,
-    };
-    let formatFormDataSpy = spyOn(component, 'formatFormData').and.returnValue(mockFormData);
+    let formatFormDataSpy = spyOn(component, 'formatFormData').and.returnValue(mockJungleTripTripFormData);
 
     let mockResponse = 'The actor has not the required roles.';
     let tripService = TestBed.inject(TripsService);
