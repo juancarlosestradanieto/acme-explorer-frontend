@@ -1,27 +1,27 @@
 {
-  "REGISTER":{
-    "REGISTER":"Registrarse",
-    "NEW_ACTOR":"Registro de nuevo actor",
-    "ROLE":"Rol",
-    "NAME":"Nombre",
-    "SURNAME":"Apellido/s",
-    "PHONE":"Número de teléfono",
-    "ADDRESS":"Dirección",
-    "EMAIL":"Correo electrónico/email",
-    "PASSWORD":"Contraseña",
-    "ALREADY_REGISTER":"¿Estás ya registrado/a",
-    "LOGIN":"¡Inicia sesión ya!"
+  "REGISTER": {
+    "REGISTER": "Registrarse",
+    "NEW_ACTOR": "Registro de nuevo actor",
+    "ROLE": "Rol",
+    "NAME": "Nombre",
+    "SURNAME": "Apellido/s",
+    "PHONE": "Número de teléfono",
+    "ADDRESS": "Dirección",
+    "EMAIL": "Correo electrónico/email",
+    "PASSWORD": "Contraseña",
+    "ALREADY_REGISTER": "¿Estás ya registrado/a",
+    "LOGIN": "¡Inicia sesión ya!"
   },
-  "LOGIN":{
-    "LOGIN_ACTION":"Inicio de sesión",
-    "LOGIN":"Iniciar sesión",
-    "EMAIL":"Introduce tu correo electrónico/email",
-    "PASSWORD":"Introduce tu contraseña",
-    "NOT_ALREADY_REGISTER":"¿No te has registrado todavía?",
-    "REGISTER_NOW":"¡Regístrate ya!"
+  "LOGIN": {
+    "LOGIN_ACTION": "Inicio de sesión",
+    "LOGIN": "Iniciar sesión",
+    "EMAIL": "Introduce tu correo electrónico/email",
+    "PASSWORD": "Introduce tu contraseña",
+    "NOT_ALREADY_REGISTER": "¿No te has registrado todavía?",
+    "REGISTER_NOW": "¡Regístrate ya!"
   },
-    "Home":"Inicio",
-    "Trips":"Viajes",
+  "Home": "Inicio",
+  "Trips": "Viajes",
   "auth": {
     "register": "Registrar",
     "login": "Ingresar",
@@ -33,8 +33,26 @@
   "home": "Inicio",
   "trips": {
     "title": "Viajes",
+    "price": "Precio",
+    "stages": "Etapas",
+    "startDate": "Fecha de inicio",
+    "endDate": "Fecha de fin",
     "favourites": "Viajes favoritos",
-    "finder": "Descubridor de viajes"
+    "finder": "Descubridor de viajes",
+    "buttons": {
+      "add-favourite": "Añadir a favoritos",
+      "remove-favourite": "Eliminar de favoritos",
+      "add": "Añadir viaje",
+      "more": "Detalles",
+      "edit": "Editar viaje",
+      "delete": "Borrar viaje"
+    },
+    "messages": {
+      "trips-available": "¡Viajes disponibles para ti!",
+      "favourite-trips-available": "¡Viajes favoritos disponibles para ti!",
+      "favourite-trips-not-found": "No se han encontrado viajes favoritos",
+      "disabled-trip": "El viaje ya ha comenzado o ha sido cancelado"
+    }
   },
   "footer": {
     "terms": "Términos y condiciones"
@@ -58,7 +76,6 @@
       "title": "IV. POLÍTICA DE PRIVACIDAD Y PROTECCIÓN DE DATOS",
       "description": "Conforme a lo establecido en la Ley General de Protección de Datos Personales en Posesión de Particulares, el titular de compromete a tomar las medidas necesarias que garanticen la seguridad del usuario, evitando que se haga uso indebido de los datos personales que el usuario proporcione en el sitio web. El titular corroborará que los datos personales contenidos en las bases de datos sean correctos, verídicos y actuales, así como que se utilicen únicamente con el fin con el que fueron recabados. Acme Explorer se reserva el derecho de realizar cualquier tipo de modificación en el Aviso de Privacidad en cualquier momento y sin previo aviso, de acuerdo con sus necesidades o cambios en la legislación aplicable, el usuario acepta dichas modificaciones. El sitio web implica la utilización de cookies que son pequeñas cantidades de información que se almacenan en el navegador utilizado por el usuario como datos de ingreso, preferencias del usuario, fecha y hora en que se accede al sitio web, sitios visitados y dirección IP, esta información es anónima y solo se utilizará para mejorar el sitio web. Los cookies facilitan la navegación y la hacen más amigable, sin embargo, el usuario puede desactivarlos en cualquier momento desde su navegador en el entendido de que esto puede afectar algunas funciones del sitio web."
     },
-
     "fifth": {
       "title": "V. POLÍTICA DE ENLACES",
       "description": "En el sitio web puede contener enlaces a otros sitios de internet pertenecientes a terceros de los cuales no se hace responsable."
@@ -125,7 +142,7 @@
     "title": "Patrocinios"
   },
   "dashboard": {
-        "title": "Panel de control",
+    "title": "Panel de control",
     "trip_by_manager": "Número de viajes gestinados por gerente",
     "applications_by_trip": "Número de solicitudes por viaje",
     "price_of_trips": "Precio de los viajes",
@@ -137,17 +154,17 @@
     "max": "Máximo",
     "desv": "Desviación estándar"
   },
-  "dark":"Modo Oscuro activado",
-  "light":"Modo Claro activado",
+  "dark": "Modo Oscuro activado",
+  "light": "Modo Claro activado",
   "buttons": {
     "create": "Crear",
     "more": "Ver más",
     "go_to_trip": "Ir al viaje"
   },
-  "Messages":{
-    "field_required":"Este campo es obligatorio.",
-    "9_digits_required":"Este campo require de 9 dígitos.",
-    "email_required":"Este campo require una sintaxis de email.",
-    "10_digits_alphanumeric":"Este campo require un mínimo de 10 caracteres alfanuméricos."
+  "Messages": {
+    "field_required": "Este campo es obligatorio.",
+    "9_digits_required": "Este campo require de 9 dígitos.",
+    "email_required": "Este campo require una sintaxis de email.",
+    "10_digits_alphanumeric": "Este campo require un mínimo de 10 caracteres alfanuméricos."
   }
 }
