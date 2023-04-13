@@ -7,11 +7,11 @@ export class Sponsorship extends Entity {
         obj && Object.assign(this, obj);
     }
 
-    private banner!: string[];
-    private page!: string;
-    private tripTicker!: string;
-    private isPayed!: boolean;
-    private sponsor_Id!: string;
+    public banner!: string[];
+    public page!: string;
+    public tripTicker!: string;
+    public isPayed!: boolean;
+    public sponsor_Id!: string;
 
     public getBanner(): string[] {
         return this.banner;
@@ -47,5 +47,22 @@ export class Sponsorship extends Entity {
 
     public setSponsor_Id(issponsor_Id: string): void {
         this.sponsor_Id = issponsor_Id;
+    }
+
+    public static castJsonSponsorship(json_sponsorship: any): Sponsorship
+    {
+        let casted_sponsorship = new Sponsorship(json_sponsorship);
+        return casted_sponsorship;
+    }
+
+
+
+
+    public static castJsonSponsorships(json_sponsorships: any): Array<Sponsorship>
+    {
+        let casted_sponsorships: Array<Sponsorship> = json_sponsorships.map((json_sponsorships: any) => {
+            return Sponsorship.castJsonSponsorship(json_sponsorships);
+        });
+        return casted_sponsorships;
     }
 }

@@ -121,7 +121,8 @@
     }
   },
   "sponsorships": {
-    "title": "Sponsorships"
+    "title": "Sponsorships",
+    "sponsorship":"Sponsorship"
   },
   "dashboard": {
         "title": "Dashboard",
@@ -149,4 +150,5 @@
     "email_required":"This field requires an email syntax.",
     "10_digits_alphanumeric":"This field requires a minimum of ten alphanumeric characters."
   }
+
 }

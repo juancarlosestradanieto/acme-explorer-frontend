@@ -1,0 +1,27 @@
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
+button
+{
+    margin: 4px;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+   
+    
+}
+
+.card:hover{
+ transition: all 300ms;
+ transform: scale(1.1);
+ z-index: 1;
+}
+
+.card{
+    margin-top: 25px;
+}

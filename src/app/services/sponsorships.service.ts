@@ -27,4 +27,14 @@ export class SponsorshipsService {
     return this.http.get<JSON>(url, httpOptions);
 
   }
+
+  getSponsorshipsBySponsor(sponsorId: string) {
+    console.log("SponsorshipsService.getSponsorshipsBySponsor sponsorId ", sponsorId);
+    const url = `${environment.backendApiBaseURL + '/sponsorships/sponsors/' + sponsorId}`;
+
+    console.log("SponsorshipsService.getSponsorshipsByTrip url ", url);
+
+    return this.http.get<JSON>(url, httpOptions);
+
+  }
 }

@@ -13,8 +13,8 @@
 
 <div *ngIf="(sponsorships_loaded | async)" class="card">
     <div class="container">
-  
-      <ngb-carousel *ngIf="sponsorship.getBanner().length > 0" class="card-img-top">
+<!--   
+      <ngb-carousel *ngIf="sponsorship.banner.length > 0" class="card-img-top">
         <ng-template ngbSlide *ngFor="let banner of sponsorship.getBanner(); let i = index">
           <div class="wrapper">
             <img [src]="banner[i]" alt="Random first slide">
@@ -24,11 +24,11 @@
             <p>Consectetur tortor volutpat pretium.</p>
           </div>
         </ng-template>
-      </ngb-carousel>
+      </ngb-carousel> -->
       
-      <img *ngIf="sponsorship.getBanner().length == 0" src="assets/images/trips/default-trip.jpg" class="card-img-top default-trip-image" alt="...">
+      <!-- <img *ngIf="sponsorship.banner.length == 0" src="assets/images/trips/default-trip.jpg" class="card-img-top default-trip-image" alt="..."> -->
 
-      <p>{{sponsorship.getPage()}}</p>
+      <a href="{{sponsorship.getPage()}}">{{sponsorship.getPage()}}</a>
   
     </div>
   </div>

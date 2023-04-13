@@ -1,1 +1,32 @@
-<p>sponsorship works!</p>
+<div class="row">
+  <div
+    class="col-md-4 col-xs-12"
+    *ngFor="let sponsorship of sponsorships; let i = index"
+  >
+    <div class="card" *ngIf="(sponsorships_loaded) |async ">
+      <img src="{{ sponsorship.page }}" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title">
+          {{ "sponsorships.sponsorship" | translate }} {{ i + 1 }}
+        </h5>
+        <p class="card-text">TripTicker: {{ sponsorship.tripTicker}}</p>
+      </div>
+      <div class="card-body">
+        <div class="buttons">
+          <button type="button" class="btn btn-success">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            More
+          </button>
+          <button type="button" class="btn btn-warning">
+            <i class="fas fa-edit"></i>
+            Edit
+          </button>
+          <button type="button" class="btn btn-danger">
+            <i class="fa-solid fa-trash"></i>
+            Delete
+          </button>
+        </div>
+        </div>
+      </div>
+  </div>
+</div>
