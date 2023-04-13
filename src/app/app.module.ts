@@ -72,7 +72,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ThemeToggleComponent,
     ApplicationcreationComponent,
     AddTripComponent,
-    EditTripComponent
+    EditTripComponent,
   ],
   imports: [
     BrowserModule,

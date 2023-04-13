@@ -39,6 +39,8 @@
     "endDate": "Fecha de fin",
     "favourites": "Viajes favoritos",
     "finder": "Descubridor de viajes",
+    "starting":"Tiempo Restante de Inicio",
+    "out_time":"Fuera de Tiempo",
     "buttons": {
       "add-favourite": "Añadir a favoritos",
       "remove-favourite": "Eliminar de favoritos",

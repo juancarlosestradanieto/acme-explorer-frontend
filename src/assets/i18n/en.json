@@ -39,6 +39,8 @@
     "endDate": "End date",
     "favourites": "Favourite trips",
     "finder": "Trip finder",
+    "starting":"Starting Time Left",
+    "out_time":"Out of Time",
     "buttons": {
       "add-favourite": "Add to favourites",
       "remove-favourite": "Remove from favourites",
