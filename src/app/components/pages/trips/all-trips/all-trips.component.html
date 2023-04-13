@@ -1,11 +1,26 @@
 
 <div class="row">
     <div class="col-md-6"><p>{{'trips.messages.trips-available' | translate}}</p></div>
-    <div class="col-md-3 offset-md-3">
+    <div class="col-md-3 offset-md-3" *ngIf="showAddTripButton">
         <button type="button" class="btn btn-success" routerLink="/trips/add">
             <i class="fa-solid fa-plus"></i>
             {{'trips.buttons.add' | translate}}
         </button>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-3">
+    
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search" [(ngModel)]="keyword" >
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="search()">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                Search
+            </button>
+        </div>
+    
     </div>
 </div>
 
@@ -36,8 +51,7 @@
                 <li class="list-group-item"
                     [ngStyle]="getCurrentStyles(trip.getStartDate().toString(), currentDateTime.toISOString())">
                     <b>{{'trips.startDate' | translate}}</b>: {{trip.getStartDate() | date: 'dd/MM/yyyy'}}
-                    <p *ngIf="getDiffDays(trip.getStartDate().toString(), currentDateTime.toISOString()) > 0
-                        && getDiffDays(trip.getStartDate().toString(), currentDateTime.toISOString()) <= 7"><b>Soon!</b></p>
+                    <p *ngIf="getNowAndStartDateDiffInDays(trip) > 0 && getNowAndStartDateDiffInDays(trip) <= 7"><b>Soon!</b></p>
                 </li>
                 <li class="list-group-item"><b>{{'trips.endDate' | translate}}</b>: {{trip.getEndDate() | date: 'dd/MM/yyyy'}}</li>
             </ul>
@@ -50,7 +64,7 @@
                     <i class="fas fa-edit"></i>
                     {{'trips.buttons.edit' | translate}}
                 </button>
-                <button type="button" class="btn btn-danger" *ngIf="activeRole == 'MANAGER'" (click)="deleteTrip(trip)">
+                <button type="button" class="btn btn-danger" *ngIf="activeRole == 'MANAGER' && getNowAndStartDateDiffInDays(trip) >= 10" (click)="deleteTrip(trip)">
                     <i class="fa-solid fa-trash"></i>
                     {{'trips.buttons.delete' | translate}}
                 </button>

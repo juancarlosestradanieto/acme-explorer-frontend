@@ -22,13 +22,81 @@ export class AllTripsComponent implements OnInit {
   currentDateTime: Date;
   total_pages: number = 0;
   pages: Array<number> = [];
+  aditional_search_parameters: any = {};
+  showAddTripButton: boolean = false;
+  keyword: string = "";
 
-  constructor(private tripsService: TripsService, private authService: AuthService) {
+  constructor(private tripsService: TripsService, private authService: AuthService) 
+  {
     this.currentDateTime = new Date;
   }
 
-  getTrips(page: number) {
-    this.tripsService.getAllTrips(page)
+  ngOnInit(): void 
+  {
+
+    this.user = this.authService.getCurrentActor();
+    if (this.user) {
+      this.activeRole = this.user.getRole().toString();
+    }
+    else {
+      this.activeRole = 'anonymous';
+    }
+
+    let local_stored_actor = localStorage.getItem("currentActor");
+    if(local_stored_actor != null)
+    {
+      let actor = JSON.parse(local_stored_actor);
+      if(actor != null)
+      {
+        if(actor.hasOwnProperty('role'))
+        {
+          let roles = actor["role"];
+          //console.log("actor roles ", roles);
+          if(roles.includes("MANAGER"))
+          {
+            //aditional_search_parameters.push({key: 'managerId', value: actor._id});
+            this.aditional_search_parameters['managerId'] = actor._id;
+            this.showAddTripButton = true;
+          }
+        }
+      }
+    }
+    //console.log("aditional_search_parameters", this.aditional_search_parameters);
+
+    this.search();
+  }
+
+  search()
+  {
+    this.getTrips(1);
+  }
+
+  getTrips(page: number) 
+  {
+
+    let search_parameters = {"page": page as unknown as string};
+
+    if(this.aditional_search_parameters != null)
+    {
+      search_parameters = {
+        ...search_parameters,
+        ...this.aditional_search_parameters
+      };
+    }
+
+    if(this.keyword != "")
+    {
+      let keyword_parameter = {"keyword": this.keyword};
+      search_parameters = {
+        ...search_parameters,
+        ...keyword_parameter
+      };
+    }
+
+    console.log("search_parameters ", search_parameters);
+    
+
+    this.tripsService.getAllTrips(search_parameters)
       .then((response: any) => {
 
         console.log("AllTripsComponent->constructor tripsService.getAllTrips then response ", response);
@@ -56,20 +124,6 @@ export class AllTripsComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void {
-
-    this.getTrips(1);
-
-    this.user = this.authService.getCurrentActor();
-    if (this.user) {
-      this.activeRole = this.user.getRole().toString();
-    }
-    else {
-      this.activeRole = 'anonymous';
-    }
-
-  }
-
   getDiffDays(start: string, now: string) {
     var startDate = new Date(start);
     var endDate = new Date(now);
@@ -92,9 +146,33 @@ export class AllTripsComponent implements OnInit {
     return currenStyles;
   }
 
+  getNowAndStartDateDiffInDays(trip: Trip)
+  {
+    return this.getDiffDays(trip.getStartDate().toString(), this.currentDateTime.toISOString());
+  }
+
   deleteTrip(trip: Trip) {
     console.log("deleteTrip", trip.id);
 
+    if(confirm("Are you sure to delete?, this action can't be undone.")) 
+    {
+
+      this.tripsService.deleteTrip(trip.id)
+      .then((response) => {
+
+        console.log("AllTripsComponent->deleteTrip tripsService.deleteTrip then response ", response);
+        alert(response.message);
+        this.search();
+        
+      })
+      .catch((error) => {
+
+        console.error("AllTripsComponent->deleteTrip tripsService.deleteTrip catch ", error);
+        alert("Something went wrong");
+
+      });
+
+    }
   }
 
   favouriteTrip(trip: Trip) {
