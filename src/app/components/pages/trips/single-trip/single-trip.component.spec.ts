@@ -6,6 +6,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { of } from 'rxjs';
 import { TripsService } from 'src/app/services/trips/trips.service';
+import { Trip } from 'src/app/models/trip.model';
 
 
 
@@ -15,38 +16,23 @@ describe('SingleTripComponent', () => {
 
   let trip_id = '6434467d297d879c26d2336d';
 
-  let fake_trip =     {
-    "requirements": [],
-    "_id": "6434467d297d879c26d2336d",
-    "ticker": "7O{Q@v6)1)*",
-    "title": "A trip to Jaredborough",
-    "description": "Sed sequi accusantium sed consequuntur voluptas accusantium eaque expedita. Enim laboriosam voluptatum. Dolores veniam quia dolorum quaerat assumenda. Autem eius repellat consectetur perferendis vitae veniam.",
-    "price": 105,
-    "publicationDate": "2020-08-20T07:54:29.407Z",
-    "startDate": "2020-10-31T05:57:14.713Z",
-    "endDate": "2022-02-21T01:59:37.858Z",
-    "managerId": "6434467d297d879c26d23348",
-    "stages": [
-      {
-        "title": "Zone 1 of city Jaredborough",
-        "description": "Delectus nihil eligendi et quas consequuntur. Quia aut sunt. Culpa voluptatum quas magni veniam adipisci perspiciatis qui minima.",
-        "price": 47
-      },
-      {
-        "title": "Zone 2 of city Jaredborough",
-        "description": "In praesentium veniam. Odio facilis nesciunt veniam quaerat non tempora delectus ducimus. Sequi officiis et quia eligendi enim non illo qui et. Commodi magni unde exercitationem dolores a non commodi adipisci et.",
-        "price": 27
-      },
-      {
-        "title": "Zone 3 of city Jaredborough",
-        "description": "Rerum aut et excepturi sit temporibus est. Unde et minima. Eos libero similique fugit quia. Et ullam vero commodi eos vero ut sed minus.",
-        "price": 31
-      }
-    ],
+  let fake_trip = Trip.castJsonTrip({
     "canceled": false,
-    "cancelReason": "",
-    "pictures": []
-  };
+    "cancelReason":"",
+    "description": "Sed sequi accusantium sed consequuntur voluptas accusantium eaque expedita. Enim laboriosam voluptatum. Dolores veniam quia dolorum quaerat assumenda. Autem eius repellat consectetur perferendis vitae veniam.",
+    "endDate": "2022-02-21",
+    "id": "6434467d297d879c26d2336d",
+    "managerId": "6434467d297d879c26d23348",
+    "pictures": [],
+    "price": 105,
+    "publicationDate": "2020-08-20",
+    "requirements": [],
+    "stages": [],
+    "startDate": "2020-10-31",
+    "ticker": "7O{Q@v6)1)*",
+    "title": "A trip to CHIPIONA",
+    "_id": "6434467d297d879c26d2336d",
+  })      
 
   let tripSpy: any;
   let getSingleTripSpy: any;
@@ -56,6 +42,8 @@ describe('SingleTripComponent', () => {
     tripSpy = jasmine.createSpyObj("TripsService", ["getSingleTrip"]);
     //getSingleTripSpy = tripSpy.getSingleTrip.and.returnValue(of (fake_trip));
     getSingleTripSpy = tripSpy.getSingleTrip.and.returnValue(Promise.resolve([fake_trip]));
+
+
 
     await TestBed.configureTestingModule({
       imports: [
@@ -84,6 +72,7 @@ describe('SingleTripComponent', () => {
     fixture.detectChanges();
   });
 
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
@@ -111,4 +100,29 @@ describe('SingleTripComponent', () => {
     });
   });
   */
+
+  
+ it('should be displayed', () => {
+    component.trip = fake_trip;
+    expect(component).toBeDefined();
+    expect(component).toBeInstanceOf(SingleTripComponent);
+    expect(getSingleTripSpy).toHaveBeenCalled();
+    expect(component).toBeTruthy();
+    expect(fake_trip.getTitle()).toEqual("A trip to CHIPIONA");
+    expect(fake_trip.getPrice()).toEqual(105);
+    expect(fake_trip.getManagerId()).toEqual("6434467d297d879c26d23348");
+  });
+
+  it('should set the trip property when getSingleTrip resolves successfully', async () => {
+    const response = fake_trip;
+    tripSpy.getSingleTrip.and.resolveTo(response);
+
+    await component.getTrip();
+
+    expect(component.trip).toEqual(response);
+  });
+
+
+
 });
+
