@@ -33,12 +33,22 @@
   "home": "Inicio",
   "trips": {
     "title": "Viajes",
+    "title-control": "Título",
+    "description": "Descripción",
     "price": "Precio",
+    "stage": "Etapa",
     "stages": "Etapas",
     "startDate": "Fecha de inicio",
     "endDate": "Fecha de fin",
+    "requirement": "Requisito",
+    "requirements": "Requisitos",
     "favourites": "Viajes favoritos",
     "finder": "Descubridor de viajes",
+    "add": "Agregar",
+    "delete": "Borrar",
+    "pictures": "Imágenes",
+    "picture": "Imagen",
+    "previous-pictures": "Imágenes cargadas previamente.",
     "buttons": {
       "add-favourite": "Añadir a favoritos",
       "remove-favourite": "Eliminar de favoritos",
@@ -52,6 +62,11 @@
       "favourite-trips-available": "¡Viajes favoritos disponibles para ti!",
       "favourite-trips-not-found": "No se han encontrado viajes favoritos",
       "disabled-trip": "El viaje ya ha comenzado o ha sido cancelado"
+    },
+    "validations": {
+      "required": "Este campo es obligatorio.",
+      "minimum": "El menor valor aceptado es",
+      "maximum": "El mayor valor aceptado es"
     }
   },
   "footer": {

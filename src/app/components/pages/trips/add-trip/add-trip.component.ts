@@ -89,11 +89,11 @@ export class AddTripComponent implements OnInit {
       price: [ this.default_number_value , [Validators.required, Validators.min(1), Validators.max(999999)]],
       requirements: this.fb.array([
         //uncomment next line to initialize with one element
-        //this.getRequirement()
+        this.getRequirement()
       ]),
       startDate: [ this.default_date_value , Validators.required],
       endDate: [ this.default_date_value , Validators.required],
-      publicationDate: [''],
+      //publicationDate: [''],
       pictures: this.fb.array([
         //uncomment next line to initialize with one element
         //this.getPicture()
@@ -125,7 +125,7 @@ export class AddTripComponent implements OnInit {
       let endDate: string = (new Date(casted_trip.getEndDate())).toLocaleDateString('en-CA');
       //console.log("endDate ", endDate);
       //publicationDate
-      let publicationDate: string = casted_trip.getPublicationDate() != null ? (new Date(casted_trip.getPublicationDate())).toLocaleDateString('en-CA') : '';
+      //let publicationDate: string = casted_trip.getPublicationDate() != null ? (new Date(casted_trip.getPublicationDate())).toLocaleDateString('en-CA') : '';
       //console.log("publicationDate ", publicationDate);
 
       //requirements
@@ -166,6 +166,24 @@ export class AddTripComponent implements OnInit {
         }
       });
 
+
+      this.tripForm.controls.title.setValue(casted_trip.getTitle());
+      this.tripForm.controls.description.setValue(casted_trip.getDescription());
+      this.tripForm.controls.price.setValue(casted_trip.getPrice());
+
+      if(formatted_requirements.length > 0)
+      {
+        this.tripForm.controls.requirements.setValue(formatted_requirements);
+      }
+
+      this.tripForm.controls.startDate.setValue(startDate);
+      this.tripForm.controls.endDate.setValue(endDate);
+
+      this.tripForm.controls.pictures.setValue(formatted_pictures);
+      this.tripForm.controls.stages.setValue(formated_stages);
+      this.tripForm.controls.managerId.setValue(casted_trip.getManagerId());
+
+      /*
       this.tripForm.setValue({
         title: casted_trip.getTitle(),
         description: casted_trip.getDescription(),
@@ -173,11 +191,12 @@ export class AddTripComponent implements OnInit {
         requirements: formatted_requirements,
         startDate: startDate,
         endDate: endDate,
-        publicationDate: publicationDate,
+        //publicationDate: publicationDate,
         pictures: formatted_pictures,
         stages: formated_stages,
         managerId: casted_trip.getManagerId()
       });
+      */
 
     })
     .catch((error) => {
@@ -307,7 +326,7 @@ export class AddTripComponent implements OnInit {
     this.error_message = "";
 
     let newFormData = this.formatFormData();
-    let publicationDateBackup = newFormData["publicationDate"];
+    //let publicationDateBackup = newFormData["publicationDate"];
 
     let previously_uploaded_pictures_backup: Array<any> = []; 
     
@@ -315,7 +334,7 @@ export class AddTripComponent implements OnInit {
     if(this.edit_mode == false)
     {
       //set publicationDate so taht the trip can be edited to add pictures information
-      newFormData["publicationDate"] = null;
+      //newFormData["publicationDate"] = null;
       newFormData["pictures"] = [];
       console.log("newFormData ", newFormData);
       promise = this.tripService.createTrip(newFormData);
@@ -368,7 +387,7 @@ export class AddTripComponent implements OnInit {
   
           console.log("pictures ", pictures);
           this.created_trip.setPictures(pictures);
-          this.created_trip.setPublicationDate(new Date(publicationDateBackup!));
+          //this.created_trip.setPublicationDate(new Date(publicationDateBackup!));
           console.log("this.created_trip ", this.created_trip);
   
           this.tripService.updateTrip(this.created_trip)
