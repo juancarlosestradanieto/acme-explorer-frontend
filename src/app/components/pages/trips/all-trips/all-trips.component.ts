@@ -22,7 +22,7 @@ export class AllTripsComponent implements OnInit {
   currentDateTime: Date;
   total_pages: number = 0;
   pages: Array<number> = [];
-  aditional_search_parameters: any = {};
+  aditional_search_parameters: any = {"published": true, "canceled": false};
   showAddTripButton: boolean = false;
   keyword: string = "";
 
@@ -55,6 +55,8 @@ export class AllTripsComponent implements OnInit {
           if(roles.includes("MANAGER"))
           {
             //aditional_search_parameters.push({key: 'managerId', value: actor._id});
+            delete this.aditional_search_parameters['published'];
+            delete this.aditional_search_parameters['canceled'];
             this.aditional_search_parameters['managerId'] = actor._id;
             this.showAddTripButton = true;
           }

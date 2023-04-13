@@ -44,7 +44,7 @@
             <img *ngIf="trip.getPictures().length == 0" src="assets/images/trips/default-trip.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">{{trip.getTitle()}}</h5>
-                <p class="card-text">{{trip.getDescription() | slice:0:50}} ...</p>
+                <p class="card-text">{{trip.getDescription() | slice:0:20}} ...</p>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><b>{{'trips.price' | translate}}</b>: {{trip.getPrice()}}</li>
