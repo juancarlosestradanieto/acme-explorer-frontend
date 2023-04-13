@@ -94,7 +94,6 @@ export class AllTripsComponent implements OnInit {
     }
 
     console.log("search_parameters ", search_parameters);
-    
 
     this.tripsService.getAllTrips(search_parameters)
       .then((response: any) => {

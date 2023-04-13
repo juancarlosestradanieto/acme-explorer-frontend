@@ -89,7 +89,7 @@ export class AddTripComponent implements OnInit {
       price: [ this.default_number_value , [Validators.required, Validators.min(1), Validators.max(999999)]],
       requirements: this.fb.array([
         //uncomment next line to initialize with one element
-        this.getRequirement()
+        //this.getRequirement()
       ]),
       startDate: [ this.default_date_value , Validators.required],
       endDate: [ this.default_date_value , Validators.required],
@@ -130,17 +130,21 @@ export class AddTripComponent implements OnInit {
 
       //requirements
       let original_requirements = casted_trip.getRequirements();
-
-      for(let i = 0; i < (original_requirements.length - 1); i++)
+      var formatted_requirements:any[] = [];
+      if(original_requirements.length > 0)
       {
-        this.onAddRequirement();
+        for(let i = 0; i < (original_requirements.length - 1); i++)
+        {
+          this.onAddRequirement();
+        }
+  
+        formatted_requirements = Object.keys(original_requirements!)
+        .map((key: any) => { 
+          return {'requirement': original_requirements[key]};
+        });
+        console.log("formatted_requirements ", formatted_requirements);
       }
 
-      var formatted_requirements = Object.keys(original_requirements!)
-      .map((key: any) => { 
-        return {'requirement': original_requirements[key]};
-      });
-      //console.log("formatted_requirements ", formatted_requirements);
 
       //pictures
       //var formatted_pictures = [{'picture': ''}];
@@ -270,12 +274,17 @@ export class AddTripComponent implements OnInit {
     let formData = this.tripForm.value;
 
     //console.log("formData", formData);
-    let original_requirements = formData.requirements;
+    let original_requirements: any[] | undefined = formData.requirements;
     //console.log(original_requirements);
-    var formatted_requirements = Object.keys(original_requirements!)
-    .map(function (key: any) { 
-      return original_requirements![key]["requirement"];
-    });
+    var formatted_requirements: any[] = [];
+    if(typeof original_requirements !== 'undefined' && original_requirements.length > 0)
+    {
+      formatted_requirements = Object.keys(original_requirements!)
+      .map(function (key: any) { 
+        return original_requirements![key]["requirement"];
+      });
+    }
+
     //console.log(formatted_requirements);
     let newFormData = JSON.parse(JSON.stringify(formData));
     newFormData["requirements"] = formatted_requirements;
