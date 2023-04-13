@@ -65,15 +65,37 @@
   <div class="card-body">
 
     <div class="card">
+
       <div class="card-body">
+
         <h5 class="card-title">{{'trips.stages' | translate}}</h5>
 
         <ul>
-          <li *ngFor="let stage of trip.getStages()">
-            <h6 class="card-subtitle mb-2 text-muted">{{stage.getTitle()}} - {{'trips.price' | translate}}: {{stage.getPrice()}}</h6>
-            <p class="card-text">{{stage.getDescription()}}</p>
+          <li *ngFor="let stage of trip.getStages(); let i=index;">
+
+            <div class="accordion" [attr.id]="'stagesAccordion-'+i" >
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="statusComments">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapseStages-'+i" 
+                    aria-expanded="true" aria-controls="collapseStages">
+                    {{stage.getTitle()}}
+                  </button>
+                </h2>
+              </div>
+              <div [attr.id]="'collapseStages-'+i"  class="accordion-collapse collapse" [attr.data-parent]="'stagesAccordion-'+i" >
+                <div class="accordion-body" >
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{stage.getTitle()}} - {{'trips.price' | translate}}: {{stage.getPrice()}}</li>
+                    <li class="list-group-item">{{stage.getDescription()}}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
           </li>
         </ul>
+
+
 
       </div>
     </div>

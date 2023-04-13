@@ -14,7 +14,7 @@
     <div class="col-md-3">
     
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Search" [(ngModel)]="keyword" >
+            <input type="text" class="form-control" [(ngModel)]="keyword" >
             <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="search()">
                 <i class="fa fa-search" aria-hidden="true"></i>
                 Search
@@ -44,7 +44,7 @@
             <img *ngIf="trip.getPictures().length == 0" src="assets/images/trips/default-trip.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">{{trip.getTitle()}}</h5>
-                <p class="card-text">{{trip.getDescription() | slice:0:50}} ...</p>
+                <p class="card-text">{{trip.getDescription() | slice:0:20}} ...</p>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><b>{{'trips.price' | translate}}</b>: {{trip.getPrice()}}</li>

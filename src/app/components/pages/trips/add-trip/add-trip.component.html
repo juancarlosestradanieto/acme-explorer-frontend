@@ -5,13 +5,12 @@
     <!--TITLE START-->
     <div class="form-group has-danger">
 
-        <label for="title" class="form-control-label">Title:</label>
+        <label for="title" class="form-control-label">{{'trips.title-control' | translate}}:</label>
 
         <input 
         id="title"
         type="text"
         class="form-control" 
-        placeholder="Indicate trip's title"
         formControlName="title"
         [class.is-valid]="tripForm.get('title')?.valid && 
         ( tripForm.get('title')?.dirty || tripForm.get('title')?.touched )"
@@ -27,7 +26,7 @@
     >
 
         <small class="text-danger" *ngIf="tripForm.get('title')?.hasError('required')">
-            This field is required.
+            {{'trips.validations.required' | translate}}
         </small>
 
     </div>
@@ -36,13 +35,12 @@
     <!--DESCRIPTION START-->
     <div class="form-group has-danger">
         
-        <label for="description" class="form-control-label">Description:</label>
+        <label for="description" class="form-control-label">{{'trips.description' | translate}}:</label>
 
         <input 
         id="description"
         type="text"
         class="form-control" 
-        placeholder="Indicate trip's description"
         formControlName="description"
         [class.is-valid]="tripForm.get('description')?.valid && 
         ( tripForm.get('description')?.dirty || tripForm.get('description')?.touched )"
@@ -58,7 +56,7 @@
     >
 
         <small class="text-danger" *ngIf="tripForm.get('description')?.hasError('required')">
-            This field is required.
+            {{'trips.validations.required' | translate}}
         </small>
 
     </div>
@@ -67,13 +65,12 @@
     <!--PRICE START-->
     <div class="form-group has-danger">
         
-        <label for="price" class="form-control-label">price:</label>
+        <label for="price" class="form-control-label">{{'trips.price' | translate}}:</label>
     
         <input 
         id="price"
         type="number"
         class="form-control" 
-        placeholder="Indicate trip's price"
         formControlName="price"
         [class.is-valid]="tripForm.get('price')?.valid && 
         ( tripForm.get('price')?.dirty || tripForm.get('price')?.touched )"
@@ -89,13 +86,13 @@
     >
 
         <small class="text-danger" *ngIf="tripForm.get('price')?.hasError('required')">
-            This field is required.
+            {{'trips.validations.required' | translate}}
         </small>
         <small class="text-danger" *ngIf="tripForm.get('price')?.hasError('min')">
-            The minimum accepted value is 1.
+            {{'trips.validations.minimum' | translate}} 1.
         </small>
         <small class="text-danger" *ngIf="tripForm.get('price')?.hasError('max')">
-            The maximum accepted value is 999999.
+            {{'trips.validations.maximum' | translate}} 999999.
         </small>
 
     </div>
@@ -106,11 +103,11 @@
     <!--REQUIREMENTS START-->
     <div class="form-group has-danger">
 
-        <label for="requirements" class="form-control-label">Requirements:</label>
+        <label for="requirements" class="form-control-label">{{'trips.requirements' | translate}}:</label>
     
         <button type="button" class="btn btn-success" (click)="onAddRequirement()">
             <i class="fa-solid fa-plus"></i>
-            Add
+            {{'trips.add' | translate}}
         </button>
         
         <div class="col-md-10 offset-md-2 ">
@@ -119,17 +116,16 @@
                 <div *ngFor="let row of tripForm.controls.requirements.controls; let i=index">
                     <div [formGroupName]="i">
 
-                        <label >Requirement {{i + 1}}</label>
+                        <label >{{'trips.requirement' | translate}} {{i + 1}}</label>
 
                         <div class="form-group">
     
-                            <label for="requirement[{{i}}]" class="form-control-label" >Requirement</label>
+                            <label for="requirement[{{i}}]" class="form-control-label" >{{'trips.requirement' | translate}}</label>
     
                             <input
                             id="requirement[{{i}}]"
                             type="text"
                             class="form-control" 
-                            placeholder="Indicate trip's requirements"
                             formControlName="requirement"
                             [class.is-valid]="row.get('requirement')?.valid && 
                             ( row.get('requirement')?.dirty || row.get('requirement')?.touched )"
@@ -143,7 +139,7 @@
                             >
 
                                 <small class="text-danger" *ngIf="row.get('requirement')?.hasError('required')">
-                                    This field is required.
+                                    {{'trips.validations.required' | translate}}
                                 </small>
 
                             </div>
@@ -151,7 +147,7 @@
                         </div>
                         <button class="btn btn-danger" (click)="onRemoveRequirement(i)">
                             <i class="fa-solid fa-trash"></i>
-                            Delete
+                            {{'trips.delete' | translate}}
                         </button>
                     </div>
                 </div>
@@ -167,13 +163,12 @@
     <!--START DATE START-->
     <div class="form-group has-danger">
         
-        <label for="startDate" class="form-control-label">startDate:</label>
+        <label for="startDate" class="form-control-label">{{'trips.startDate' | translate}}:</label>
     
         <input 
         id="startDate"
         type="date"
         class="form-control" 
-        placeholder="Indicate trip's startDate"
         formControlName="startDate"
         [class.is-valid]="tripForm.get('startDate')?.valid && 
         ( tripForm.get('startDate')?.dirty || tripForm.get('startDate')?.touched )"
@@ -189,7 +184,7 @@
     >
 
         <small class="text-danger" *ngIf="tripForm.get('startDate')?.hasError('required')">
-            This field is required.
+            {{'trips.validations.required' | translate}}
         </small>
 
     </div>
@@ -198,7 +193,7 @@
     <!--END DATE START-->
     <div class="form-group has-danger">
         
-        <label for="endDate" class="form-control-label">endDate:</label>
+        <label for="endDate" class="form-control-label">{{'trips.endDate' | translate}}:</label>
     
         <input 
         id="endDate"
@@ -220,13 +215,15 @@
     >
 
         <small class="text-danger" *ngIf="tripForm.get('endDate')?.hasError('required')">
-            This field is required.
+            {{'trips.validations.required' | translate}}
         </small>
 
     </div>
     <!--END DATE END-->
 
     <!--PUBLICATION DATE START-->
+
+    <!--
     <div class="form-group has-danger">
         
         <label for="publicationDate" class="form-control-label">publicationDate:</label>
@@ -255,6 +252,8 @@
         </small>
 
     </div>
+    -->
+    
     <!--PUBLICATION DATE END-->
 
     <hr>
@@ -262,11 +261,11 @@
     <!--PICTURES START-->
     <div class="form-group has-danger">
 
-        <label for="pictures" class="form-control-label">Pictures:</label>
+        <label for="pictures" class="form-control-label">{{'trips.pictures' | translate}}:</label>
     
         <button type="button" class="btn btn-success" (click)="onAddPicture()">
             <i class="fa-solid fa-plus"></i>
-            Add
+            {{'trips.add' | translate}}
         </button>
         
         <div class="col-md-10 offset-md-2 ">
@@ -275,20 +274,19 @@
                 <div *ngFor="let row of tripForm.controls.pictures.controls; let i=index">
                     <div [formGroupName]="i">
 
-                        <label >Picture {{i + 1}}</label>
+                        <label >{{'trips.picture' | translate}} {{i + 1}}</label>
 
                         <div class="form-group">
     
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="picture[{{i}}]" class="form-control-label" >Picture</label>
+                                    <label for="picture[{{i}}]" class="form-control-label" >{{'trips.picture' | translate}}</label>
         
                                     <input
                                     id="picture[{{i}}]"
                                     type="file"
                                     accept="image/png, image/jpeg"
                                     class="form-control" 
-                                    placeholder="Indicate trip's pictures"
                                     formControlName="picture"
                                     [class.is-valid]="row.get('picture')?.valid && 
                                     ( row.get('picture')?.dirty || row.get('picture')?.touched )"
@@ -304,7 +302,7 @@
                                     >
         
                                         <small class="text-danger" *ngIf="row.get('picture')?.hasError('required')">
-                                            This field is required.
+                                            {{'trips.validations.required' | translate}}
                                         </small>
         
                                     </div>
@@ -318,7 +316,7 @@
                         </div>
                         <button class="btn btn-danger" (click)="onRemovePicture(i)">
                             <i class="fa-solid fa-trash"></i>
-                            Delete
+                            {{'trips.delete' | translate}}
                         </button>
                     </div>
                 </div>
@@ -332,7 +330,7 @@
     
     <div class="row" *ngIf="edit_mode == true && editing_trip">
     
-        Previously uploaded pictures
+        {{'trips.previous-pictures' | translate}}
 
         <div class="row ">
 
@@ -344,7 +342,7 @@
                     <div class="card-body">
                         <button type="button" class="btn btn-danger" (click)="onRemovePreviouslySelectedPicture(picture)">
                             <i class="fa-solid fa-trash"></i>
-                            Delete
+                            {{'trips.delete' | translate}}
                         </button>
                     </div>
                 </div>
@@ -362,11 +360,11 @@
     <!--STAGES START-->
     <div class="form-group has-danger">
 
-        <label for="stages" class="form-control-label">Stages:</label>
+        <label for="stages" class="form-control-label">{{'trips.stages' | translate}}:</label>
     
         <button type="button" class="btn btn-success" (click)="onAddStage()">
             <i class="fa-solid fa-plus"></i>
-            Add
+            {{'trips.add' | translate}}
         </button>
         
         <div class="col-md-10 offset-md-2 ">
@@ -375,17 +373,16 @@
                 <div *ngFor="let row of tripForm.controls.stages.controls; let i=index">
                     <div [formGroupName]="i">
 
-                        <label >Stage {{i + 1}}</label>
+                        <label >{{'trips.stage' | translate}} {{i + 1}}</label>
 
                         <div class="form-group">
     
-                            <label for="title[{{i}}]" class="form-control-label">Title</label>
+                            <label for="title[{{i}}]" class="form-control-label">{{'trips.title-control' | translate}}</label>
     
                             <input
                             id="title[{{i}}]"
                             type="text"
                             class="form-control" 
-                            placeholder="Indicate stage's title"
                             formControlName="title"
                             [class.is-valid]="row.get('title')?.valid && 
                             ( row.get('title')?.dirty || row.get('title')?.touched )"
@@ -399,7 +396,7 @@
                             >
                             
                                 <small class="text-danger" *ngIf="row.get('title')?.hasError('required')">
-                                    This field is required.
+                                    {{'trips.validations.required' | translate}}
                                 </small>
 
                             </div>
@@ -408,13 +405,12 @@
 
                         <div class="form-group">
     
-                            <label for="description[{{i}}]" class="form-control-label">Description</label>
+                            <label for="description[{{i}}]" class="form-control-label">{{'trips.description' | translate}}</label>
     
                             <input
                             id="description[{{i}}]"
                             type="text"
                             class="form-control" 
-                            placeholder="Indicate stage's description"
                             formControlName="description"
                             [class.is-valid]="row.get('description')?.valid && 
                             ( row.get('description')?.dirty || row.get('description')?.touched )"
@@ -428,7 +424,7 @@
                             >
 
                                 <small class="text-danger" *ngIf="row.get('description')?.hasError('required')">
-                                    This field is required.
+                                    {{'trips.validations.required' | translate}}
                                 </small>
 
                             </div>
@@ -437,13 +433,12 @@
 
                         <div class="form-group">
     
-                            <label for="price[{{i}}]" class="form-control-label">Price</label>
+                            <label for="price[{{i}}]" class="form-control-label">{{'trips.price' | translate}}</label>
     
                             <input
                             id="price[{{i}}]"
                             type="number"
                             class="form-control" 
-                            placeholder="Indicate stage's price"
                             formControlName="price"
                             [class.is-valid]="row.get('price')?.valid && 
                             ( row.get('price')?.dirty || row.get('price')?.touched )"
@@ -457,7 +452,7 @@
                             >
 
                                 <small class="text-danger" *ngIf="row.get('price')?.hasError('required')">
-                                    This field is required.
+                                    {{'trips.validations.required' | translate}}
                                 </small>
 
                             </div>
@@ -466,7 +461,7 @@
 
                         <button class="btn btn-danger" (click)="onRemoveStage(i)">
                             <i class="fa-solid fa-trash"></i>
-                            Delete
+                            {{'trips.delete' | translate}}
                         </button>
                     </div>
                 </div>
@@ -502,7 +497,7 @@
     >
 
         <small class="text-danger" *ngIf="tripForm.get('managerId')?.hasError('required')">
-            This field is required.
+            {{'trips.validations.required' | translate}}
         </small>
 
     </div>
@@ -513,7 +508,7 @@
         || tripForm.controls.requirements.controls.length < 1
         || tripForm.controls.stages.controls.length < 1
         ">
-        Add
+        {{'trips.add' | translate}}
     </button>
 
     <div class="alert alert-success" *ngIf="success_message && success_message != ''">

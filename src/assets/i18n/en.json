@@ -33,12 +33,22 @@
   "home": "Home",
   "trips": {
     "title": "Trips",
+    "title-control": "Title",
+    "description": "Description",
     "price": "Price",
+    "stage": "stage",
     "stages": "Stages",
     "startDate": "Start date",
     "endDate": "End date",
+    "requirement": "Requirement",
+    "requirements": "Requirements",
     "favourites": "Favourite trips",
     "finder": "Trip finder",
+    "add": "Add",
+    "delete": "Delete",
+    "pictures": "Pictures",
+    "picture": "Picture",
+    "previous-pictures": "Previously uploaded pictures.",
     "starting":"Starting Time Left",
     "out_time":"Out of Time",
     "buttons": {
@@ -53,7 +63,12 @@
       "trips-available": "Available trips just for you!",
       "favourite-trips-available": "Available favourite trips just for you!",
       "favourite-trips-not-found": "There are no favourite trips found",
-      "disabled-trip": "The trip has already started or  has been cancelled"
+      "disabled-trip": "The trip has already started or has been cancelled"
+    },
+    "validations": {
+      "required": "This field is required.",
+      "minimum": "The minimum accepted value is",
+      "maximum": "The maximum accepted value is"
     }
   },
   "footer": {
