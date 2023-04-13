@@ -9,6 +9,13 @@ import { environment } from 'src/environments/environment';
 import { ActivatedRoute } from '@angular/router';
 import { TripsService } from 'src/app/services/trips/trips.service';
 
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}
+
 let mockJungleTripTripFormData = {
   managerId: "6435a0d99e47fd1155253783",
   title: "Jungle party",
@@ -75,7 +82,18 @@ describe('AddTripComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ AddTripComponent ],
-      imports: [FormsModule, ReactiveFormsModule, AngularFireModule.initializeApp(environment.firebase)],
+      imports: [
+        FormsModule, 
+        ReactiveFormsModule, 
+        AngularFireModule.initializeApp(environment.firebase),
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient]
+          }
+        })
+      ],
       providers: [
         HttpClient, 
         HttpHandler, 
