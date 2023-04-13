@@ -6,6 +6,8 @@ import { Trip } from 'src/app/models/trip.model';
 import { ApplicationsService } from 'src/app/services/applications.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { TripsService } from 'src/app/services/trips/trips.service';
+import { differenceInMilliseconds } from 'date-fns';
+
 
 @Component({
   selector: 'app-all-trips',
@@ -25,6 +27,10 @@ export class AllTripsComponent implements OnInit {
   aditional_search_parameters: any = {"published": true, "canceled": false};
   showAddTripButton: boolean = false;
   keyword: string = "";
+  
+  //Para el CountDown
+  interval:any;
+  out_time!:string;
 
   constructor(private tripsService: TripsService, private authService: AuthService) 
   {
@@ -66,6 +72,9 @@ export class AllTripsComponent implements OnInit {
     //console.log("aditional_search_parameters", this.aditional_search_parameters);
 
     this.search();
+    this.interval = setInterval(() => {
+      this.countDownTimer("start");
+    }, 1000);
   }
 
   search()
@@ -132,6 +141,23 @@ export class AllTripsComponent implements OnInit {
     var difference = startDate.getTime() - endDate.getTime();
     return difference / (1000 * 3600 * 24);
   }
+
+  countDownTimer(start: string){
+    let startDate = new Date(start);
+    let now = new Date();
+    const difference = differenceInMilliseconds(startDate, now);
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((difference / 1000 / 60) % 60);
+    const seconds = Math.floor((difference / 1000) % 60);
+    if(difference >0){
+      return  days +"d "+hours+"hr "+minutes+"min "+seconds+"sec ";
+    } 
+    else{
+       return "-"
+  }
+}
+
 
   getCurrentStyles(start: string, now: string) {
     let difference = this.getDiffDays(start, now);

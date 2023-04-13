@@ -49,6 +49,8 @@
     "pictures": "Imágenes",
     "picture": "Imagen",
     "previous-pictures": "Imágenes cargadas previamente.",
+    "starting":"Tiempo Restante de Inicio",
+    "out_time":"Fuera de Tiempo",
     "buttons": {
       "add-favourite": "Añadir a favoritos",
       "remove-favourite": "Eliminar de favoritos",

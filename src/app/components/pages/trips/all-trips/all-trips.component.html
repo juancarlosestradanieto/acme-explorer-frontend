@@ -54,6 +54,8 @@
                     <p *ngIf="getNowAndStartDateDiffInDays(trip) > 0 && getNowAndStartDateDiffInDays(trip) <= 7"><b>Soon!</b></p>
                 </li>
                 <li class="list-group-item"><b>{{'trips.endDate' | translate}}</b>: {{trip.getEndDate() | date: 'dd/MM/yyyy'}}</li>
+                <li class="list-group-item"><b>{{'trips.starting' | translate}}</b>: {{countDownTimer(trip.getStartDate().toString())}}</li>
+
             </ul>
             <div class="card-body">
                 <button type="button" class="btn btn-success" routerLink="/trips/{{trip.id}}">
