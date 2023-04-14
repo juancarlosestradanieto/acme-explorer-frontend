@@ -75,32 +75,35 @@ export class SingleTripComponent implements OnInit {
   }
 
   getPaidSponsorships() {
-    console.log("SingleTripComponent->constructor getSponsorships this.trip.getTicker() ", this.trip.getTicker());
+    console.log("SingleTripComponent->getPaidSponsorships this.trip.getTicker() ", this.trip.getTicker());
     this.sponsorshipService.getSponsorshipsByTrip(this.trip.getTicker())
       .subscribe(
         (response: any) => {
-          console.log("SingleTripComponent->constructor getSponsorships response ", response);
-          console.log("SingleTripComponent->constructor getSponsorships response.values ", response.sponsorships);
+          console.log("SingleTripComponent->getPaidSponsorships response ", response);
+          console.log("SingleTripComponent->getPaidSponsorships response.values ", response.sponsorships);
           if (response.error) {
             console.error(response.message);
             this.sponsorships_loaded = Promise.resolve(false);
           } else {
             this.sponsorships = Sponsorship.castJsonSponsorships(response.sponsorships);
-            console.log("SingleTripComponent->constructor this.sponsorships length ", this.sponsorships.length);
+            console.log("SingleTripComponent->getPaidSponsorships this.sponsorships length ", this.sponsorships.length);
 
             this.paidSponsorships = this.sponsorships.filter(sponsorship => sponsorship.getIsPayed() == true);
-            console.log("SingleTripComponent->constructor this.paidSponsorships length ", this.paidSponsorships.length);
+            console.log("SingleTripComponent->getPaidSponsorships this.paidSponsorships length ", this.paidSponsorships.length);
           }
 
           if (this.sponsorships.length > 0) {
-            console.log("SingleTripComponent->constructor getSponsorships Promise.resolve ", true);
+            console.log("SingleTripComponent->getPaidSponsorships Promise.resolve ", true);
             this.selectRandomPaidSponsorship();
           }
           else {
-            console.log("SingleTripComponent->constructor getSponsorships Promise.resolve ", false);
+            console.log("SingleTripComponent->getPaidSponsorships Promise.resolve ", false);
             this.sponsorships_loaded = Promise.resolve(false);
           }
 
+        },
+        (error) => {
+          console.error("SingleTripComponent->getPaidSponsorships error", error);
         }
       );
   }
