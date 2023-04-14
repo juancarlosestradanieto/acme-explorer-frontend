@@ -1,5 +1,5 @@
 <h2>{{"dashboard.title" | translate}}</h2>
-<div class="card">
+<div class="card" *ngIf="(dashboard_loaded | async)">
   <div class="card-body">
     <ul class="list-group list-group-flush">
       <li class="list-group-item">
@@ -83,18 +83,18 @@
           </thead>     
           <tbody>  
             <tr>   
-              <th scope="col" style="width:20%">Cancelled</th>  
-              <th scope="col" style="width:20%">Rejected</th>   
-              <th scope="col" style="width:20%">Pending</th> 
-              <th scope="col" style="width:20%">Due</th> 
-              <th scope="col" style="width:20%">Accepted</th> 
+              <th scope="col" style="width:20%">{{"applications.status.cancelled" | translate}}</th>  
+              <th scope="col" style="width:20%">{{"applications.status.rejected" | translate}}</th>   
+              <th scope="col" style="width:20%">{{"applications.status.pending" | translate}}</th> 
+              <th scope="col" style="width:20%">{{"applications.status.due" | translate}}</th> 
+              <th scope="col" style="width:20%">{{"applications.status.accepted" | translate}}</th> 
             </tr>     
             <tr> 
-              <td>Ratio</td>
-              <td>Ratio</td>
-              <td>Ratio</td>
-              <td>Ratio</td>
-              <td>Ratio</td>
+              <td>{{applications_by_status["CANCELLED"].ratio}}</td>
+              <td>{{applications_by_status["REJECTED"].ratio}}</td>
+              <td>{{applications_by_status["PENDING"].ratio}}</td>
+              <td>{{applications_by_status["DUE"].ratio}}</td>
+              <td>{{applications_by_status["ACCEPTED"].ratio}}</td>
             </tr> 
           </tbody>
         </table>
