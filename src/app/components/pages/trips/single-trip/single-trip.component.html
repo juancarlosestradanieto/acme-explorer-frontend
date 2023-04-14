@@ -1,13 +1,29 @@
 
 <div class="row">
 
-  <div class="col-md-2 offset-md-10">
-
+  <div class="col-md-2 offset-md-8">
     <button type="button" class="btn btn-success" *ngIf="trip && (activeRole == 'MANAGER')" routerLink="/trips/{{trip.id}}/edit/">
       <i class="fa-solid fa-edit"></i>
       {{'trips.buttons.edit' | translate}}
     </button>
-    
+  </div>
+
+  <div class="col-md-2">
+    <button type="button" class="btn btn-danger" *ngIf="activeRole == 'MANAGER' && getNowAndStartDateDiffInDays(trip) >= 10" (click)="deleteTrip(trip)">
+      <i class="fa-solid fa-trash"></i>
+      {{'trips.buttons.delete' | translate}}
+    </button>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="alert alert-success" *ngIf="success_message && success_message != ''">
+    {{success_message}}
+  </div>
+
+  <div class="alert alert-danger" *ngIf="error_message && error_message != ''">
+      {{error_message}}
   </div>
 </div>
 
@@ -94,8 +110,6 @@
 
           </li>
         </ul>
-
-
 
       </div>
     </div>

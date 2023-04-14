@@ -17,7 +17,7 @@
             <input type="text" class="form-control" [(ngModel)]="keyword" >
             <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="search()">
                 <i class="fa fa-search" aria-hidden="true"></i>
-                Search
+                {{'trips.search' | translate}}
             </button>
         </div>
     
@@ -61,14 +61,6 @@
                 <button type="button" class="btn btn-success" routerLink="/trips/{{trip.id}}">
                     <i class="fa-solid fa-magnifying-glass"></i>
                     {{'trips.buttons.more' | translate}}
-                </button>
-                <button type="button" class="btn btn-warning" *ngIf="activeRole == 'MANAGER'" routerLink="/trips/{{trip.id}}/edit">
-                    <i class="fas fa-edit"></i>
-                    {{'trips.buttons.edit' | translate}}
-                </button>
-                <button type="button" class="btn btn-danger" *ngIf="activeRole == 'MANAGER' && getNowAndStartDateDiffInDays(trip) >= 10" (click)="deleteTrip(trip)">
-                    <i class="fa-solid fa-trash"></i>
-                    {{'trips.buttons.delete' | translate}}
                 </button>
                 <button type="button" class="btn btn-primary"
                     *ngIf="activeRole == 'EXPLORER' && trip.getStartDate().toString() > currentDateTime.toISOString() && !trip.isCanceled()"

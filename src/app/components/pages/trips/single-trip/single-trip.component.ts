@@ -17,6 +17,8 @@ export class SingleTripComponent implements OnInit {
   trip!: Trip;
   trip_id!: string;
   json_trip: any;
+  error_message: string = "";
+  success_message: string = "";
 
   protected user!: Actor | null;
   protected activeRole: string = 'anonymous';
@@ -113,6 +115,44 @@ export class SingleTripComponent implements OnInit {
       }
     }
     return result;
+  }
+
+  getDiffDays(start: string, now: string) {
+    var startDate = new Date(start);
+    var endDate = new Date(now);
+
+    var difference = startDate.getTime() - endDate.getTime();
+    return difference / (1000 * 3600 * 24);
+  }
+  
+  getNowAndStartDateDiffInDays(trip: Trip)
+  {
+    return this.getDiffDays(trip.getStartDate().toString(), this.currentDateTime.toISOString());
+  }
+
+  deleteTrip(trip: Trip) {
+    
+    this.error_message = "";
+    this.success_message = "";
+
+    if(confirm("Are you sure to delete?, this action can't be undone.")) 
+    {
+
+      this.tripService.deleteTrip(trip.id)
+      .then((response) => {
+
+        console.log("AllTripsComponent->deleteTrip tripsService.deleteTrip then response ", response);
+        this.success_message = response.message;
+        
+      })
+      .catch((error) => {
+
+        console.error("AllTripsComponent->deleteTrip tripsService.deleteTrip catch ", error);
+        this.success_message = "Something went wrong";
+
+      });
+
+    }
   }
 
 }

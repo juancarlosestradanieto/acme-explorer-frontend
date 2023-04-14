@@ -178,30 +178,6 @@ export class AllTripsComponent implements OnInit {
     return this.getDiffDays(trip.getStartDate().toString(), this.currentDateTime.toISOString());
   }
 
-  deleteTrip(trip: Trip) {
-    console.log("deleteTrip", trip.id);
-
-    if(confirm("Are you sure to delete?, this action can't be undone.")) 
-    {
-
-      this.tripsService.deleteTrip(trip.id)
-      .then((response) => {
-
-        console.log("AllTripsComponent->deleteTrip tripsService.deleteTrip then response ", response);
-        alert(response.message);
-        this.search();
-        
-      })
-      .catch((error) => {
-
-        console.error("AllTripsComponent->deleteTrip tripsService.deleteTrip catch ", error);
-        alert("Something went wrong");
-
-      });
-
-    }
-  }
-
   favouriteTrip(trip: Trip) {
     console.log("favouriteTrip user.email ", this.user!.getEmail());
     console.log("favouriteTrip user.email-favourites ", this.user!.getEmail() + "-favourites");
