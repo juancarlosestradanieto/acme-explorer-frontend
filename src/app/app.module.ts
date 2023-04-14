@@ -45,6 +45,7 @@ import { AllActorsComponent } from './components/pages/actors/all-actors/all-act
 import { AddActorComponent } from './components/pages/actors/add-actor/add-actor.component';
 import { EditActorComponent } from './components/pages/actors/edit-actor/edit-actor.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { RegisterManagerComponent } from './components/pages/actors/register-manager/register-manager.component';
 
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -81,6 +82,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AllActorsComponent,
     AddActorComponent,
     EditActorComponent,
+    RegisterManagerComponent,
   ],
   imports: [
     BrowserModule,
