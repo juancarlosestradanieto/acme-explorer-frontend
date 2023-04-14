@@ -45,21 +45,43 @@ export class Sponsorship extends Entity {
         return this.sponsor_Id;
     }
 
-    public setSponsor_Id(issponsor_Id: string): void {
-        this.sponsor_Id = issponsor_Id;
+    public setSponsor_Id(sponsor_Id: string): void {
+        this.sponsor_Id = sponsor_Id;
     }
 
-    public static castJsonSponsorship(json_sponsorship: any): Sponsorship
-    {
+    public static castJsonSponsorship(json_sponsorship: any): Sponsorship {
         let casted_sponsorship = new Sponsorship(json_sponsorship);
+
+        let json_banners = json_sponsorship.banner;
+        console.log("json_banners", json_banners);
+        if(json_banners != undefined) {
+            let finishedBanners = false;
+            let index = 0;
+            let banner: string;
+            let banners = [];
+            while (!finishedBanners) {
+                banner = json_banners[index];
+                console.log("New banner", banner);
+                if (banner != undefined) {
+                    banners.push(banner);
+                    console.log("Banners group",banners);
+                    index++;
+                } else {
+                    finishedBanners = true;
+                }
+            }
+    
+            casted_sponsorship.setBanner(banners);
+        } else {
+            casted_sponsorship.setBanner([]);
+        }
+
+
+
         return casted_sponsorship;
     }
 
-
-
-
-    public static castJsonSponsorships(json_sponsorships: any): Array<Sponsorship>
-    {
+    public static castJsonSponsorships(json_sponsorships: any): Array<Sponsorship> {
         let casted_sponsorships: Array<Sponsorship> = json_sponsorships.map((json_sponsorships: any) => {
             return Sponsorship.castJsonSponsorship(json_sponsorships);
         });

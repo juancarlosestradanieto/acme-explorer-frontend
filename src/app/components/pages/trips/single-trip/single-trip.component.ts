@@ -20,6 +20,7 @@ export class SingleTripComponent implements OnInit {
   trip!: Trip;
   trip_id!: string;
   sponsorships!: Sponsorship[];
+  paidSponsorships!: Sponsorship[];
   sponsorships_loaded!: Promise<boolean>;
   sponsorship!: Sponsorship;
   json_trip: any;
@@ -82,15 +83,18 @@ export class SingleTripComponent implements OnInit {
           console.log("SingleTripComponent->constructor getSponsorships response.values ", response.sponsorships);
           if (response.error) {
             console.error(response.message);
+            this.sponsorships_loaded = Promise.resolve(false);
           } else {
-            this.sponsorships = response.sponsorships;
-            console.log("SingleTripComponent->constructor getSponsorships length ", this.sponsorships.length);
+            this.sponsorships = Sponsorship.castJsonSponsorships(response.sponsorships);
+            console.log("SingleTripComponent->constructor this.sponsorships length ", this.sponsorships.length);
+
+            this.paidSponsorships = this.sponsorships.filter(sponsorship => sponsorship.getIsPayed() == true);
+            console.log("SingleTripComponent->constructor this.paidSponsorships length ", this.paidSponsorships.length);
           }
 
           if (this.sponsorships.length > 0) {
             console.log("SingleTripComponent->constructor getSponsorships Promise.resolve ", true);
             this.selectRandomPaidSponsorship();
-            this.sponsorships_loaded = Promise.resolve(true);
           }
           else {
             console.log("SingleTripComponent->constructor getSponsorships Promise.resolve ", false);
@@ -102,14 +106,33 @@ export class SingleTripComponent implements OnInit {
   }
 
   selectRandomPaidSponsorship() {
-    const randomIndex = Math.floor(Math.random() * this.sponsorships.length);
-    console.log("SingleTripComponent->constructor selectRandomPaidSponsorship randomIndex ", randomIndex);
-
-    this.sponsorship = new Sponsorship(this.sponsorships[randomIndex]);
-
-    console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship ", this.sponsorship);
-    console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship.getBanner() ", this.sponsorship.getBanner());
-    console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship.getPage() ", this.sponsorship.getPage());
+    if(this.paidSponsorships.length > 0) {
+      const randomSponsorshipIndex = Math.floor(Math.random() * this.paidSponsorships.length);
+      console.log("SingleTripComponent->constructor selectRandomPaidSponsorship randomSponsorshipIndex ", randomSponsorshipIndex);
+  
+      this.sponsorship = new Sponsorship(this.paidSponsorships[randomSponsorshipIndex]);
+  
+      console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship ", this.sponsorship);
+      console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship.getBanner() ", this.sponsorship.getBanner());
+      console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship.getPage() ", this.sponsorship.getPage());
+  
+      console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship.getBanner().length ", this.sponsorship.banner.length);
+    
+      if(this.sponsorship.getBanner().length > 1) {
+        const randomBannerIndex = Math.floor(Math.random() * this.sponsorship.getBanner().length);
+        console.log("SingleTripComponent->constructor selectRandomPaidSponsorship randomBannerIndex ", randomBannerIndex);
+  
+        this.sponsorship.setBanner([this.sponsorship.getBanner()[randomBannerIndex]]);
+  
+        console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship ", this.sponsorship);
+        console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship.getBanner() ", this.sponsorship.getBanner());
+        console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship.getPage() ", this.sponsorship.getPage());
+      }
+  
+      this.sponsorships_loaded = Promise.resolve(true);
+    } else {
+      this.sponsorships_loaded = Promise.resolve(false);
+    }
   }
 
 }
