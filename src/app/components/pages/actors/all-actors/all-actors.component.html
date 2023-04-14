@@ -1,0 +1,47 @@
+<h2 class="mt-3">{{ "actor.control_panel" | translate }}</h2>
+
+<div class="center mb-4">
+      <button type="button" class="btn btn-success">
+          <i class="fa-solid fa-user"></i>
+          {{ "actor.add_manager" | translate }}
+        </button>
+</div>
+
+<div class="table-decoration">
+    <table class="table table-success table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th scope="col">{{'actor.name' | translate}}</th>
+                <th scope="col">{{'actor.surname' | translate}}</th>
+                <th scope="col">{{'actor.email' | translate}}</th>
+                <th scope="col">{{'actor.address' | translate}}</th>
+                <th scope="col">{{'actor.phone_number' | translate}}</th>
+                <th scope="col">{{'actor.role.title' | translate}}</th>
+                <th scope="col">{{'actor.actions' | translate}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let actor of actors | slice:desde:hasta let i=index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{actor.name}}</td>
+                <td>{{actor.surname}}</td>
+                <td>{{actor.email}}</td>
+                <td>{{actor.address}}</td>
+                <td>{{actor.phone_number}}</td>
+                <td>{{actor.role}}</td>
+                <td>
+                    <button class="btn btn-success m-1"><i class="fa-solid fa-edit"></i></button>
+                    <button class="btn btn-primary m-1"><i class="fa-solid fa-user"></i></button>
+                    <button class="btn btn-danger  m-1"><i class="fa-solid fa-trash"></i></button>
+                    
+                </td>
+        </tr>
+        </tbody>
+    </table>
+    <mat-paginator [length]="actorsLength"
+    [pageSize]="pageSize"
+    (page)="cambiarPagina($event)">
+</mat-paginator>
+</div>
+

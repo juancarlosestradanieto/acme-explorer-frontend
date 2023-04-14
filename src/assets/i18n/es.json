@@ -111,6 +111,14 @@
   },
   "actor": {
     "profile": "Perfil",
+    "control_panel":"Panel de actores",
+    "add_manager":"Registrar nuevo Manager",
+    "name":"Nombre",
+    "surname":"Apellido",
+    "email":"Email",
+    "address":"Dirección",
+    "phone_number":"Número de Teléfono",
+    "actions":"Acciones",    
     "role": {
       "title": "Rol",
       "explorer": "Explorador",

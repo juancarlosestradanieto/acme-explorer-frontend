@@ -111,8 +111,16 @@
   },
   "actor": {
     "profile": "Profile",
+    "control_panel":"Actors Panel",
+    "add_manager":"Register new Manager",
+    "name":"Name",
+    "surname":"Surname",
+    "email":"Email",
+    "address":"Address",
+    "phone_number":"Phone Number",
+    "actions":"Actions",
     "role": {
-      "title": "Rol",
+      "title": "Role",
       "explorer": "Explorer",
       "manager": "Manager",
       "sponsor": "Sponsor",

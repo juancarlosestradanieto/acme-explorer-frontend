@@ -41,6 +41,11 @@ import { ThemeToggleComponent } from './components/shared/theme-toggle/theme-tog
 import { ApplicationcreationComponent } from './components/pages/applications/applicationcreation/applicationcreation.component';
 import { AddTripComponent } from './components/pages/trips/add-trip/add-trip.component';
 import { EditTripComponent } from './components/pages/trips/edit-trip/edit-trip.component';
+import { AllActorsComponent } from './components/pages/actors/all-actors/all-actors.component';
+import { AddActorComponent } from './components/pages/actors/add-actor/add-actor.component';
+import { EditActorComponent } from './components/pages/actors/edit-actor/edit-actor.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -73,6 +78,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ApplicationcreationComponent,
     AddTripComponent,
     EditTripComponent,
+    AllActorsComponent,
+    AddActorComponent,
+    EditActorComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,6 +88,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatPaginatorModule,
     NgbModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
