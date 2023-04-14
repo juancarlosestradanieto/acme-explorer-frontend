@@ -9,6 +9,7 @@ import { Actor } from 'src/app/models/actor.model';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { DashboardService } from 'src/app/services/dashboard.service';
+import { Observable, of } from 'rxjs';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -18,6 +19,8 @@ describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
   let getDashboardSpy: any;
+  let getTop10KeyWordsSpy: any;
+  let getAveragePriceFindersSpy: any;
 
   const mockManagerActor = Actor.castJsonActor({
     "_id": "64304c9dae7efef4708d821q",
@@ -37,6 +40,8 @@ describe('DashboardComponent', () => {
   });
 
   beforeEach(async () => {
+
+
     const mockDashboard = {
       "error": false,
       "message": " Latest dashboard successfully retrieved.",
@@ -99,8 +104,31 @@ describe('DashboardComponent', () => {
 
     };
 
-    let dashboardSpy = jasmine.createSpyObj('DashboardService', ['getDashboard']);
+    const mockAveragePriceFinder = {
+      normal:10,
+      decimal:100,
+      positive:200
+    }
+
+    const mockTop10Words = {
+      decimal: 32.26,
+      digit: 9,
+      hexadecimal: "49ce092141edaed8",
+      id: 330,
+      leading_zero_number: "0242039256",
+      negative: -1160.4884522392863,
+      non_zero_number: 9,
+      normal: 46.74926772706294,
+      number: 5445951757,
+      positive: 1101.3167116251248,
+      uid: "694e15c0-df70-4bd6-b16c-2fc16080f6d6"
+    }
+
+    let dashboardSpy = jasmine.createSpyObj('DashboardService', ['getDashboard','getTop10KeyWords','getAveragePriceFinders']);
     getDashboardSpy = dashboardSpy.getDashboard.and.returnValue(Promise.resolve(mockDashboard));
+    getTop10KeyWordsSpy = dashboardSpy.getTop10KeyWords.and.returnValue(of(mockTop10Words));
+    getAveragePriceFindersSpy = dashboardSpy.getAveragePriceFinders.and.returnValue(of(mockAveragePriceFinder));
+
 
     await TestBed.configureTestingModule({
       imports: [

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { DashboardService } from 'src/app/services/dashboard.service';
 
 @Component({
@@ -53,6 +54,22 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLatestDashboard();
+    this.getAveragePriceFinders();
+    this.getTop10WordsFinder();
+  }
+
+  getTop10WordsFinder():void{
+    this.dashboardService.getTop10KeyWords().subscribe((res)=>{
+      this.top10_in_finder= res;
+      console.log("Dashboard.component ->getTop10WordsFinder()",res)
+    });
+  }
+
+  getAveragePriceFinders():void{
+    this.dashboardService.getAveragePriceFinders().subscribe((res)=>{
+      this.price_range_in_finder = [res.normal,res.positive,res.decimal];
+      console.log("Dashboard.component -> getAveragePriceFinders() ",res);
+    })
   }
 
 }
