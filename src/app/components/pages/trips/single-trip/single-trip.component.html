@@ -8,7 +8,7 @@
         {{'trips.buttons.edit' | translate}}
       </button>
     </div>
-  
+
     <div class="col-md-2">
       <button type="button" class="btn btn-success" [ngClass]="{ 'disabled' : !( !trip.isCanceled() && !trip.isPublished() ) }"
        (click)="publishTrip(trip)">
@@ -16,36 +16,32 @@
         {{'trips.buttons.publish' | translate}}
       </button>
     </div>
-  
+
     <div class="col-md-2">
       <button type="button" class="btn btn-warning" [ngClass]="{ 'disabled' : !( trip.isPublished() && !trip.isCanceled() ) }" (click)="cancelTrip(trip)">
         <i class="fa-solid fa-times"></i>
         {{'trips.buttons.cancel' | translate}}
       </button>
     </div>
-  
+
     <div class="col-md-2">
       <button type="button" class="btn btn-danger" [ngClass]="{ 'disabled' : !( getNowAndStartDateDiffInDays(trip) >= 10 && (!trip.isPublished() || trip.isCanceled() ) ) }" (click)="deleteTrip(trip)">
         <i class="fa-solid fa-trash"></i>
         {{'trips.buttons.delete' | translate}}
       </button>
     </div>
-
   </div>
 
-  <div class="row">
-    <div class="alert alert-success" *ngIf="success_message && success_message != ''">
-      {{success_message}}
+  <div *ngIf="(sponsorships_loaded | async)" class="card">
+    <div class="card-header" *ngIf="sponsorship">
+      <img [src]="sponsorship.getBanner()[0]" class="card-img-top" *ngIf="sponsorship.getBanner().length > 0">
+      <a href="{{sponsorship.getPage()}}" style="  display: flex;justify-content: center;">{{sponsorship.getPage()}}</a>
     </div>
+  </div>
   
-    <div class="alert alert-danger" *ngIf="error_message && error_message != ''">
-        {{error_message}}
-    </div>
-  </div>
-
   <div class="card">
     <div class="container">
-  
+
       <ngb-carousel *ngIf="trip.getPictures().length > 0" class="card-img-top">
         <ng-template ngbSlide *ngFor="let picture of trip.getPictures()">
           <div class="wrapper">
@@ -59,11 +55,43 @@
           </div>
         </ng-template>
       </ngb-carousel>
-      
+
       <img *ngIf="trip.getPictures().length == 0" src="assets/images/trips/default-trip.jpg" class="card-img-top default-trip-image" alt="...">
-  
+
     </div>
-  
+  </div>
+
+  <div class="row">
+    <div class="alert alert-success" *ngIf="success_message && success_message != ''">
+      {{success_message}}
+    </div>
+
+    <div class="alert alert-danger" *ngIf="error_message && error_message != ''">
+        {{error_message}}
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="container">
+
+      <ngb-carousel *ngIf="trip.getPictures().length > 0" class="card-img-top">
+        <ng-template ngbSlide *ngFor="let picture of trip.getPictures()">
+          <div class="wrapper">
+            <img [src]="picture['picture']" alt="Random first slide">
+          </div>
+          <div class="carousel-caption">
+            <!--
+            <h3>Title Goes Here</h3>
+            <p>Consectetur tortor volutpat pretium.</p>
+            -->
+          </div>
+        </ng-template>
+      </ngb-carousel>
+
+      <img *ngIf="trip.getPictures().length == 0" src="assets/images/trips/default-trip.jpg" class="card-img-top default-trip-image" alt="...">
+
+    </div>
+
     <div class="card-body">
       <h5 class="card-title">{{trip.getTitle()}}</h5>
       <p class="card-text">{{trip.getDescription()}}</p>
@@ -83,7 +111,7 @@
         <i class="fa-solid fa-envelope"></i>
         {{'applications.title-plural' | translate}}
       </button>
-  
+
       <button type="button" class="btn btn-success" *ngIf="activeRole == 'EXPLORER' && !checkTripInFavourites(trip)" (click)="favouriteTrip(trip)">
         <i class="fa-solid fa-heart-circle-plus"></i>
         {{'trips.buttons.add-favourite' | translate}}
@@ -92,23 +120,23 @@
         <i class="fa-solid fa-heart-circle-xmark"></i>
         {{'trips.buttons.remove-favourite' | translate}}
        </button>
-  
+
     </div>
     <div class="card-body">
-  
+
       <div class="card">
-  
+
         <div class="card-body">
-  
+
           <h5 class="card-title">{{'trips.stages' | translate}}</h5>
-  
+
           <ul>
             <li *ngFor="let stage of trip.getStages(); let i=index;">
-  
+
               <div class="accordion" [attr.id]="'stagesAccordion-'+i" >
                 <div class="accordion-item">
                   <h2 class="accordion-header" id="statusComments">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapseStages-'+i" 
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapseStages-'+i"
                       aria-expanded="true" aria-controls="collapseStages">
                       {{stage.getTitle()}}
                     </button>
@@ -123,13 +151,13 @@
                   </div>
                 </div>
               </div>
-  
+
             </li>
           </ul>
-  
+
         </div>
       </div>
-  
+
     </div>
   </div>
 
