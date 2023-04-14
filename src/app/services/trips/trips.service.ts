@@ -20,9 +20,14 @@ export class TripsService {
   
   constructor(private http: HttpClient) { }
 
-  getAllTrips(page: number)
+  getAllTrips(search_parameters: any)
   {
-    const url = `${environment.backendApiBaseURL + '/trips?page='+page}`;
+    
+    let url_parameters = new URLSearchParams(search_parameters).toString();
+    url_parameters = url_parameters != '' ? '?'+url_parameters : '';
+    console.log("url_parameters ", url_parameters);
+
+    const url = `${environment.backendApiBaseURL + '/trips'+url_parameters}`;
 
     return new Promise<any>((resolve, reject) => {
 
@@ -73,11 +78,8 @@ export class TripsService {
   }
 
   createTrip(trip: any) {
-    const url = `${environment.backendApiBaseURL + '/trips'}`;
-    const idToken = localStorage.getItem('idToken') ?? '';
 
-    //console.log("TripsService->createTrip idToken ", idToken);
-    
+    const idToken = localStorage.getItem('idToken') ?? '';
     const httpOptions = {
       headers: new HttpHeaders({ 
         'Content-Type': 'application/json',
@@ -85,6 +87,8 @@ export class TripsService {
         'idToken': idToken 
       }),
     };
+
+    const url = `${environment.backendApiBaseURL + '/trips'}`;
 
     return new Promise<any>((resolve, reject) => {
 
@@ -105,12 +109,10 @@ export class TripsService {
 
   }
 
-  updateTrip(trip: any) {
-    const url = `${environment.backendApiBaseURL + '/trips/'+trip.id}`;
-    const idToken = localStorage.getItem('idToken') ?? '';
+  updateTrip(trip: any) 
+  {
 
-    //console.log("TripsService->createTrip idToken ", idToken);
-    
+    const idToken = localStorage.getItem('idToken') ?? '';
     const httpOptions = {
       headers: new HttpHeaders({ 
         'Content-Type': 'application/json',
@@ -118,6 +120,8 @@ export class TripsService {
         'idToken': idToken 
       }),
     };
+
+    const url = `${environment.backendApiBaseURL + '/trips/'+trip.id}`;
 
     return new Promise<any>((resolve, reject) => {
 
@@ -134,6 +138,41 @@ export class TripsService {
         }
       });
       
+    });
+
+  }
+
+  deleteTrip(trip_id: string)
+  {
+
+    const idToken = localStorage.getItem('idToken') ?? '';
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Accept-Language': 'es',
+        'idToken': idToken 
+      }),
+    };
+
+    const url = `${environment.backendApiBaseURL + '/trips/'+trip_id}`;
+
+    return new Promise<any>((resolve, reject) => {
+
+      this.http.delete<any>(url, httpOptions).subscribe({
+        next: (response) => {
+  
+          console.log('TripsService->getSingleTrip delete next response', response);
+          resolve(response);
+  
+        },
+        error: (error) => {
+  
+          console.error('TripsService->getSingleTrip delete error', error);
+          reject(error);
+  
+        }
+      });
+    
     });
 
   }

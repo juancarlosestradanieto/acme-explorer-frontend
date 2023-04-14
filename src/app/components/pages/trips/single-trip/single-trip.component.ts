@@ -135,4 +135,52 @@ export class SingleTripComponent implements OnInit {
     }
   }
 
+  favouriteTrip(trip: Trip) {
+    console.log("favouriteTrip user.email ", this.user!.getEmail());
+    console.log("favouriteTrip user.email-favourites ", this.user!.getEmail() + "-favourites");
+    let favourites = localStorage.getItem(this.user!.getEmail() + "-favourites");
+    console.log("favouriteTrip " + this.user!.getEmail() + "-favourites ", favourites);
+    if (!favourites) {
+      let newFavourites = [];
+      newFavourites.push(trip);
+      console.log("favouriteTrip newFavourites ", newFavourites);
+      localStorage.setItem(this.user!.getEmail() + "-favourites", JSON.stringify(newFavourites));
+    }
+    else {
+      let storedFavourites: Trip[] = JSON.parse(localStorage.getItem(this.user!.getEmail() + "-favourites") || '{}');
+      let existsInFavourites: boolean = storedFavourites.some(storedTrip => Trip.castJsonTrip(storedTrip).getTicker() === trip.getTicker());
+      console.log("favouriteTrip trip is in storedFavourites ", existsInFavourites);
+      if (existsInFavourites) {
+        storedFavourites.forEach((storedTrip, index) => {
+          if (Trip.castJsonTrip(storedTrip).getTicker() === trip.getTicker()) {
+            storedFavourites.splice(index, 1);
+          }
+        });
+        console.log("favouriteTrip storedFavourites ", storedFavourites);
+        localStorage.setItem(this.user!.getEmail() + "-favourites", JSON.stringify(storedFavourites));
+      } else {
+        console.log("favouriteTrip storedFavourites ", storedFavourites);
+        storedFavourites.push(trip);
+        localStorage.setItem(this.user!.getEmail() + "-favourites", JSON.stringify(storedFavourites));
+      }
+    }
+  }
+
+  checkTripInFavourites(trip: Trip) {
+    let result: boolean = false;
+    console.log("favouriteTrip user.email ", this.user!.getEmail());
+    console.log("favouriteTrip user.email-favourites ", this.user!.getEmail() + "-favourites");
+    let favourites = localStorage.getItem(this.user!.getEmail() + "-favourites");
+    console.log("favouriteTrip " + this.user!.getEmail() + "-favourites ", favourites);
+    if (favourites) {
+      let storedFavourites: Trip[] = JSON.parse(localStorage.getItem(this.user!.getEmail() + "-favourites") || '{}');
+      let existsInFavourites: boolean = storedFavourites.some(storedTrip => Trip.castJsonTrip(storedTrip).getTicker() === trip.getTicker());
+      console.log("favouriteTrip trip is in storedFavourites ", existsInFavourites);
+      if (existsInFavourites) {
+        result = true;
+      }
+    }
+    return result;
+  }
+
 }

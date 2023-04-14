@@ -93,7 +93,7 @@ export class AddTripComponent implements OnInit {
       ]),
       startDate: [ this.default_date_value , Validators.required],
       endDate: [ this.default_date_value , Validators.required],
-      publicationDate: [''],
+      //publicationDate: [''],
       pictures: this.fb.array([
         //uncomment next line to initialize with one element
         //this.getPicture()
@@ -125,22 +125,26 @@ export class AddTripComponent implements OnInit {
       let endDate: string = (new Date(casted_trip.getEndDate())).toLocaleDateString('en-CA');
       //console.log("endDate ", endDate);
       //publicationDate
-      let publicationDate: string = casted_trip.getPublicationDate() != null ? (new Date(casted_trip.getPublicationDate())).toLocaleDateString('en-CA') : '';
+      //let publicationDate: string = casted_trip.getPublicationDate() != null ? (new Date(casted_trip.getPublicationDate())).toLocaleDateString('en-CA') : '';
       //console.log("publicationDate ", publicationDate);
 
       //requirements
       let original_requirements = casted_trip.getRequirements();
-
-      for(let i = 0; i < (original_requirements.length - 1); i++)
+      var formatted_requirements:any[] = [];
+      if(original_requirements.length > 0)
       {
-        this.onAddRequirement();
+        for(let i = 0; i < (original_requirements.length - 1); i++)
+        {
+          this.onAddRequirement();
+        }
+  
+        formatted_requirements = Object.keys(original_requirements!)
+        .map((key: any) => { 
+          return {'requirement': original_requirements[key]};
+        });
+        console.log("formatted_requirements ", formatted_requirements);
       }
 
-      var formatted_requirements = Object.keys(original_requirements!)
-      .map((key: any) => { 
-        return {'requirement': original_requirements[key]};
-      });
-      //console.log("formatted_requirements ", formatted_requirements);
 
       //pictures
       //var formatted_pictures = [{'picture': ''}];
@@ -162,6 +166,24 @@ export class AddTripComponent implements OnInit {
         }
       });
 
+
+      this.tripForm.controls.title.setValue(casted_trip.getTitle());
+      this.tripForm.controls.description.setValue(casted_trip.getDescription());
+      this.tripForm.controls.price.setValue(casted_trip.getPrice());
+
+      if(formatted_requirements.length > 0)
+      {
+        this.tripForm.controls.requirements.setValue(formatted_requirements);
+      }
+
+      this.tripForm.controls.startDate.setValue(startDate);
+      this.tripForm.controls.endDate.setValue(endDate);
+
+      this.tripForm.controls.pictures.setValue(formatted_pictures);
+      this.tripForm.controls.stages.setValue(formated_stages);
+      this.tripForm.controls.managerId.setValue(casted_trip.getManagerId());
+
+      /*
       this.tripForm.setValue({
         title: casted_trip.getTitle(),
         description: casted_trip.getDescription(),
@@ -169,11 +191,12 @@ export class AddTripComponent implements OnInit {
         requirements: formatted_requirements,
         startDate: startDate,
         endDate: endDate,
-        publicationDate: publicationDate,
+        //publicationDate: publicationDate,
         pictures: formatted_pictures,
         stages: formated_stages,
         managerId: casted_trip.getManagerId()
       });
+      */
 
     })
     .catch((error) => {
@@ -270,12 +293,17 @@ export class AddTripComponent implements OnInit {
     let formData = this.tripForm.value;
 
     //console.log("formData", formData);
-    let original_requirements = formData.requirements;
+    let original_requirements: any[] | undefined = formData.requirements;
     //console.log(original_requirements);
-    var formatted_requirements = Object.keys(original_requirements!)
-    .map(function (key: any) { 
-      return original_requirements![key]["requirement"];
-    });
+    var formatted_requirements: any[] = [];
+    if(typeof original_requirements !== 'undefined' && original_requirements.length > 0)
+    {
+      formatted_requirements = Object.keys(original_requirements!)
+      .map(function (key: any) { 
+        return original_requirements![key]["requirement"];
+      });
+    }
+
     //console.log(formatted_requirements);
     let newFormData = JSON.parse(JSON.stringify(formData));
     newFormData["requirements"] = formatted_requirements;
@@ -294,8 +322,11 @@ export class AddTripComponent implements OnInit {
 
   onSubmit()
   {
+    this.success_message = "";
+    this.error_message = "";
+
     let newFormData = this.formatFormData();
-    let publicationDateBackup = newFormData["publicationDate"];
+    //let publicationDateBackup = newFormData["publicationDate"];
 
     let previously_uploaded_pictures_backup: Array<any> = []; 
     
@@ -303,7 +334,7 @@ export class AddTripComponent implements OnInit {
     if(this.edit_mode == false)
     {
       //set publicationDate so taht the trip can be edited to add pictures information
-      newFormData["publicationDate"] = null;
+      //newFormData["publicationDate"] = null;
       newFormData["pictures"] = [];
       console.log("newFormData ", newFormData);
       promise = this.tripService.createTrip(newFormData);
@@ -329,7 +360,11 @@ export class AddTripComponent implements OnInit {
 
       if(this.files.length == 0)
       {
-        this.router.navigate(['/trips/'+this.created_trip.id]);
+        if(this.edit_mode == false)
+        {
+          this.tripForm.reset();
+        }
+        this.success_message = "Trip successfully saved";
       }
       else
       {
@@ -352,7 +387,7 @@ export class AddTripComponent implements OnInit {
   
           console.log("pictures ", pictures);
           this.created_trip.setPictures(pictures);
-          this.created_trip.setPublicationDate(new Date(publicationDateBackup!));
+          //this.created_trip.setPublicationDate(new Date(publicationDateBackup!));
           console.log("this.created_trip ", this.created_trip);
   
           this.tripService.updateTrip(this.created_trip)
@@ -360,13 +395,17 @@ export class AddTripComponent implements OnInit {
   
             console.log("AddTripComponent->onSubmit->uploadFiles->updateTrip then response3 ", response3);
             
-            //this.tripForm.reset();
-            this.router.navigate(['/trips/'+this.created_trip.id]);
+            if(this.edit_mode == false)
+            {
+              this.tripForm.reset();
+            }
+            this.success_message = "Trip successfully saved";
   
           })
           .catch((error3) => {
       
             console.error("AddTripComponent->onSubmit->uploadFiles->updateTrip error3 ", error3);
+            this.error_message = "Something went wrong";
       
           });
     
@@ -374,6 +413,7 @@ export class AddTripComponent implements OnInit {
         .catch((error2) => {
     
           console.error("AddTripComponent->onSubmit->uploadFiles error2 ", error2);
+          this.error_message = "Something went wrong";
     
         });
       }
@@ -382,10 +422,10 @@ export class AddTripComponent implements OnInit {
     .catch((error1) => {
 
       console.error("AddTripComponent->onSubmit error1 ", error1);
+      this.error_message = "Something went wrong";
 
     });
 
-    
   }
 
   uploadFiles()
@@ -415,10 +455,6 @@ export class AddTripComponent implements OnInit {
     });
 
     return this.s3UploadService.uploadMultipleFiles(this.filesToUpload);
-  }
-
-  goToTripList() {
-    this.router.navigate(['/trips/list']);
   }
 
   onRemovePreviouslySelectedPicture(picture: TripPicture)

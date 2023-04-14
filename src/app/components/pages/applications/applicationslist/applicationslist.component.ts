@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ApplicationslistComponent implements OnInit {
 
-  protected applications: Array<Application> = [];
+  applications: Array<Application> = [];
   cancelledApplications: Array<Application> = [];
   pendingApplications: Array<Application> = [];
   rejectedApplications: Array<Application> = [];
@@ -22,7 +22,7 @@ export class ApplicationslistComponent implements OnInit {
 
   protected user!: Actor | null;
   protected activeRole: string = 'anonymous';
-  protected trip_id!: string;
+  trip_id!: string;
 
   @ViewChild(NgForm)
   f!: NgForm;

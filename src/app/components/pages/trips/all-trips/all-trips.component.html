@@ -1,11 +1,26 @@
 
 <div class="row">
-    <div class="col-md-6"><p>Available trips just for you!</p></div>
-    <div class="col-md-3 offset-md-3">
+    <div class="col-md-6"><p>{{'trips.messages.trips-available' | translate}}</p></div>
+    <div class="col-md-3 offset-md-3" *ngIf="showAddTripButton">
         <button type="button" class="btn btn-success" routerLink="/trips/add">
             <i class="fa-solid fa-plus"></i>
-            Add trip
+            {{'trips.buttons.add' | translate}}
         </button>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-3">
+    
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" [(ngModel)]="keyword" >
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="search()">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                Search
+            </button>
+        </div>
+    
     </div>
 </div>
 
@@ -29,30 +44,31 @@
             <img *ngIf="trip.getPictures().length == 0" src="assets/images/trips/default-trip.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">{{trip.getTitle()}}</h5>
-                <p class="card-text">{{trip.getDescription() | slice:0:50}} ...</p>
+                <p class="card-text">{{trip.getDescription() | slice:0:20}} ...</p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><b>Price</b>: {{trip.getPrice()}}</li>
+                <li class="list-group-item"><b>{{'trips.price' | translate}}</b>: {{trip.getPrice()}}</li>
                 <li class="list-group-item"
                     [ngStyle]="getCurrentStyles(trip.getStartDate().toString(), currentDateTime.toISOString())">
-                    <b>Start date</b>: {{trip.getStartDate() | date: 'dd/MM/yyyy'}}
-                    <p *ngIf="getDiffDays(trip.getStartDate().toString(), currentDateTime.toISOString()) > 0
-                        && getDiffDays(trip.getStartDate().toString(), currentDateTime.toISOString()) <= 7"><b>Soon!</b></p>
+                    <b>{{'trips.startDate' | translate}}</b>: {{trip.getStartDate() | date: 'dd/MM/yyyy'}}
+                    <p *ngIf="getNowAndStartDateDiffInDays(trip) > 0 && getNowAndStartDateDiffInDays(trip) <= 7"><b>Soon!</b></p>
                 </li>
-                <li class="list-group-item"><b>End date</b>: {{trip.getEndDate() | date: 'dd/MM/yyyy'}}</li>
+                <li class="list-group-item"><b>{{'trips.endDate' | translate}}</b>: {{trip.getEndDate() | date: 'dd/MM/yyyy'}}</li>
+                <li class="list-group-item"><b>{{'trips.starting' | translate}}</b>: {{countDownTimer(trip.getStartDate().toString())}}</li>
+
             </ul>
             <div class="card-body">
                 <button type="button" class="btn btn-success" routerLink="/trips/{{trip.id}}">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    More
+                    {{'trips.buttons.more' | translate}}
                 </button>
-                <button type="button" class="btn btn-warning" routerLink="/trips/{{trip.id}}/edit">
+                <button type="button" class="btn btn-warning" *ngIf="activeRole == 'MANAGER'" routerLink="/trips/{{trip.id}}/edit">
                     <i class="fas fa-edit"></i>
-                    Edit
+                    {{'trips.buttons.edit' | translate}}
                 </button>
-                <button type="button" class="btn btn-danger" (click)="deleteTrip(trip)">
+                <button type="button" class="btn btn-danger" *ngIf="activeRole == 'MANAGER' && getNowAndStartDateDiffInDays(trip) >= 10" (click)="deleteTrip(trip)">
                     <i class="fa-solid fa-trash"></i>
-                    Delete
+                    {{'trips.buttons.delete' | translate}}
                 </button>
                 <button type="button" class="btn btn-primary"
                     *ngIf="activeRole == 'EXPLORER' && trip.getStartDate().toString() > currentDateTime.toISOString() && !trip.isCanceled()"
@@ -64,6 +80,14 @@
                     routerLink="/trips/{{trip.id}}/applications/">
                     <i class="fa-solid fa-envelope"></i>
                     {{'applications.title-plural' | translate}}
+                </button>
+                <button type="button" class="btn btn-success" *ngIf="activeRole == 'EXPLORER' && !checkTripInFavourites(trip)" (click)="favouriteTrip(trip)">
+                    <i class="fa-solid fa-heart-circle-plus"></i>
+                    {{'trips.buttons.add-favourite' | translate}}
+                </button>
+                <button type="button" class="btn btn-danger" *ngIf="activeRole == 'EXPLORER' && checkTripInFavourites(trip)" (click)="favouriteTrip(trip)">
+                    <i class="fa-solid fa-heart-circle-xmark"></i>
+                    {{'trips.buttons.remove-favourite' | translate}}
                 </button>
             </div>
         </div>
