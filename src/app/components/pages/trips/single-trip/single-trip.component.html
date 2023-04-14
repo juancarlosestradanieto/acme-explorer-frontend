@@ -38,28 +38,6 @@
       <a href="{{sponsorship.getPage()}}" style="  display: flex;justify-content: center;">{{sponsorship.getPage()}}</a>
     </div>
   </div>
-  
-  <div class="card">
-    <div class="container">
-
-      <ngb-carousel *ngIf="trip.getPictures().length > 0" class="card-img-top">
-        <ng-template ngbSlide *ngFor="let picture of trip.getPictures()">
-          <div class="wrapper">
-            <img [src]="picture['picture']" alt="Random first slide">
-          </div>
-          <div class="carousel-caption">
-            <!--
-            <h3>Title Goes Here</h3>
-            <p>Consectetur tortor volutpat pretium.</p>
-            -->
-          </div>
-        </ng-template>
-      </ngb-carousel>
-
-      <img *ngIf="trip.getPictures().length == 0" src="assets/images/trips/default-trip.jpg" class="card-img-top default-trip-image" alt="...">
-
-    </div>
-  </div>
 
   <div class="row">
     <div class="alert alert-success" *ngIf="success_message && success_message != ''">
