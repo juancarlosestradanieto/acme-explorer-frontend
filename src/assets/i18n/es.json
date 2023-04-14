@@ -156,7 +156,8 @@
     }
   },
   "sponsorships": {
-    "title": "Patrocinios"
+    "title": "Patrocinios",
+    "sponsorship":"Patrocinio"
   },
   "dashboard": {
     "title": "Panel de control",

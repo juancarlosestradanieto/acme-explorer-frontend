@@ -156,7 +156,8 @@
     }
   },
   "sponsorships": {
-    "title": "Sponsorships"
+    "title": "Sponsorships",
+    "sponsorship":"Sponsorship"
   },
   "dashboard": {
     "title": "Dashboard",
