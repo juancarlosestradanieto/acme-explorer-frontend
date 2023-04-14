@@ -163,7 +163,7 @@
     "trip_by_manager": "Number of trips managed per manager",
     "applications_by_trip": "Number of applications per trip",
     "price_of_trips": "Price of the trips",
-    "applications_by_status": "Applications grouped by status",
+    "applications_by_status": "Ratio of applications grouped by status",
     "price_range_in_finder": "Average price range in finders",
     "top10_in_finder": "Top 10 keywords in finders",
     "avg": "Average",
