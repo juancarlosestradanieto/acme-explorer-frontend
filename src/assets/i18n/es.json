@@ -57,8 +57,10 @@
       "remove-favourite": "Eliminar de favoritos",
       "add": "Añadir viaje",
       "more": "Detalles",
-      "edit": "Editar viaje",
-      "delete": "Borrar viaje"
+      "edit": "Editar",
+      "delete": "Borrar",
+      "cancel":"Cancelar",
+      "publish":"Publicar"
     },
     "messages": {
       "trips-available": "¡Viajes disponibles para ti!",

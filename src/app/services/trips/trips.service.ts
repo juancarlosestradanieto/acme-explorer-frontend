@@ -161,13 +161,87 @@ export class TripsService {
       this.http.delete<any>(url, httpOptions).subscribe({
         next: (response) => {
   
-          console.log('TripsService->getSingleTrip delete next response', response);
+          console.log('TripsService->deleteTrip delete next response', response);
           resolve(response);
   
         },
         error: (error) => {
   
-          console.error('TripsService->getSingleTrip delete error', error);
+          console.error('TripsService->deleteTrip delete error', error);
+          reject(error);
+  
+        }
+      });
+    
+    });
+
+  }
+
+  cancelTrip(trip_id: string, cancelReason: string)
+  {
+
+    const idToken = localStorage.getItem('idToken') ?? '';
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Accept-Language': 'es',
+        'idToken': idToken 
+      }),
+    };
+
+    let body = {"cancelReason": cancelReason};
+
+    const url = `${environment.backendApiBaseURL + '/trips/'+trip_id+'/cancel'}`;
+
+    return new Promise<any>((resolve, reject) => {
+
+      this.http.patch<any>(url, body, httpOptions).subscribe({
+        next: (response) => {
+  
+          console.log('TripsService->cancelTrip patch next response', response);
+          resolve(response);
+  
+        },
+        error: (error) => {
+  
+          console.error('TripsService->cancelTrip patch error', error);
+          reject(error);
+  
+        }
+      });
+    
+    });
+
+  }
+
+  publishTrip(trip_id: string)
+  {
+
+    const idToken = localStorage.getItem('idToken') ?? '';
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Accept-Language': 'es',
+        'idToken': idToken 
+      }),
+    };
+
+    let body = {};
+
+    const url = `${environment.backendApiBaseURL + '/trips/'+trip_id+'/publish'}`;
+
+    return new Promise<any>((resolve, reject) => {
+
+      this.http.patch<any>(url, body, httpOptions).subscribe({
+        next: (response) => {
+  
+          console.log('TripsService->publishTrip patch next response', response);
+          resolve(response);
+  
+        },
+        error: (error) => {
+  
+          console.error('TripsService->publishTrip patch error', error);
           reject(error);
   
         }

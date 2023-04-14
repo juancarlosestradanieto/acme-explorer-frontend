@@ -57,8 +57,10 @@
       "remove-favourite": "Remove from favourites",
       "add": "Add trip",
       "more": "More",
-      "edit": "Edit trip",
-      "delete": "Delete trip"
+      "edit": "Edit",
+      "delete": "Delete",
+      "cancel":"Cancel",
+      "publish":"Publish"
     },
     "messages": {
       "trips-available": "Available trips just for you!",

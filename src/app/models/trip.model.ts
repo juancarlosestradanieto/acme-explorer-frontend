@@ -159,4 +159,19 @@ export class Trip extends Entity {
         return casted_trips;
     }
 
+    isPublished(): Boolean
+    {
+        let trip: Trip = this;
+        let published: Boolean = false;
+    
+        //console.log("trip.getPublicationDate()", trip.getPublicationDate());
+        //console.log("typeof trip.getPublicationDate()", typeof trip.getPublicationDate());
+        if(typeof trip.getPublicationDate() !== 'undefined' && typeof trip.getPublicationDate() === 'string')
+        {
+            published = true;
+        }
+    
+        return published;
+    }
+
 }

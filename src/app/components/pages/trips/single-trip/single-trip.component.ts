@@ -49,26 +49,6 @@ export class SingleTripComponent implements OnInit {
 
   }
 
-  getTrip()
-  {
-    this.tripService.getSingleTrip(this.trip_id)
-    .then((response) => {
-
-      console.log("SingleTripComponent->constructor tripsService.getSingleTrip then response ", response);
-      this.json_trip = response;
-      console.log("this.json_trip", this.json_trip);
-      
-      let casted_trip: Trip = Trip.castJsonTrip(this.json_trip);
-      this.trip = casted_trip;
-
-    })
-    .catch((error) => {
-
-      console.error("SingleTripComponent->constructor tripsService.getSingleTrip catch ", error);
-
-    });
-  }
-
   favouriteTrip(trip: Trip) {
     console.log("favouriteTrip user.email ", this.user!.getEmail());
     console.log("favouriteTrip user.email-favourites ", this.user!.getEmail() + "-favourites");
@@ -130,6 +110,26 @@ export class SingleTripComponent implements OnInit {
     return this.getDiffDays(trip.getStartDate().toString(), this.currentDateTime.toISOString());
   }
 
+  getTrip()
+  {
+    this.tripService.getSingleTrip(this.trip_id)
+    .then((response) => {
+
+      console.log("SingleTripComponent->constructor tripsService.getSingleTrip then response ", response);
+      this.json_trip = response;
+      console.log("this.json_trip", this.json_trip);
+      
+      let casted_trip: Trip = Trip.castJsonTrip(this.json_trip);
+      this.trip = casted_trip;
+
+    })
+    .catch((error) => {
+
+      console.error("SingleTripComponent->constructor tripsService.getSingleTrip catch ", error);
+
+    });
+  }
+
   deleteTrip(trip: Trip) {
     
     this.error_message = "";
@@ -141,14 +141,77 @@ export class SingleTripComponent implements OnInit {
       this.tripService.deleteTrip(trip.id)
       .then((response) => {
 
-        console.log("AllTripsComponent->deleteTrip tripsService.deleteTrip then response ", response);
+        console.log("SingleTripComponent->deleteTrip tripsService.deleteTrip then response ", response);
         this.success_message = response.message;
         
       })
       .catch((error) => {
 
-        console.error("AllTripsComponent->deleteTrip tripsService.deleteTrip catch ", error);
-        this.success_message = "Something went wrong";
+        console.error("SingleTripComponent->deleteTrip tripsService.deleteTrip catch ", error);
+        this.error_message = "Something went wrong";
+
+      });
+
+    }
+  }
+
+  cancelTrip(trip: Trip) {
+    
+    this.error_message = "";
+    this.success_message = "";
+
+    if(confirm("Are you sure to cancel?")) 
+    {
+
+      let cancelReason = prompt("Please enter the cancel reason");
+
+      if (cancelReason == null || cancelReason == "") 
+      {
+        //User cancelled the prompt"
+      } 
+      else 
+      {
+
+        this.tripService.cancelTrip(trip.id, cancelReason)
+        .then((response) => {
+  
+          console.log("SingleTripComponent->cancelTrip tripsService.cancelTrip then response ", response);
+          this.success_message = response.message;
+          this.getTrip();
+          
+        })
+        .catch((error) => {
+  
+          console.error("SingleTripComponent->cancelTrip tripsService.cancelTrip catch ", error);
+          this.error_message = "Something went wrong";
+  
+        });
+
+      }
+
+    }
+  }
+
+  publishTrip(trip: Trip) {
+    
+    this.error_message = "";
+    this.success_message = "";
+
+    if(confirm("Are you sure to publish?")) 
+    {
+
+      this.tripService.publishTrip(trip.id)
+      .then((response) => {
+
+        console.log("SingleTripComponent->publishTrip tripsService.publishTrip then response ", response);
+        this.success_message = response.message;
+        this.getTrip();
+        
+      })
+      .catch((error) => {
+
+        console.error("SingleTripComponent->publishTrip tripsService.publishTrip catch ", error);
+        this.error_message = "Something went wrong";
 
       });
 

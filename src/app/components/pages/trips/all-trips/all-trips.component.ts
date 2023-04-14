@@ -125,7 +125,6 @@ export class AllTripsComponent implements OnInit {
 
         this.trips = casted_trips;
 
-        //console.log(this.getDiffDays(this.trips[0].start_date.toString(), this.currentDateTime.toISOString()))
       })
       .catch((error: any) => {
 
