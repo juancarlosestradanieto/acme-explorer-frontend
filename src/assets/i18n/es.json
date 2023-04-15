@@ -113,6 +113,7 @@
     "profile": "Perfil",
     "control_panel":"Panel de actores",
     "add_manager":"Registrar nuevo Manager",
+    "back_actors_control_panel":"Volver al Panel de Actores",
     "name":"Nombre",
     "surname":"Apellido",
     "email":"Email",
@@ -122,7 +123,7 @@
     "role": {
       "title": "Rol",
       "explorer": "Explorador",
-      "manager": "Gerente",
+      "manager": "Manager",
       "sponsor": "Patrocinador",
       "admin": "Administrador"
     }
@@ -172,7 +173,7 @@
   },
   "dashboard": {
     "title": "Panel de control",
-    "trip_by_manager": "Número de viajes gestinados por gerente",
+    "trip_by_manager": "Número de viajes gestinados por manager",
     "applications_by_trip": "Número de solicitudes por viaje",
     "price_of_trips": "Precio de los viajes",
     "applications_by_status": "Ratio de solicitudes agrupadas por estado",

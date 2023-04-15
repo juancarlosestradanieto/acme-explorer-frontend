@@ -5,6 +5,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { ConfirmationService } from 'primeng/api/confirmationservice';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -17,13 +19,14 @@ describe('AllActorsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports:[HttpClientModule, TranslateModule.forRoot({
+      imports:[HttpClientModule,ConfirmDialogModule, TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
           useFactory: HttpLoaderFactory,
           deps: [HttpClient]
         }
       })],
+      providers:[],
       declarations: [ AllActorsComponent ]
     })
     .compileComponents();

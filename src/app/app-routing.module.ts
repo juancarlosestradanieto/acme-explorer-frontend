@@ -23,6 +23,7 @@ import { AddTripComponent } from './components/pages/trips/add-trip/add-trip.com
 import { EditTripComponent } from './components/pages/trips/edit-trip/edit-trip.component';
 import { ManagerApplicationsGuard } from './guards/manager-applications.guard';
 import { AllActorsComponent } from './components/pages/actors/all-actors/all-actors.component';
+import { RegisterManagerComponent } from './components/pages/actors/register-manager/register-manager.component';
 
 const routes: Routes = [
   {
@@ -118,6 +119,9 @@ const routes: Routes = [
   },
   {
     path:'all-actors',component: AllActorsComponent, canActivate: [ActorRoleGuard], data:{ expectedRole: 'ADMINISTRATOR'}
+  },
+  {
+    path:'register-manager',component: RegisterManagerComponent, canActivate: [ActorRoleGuard], data:{ expectedRole: 'ADMINISTRATOR'}
   },
   {
     path: 'denied-access', component: AccessdeniedComponent
