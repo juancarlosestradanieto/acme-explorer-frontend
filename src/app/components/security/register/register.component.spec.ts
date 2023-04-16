@@ -77,7 +77,7 @@ describe('RegisterComponent', () => {
       surname: 'test',
       email: 'test'+(now.getTime())+'@gmail.com',
       password: '1234567890',
-      phone: '123456789',
+      phone_number: '123456789',
       address: 'test',
       role: ['EXPLORER'],
       isActive: true
@@ -89,7 +89,7 @@ describe('RegisterComponent', () => {
   it('should send register form',  fakeAsync(() => {
     let authService = TestBed.inject(AuthService);
     let mockResponse = {
-      "phone": "test",
+      "phone_number": "test",
       "name": "test",
       "surname": "test",
       "email": "test1680948412118@gmail.com",

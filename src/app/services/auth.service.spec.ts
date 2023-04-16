@@ -58,7 +58,7 @@ describe('AuthService', () => {
       surname: newActor.getSurname(),
       email: newActor.getEmail(),
       password: newActor.getPassword(),
-      phone: newActor.getPhone_number(),
+      phone_number: newActor.getPhone_number(),
       address: newActor.getAddress(),
       role: newActor.getRole(),
       isActive: newActor.isIsActive()
@@ -72,7 +72,7 @@ describe('AuthService', () => {
       name: newActor.getName(),
       surname: newActor.getSurname(),
       email: newActor.getEmail(),
-      phone: newActor.getPhone_number(),
+      phone_number: newActor.getPhone_number(),
       address: newActor.getAddress(),
       role: newActor.getRole(),
       isActive: newActor.isIsActive() }));
