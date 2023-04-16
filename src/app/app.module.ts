@@ -46,14 +46,6 @@ import { AddActorComponent } from './components/pages/actors/add-actor/add-actor
 import { EditActorComponent } from './components/pages/actors/edit-actor/edit-actor.component';
 import { RegisterManagerComponent } from './components/pages/actors/register-manager/register-manager.component';
 
-//PrimeNG Modules and Services
-import { ConfirmationService } from 'primeng/api';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-
-let PRIMENG_MODULES = [
-  ConfirmDialogModule,
-  
-]
 
 //Angular Material Modules
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -116,7 +108,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ReactiveFormsModule,
     HttpClientModule,
     ...ANGULAR_MATERIAL_MODULES,
-    ...PRIMENG_MODULES,
     NgbModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
@@ -132,7 +123,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     }),
 
   ],
-  providers: [ConfirmationService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

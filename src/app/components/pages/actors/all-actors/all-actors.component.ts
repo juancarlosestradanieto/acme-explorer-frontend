@@ -3,7 +3,6 @@ import { PageEvent } from '@angular/material/paginator';
 import { Actor } from 'src/app/models/actor.model';
 import { Trip } from 'src/app/models/trip.model';
 import { ActorsService } from 'src/app/services/actors.service';
-import { ConfirmationService } from 'primeng/api';
 
 
 
@@ -23,7 +22,7 @@ export class AllActorsComponent implements OnInit {
   desde:number = 0;
   hasta:number = 10;
 
-  constructor(private _actorsService:ActorsService, private  _confirmationService:ConfirmationService){ }
+  constructor(private _actorsService:ActorsService, ){ }
 
   ngOnInit(): void {
     this.getAllActors();
@@ -44,20 +43,10 @@ export class AllActorsComponent implements OnInit {
 
 
   deleteActor(actorID:string){
-    this._confirmationService.confirm({
-      message: 'Are you sure you want to delete this actor?',
-      accept: () => {
+
         this._actorsService.deleteActor(actorID).subscribe(res =>{
           this.getAllActors(); //Para rellenar la tabla con los datos cada vez que borremos alguno
-        },(err =>{
-        }))
-          
-      },
-      reject: () => {
-        return
+        });
       }
-  });
-  }
-  
 
 }
