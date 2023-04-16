@@ -41,6 +41,7 @@ import { ThemeToggleComponent } from './components/shared/theme-toggle/theme-tog
 import { ApplicationcreationComponent } from './components/pages/applications/applicationcreation/applicationcreation.component';
 import { AddTripComponent } from './components/pages/trips/add-trip/add-trip.component';
 import { EditTripComponent } from './components/pages/trips/edit-trip/edit-trip.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -84,6 +85,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    NgxDatatableModule,
     // ngx-translate and the loader module
     HttpClientModule,
     TranslateModule.forRoot({

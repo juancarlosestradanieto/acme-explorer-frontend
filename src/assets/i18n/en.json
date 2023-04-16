@@ -146,6 +146,8 @@
       "accepted": "Accepted"
     },
     "messages": {
+      "expand-collapse-comments": "Expand/collapse Comments",
+      "expand-collapse-comments-reject": "Expandir/Colapsar Comentarios and Rejection",
       "rejection-reason-required": "A rejection reason is needed",
       "comments-not-found": "There are no comments found",
       "cancelled-applications-not-found": "There are no cancelled applications found",

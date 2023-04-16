@@ -28,6 +28,7 @@
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
     "@popperjs/core": "^2.10.2",
+    "@swimlane/ngx-datatable": "^20.1.0",
     "aws-sdk": "^2.1353.0",
     "bootstrap": "^5.2.3",
     "date-fns": "^2.29.3",
