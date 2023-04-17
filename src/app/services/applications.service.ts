@@ -184,11 +184,11 @@ export class ApplicationsService {
         'idToken': idToken
       }),
     };
-
-    httpOptions.headers.set('idToken', idToken);
+    
+    console.log('ApplicationsService->cancelApplication httpOptionsStatus: ', httpOptionsStatus);
 
     return new Promise<any>((resolve, reject) => {
-      this.http.patch<any>(url, {}, httpOptions).subscribe({
+      this.http.patch<any>(url, {}, httpOptionsStatus).subscribe({
         next: (response) => {
           console.log('ApplicationsService->getApplicationById get next response: ', response);
           resolve(response);

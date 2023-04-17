@@ -439,15 +439,20 @@
                     </ng-template>
                 </ngx-datatable-column>
 
+                <ngx-datatable-column name="" *ngIf="activeRole == 'EXPLORER'" prop="id" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        <button type="button" (click)="onApplicationCancel(value)" class="btn btn-danger" *ngIf="activeRole == 'EXPLORER'">
+                            <i class="fa-regular fa-rectangle-xmark"></i>
+                            {{'applications.cancel' | translate}}
+                        </button>
+                    </ng-template>
+                </ngx-datatable-column>
+
                 <ngx-datatable-column *ngIf="activeRole == 'EXPLORER'" [canAutoResize]="true">
                     <ng-template let-value="value" ngx-datatable-cell-template>
                         <button type="button" class="btn btn-success" *ngIf="activeRole == 'EXPLORER'">
                             <i class="fa-regular fa-credit-card"></i>
                             {{'applications.pay' | translate}}
-                        </button>
-                        <button type="button" class="btn btn-danger" *ngIf="activeRole == 'EXPLORER'">
-                            <i class="fa-regular fa-rectangle-xmark"></i>
-                            {{'applications.cancel' | translate}}
                         </button>
                     </ng-template>
                 </ngx-datatable-column>

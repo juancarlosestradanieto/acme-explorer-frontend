@@ -210,14 +210,14 @@ export class AllTripsComponent implements OnInit {
 
   checkTripInFavourites(trip: Trip) {
     let result: boolean = false;
-    console.log("favouriteTrip user.email ", this.user!.getEmail());
-    console.log("favouriteTrip user.email-favourites ", this.user!.getEmail() + "-favourites");
+    //console.log("favouriteTrip user.email ", this.user!.getEmail());
+    //console.log("favouriteTrip user.email-favourites ", this.user!.getEmail() + "-favourites");
     let favourites = localStorage.getItem(this.user!.getEmail() + "-favourites");
-    console.log("favouriteTrip " + this.user!.getEmail() + "-favourites ", favourites);
+    //console.log("favouriteTrip " + this.user!.getEmail() + "-favourites ", favourites);
     if (favourites) {
       let storedFavourites: Trip[] = JSON.parse(localStorage.getItem(this.user!.getEmail() + "-favourites") || '{}');
       let existsInFavourites: boolean = storedFavourites.some(storedTrip => Trip.castJsonTrip(storedTrip).getTicker() === trip.getTicker());
-      console.log("favouriteTrip trip is in storedFavourites ", existsInFavourites);
+      //console.log("favouriteTrip trip is in storedFavourites ", existsInFavourites);
       if (existsInFavourites) {
         result = true;
       }
