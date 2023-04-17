@@ -14,33 +14,90 @@
         <div class="accordion-body" *ngIf="cancelledApplications.length < 1">
             <p>{{'applications.messages.cancelled-applications-not-found' | translate}}</p>
         </div>
-        <div class="accordion-body" *ngFor="let application of cancelledApplications">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"></li>
-                <li class="list-group-item"><b>{{'applications.title-sing' | translate}}</b>: #{{application.id}}</li>
-                <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}
-                </li>
-                <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>:
-                    {{application.applicationMoment}}</li>
-                <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.explorer_Id}}
-                </li>
-                <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip_Id}}</li>
-                <li class="list-group-item" *ngFor="let comment of application.getComments(); let i = index">
-                    <p>{{i+1}} - {{comment}}</p>
-                </li>
-                <li class="list-group-item">
-                    <button type="button" class="btn btn-primary" routerLink="/trip/{{application.trip_Id}}">
-                        <i class="fa fa-plane" aria-hidden="true"></i>
-                        {{'buttons.go_to_trip' | translate}}
-                    </button>
-                    <!--
-                                            <button type="button" class="btn btn-primary" routerLink="/applications/{{application.id}}">
-                        <i class="fa-solid fa-magnifying-glass-plus"></i>
-                        {{'buttons.more' | translate}}
-                    </button>
-                     -->
-                </li>
-            </ul>
+        <div>
+            <ngx-datatable [rows]="cancelledApplications" #cancelledTable class="bootstrap expandable"
+                [loadingIndicator]="true" [headerHeight]="40" [footerHeight]="80" [limit]="10" [rowHeight]="'auto'"
+                [columnMode]="'force'" [scrollbarH]="true">
+
+                <ngx-datatable-row-detail [rowHeight]="500" [scrollLeft]="true" #cancelledCommentsRow
+                    (toggle)="onDetailToggle($event)">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                        <div style="padding-left: 1%;">
+                            <div><strong>{{'applications.comments' | translate}}</strong></div>
+                            <div *ngFor="let comment of row.getComments(); let i = index">
+                                <p>{{i+1}} - {{comment}}</p>
+                            </div>
+                        </div>
+
+                    </ng-template>
+                </ngx-datatable-row-detail>
+
+                <ngx-datatable-column [resizeable]="false" [sortable]="false" [draggable]="false"
+                    [canAutoResize]="false" [canAutoResize]="true">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                        <a href="javascript:void(0)"
+                            title="{{'applications.messages.expand-collapse-comments' | translate}}"
+                            (click)="toggleExpandCancelledRow(row)">
+                            <i class="fa-solid fa-comments"></i>
+                        </a>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.title-sing' | translate}}" prop="id" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        #{{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <!--<ngx-datatable-column name="{{'applications.status.title' | translate}}" prop="status" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+        
+                 <ngx-datatable-column name="{{'applications.moment' | translate}}" prop="applicationMoment" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>-->
+
+                <ngx-datatable-column name="{{'applications.actor-id' | translate}}" prop="explorer_Id"
+                    [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.trip-id' | translate}}" prop="trip_Id"
+                    [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.rejection_reason' | translate}}" prop="rejected_reason"
+                    [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="" prop="trip_Id" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        <button type="button" class="btn btn-primary" routerLink="/trips/{{value}}">
+                            <i class="fa fa-plane" aria-hidden="true"></i>
+                            {{'buttons.go_to_trip' | translate}}
+                        </button>
+                        <!--
+                                                <button type="button" class="btn btn-primary" routerLink="/applications/{{application.id}}">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            {{'buttons.more' | translate}}
+                        </button>
+                         -->
+                    </ng-template>
+                </ngx-datatable-column>
+
+            </ngx-datatable>
         </div>
     </div>
 </div>
@@ -58,39 +115,95 @@
         <div class="accordion-body" *ngIf="rejectedApplications.length < 1">
             <p>{{'applications.messages.rejected-applications-not-found' | translate}}</p>
         </div>
-        <div class="accordion-body" *ngFor="let application of rejectedApplications">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"></li>
-                <li class="list-group-item"><b>{{'applications.title-sing' | translate}}</b>: #{{application.id}}</li>
-                <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}
-                </li>
-                <li class="list-group-item"><b>{{'applications.rejection_reason' | translate}}</b>:
-                    {{application.rejected_reason}}
-                </li>
-                <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>:
-                    {{application.applicationMoment}}</li>
-                <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.explorer_Id}}
-                </li>
-                <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip_Id}}</li>
-                <li class="list-group-item" *ngFor="let comment of application.getComments(); let i = index">
-                    <p>{{i+1}} - {{comment}}</p>
-                </li>
-                <li class="list-group-item">
-                    <button type="button" class="btn btn-primary" routerLink="/trip/{{application.trip_Id}}">
-                        <i class="fa fa-plane" aria-hidden="true"></i>
-                        {{'buttons.go_to_trip' | translate}}
-                    </button>
-                    <!--
-                                            <button type="button" class="btn btn-primary" routerLink="/applications/{{application.id}}">
-                        <i class="fa-solid fa-magnifying-glass-plus"></i>
-                        {{'buttons.more' | translate}}
-                    </button>
-                     -->
-                </li>
-            </ul>
+        <div>
+            <ngx-datatable [rows]="rejectedApplications" #rejectedTable class="bootstrap expandable"
+                [loadingIndicator]="true" [headerHeight]="40" [footerHeight]="80" [limit]="10" [rowHeight]="'auto'"
+                [columnMode]="'force'" [scrollbarH]="true">
+
+                <ngx-datatable-row-detail [rowHeight]="500" [scrollLeft]="true" #rejectedCommentsRow
+                    (toggle)="onDetailToggle($event)">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                        <div style="padding-left: 1%;">
+                            <div><strong>{{'applications.comments' | translate}}</strong></div>
+                            <div *ngFor="let comment of row.getComments(); let i = index">
+                                <p>{{i+1}} - {{comment}}</p>
+                            </div>
+                        </div>
+
+                    </ng-template>
+                </ngx-datatable-row-detail>
+
+                <ngx-datatable-column [resizeable]="false" [sortable]="false" [draggable]="false"
+                    [canAutoResize]="false" [canAutoResize]="true">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                        <a href="javascript:void(0)"
+                            title="{{'applications.messages.expand-collapse-comments' | translate}}"
+                            (click)="toggleExpandRejectedRow(row)">
+                            <i class="fa-solid fa-comments"></i>
+                        </a>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.title-sing' | translate}}" prop="id" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        #{{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <!--<ngx-datatable-column name="{{'applications.status.title' | translate}}" prop="status" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+        
+                 <ngx-datatable-column name="{{'applications.moment' | translate}}" prop="applicationMoment" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>-->
+
+                <ngx-datatable-column name="{{'applications.actor-id' | translate}}" prop="explorer_Id"
+                    [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.trip-id' | translate}}" prop="trip_Id"
+                    [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.rejection_reason' | translate}}" prop="rejected_reason"
+                    [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="" prop="trip_Id" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        <button type="button" class="btn btn-primary" routerLink="/trips/{{value}}">
+                            <i class="fa fa-plane" aria-hidden="true"></i>
+                            {{'buttons.go_to_trip' | translate}}
+                        </button>
+                        <!--
+                                                <button type="button" class="btn btn-primary" routerLink="/applications/{{application.id}}">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            {{'buttons.more' | translate}}
+                        </button>
+                         -->
+                    </ng-template>
+                </ngx-datatable-column>
+
+            </ngx-datatable>
         </div>
     </div>
 </div>
+
+
 
 <div class="accordion" id="statusPendingAccordion">
     <div class="accordion-item">
@@ -105,60 +218,134 @@
         <div class="accordion-body" *ngIf="pendingApplications.length < 1">
             <p>{{'applications.messages.pending-applications-not-found' | translate}}</p>
         </div>
-        <div class="accordion-body" *ngFor="let application of pendingApplications; let iApp = index">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"></li>
-                <li class="list-group-item"><b>{{'applications.title-sing' | translate}}</b>: #{{application.id}}</li>
-                <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}
-                </li>
-                <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>:
-                    {{application.applicationMoment}}</li>
-                <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.explorer_Id}}
-                </li>
-                <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip_Id}}</li>
-                <li class="list-group-item" *ngFor="let comment of application.getComments(); let i = index">
-                    <p>{{i+1}} - {{comment}}</p>
-                </li>
-                <li class="list-group-item" *ngIf="activeRole == 'MANAGER'"><b>{{'applications.rejection_reason' |
-                        translate}}*</b>:
-                    <form class="form-horizontal" (ngSubmit)="onApplicationReject(application.id, f)" #f="ngForm">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="rejected_reason{{iApp}}" name="rejected_reason"
-                                required #rejected_reason="ngModel" ngModel>
+        <div>
+            <ngx-datatable [rows]="pendingApplications" #pendingTable class="bootstrap expandable"
+                [loadingIndicator]="true" [headerHeight]="40" [footerHeight]="80" [limit]="10" [rowHeight]="'auto'"
+                [columnMode]="'force'" [scrollbarH]="true">
+
+                <ngx-datatable-row-detail [rowHeight]="500" [scrollLeft]="true" #pendingCommentsRow
+                    (toggle)="onDetailToggle($event)">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                        <div style="padding-left: 1%;">
+                            <div *ngIf="activeRole == 'MANAGER'" style="padding-bottom: 1%;">
+                                <b>{{'applications.rejection_reason' | translate}}*</b>:
+                                <form class="form-horizontal" (ngSubmit)="onApplicationReject(row.id, f)" #f="ngForm">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="rejected_reason{{row.id}}"
+                                            name="rejected_reason" required #rejected_reason="ngModel" ngModel>
+                                    </div>
+                                    <div *ngIf="rejected_reason!.errors?.['required'] && rejected_reason.dirty"
+                                        class="alert alert-danger">
+                                        {{'applications.messages.rejection-reason-required' | translate}}
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-danger"
+                                            [disabled]="rejected_reason!.errors?.['required']">
+                                            <i class="fa-solid fa-ban"></i>
+                                            {{'applications.reject' | translate}}
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div><strong>{{'applications.comments' | translate}}</strong></div>
+                            <div *ngFor="let comment of row.getComments(); let i = index">
+                                <p>{{i+1}} - {{comment}}</p>
+                            </div>
                         </div>
-                        <div *ngIf="rejected_reason!.errors?.['required'] && rejected_reason.dirty" class="alert alert-danger">
-                            {{'applications.messages.rejection-reason-required' | translate}}
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-danger" [disabled]="rejected_reason!.errors?.['required']">
-                                <i class="fa-solid fa-ban"></i>
-                                {{'applications.reject' | translate}}
-                            </button>
-                        </div>
-                    </form>
-                </li>
-                <li class="list-group-item">
-                    <button type="button" class="btn btn-primary" routerLink="/trip/{{application.trip_Id}}">
-                        <i class="fa fa-plane" aria-hidden="true"></i>
-                        {{'buttons.go_to_trip' | translate}}
-                    </button>
-                    <!--
-                                            <button type="button" class="btn btn-primary" routerLink="/applications/{{application.id}}">
-                        <i class="fa-solid fa-magnifying-glass-plus"></i>
-                        {{'buttons.more' | translate}}
-                    </button>
-                     -->
-                    <button type="button" class="btn btn-danger" *ngIf="activeRole == 'EXPLORER'">
-                        <i class="fa-regular fa-rectangle-xmark"></i>
-                        {{'applications.cancel' | translate}}
-                    </button>
-                    <button type="button" (click)="onApplicationAccept(application.id)" class="btn btn-success"
-                        *ngIf="activeRole == 'MANAGER'">
-                        <i class="fa-solid fa-check"></i>
-                        {{'applications.accept' | translate}}
-                    </button>
-                </li>
-            </ul>
+
+                    </ng-template>
+                </ngx-datatable-row-detail>
+
+                <ngx-datatable-column *ngIf="activeRole == 'MANAGER'" [resizeable]="false" [sortable]="false" [draggable]="false"
+                    [canAutoResize]="false" [canAutoResize]="true">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                        <a href="javascript:void(0)"
+                            title="{{'applications.messages.expand-collapse-comments-reject' | translate}}"
+                            (click)="toggleExpandPendingRow(row)">
+                            <i class="fa-solid fa-comments"></i>
+                        </a>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                
+                <ngx-datatable-column *ngIf="activeRole == 'EXPLORER'" [resizeable]="false" [sortable]="false" [draggable]="false"
+                    [canAutoResize]="false" [canAutoResize]="true">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                        <a href="javascript:void(0)"
+                            title="{{'applications.messages.expand-collapse-comments' | translate}}"
+                            (click)="toggleExpandPendingRow(row)">
+                            <i class="fa-solid fa-comments"></i>
+                        </a>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.title-sing' | translate}}" prop="id" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        #{{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <!--<ngx-datatable-column name="{{'applications.status.title' | translate}}" prop="status" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+        
+                 <ngx-datatable-column name="{{'applications.moment' | translate}}" prop="applicationMoment" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>-->
+
+                <ngx-datatable-column name="{{'applications.actor-id' | translate}}" prop="explorer_Id"
+                    [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.trip-id' | translate}}" prop="trip_Id"
+                    [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="" prop="trip_Id" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        <button type="button" class="btn btn-primary" routerLink="/trips/{{value}}">
+                            <i class="fa fa-plane" aria-hidden="true"></i>
+                            {{'buttons.go_to_trip' | translate}}
+                        </button>
+                        <!--
+                                                <button type="button" class="btn btn-primary" routerLink="/applications/{{application.id}}">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            {{'buttons.more' | translate}}
+                        </button>
+                         -->
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="" *ngIf="activeRole == 'EXPLORER'" prop="id" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        <button type="button" (click)="onApplicationCancel(value)" class="btn btn-danger" *ngIf="activeRole == 'EXPLORER'">
+                            <i class="fa-regular fa-rectangle-xmark"></i>
+                            {{'applications.cancel' | translate}}
+                        </button>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="" *ngIf="activeRole == 'MANAGER'" prop="id" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        <button type="button" (click)="onApplicationAccept(value)" class="btn btn-success"
+                            *ngIf="activeRole == 'MANAGER'">
+                            <i class="fa-solid fa-check"></i>
+                            {{'applications.accept' | translate}}
+                        </button>
+                    </ng-template>
+                </ngx-datatable-column>
+
+            </ngx-datatable>
         </div>
     </div>
 </div>
@@ -176,41 +363,96 @@
         <div class="accordion-body" *ngIf="dueApplications.length < 1">
             <p>{{'applications.messages.due-applications-not-found' | translate}}</p>
         </div>
-        <div class="accordion-body" *ngFor="let application of dueApplications">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"></li>
-                <li class="list-group-item"><b>{{'applications.title-sing' | translate}}</b>: #{{application.id}}</li>
-                <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}
-                </li>
-                <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>:
-                    {{application.applicationMoment}}</li>
-                <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.explorer_Id}}
-                </li>
-                <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip_Id}}</li>
-                <li class="list-group-item" *ngFor="let comment of application.getComments(); let i = index">
-                    <p>{{i+1}} - {{comment}}</p>
-                </li>
-                <li class="list-group-item">
-                    <button type="button" class="btn btn-primary" routerLink="/trip/{{application.trip_Id}}">
-                        <i class="fa fa-plane" aria-hidden="true"></i>
-                        {{'buttons.go_to_trip' | translate}}
-                    </button>
-                    <!--
-                                            <button type="button" class="btn btn-primary" routerLink="/applications/{{application.id}}">
-                        <i class="fa-solid fa-magnifying-glass-plus"></i>
-                        {{'buttons.more' | translate}}
-                    </button>
-                     -->
-                    <button type="button" class="btn btn-success" *ngIf="activeRole == 'EXPLORER'">
-                        <i class="fa-regular fa-credit-card"></i>
-                        {{'applications.pay' | translate}}
-                    </button>
-                    <button type="button" class="btn btn-danger" *ngIf="activeRole == 'EXPLORER'">
-                        <i class="fa-regular fa-rectangle-xmark"></i>
-                        {{'applications.cancel' | translate}}
-                    </button>
-                </li>
-            </ul>
+        <div>
+            <ngx-datatable [rows]="dueApplications" #dueTable class="bootstrap expandable" [loadingIndicator]="true"
+                [headerHeight]="40" [footerHeight]="80" [limit]="10" [rowHeight]="'auto'" [columnMode]="'force'"
+                [scrollbarH]="true">
+
+                <ngx-datatable-row-detail [rowHeight]="350" [scrollLeft]="true" #dueCommentsRow
+                    (toggle)="onDetailToggle($event)">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                        <div style="padding-left: 1%;">
+                            <div><strong>{{'applications.comments' | translate}}</strong></div>
+                            <div *ngFor="let comment of row.getComments(); let i = index">
+                                <p>{{i+1}} - {{comment}}</p>
+                            </div>
+                        </div>
+
+                    </ng-template>
+                </ngx-datatable-row-detail>
+
+                <ngx-datatable-column [resizeable]="false" [sortable]="false" [draggable]="false"
+                    [canAutoResize]="false" [canAutoResize]="true">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                        <a href="javascript:void(0)"
+                            title="{{'applications.messages.expand-collapse-comments' | translate}}"
+                            (click)="toggleExpandDueRow(row)">
+                            <i class="fa-solid fa-comments"></i>
+                        </a>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.title-sing' | translate}}" prop="id" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        #{{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <!--<ngx-datatable-column name="{{'applications.status.title' | translate}}" prop="status" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+        
+                 <ngx-datatable-column name="{{'applications.moment' | translate}}" prop="applicationMoment" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>-->
+
+                <ngx-datatable-column name="{{'applications.actor-id' | translate}}" prop="explorer_Id"
+                    [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.trip-id' | translate}}" prop="trip_Id"
+                    [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="" prop="trip_Id" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        <button type="button" class="btn btn-primary" routerLink="/trips/{{value}}">
+                            <i class="fa fa-plane" aria-hidden="true"></i>
+                            {{'buttons.go_to_trip' | translate}}
+                        </button>
+                        <!--
+                                                <button type="button" class="btn btn-primary" routerLink="/applications/{{application.id}}">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            {{'buttons.more' | translate}}
+                        </button>
+                         -->
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column *ngIf="activeRole == 'EXPLORER'" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        <button type="button" class="btn btn-success" *ngIf="activeRole == 'EXPLORER'">
+                            <i class="fa-regular fa-credit-card"></i>
+                            {{'applications.pay' | translate}}
+                        </button>
+                        <button type="button" class="btn btn-danger" *ngIf="activeRole == 'EXPLORER'">
+                            <i class="fa-regular fa-rectangle-xmark"></i>
+                            {{'applications.cancel' | translate}}
+                        </button>
+                    </ng-template>
+                </ngx-datatable-column>
+
+            </ngx-datatable>
         </div>
     </div>
 </div>
@@ -228,33 +470,83 @@
         <div class="accordion-body" *ngIf="acceptedApplications.length < 1">
             <p>{{'applications.messages.accepted-applications-not-found' | translate}}</p>
         </div>
-        <div class="accordion-body" *ngFor="let application of acceptedApplications">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"></li>
-                <li class="list-group-item"><b>{{'applications.title-sing' | translate}}</b>: #{{application.id}}</li>
-                <li class="list-group-item"><b>{{'applications.status.title' | translate}}</b>: {{application.status}}
-                </li>
-                <li class="list-group-item"><b>{{'applications.moment' | translate}}</b>:
-                    {{application.applicationMoment}}</li>
-                <li class="list-group-item"><b>{{'applications.actor-id' | translate}}</b>: {{application.explorer_Id}}
-                </li>
-                <li class="list-group-item"><b>{{'applications.trip-id' | translate}}</b>: {{application.trip_Id}}</li>
-                <li class="list-group-item" *ngFor="let comment of application.getComments(); let i = index">
-                    <p>{{i+1}} - {{comment}}</p>
-                </li>
-                <li class="list-group-item">
-                    <button type="button" class="btn btn-primary" routerLink="/trip/{{application.trip_Id}}">
-                        <i class="fa fa-plane" aria-hidden="true"></i>
-                        {{'buttons.go_to_trip' | translate}}
-                    </button>
-                    <!--
-                                            <button type="button" class="btn btn-primary" routerLink="/applications/{{application.id}}">
-                        <i class="fa-solid fa-magnifying-glass-plus"></i>
-                        {{'buttons.more' | translate}}
-                    </button>
-                     -->
-                </li>
-            </ul>
+        <div>
+            <ngx-datatable [rows]="acceptedApplications" #acceptedTable class="bootstrap expandable"
+                [loadingIndicator]="true" [headerHeight]="40" [footerHeight]="80" [limit]="10" [rowHeight]="'auto'"
+                [columnMode]="'force'" [scrollbarH]="true">
+
+                <ngx-datatable-row-detail [rowHeight]="350" [scrollLeft]="true" #acceptedCommentsRow
+                    (toggle)="onDetailToggle($event)">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                        <div style="padding-left: 1%;">
+                            <div><strong>{{'applications.comments' | translate}}</strong></div>
+                            <div *ngFor="let comment of row.getComments(); let i = index">
+                                <p>{{i+1}} - {{comment}}</p>
+                            </div>
+                        </div>
+
+                    </ng-template>
+                </ngx-datatable-row-detail>
+
+                <ngx-datatable-column [resizeable]="false" [sortable]="false" [draggable]="false"
+                    [canAutoResize]="false" [canAutoResize]="true">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                        <a href="javascript:void(0)"
+                            title="{{'applications.messages.expand-collapse-comments' | translate}}"
+                            (click)="toggleExpandAcceptedRow(row)">
+                            <i class="fa-solid fa-comments"></i>
+                        </a>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.title-sing' | translate}}" prop="id" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        #{{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <!--<ngx-datatable-column name="{{'applications.status.title' | translate}}" prop="status" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+        
+                 <ngx-datatable-column name="{{'applications.moment' | translate}}" prop="applicationMoment" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>-->
+
+                <ngx-datatable-column name="{{'applications.actor-id' | translate}}" prop="explorer_Id"
+                    [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.trip-id' | translate}}" prop="trip_Id"
+                    [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="" prop="trip_Id" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        <button type="button" class="btn btn-primary" routerLink="/trips/{{value}}">
+                            <i class="fa fa-plane" aria-hidden="true"></i>
+                            {{'buttons.go_to_trip' | translate}}
+                        </button>
+                        <!--
+                                                <button type="button" class="btn btn-primary" routerLink="/applications/{{application.id}}">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            {{'buttons.more' | translate}}
+                        </button>
+                         -->
+                    </ng-template>
+                </ngx-datatable-column>
+
+            </ngx-datatable>
         </div>
     </div>
 </div>

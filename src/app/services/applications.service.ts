@@ -4,7 +4,8 @@ import { environment } from 'src/environments/environment';
 import { Application } from '../models/application.model';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  headers: new HttpHeaders({ 'Content-Type': 'application/json',
+  'Accept-Language': 'es' }),
 };
 
 @Injectable({
@@ -172,8 +173,22 @@ export class ApplicationsService {
   cancelApplication(application_id: string) {
     const url = `${environment.backendApiBaseURL + '/applications/' + application_id + '/cancel'}`;
 
+    const idToken = localStorage.getItem('idToken') ?? '';
+
+    console.log("ApplicationsService->cancelApplication idToken ", idToken);
+
+    const httpOptionsStatus = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept-Language': 'es',
+        'idToken': idToken
+      }),
+    };
+
+    httpOptions.headers.set('idToken', idToken);
+
     return new Promise<any>((resolve, reject) => {
-      this.http.get<any>(url, httpOptions).subscribe({
+      this.http.patch<any>(url, {}, httpOptions).subscribe({
         next: (response) => {
           console.log('ApplicationsService->getApplicationById get next response: ', response);
           resolve(response);

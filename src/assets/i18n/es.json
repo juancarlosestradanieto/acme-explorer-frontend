@@ -158,6 +158,8 @@
       "accepted": "Aceptada"
     },
     "messages": {
+      "expand-collapse-comments": "Expandir/Colapsar Comentarios",
+      "expand-collapse-comments-reject": "Expandir/Colapsar Comentarios y Rechazar",
       "rejection-reason-required": "Es necesario un motivo para el rechazo",
       "comments-not-found": "No se han encontrado comentarios",
       "cancelled-applications-not-found": "No se han encontrado solicitudes canceladas",

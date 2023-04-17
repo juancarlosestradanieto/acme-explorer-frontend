@@ -13,6 +13,12 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ApplicationslistComponent implements OnInit {
 
+  @ViewChild('cancelledTable') cancelledTable: any;
+  @ViewChild('rejectedTable') rejectedTable: any;
+  @ViewChild('pendingTable') pendingTable: any;
+  @ViewChild('dueTable') dueTable: any;
+  @ViewChild('dueTable') acceptedTable: any;
+
   applications: Array<Application> = [];
   cancelledApplications: Array<Application> = [];
   pendingApplications: Array<Application> = [];
@@ -26,7 +32,7 @@ export class ApplicationslistComponent implements OnInit {
 
   @ViewChild(NgForm)
   f!: NgForm;
-  
+
   constructor(private applicationService: ApplicationsService,
     private authService: AuthService,
     private router: Router,
@@ -92,7 +98,7 @@ export class ApplicationslistComponent implements OnInit {
 
   }
 
-  reloadPage(){
+  reloadPage() {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['./'], {
@@ -119,5 +125,37 @@ export class ApplicationslistComponent implements OnInit {
       })
   }
 
+  onApplicationCancel(applicationId: string) {
+    this.applicationService.cancelApplication(applicationId).
+      then(() => {
+        this.reloadPage();
+      }).catch((error: any) => {
+        console.log("ApplicationslistComponent->constructor applicationService.onApplicationCancel catch ", error);
+      })
+  }
+
+  toggleExpandCancelledRow(row: any) {
+    this.cancelledTable.rowDetail.toggleExpandRow(row);
+  }
+
+  toggleExpandRejectedRow(row: any) {
+    this.rejectedTable.rowDetail.toggleExpandRow(row);
+  }
+
+  toggleExpandPendingRow(row: any) {
+    this.pendingTable.rowDetail.toggleExpandRow(row);
+  }
+
+  toggleExpandDueRow(row: any) {
+    this.dueTable.rowDetail.toggleExpandRow(row);
+  }
+
+  toggleExpandAcceptedRow(row: any) {
+    this.acceptedTable.rowDetail.toggleExpandRow(row);
+  }
+
+  onDetailToggle($event: any) {
+
+  }
 
 }
