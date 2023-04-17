@@ -23,6 +23,7 @@ describe('AppComponent', () => {
           }
         })
       ],
+      providers:[],
       declarations: [
         AppComponent
       ],

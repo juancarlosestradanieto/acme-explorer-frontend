@@ -12,17 +12,17 @@ export class Actor extends Entity {
     obj && Object.assign(this, obj);
   }
 
-  private name!: string;
-  private surname!: string;
-  private email!: string;
-  private password!: string;
-  private language!: string;
-  private phone_number!: string;
-  private address!: string;
-  private isActive!: boolean;
-  private role!: string[];
-  private deleted!: boolean;
-  private deletedAt!: Date;
+  public name!: string;
+  public surname!: string;
+  public email!: string;
+  public password!: string;
+  public language!: string;
+  public phone_number!: string;
+  public address!: string;
+  public isActive!: boolean;
+  public role!: string[];
+  public deleted!: boolean;
+  public deletedAt!: Date;
 
   public getName(): string 
   {

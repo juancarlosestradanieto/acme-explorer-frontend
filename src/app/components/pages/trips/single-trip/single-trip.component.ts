@@ -24,6 +24,8 @@ export class SingleTripComponent implements OnInit {
   sponsorships_loaded!: Promise<boolean>;
   sponsorship!: Sponsorship;
   json_trip: any;
+  error_message: string = "";
+  success_message: string = "";
 
   protected user!: Actor | null;
   protected activeRole: string = 'anonymous';
@@ -51,27 +53,6 @@ export class SingleTripComponent implements OnInit {
 
     this.getTrip();
 
-  }
-
-  getTrip() {
-    this.tripService.getSingleTrip(this.trip_id)
-      .then((response) => {
-
-        console.log("SingleTripComponent->constructor tripsService.getSingleTrip then response ", response);
-        this.json_trip = response;
-        console.log("this.json_trip", this.json_trip);
-
-        let casted_trip: Trip = Trip.castJsonTrip(this.json_trip);
-        this.trip = casted_trip;
-
-        this.getPaidSponsorships();
-      })
-      .catch((error) => {
-        this.sponsorships = [];
-        this.sponsorships_loaded = Promise.resolve(false);
-        console.error("SingleTripComponent->constructor tripsService.getSingleTrip catch ", error);
-
-      });
   }
 
   getPaidSponsorships() {
@@ -112,26 +93,26 @@ export class SingleTripComponent implements OnInit {
     if(this.paidSponsorships.length > 0) {
       const randomSponsorshipIndex = Math.floor(Math.random() * this.paidSponsorships.length);
       console.log("SingleTripComponent->constructor selectRandomPaidSponsorship randomSponsorshipIndex ", randomSponsorshipIndex);
-  
+
       this.sponsorship = new Sponsorship(this.paidSponsorships[randomSponsorshipIndex]);
-  
+
       console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship ", this.sponsorship);
       console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship.getBanner() ", this.sponsorship.getBanner());
       console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship.getPage() ", this.sponsorship.getPage());
-  
+
       console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship.getBanner().length ", this.sponsorship.banner.length);
-    
+
       if(this.sponsorship.getBanner().length > 1) {
         const randomBannerIndex = Math.floor(Math.random() * this.sponsorship.getBanner().length);
         console.log("SingleTripComponent->constructor selectRandomPaidSponsorship randomBannerIndex ", randomBannerIndex);
-  
+
         this.sponsorship.setBanner([this.sponsorship.getBanner()[randomBannerIndex]]);
-  
+
         console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship ", this.sponsorship);
         console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship.getBanner() ", this.sponsorship.getBanner());
         console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship.getPage() ", this.sponsorship.getPage());
       }
-  
+
       this.sponsorships_loaded = Promise.resolve(true);
     } else {
       this.sponsorships_loaded = Promise.resolve(false);
@@ -184,6 +165,128 @@ export class SingleTripComponent implements OnInit {
       }
     }
     return result;
+  }
+
+  getDiffDays(start: string, now: string) {
+    var startDate = new Date(start);
+    var endDate = new Date(now);
+
+    var difference = startDate.getTime() - endDate.getTime();
+    return difference / (1000 * 3600 * 24);
+  }
+
+  getNowAndStartDateDiffInDays(trip: Trip)
+  {
+    return this.getDiffDays(trip.getStartDate().toString(), this.currentDateTime.toISOString());
+  }
+
+  getTrip() {
+    this.tripService.getSingleTrip(this.trip_id)
+      .then((response) => {
+
+        console.log("SingleTripComponent->constructor tripsService.getSingleTrip then response ", response);
+        this.json_trip = response;
+        console.log("this.json_trip", this.json_trip);
+
+        let casted_trip: Trip = Trip.castJsonTrip(this.json_trip);
+        this.trip = casted_trip;
+
+        this.getPaidSponsorships();
+      })
+      .catch((error) => {
+        this.sponsorships = [];
+        this.sponsorships_loaded = Promise.resolve(false);
+        console.error("SingleTripComponent->constructor tripsService.getSingleTrip catch ", error);
+
+      });
+  }
+
+  deleteTrip(trip: Trip) {
+
+    this.error_message = "";
+    this.success_message = "";
+
+    if(confirm("Are you sure to delete?, this action can't be undone."))
+    {
+
+      this.tripService.deleteTrip(trip.id)
+      .then((response) => {
+
+        console.log("SingleTripComponent->deleteTrip tripsService.deleteTrip then response ", response);
+        this.success_message = response.message;
+
+      })
+      .catch((error) => {
+
+        console.error("SingleTripComponent->deleteTrip tripsService.deleteTrip catch ", error);
+        this.error_message = "Something went wrong";
+
+      });
+
+    }
+  }
+
+  cancelTrip(trip: Trip) {
+
+    this.error_message = "";
+    this.success_message = "";
+
+    if(confirm("Are you sure to cancel?"))
+    {
+
+      let cancelReason = prompt("Please enter the cancel reason");
+
+      if (cancelReason == null || cancelReason == "")
+      {
+        //User cancelled the prompt"
+      }
+      else
+      {
+
+        this.tripService.cancelTrip(trip.id, cancelReason)
+        .then((response) => {
+
+          console.log("SingleTripComponent->cancelTrip tripsService.cancelTrip then response ", response);
+          this.success_message = response.message;
+          this.getTrip();
+
+        })
+        .catch((error) => {
+
+          console.error("SingleTripComponent->cancelTrip tripsService.cancelTrip catch ", error);
+          this.error_message = "Something went wrong";
+
+        });
+
+      }
+
+    }
+  }
+
+  publishTrip(trip: Trip) {
+
+    this.error_message = "";
+    this.success_message = "";
+
+    if(confirm("Are you sure to publish?"))
+    {
+
+      this.tripService.publishTrip(trip.id)
+      .then((response) => {
+
+        console.log("SingleTripComponent->publishTrip tripsService.publishTrip then response ", response);
+        this.success_message = response.message;
+        this.getTrip();
+
+      })
+      .catch((error) => {
+
+        console.error("SingleTripComponent->publishTrip tripsService.publishTrip catch ", error);
+        this.error_message = "Something went wrong";
+
+      });
+
+    }
   }
 
 }

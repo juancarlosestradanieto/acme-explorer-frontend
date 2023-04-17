@@ -42,7 +42,30 @@ import { ApplicationcreationComponent } from './components/pages/applications/ap
 import { AddTripComponent } from './components/pages/trips/add-trip/add-trip.component';
 import { EditTripComponent } from './components/pages/trips/edit-trip/edit-trip.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { AllActorsComponent } from './components/pages/actors/all-actors/all-actors.component';
+import { AddActorComponent } from './components/pages/actors/add-actor/add-actor.component';
+import { EditActorComponent } from './components/pages/actors/edit-actor/edit-actor.component';
+import { RegisterManagerComponent } from './components/pages/actors/register-manager/register-manager.component';
 
+
+//Angular Material Modules
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatDialogModule} from '@angular/material/dialog';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
+ let ANGULAR_MATERIAL_MODULES =[
+  MatPaginatorModule,
+  MatDialogModule,
+  BrowserAnimationsModule,
+  MatIconModule,
+  MatButtonModule,
+  MatToolbarModule
+ ]
+
+ //Traducción
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
@@ -74,6 +97,10 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ApplicationcreationComponent,
     AddTripComponent,
     EditTripComponent,
+    AllActorsComponent,
+    AddActorComponent,
+    EditActorComponent,
+    RegisterManagerComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,6 +108,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ...ANGULAR_MATERIAL_MODULES,
     NgbModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,

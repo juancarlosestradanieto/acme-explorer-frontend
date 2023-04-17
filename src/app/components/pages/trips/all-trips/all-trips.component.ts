@@ -125,7 +125,6 @@ export class AllTripsComponent implements OnInit {
 
         this.trips = casted_trips;
 
-        //console.log(this.getDiffDays(this.trips[0].start_date.toString(), this.currentDateTime.toISOString()))
       })
       .catch((error: any) => {
 
@@ -176,30 +175,6 @@ export class AllTripsComponent implements OnInit {
   getNowAndStartDateDiffInDays(trip: Trip)
   {
     return this.getDiffDays(trip.getStartDate().toString(), this.currentDateTime.toISOString());
-  }
-
-  deleteTrip(trip: Trip) {
-    console.log("deleteTrip", trip.id);
-
-    if(confirm("Are you sure to delete?, this action can't be undone.")) 
-    {
-
-      this.tripsService.deleteTrip(trip.id)
-      .then((response) => {
-
-        console.log("AllTripsComponent->deleteTrip tripsService.deleteTrip then response ", response);
-        alert(response.message);
-        this.search();
-        
-      })
-      .catch((error) => {
-
-        console.error("AllTripsComponent->deleteTrip tripsService.deleteTrip catch ", error);
-        alert("Something went wrong");
-
-      });
-
-    }
   }
 
   favouriteTrip(trip: Trip) {
