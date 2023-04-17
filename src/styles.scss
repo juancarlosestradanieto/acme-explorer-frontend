@@ -44,7 +44,7 @@ html{
     height: 100%;
 }
 
-body{
+body,footer{
     background-color: var(--background);
     padding: 20px;
     height: 100vh;
@@ -57,9 +57,12 @@ body{
             border-color: var(--font-color);
         }
     }
-    p,h1,h2,h3,h4,h5,legend,label{
+    p,h1,h2,h3,h4,h5,legend,label,a{
         color: var(--font-color);
     }
+}
+.text-muted{
+    color:var(--font-color) !important;
 }
 
 
