@@ -46,7 +46,7 @@ import { AllActorsComponent } from './components/pages/actors/all-actors/all-act
 import { AddActorComponent } from './components/pages/actors/add-actor/add-actor.component';
 import { EditActorComponent } from './components/pages/actors/edit-actor/edit-actor.component';
 import { RegisterManagerComponent } from './components/pages/actors/register-manager/register-manager.component';
-
+import { NgxPayPalModule } from 'ngx-paypal';
 
 //Angular Material Modules
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -125,7 +125,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
             deps: [HttpClient]
         }
     }),
-
+    NgxPayPalModule
   ],
   providers: [],
   bootstrap: [AppComponent]
