@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FavouriteTrips } from 'src/app/models/favourite-trips.model';
 import { Trip } from 'src/app/models/trip.model';
 
 import { environment } from 'src/environments/environment';
@@ -249,6 +250,37 @@ export class TripsService {
     
     });
 
+  }
+
+  createFavouriteTripsReference(favouriteTrips: FavouriteTrips) {
+    console.log("TripsService.createFavouriteTripsReference favouriteTrips ", favouriteTrips);
+    const url = `${environment.backendMockupBaseURL + '/favourite-trips'}`;
+
+    console.log("TripsService.createFavouriteTripsReference url ", url);
+
+    const body = JSON.stringify(favouriteTrips);
+
+    return this.http.post<JSON>(url, body , httpOptions);
+  }
+
+  getFavouriteTripsByReference(reference: string) {
+    console.log("TripsService.getFavouriteTripsByReference reference ", reference);
+    const url = `${environment.backendMockupBaseURL + '/favourite-trips?reference=' + reference}`;
+
+    console.log("TripsService.getFavouriteTripsByReference url ", url);
+
+    return this.http.get<JSON>(url, httpOptions);
+  }
+
+  updateFavouriteTripsReference(favouriteTrips: FavouriteTrips, id: string) {
+    console.log("TripsService.updateFavouriteTripsReference favouriteTrips ", favouriteTrips);
+    const url = `${environment.backendMockupBaseURL + '/favourite-trips/' + id}`;
+
+    console.log("TripsService.updateFavouriteTripsReference url ", url);
+
+    const body = JSON.stringify(favouriteTrips);
+
+    return this.http.patch<JSON>(url, body , httpOptions);
   }
 
 }
