@@ -55,6 +55,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { PayTripComponent } from './components/pages/trips/pay-trip/pay-trip.component';
 
  let ANGULAR_MATERIAL_MODULES =[
   MatPaginatorModule,
@@ -101,6 +102,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AddActorComponent,
     EditActorComponent,
     RegisterManagerComponent,
+    PayTripComponent,
   ],
   imports: [
     BrowserModule,

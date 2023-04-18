@@ -35,6 +35,7 @@
     "bootstrap": "^5.2.3",
     "date-fns": "^2.29.3",
     "dotenv": "^16.0.3",
+    "ngx-paypal": "^10.0.0",
     "rxjs": "~7.5.0",
     "ts-node": "^10.9.1",
     "tslib": "^2.5.0",
