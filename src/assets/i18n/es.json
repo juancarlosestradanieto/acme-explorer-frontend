@@ -52,6 +52,7 @@
     "starting":"Tiempo Restante de Inicio",
     "out_time":"Fuera de Tiempo",
     "search":"Buscar",
+    "search-reset":"Restablecer",
     "buttons": {
       "add-favourite": "Añadir a favoritos",
       "remove-favourite": "Eliminar de favoritos",
@@ -198,5 +199,10 @@
     "9_digits_required": "Este campo require de 9 dígitos.",
     "email_required": "Este campo require una sintaxis de email.",
     "10_digits_alphanumeric": "Este campo require un mínimo de 10 caracteres alfanuméricos."
+  },
+  "pagination": {
+    "next": "Siguiente",
+    "prev": "Anterior",
+    "page": "Página"
   }
 }

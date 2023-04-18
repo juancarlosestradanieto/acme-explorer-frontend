@@ -52,6 +52,7 @@
     "starting":"Starting Time Left",
     "out_time":"Out of Time",
     "search":"Search",
+    "search-reset":"Reset",
     "buttons": {
       "add-favourite": "Add to favourites",
       "remove-favourite": "Remove from favourites",
@@ -198,5 +199,10 @@
     "9_digits_required": "This field requires 9 digits.",
     "email_required": "This field requires an email syntax.",
     "10_digits_alphanumeric": "This field requires a minimum of ten alphanumeric characters."
+  },
+  "pagination": {
+    "next": "Next",
+    "prev": "Previous",
+    "page": "Page"
   }
 }
