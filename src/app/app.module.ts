@@ -55,6 +55,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { SystemParametersEditComponent } from './components/pages/system-parameters/system-parameters-edit/system-parameters-edit.component';
 
  let ANGULAR_MATERIAL_MODULES =[
   MatPaginatorModule,
@@ -101,6 +102,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AddActorComponent,
     EditActorComponent,
     RegisterManagerComponent,
+    SystemParametersEditComponent,
   ],
   imports: [
     BrowserModule,
