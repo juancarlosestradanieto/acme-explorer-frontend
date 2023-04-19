@@ -44,4 +44,21 @@ export class ActorsService {
     return this._http.delete<any>(url,httpOptions);
   }
 
+  getActorById(actorID:string):Observable<Actor>{
+    const url = `${environment.backendApiBaseURL + '/actors/'+actorID}`;
+    const idToken = localStorage.getItem('idToken') ?? '';
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Accept-Language': 'es',
+        'idToken': idToken 
+      }),
+    };
+    return this._http.get<Actor>(url,httpOptions);
+  }
+
+
+
+
+
 }

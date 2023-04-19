@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Actor } from 'src/app/models/actor.model';
+import { ActorsService } from 'src/app/services/actors.service';
 
 @Component({
   selector: 'app-actor-profile',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ActorProfileComponent implements OnInit {
 
-  constructor() { }
-
+  actor!:Actor;
+  actor_id: string;
+  constructor(private _actorsService:ActorsService,private route: ActivatedRoute) { 
+    this.actor_id = this.route.snapshot.params['id'];
+    
+  }
   ngOnInit(): void {
+    this.getActor();
+  }
+
+  getActor(){
+    this._actorsService.getActorById(this.actor_id).subscribe((res)=>{
+      this.actor = res;
+      console.log(res);
+    })
   }
 
 }

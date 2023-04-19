@@ -18,6 +18,7 @@ export class Actor extends Entity {
   public password!: string;
   public language!: string;
   public phone_number!: string;
+  public phone!: string;
   public address!: string;
   public isActive!: boolean;
   public role!: string[];

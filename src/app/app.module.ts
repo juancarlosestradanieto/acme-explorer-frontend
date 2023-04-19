@@ -42,8 +42,6 @@ import { ApplicationcreationComponent } from './components/pages/applications/ap
 import { AddTripComponent } from './components/pages/trips/add-trip/add-trip.component';
 import { EditTripComponent } from './components/pages/trips/edit-trip/edit-trip.component';
 import { AllActorsComponent } from './components/pages/actors/all-actors/all-actors.component';
-import { AddActorComponent } from './components/pages/actors/add-actor/add-actor.component';
-import { EditActorComponent } from './components/pages/actors/edit-actor/edit-actor.component';
 import { RegisterManagerComponent } from './components/pages/actors/register-manager/register-manager.component';
 
 
@@ -54,6 +52,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { EditActorProfileComponent } from './components/pages/actor-profile/edit-actor-profile/edit-actor-profile.component';
 
  let ANGULAR_MATERIAL_MODULES =[
   MatPaginatorModule,
@@ -97,9 +96,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AddTripComponent,
     EditTripComponent,
     AllActorsComponent,
-    AddActorComponent,
-    EditActorComponent,
     RegisterManagerComponent,
+    EditActorProfileComponent,
   ],
   imports: [
     BrowserModule,
