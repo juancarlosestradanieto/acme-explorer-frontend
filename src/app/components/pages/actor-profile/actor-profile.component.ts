@@ -13,7 +13,6 @@ export class ActorProfileComponent implements OnInit {
 
   actor!:any;
   actor_id: string;
-  phone_number!:string;
   constructor(private _actorsService:ActorsService,private route: ActivatedRoute, private _location:Location) { 
     this.actor_id = this.route.snapshot.params['id'];
     
