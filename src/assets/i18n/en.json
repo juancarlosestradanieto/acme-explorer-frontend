@@ -189,7 +189,8 @@
   "buttons": {
     "create": "Create",
     "more": "More",
-    "go_to_trip": "Go to trip"
+    "go_to_trip": "Go to trip",
+    "back":"Go back"
   },
   "Messages": {
     "field_required": "This field is required.",

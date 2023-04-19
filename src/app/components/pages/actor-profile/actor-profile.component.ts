@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Actor } from 'src/app/models/actor.model';
@@ -10,9 +11,10 @@ import { ActorsService } from 'src/app/services/actors.service';
 })
 export class ActorProfileComponent implements OnInit {
 
-  actor!:Actor;
+  actor!:any;
   actor_id: string;
-  constructor(private _actorsService:ActorsService,private route: ActivatedRoute) { 
+  phone_number!:string;
+  constructor(private _actorsService:ActorsService,private route: ActivatedRoute, private _location:Location) { 
     this.actor_id = this.route.snapshot.params['id'];
     
   }
@@ -22,9 +24,11 @@ export class ActorProfileComponent implements OnInit {
 
   getActor(){
     this._actorsService.getActorById(this.actor_id).subscribe((res)=>{
-      this.actor = res;
       console.log(res);
+      return this.actor = res;
     })
   }
+
+
 
 }

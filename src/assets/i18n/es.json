@@ -189,7 +189,8 @@
   "buttons": {
     "create": "Crear",
     "more": "Ver más",
-    "go_to_trip": "Ir al viaje"
+    "go_to_trip": "Ir al viaje",
+    "back":"Volver"
   },
   "Messages": {
     "field_required": "Este campo es obligatorio.",
