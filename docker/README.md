@@ -47,5 +47,6 @@ sh npm-build.sh
 ## Test the application
 
 ~~~
-ng test --browsers ChromeHeadless --no-sandbox
+cd docker
+sh test.sh
 ~~~
