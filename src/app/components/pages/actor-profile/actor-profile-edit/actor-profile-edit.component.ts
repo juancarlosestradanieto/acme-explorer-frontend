@@ -16,13 +16,13 @@ export class ActorProfileEditComponent implements OnInit {
   editProfileForm!:FormGroup;
   error_message!: string;
   success_message!: string;
-  currentCategoryId!:string
+  actor_id!:string
 
   constructor(private fb:FormBuilder, 
     private _actorsService:ActorsService, 
      private _location:Location ,
      private _activatedRoute:ActivatedRoute) { 
-    this.currentCategoryId = this._activatedRoute.snapshot.params['id'];
+    this.actor_id = this._activatedRoute.snapshot.params['id'];
     this.editProfileForm = this.createForm();
   }
   
@@ -54,7 +54,7 @@ export class ActorProfileEditComponent implements OnInit {
 
   onSubmit(){
     const actor: any = {
-      id: this.currentCategoryId,
+      id: this.actor_id,
       name: this.actorForm['name'].value,
       surname: this.actorForm['surname'].value,
       password: this.actorForm['password'].value,
@@ -76,7 +76,7 @@ export class ActorProfileEditComponent implements OnInit {
   }
 
   private setValues(){
-        this._actorsService.getActorById(this.currentCategoryId).subscribe(actor => {
+        this._actorsService.getActorById(this.actor_id).subscribe(actor => {
           console.log(actor)
           // console.log(category)
           this.actorForm['name'].setValue(actor.name)
