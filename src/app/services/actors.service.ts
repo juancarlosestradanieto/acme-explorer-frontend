@@ -57,8 +57,8 @@ export class ActorsService {
     return this._http.get<Actor>(url,httpOptions);
   }
 
-  updateActor(actorID:Actor):Observable<Actor>{
-    const url = `${environment.backendApiBaseURL+'/actors/'+actorID}`;
+  updateActor(actor:Actor):Observable<Actor>{
+    const url = `${environment.backendApiBaseURL+'/actors/'+actor.id}`;
     const idToken = localStorage.getItem('idToken') ?? '';
     const httpOptions = {
       headers: new HttpHeaders({ 
@@ -67,7 +67,8 @@ export class ActorsService {
         'idToken': idToken 
       }),
     };
-    return this._http.put<Actor>(url,actorID,httpOptions);
+    const body = JSON.stringify(actor);
+    return this._http.put<Actor>(url,body,httpOptions);
 
   }
 
