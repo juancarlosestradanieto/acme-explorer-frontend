@@ -120,6 +120,9 @@
     "address":"Dirección",
     "phone_number":"Número de Teléfono",
     "actions":"Acciones",    
+    "profile_edition":"Edición del perfil de usuario",
+    "confirm_edition":"Confirmar perfil de usuario",
+
     "role": {
       "title": "Rol",
       "explorer": "Explorador",
@@ -201,7 +204,8 @@
     "update": "Actualizar",
     "edit-mode": "Modo edición",
     "more": "Ver más",
-    "go_to_trip": "Ir al viaje"
+    "go_to_trip": "Ir al viaje",
+    "back":"Volver"
   },
   "Messages": {
     "field_required": "Este campo es obligatorio.",

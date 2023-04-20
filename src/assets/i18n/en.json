@@ -120,6 +120,8 @@
     "address":"Address",
     "phone_number":"Phone Number",
     "actions":"Actions",
+    "profile_edition":"User Profile Edition",
+    "confirm_edition":"Confirm User Profile",
     "role": {
       "title": "Role",
       "explorer": "Explorer",
@@ -201,7 +203,8 @@
     "update": "Update",
     "edit-mode": "Edit mode",
     "more": "More",
-    "go_to_trip": "Go to trip"
+    "go_to_trip": "Go to trip",
+    "back":"Go back"
   },
   "Messages": {
     "field_required": "This field is required.",
