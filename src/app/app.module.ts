@@ -53,6 +53,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { GoBackButtonComponent } from './components/shared/go-back-button/go-back-button.component';
+import { ActorProfileEditComponent } from './components/pages/actor-profile/actor-profile-edit/actor-profile-edit.component';
 
  let ANGULAR_MATERIAL_MODULES =[
   MatPaginatorModule,
@@ -98,6 +99,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AllActorsComponent,
     RegisterManagerComponent,
     GoBackButtonComponent,
+    ActorProfileEditComponent,
   ],
   imports: [
     BrowserModule,

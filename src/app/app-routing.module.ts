@@ -24,6 +24,7 @@ import { EditTripComponent } from './components/pages/trips/edit-trip/edit-trip.
 import { ManagerApplicationsGuard } from './guards/manager-applications.guard';
 import { AllActorsComponent } from './components/pages/actors/all-actors/all-actors.component';
 import { RegisterManagerComponent } from './components/pages/actors/register-manager/register-manager.component';
+import { ActorProfileEditComponent } from './components/pages/actor-profile/actor-profile-edit/actor-profile-edit.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,9 @@ const routes: Routes = [
     path: 'actor/:id', children: [
       {
         path: 'profile', component: ActorProfileComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'EXPLORER|MANAGER|ADMINISTRATOR|SPONSOR' }
+      },
+      {
+        path: 'profile-edit', component: ActorProfileEditComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'EXPLORER|MANAGER|ADMINISTRATOR|SPONSOR' }
       },
       {
         path: 'customize-ui', component: CustomizeUiComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'EXPLORER' }

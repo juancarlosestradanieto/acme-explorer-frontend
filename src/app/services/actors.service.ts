@@ -57,6 +57,20 @@ export class ActorsService {
     return this._http.get<Actor>(url,httpOptions);
   }
 
+  updateActor(actorID:Actor):Observable<Actor>{
+    const url = `${environment.backendApiBaseURL+'/actors/'+actorID}`;
+    const idToken = localStorage.getItem('idToken') ?? '';
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Accept-Language': 'es',
+        'idToken': idToken 
+      }),
+    };
+    return this._http.put<Actor>(url,actorID,httpOptions);
+
+  }
+
 
 
 

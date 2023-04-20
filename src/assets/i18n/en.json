@@ -120,6 +120,8 @@
     "address":"Address",
     "phone_number":"Phone Number",
     "actions":"Actions",
+    "profile_edition":"User Profile Edition",
+    "confirm_edition":"Confirm User Profile",
     "role": {
       "title": "Role",
       "explorer": "Explorer",
