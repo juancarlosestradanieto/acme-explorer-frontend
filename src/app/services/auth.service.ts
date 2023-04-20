@@ -145,7 +145,34 @@ export class AuthService {
               let idToken = response3;
               console.log('user->getIdToken then idToken', idToken);
 
-              localStorage.setItem('currentActor', JSON.stringify(this.currentActor));
+              let actor: any = this.currentActor;
+
+              console.log('user->getIdToken then actor.hasOwnProperty password', actor.hasOwnProperty('password'));
+              if (actor.hasOwnProperty('password')) {
+                delete actor['password'];
+                console.log('user->getIdToken then actor', actor);
+              }
+
+              console.log('user->getIdToken then actor.hasOwnProperty password', actor.hasOwnProperty('address'));
+              if (actor.hasOwnProperty('address')) {
+                delete actor['address'];
+                console.log('user->getIdToken then actor', actor);
+              }
+
+              console.log('user->getIdToken then actor.hasOwnProperty phone', actor.hasOwnProperty('phone'));
+              if (actor.hasOwnProperty('phone')) {
+                delete actor['phone'];
+                console.log('user->getIdToken then actor', actor);
+              }
+
+              console.log('user->getIdToken then actor.hasOwnProperty customToken', actor.hasOwnProperty('customToken'));
+              if (actor.hasOwnProperty('customToken')) {
+                delete actor['customToken'];
+                console.log('user->getIdToken then actor', actor);
+              }
+
+
+              localStorage.setItem('currentActor', JSON.stringify(actor));
               localStorage.setItem('idToken', idToken);
 
               this.loginStatus.next(true);

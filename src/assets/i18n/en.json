@@ -160,6 +160,8 @@
       "accepted": "Accepted"
     },
     "messages": {
+      "expand-collapse-comments": "Expand/collapse Comments",
+      "expand-collapse-comments-reject": "Expandir/Colapsar Comentarios and Rejection",
       "rejection-reason-required": "A rejection reason is needed",
       "comments-not-found": "There are no comments found",
       "cancelled-applications-not-found": "There are no cancelled applications found",
@@ -186,10 +188,20 @@
     "max": "Maximum",
     "desv": "Standard desviation"
   },
+  "system-parameters": {
+    "title": "System parameters",
+    "title-create": "Create system parameters",
+    "title-update": "Update system parameters",
+    "maxFinderResults": "Maximum amount of results shown in finders",
+    "flatRateSponsorships": "Flat rate cost of sponsorships",
+    "cacheHour": "Maximum cache duration in hours"
+  },
   "dark": "Dark theme activated",
   "light": "Light theme activated",
   "buttons": {
     "create": "Create",
+    "update": "Update",
+    "edit-mode": "Edit mode",
     "more": "More",
     "go_to_trip": "Go to trip",
     "back":"Go back"
@@ -198,6 +210,7 @@
     "field_required": "This field is required.",
     "9_digits_required": "This field requires 9 digits.",
     "email_required": "This field requires an email syntax.",
-    "10_digits_alphanumeric": "This field requires a minimum of ten alphanumeric characters."
+    "10_digits_alphanumeric": "This field requires a minimum of ten alphanumeric characters.",
+    "positive-number": "This field requires a positive number."
   }
 }

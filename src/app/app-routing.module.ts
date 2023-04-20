@@ -25,6 +25,7 @@ import { ManagerApplicationsGuard } from './guards/manager-applications.guard';
 import { AllActorsComponent } from './components/pages/actors/all-actors/all-actors.component';
 import { RegisterManagerComponent } from './components/pages/actors/register-manager/register-manager.component';
 import { ActorProfileEditComponent } from './components/pages/actor-profile/actor-profile-edit/actor-profile-edit.component';
+import { SystemParametersEditComponent } from './components/pages/system-parameters/system-parameters-edit/system-parameters-edit.component';
 
 const routes: Routes = [
   {
@@ -120,6 +121,13 @@ const routes: Routes = [
   },
   {
     path: 'dashboard', component: DashboardComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'ADMINISTRATOR' }
+  },
+  {
+    path: 'system-parameters', children: [
+      {
+        path: ':pageMode', component: SystemParametersEditComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'ADMINISTRATOR' }
+      }
+    ]
   },
   {
     path:'all-actors',component: AllActorsComponent, canActivate: [ActorRoleGuard], data:{ expectedRole: 'ADMINISTRATOR'}

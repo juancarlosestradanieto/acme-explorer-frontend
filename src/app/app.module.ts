@@ -41,6 +41,7 @@ import { ThemeToggleComponent } from './components/shared/theme-toggle/theme-tog
 import { ApplicationcreationComponent } from './components/pages/applications/applicationcreation/applicationcreation.component';
 import { AddTripComponent } from './components/pages/trips/add-trip/add-trip.component';
 import { EditTripComponent } from './components/pages/trips/edit-trip/edit-trip.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AllActorsComponent } from './components/pages/actors/all-actors/all-actors.component';
 import { RegisterManagerComponent } from './components/pages/actors/register-manager/register-manager.component';
 
@@ -54,6 +55,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { GoBackButtonComponent } from './components/shared/go-back-button/go-back-button.component';
 import { ActorProfileEditComponent } from './components/pages/actor-profile/actor-profile-edit/actor-profile-edit.component';
+import { SystemParametersEditComponent } from './components/pages/system-parameters/system-parameters-edit/system-parameters-edit.component';
 
  let ANGULAR_MATERIAL_MODULES =[
   MatPaginatorModule,
@@ -100,6 +102,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     RegisterManagerComponent,
     GoBackButtonComponent,
     ActorProfileEditComponent,
+    SystemParametersEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -112,6 +115,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    NgxDatatableModule,
     // ngx-translate and the loader module
     HttpClientModule,
     TranslateModule.forRoot({
