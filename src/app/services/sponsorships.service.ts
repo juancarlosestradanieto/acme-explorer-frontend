@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Sponsorship } from '../models/sponsorship.model';
 import { SponsorshipsResponse } from '../models/sponsorships-response.model';
+import { Observable } from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({ 
@@ -31,10 +32,27 @@ export class SponsorshipsService {
   getSponsorshipsBySponsor(sponsorId: string) {
     console.log("SponsorshipsService.getSponsorshipsBySponsor sponsorId ", sponsorId);
     const url = `${environment.backendApiBaseURL + '/sponsorships/sponsors/' + sponsorId}`;
-
     console.log("SponsorshipsService.getSponsorshipsByTrip url ", url);
-
     return this.http.get<JSON>(url, httpOptions);
+  }
+
+  getAllSponsorships(){
+    const url = `${environment.backendApiBaseURL+'/sponsorships/'}`;
+    return this.http.get<any>(url);
+  }
+
+  deleteSponsorship(sponsorshipID:string):Observable<any>{
+    const url = `${environment.backendApiBaseURL+'/sponsorships/'+sponsorshipID}`;
+    const idToken = localStorage.getItem('idToken') ?? '';
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Accept-Language': 'es',
+        'idToken':idToken
+      }),
+    };
+  
+    return this.http.delete(url,httpOptions)
 
   }
 }

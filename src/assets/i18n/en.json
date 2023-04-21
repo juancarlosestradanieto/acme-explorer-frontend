@@ -173,7 +173,17 @@
   },
   "sponsorships": {
     "title": "Sponsorships",
-    "sponsorship":"Sponsorship"
+    "sponsorship":"Sponsorship",
+    "my_sponsorhips":"My sponsorhips",
+    "all_sponsorships":"All sponsorships",
+    "isPayed":"It is payed?",
+    "all_sponsorships_title":"These are all the sponsorships",
+    "all_sponsorships_sponsor":"These are your sponsorships",
+    "all_sponsorships_text":"To modify and/or delete sponsorships, please navigate to 'My Sponsorships'",
+    "create":"Create new sponsorship",
+    "delete":"Delete",
+    "edit":"Modify",
+    "detail":"View details"
   },
   "dashboard": {
     "title": "Dashboard",

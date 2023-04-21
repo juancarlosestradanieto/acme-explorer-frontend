@@ -14,12 +14,16 @@ export class SponsorshipComponent implements OnInit {
   sponsorship!: Sponsorship;  
   sponsorships_loaded!: Promise<boolean>;
   id!:string;
+  sponsorshipID!:string;
+
 
   constructor( private SponsorshipsService: SponsorshipsService,
                private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
+    this.sponsorshipID = this.route.snapshot.params['sponsorshipID']
+
     this.getSponsorships();
     console.log("¿Que id está cogiendo?:",this.id);
     
@@ -52,5 +56,18 @@ export class SponsorshipComponent implements OnInit {
     );
     return this.sponsorships;
   }
+
+
+  deleteSponsorship(sponsorshipID: string) {
+    this.SponsorshipsService.deleteSponsorship(sponsorshipID).subscribe(res=>{
+      this.getSponsorships();
+      location.reload()
+    }, error =>{
+      console.log("Error al eliminar sponsorship");
+      location.reload()
+    });
+
+  }
+
 
 }

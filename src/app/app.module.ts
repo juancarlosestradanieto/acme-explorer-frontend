@@ -44,6 +44,9 @@ import { EditTripComponent } from './components/pages/trips/edit-trip/edit-trip.
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AllActorsComponent } from './components/pages/actors/all-actors/all-actors.component';
 import { RegisterManagerComponent } from './components/pages/actors/register-manager/register-manager.component';
+import { AllSponsorshipsComponent } from './components/pages/sponsorship/all-sponsorships/all-sponsorships.component';
+import { AddSponsorshipComponent } from './components/pages/sponsorship/add-sponsorship/add-sponsorship.component';
+import { EditSponsorshipComponent } from './components/pages/sponsorship/edit-sponsorship/edit-sponsorship.component';
 
 
 //Angular Material Modules
@@ -56,6 +59,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { GoBackButtonComponent } from './components/shared/go-back-button/go-back-button.component';
 import { ActorProfileEditComponent } from './components/pages/actor-profile/actor-profile-edit/actor-profile-edit.component';
 import { SystemParametersEditComponent } from './components/pages/system-parameters/system-parameters-edit/system-parameters-edit.component';
+import { DetailSponsorshipComponent } from './components/pages/sponsorship/detail-sponsorship/detail-sponsorship.component';
 
  let ANGULAR_MATERIAL_MODULES =[
   MatPaginatorModule,
@@ -103,6 +107,10 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     GoBackButtonComponent,
     ActorProfileEditComponent,
     SystemParametersEditComponent,
+    AllSponsorshipsComponent,
+    AddSponsorshipComponent,
+    EditSponsorshipComponent,
+    DetailSponsorshipComponent
   ],
   imports: [
     BrowserModule,
