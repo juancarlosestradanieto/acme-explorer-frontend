@@ -120,7 +120,10 @@
     "email":"Email",
     "address":"Dirección",
     "phone_number":"Número de Teléfono",
-    "actions":"Acciones",    
+    "actions":"Acciones",
+    "profile_edition":"Edición del perfil de usuario",
+    "confirm_edition":"Confirmar perfil de usuario",
+
     "role": {
       "title": "Rol",
       "explorer": "Explorador",
@@ -187,18 +190,30 @@
     "max": "Máximo",
     "desv": "Desviación estándar"
   },
+  "system-parameters": {
+    "title": "Parámetros del sistema",
+    "title-create": "Crear parámetros del sistema",
+    "title-update": "Actualizar parámetros del sistema",
+    "maxFinderResults": "Cantidad máxima de resultados mostrados en descubridores de viajes",
+    "flatRateSponsorships": "Tarifa plana del coste de los patrocinios",
+    "cacheHour": "Duración máxima en horas de la caché"
+  },
   "dark": "Modo Oscuro activado",
   "light": "Modo Claro activado",
   "buttons": {
     "create": "Crear",
+    "update": "Actualizar",
+    "edit-mode": "Modo edición",
     "more": "Ver más",
-    "go_to_trip": "Ir al viaje"
+    "go_to_trip": "Ir al viaje",
+    "back":"Volver"
   },
   "Messages": {
     "field_required": "Este campo es obligatorio.",
     "9_digits_required": "Este campo require de 9 dígitos.",
     "email_required": "Este campo require una sintaxis de email.",
-    "10_digits_alphanumeric": "Este campo require un mínimo de 10 caracteres alfanuméricos."
+    "10_digits_alphanumeric": "Este campo require un mínimo de 10 caracteres alfanuméricos.",
+    "positive-number": "Este campo require un número positivo."
   },
   "pagination": {
     "next": "Siguiente",

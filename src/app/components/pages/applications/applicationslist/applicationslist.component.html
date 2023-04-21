@@ -75,13 +75,6 @@
                     </ng-template>
                 </ngx-datatable-column>
 
-                <ngx-datatable-column name="{{'applications.rejection_reason' | translate}}" prop="rejected_reason"
-                    [canAutoResize]="true">
-                    <ng-template let-value="value" ngx-datatable-cell-template>
-                        {{value}}
-                    </ng-template>
-                </ngx-datatable-column>
-
                 <ngx-datatable-column name="" prop="trip_Id" [canAutoResize]="true">
                     <ng-template let-value="value" ngx-datatable-cell-template>
                         <button type="button" class="btn btn-primary" routerLink="/trips/{{value}}">

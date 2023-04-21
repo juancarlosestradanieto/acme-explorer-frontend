@@ -1,0 +1,4 @@
+services:
+  acme-explorer-frontend-service:
+    ports:
+    - '${FRONTEND_PORT:-4200}:80'

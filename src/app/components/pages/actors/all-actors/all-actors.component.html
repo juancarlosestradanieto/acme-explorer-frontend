@@ -31,9 +31,8 @@
                 <td>{{actor.phone_number}}</td>
                 <td>{{actor.role}}</td>
                 <td>
-                    <button class="btn btn-success m-1" title="Edit"><i class="fa-solid fa-edit"></i></button>
-                    <button class="btn btn-primary m-1" title="See Profile"><i class="fa-solid fa-user"></i></button>
                     <button class="btn btn-danger  m-1" title="Delete" (click)="deleteActor(actor._id)"><i class="fa-solid fa-trash"></i></button>
+                    <button class="btn btn-primary  m-1" title="Profile" (click)="getActorById(actor._id)"><i class="fa-solid fa-user"></i></button>
                 </td>
         </tr>
         </tbody>
@@ -43,3 +42,5 @@
     (page)="cambiarPagina($event)">
 </mat-paginator>
 </div>
+
+<app-go-back-button></app-go-back-button>
