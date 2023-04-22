@@ -25,6 +25,7 @@ import { ManagerApplicationsGuard } from './guards/manager-applications.guard';
 import { AllActorsComponent } from './components/pages/actors/all-actors/all-actors.component';
 import { RegisterManagerComponent } from './components/pages/actors/register-manager/register-manager.component';
 import { PayTripComponent } from './components/pages/trips/pay-trip/pay-trip.component';
+import { PayapplicationComponent } from './components/pages/applications/payapplication/payapplication.component';
 
 const routes: Routes = [
   {
@@ -112,6 +113,9 @@ const routes: Routes = [
     path: 'applications', children: [
       {
         path: ':id', component: ApplicationdisplayComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'EXPLORER|MANAGER' }
+      },
+      {
+        path: ':id/pay', component: PayapplicationComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'EXPLORER' }
       },
       {
         path: '', component: ApplicationslistComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'EXPLORER|MANAGER' }
