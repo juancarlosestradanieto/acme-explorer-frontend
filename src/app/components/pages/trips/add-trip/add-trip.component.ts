@@ -400,6 +400,7 @@ export class AddTripComponent implements OnInit {
             if(this.edit_mode == false)
             {
               this.tripForm.reset();
+              this.removeImagePrevisualizations();
             }
             this.success_message = "Trip successfully saved";
   
@@ -524,6 +525,15 @@ export class AddTripComponent implements OnInit {
 
     this.tripForm.patchValue({
       price: total_price
+    });
+  }
+
+  removeImagePrevisualizations()
+  {
+    //document.querySelectorAll(".image-previsualization")
+    Array.from(document.querySelectorAll(".image-previsualization")).map((element) => {
+      let image = element as HTMLImageElement;
+      image.src = "";
     });
   }
 
