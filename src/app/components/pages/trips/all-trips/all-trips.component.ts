@@ -66,7 +66,6 @@ export class AllTripsComponent implements OnInit {
   pages: Array<number> = [];
   aditional_search_parameters: any = {"published": true, "canceled": false};
   showAddTripButton: boolean = false;
-  keyword: string = "";
   searchTripForm;
   
   //Para el CountDown
@@ -171,9 +170,6 @@ export class AllTripsComponent implements OnInit {
   getTrips(page: number) 
   {
     
-    let formData = this.searchTripForm.value;
-    console.log("formData", formData);
-
     let search_parameters = {"page": page as unknown as string};
 
     if(this.aditional_search_parameters != null)
@@ -184,16 +180,24 @@ export class AllTripsComponent implements OnInit {
       };
     }
 
-    if(this.keyword != "")
-    {
-      let keyword_parameter = {"keyword": this.keyword};
-      search_parameters = {
-        ...search_parameters,
-        ...keyword_parameter
-      };
-    }
+    let formData = this.searchTripForm.value;
+    console.log("formData", formData);
 
-    console.log("search_parameters ", search_parameters);
+    for (let [key, value] of Object.entries(formData)) {
+      //console.log(`{${key}: ${value}}`);
+
+      if(value != "")
+      {
+        let new_search_parameter = JSON.parse(`{ "${key}" : "${value}" }`);
+        //console.log("new_search_parameter", new_search_parameter);
+        search_parameters = {
+          ...search_parameters,
+          ...new_search_parameter
+        };
+      }
+    }
+    
+    //console.log("search_parameters ", search_parameters);
 
     this.tripsService.getAllTrips(search_parameters)
       .then((response: any) => {
