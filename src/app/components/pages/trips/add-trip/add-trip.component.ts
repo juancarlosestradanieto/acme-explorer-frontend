@@ -235,11 +235,13 @@ export class AddTripComponent implements OnInit {
   onAddStage() {
     const control = <FormArray>this.tripForm.controls['stages'];
     control.push(this.getStage());
+    this.updateTotalPrice();
   }
 
   onRemoveStage(i: number) {
     const control = <FormArray>this.tripForm.controls['stages'];
     control.removeAt(i);
+    this.updateTotalPrice();
   }
 
   private getPicture()
@@ -505,6 +507,24 @@ export class AddTripComponent implements OnInit {
       });
 
     }
+  }
+
+  updateTotalPrice()
+  {
+    let formData = this.tripForm.value;
+    let stages = formData.stages;
+    let total_price = 0;
+    if(stages != null && stages.length > 0)
+    {
+      //console.log("updateTotalPrice stages", stages);
+      stages.map((stage) => {
+        total_price += stage.price ?? 0;
+      })
+    }
+
+    this.tripForm.patchValue({
+      price: total_price
+    });
   }
 
 }

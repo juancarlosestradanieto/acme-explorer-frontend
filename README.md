@@ -71,8 +71,6 @@ npm run fake-backend
 npm start
 ```
 
-
-
 ## 7. Run the tests
 
 ```

@@ -76,6 +76,7 @@
         ( tripForm.get('price')?.dirty || tripForm.get('price')?.touched )"
         [class.is-invalid]="tripForm.get('price')?.invalid && 
         ( tripForm.get('price')?.dirty || tripForm.get('price')?.touched )" 
+        [readonly]="true"
         />
     
     </div>
@@ -444,6 +445,7 @@
                             ( row.get('price')?.dirty || row.get('price')?.touched )"
                             [class.is-invalid]="row.get('price')?.invalid && 
                             ( row.get('price')?.dirty || row.get('price')?.touched )" 
+                            (keyup)="updateTotalPrice()"
                             />
                             
                             <div *ngIf="row.get('price')?.invalid && 
