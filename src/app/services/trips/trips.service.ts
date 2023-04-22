@@ -26,7 +26,7 @@ export class TripsService {
     
     let url_parameters = new URLSearchParams(search_parameters).toString();
     url_parameters = url_parameters != '' ? '?'+url_parameters : '';
-    console.log("url_parameters ", url_parameters);
+    //console.log("url_parameters ", url_parameters);
 
     const url = `${environment.backendApiBaseURL + '/trips'+url_parameters}`;
 

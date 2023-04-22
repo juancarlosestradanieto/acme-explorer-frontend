@@ -211,7 +211,7 @@ export class AuthService {
     let loggedIn_stored = localStorage.getItem('loggedIn');
     let loggedIn: boolean;
     let user: Actor | null = null;
-    console.log("HeaderComponent->ngAfterViewChecked user_stored", loggedIn_stored);
+    //console.log("HeaderComponent->ngAfterViewChecked user_stored", loggedIn_stored);
 
     if (loggedIn_stored != null) {
       loggedIn = JSON.parse(loggedIn_stored);

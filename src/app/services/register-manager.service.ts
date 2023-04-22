@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 
 
 const idToken = localStorage.getItem('idToken') ?? '';
-console.log("PANEL_ACTORES -> idToken del administrator actual: ",idToken)
+//console.log("PANEL_ACTORES -> idToken del administrator actual: ",idToken)
 
 const httpOptions = {
   headers: new HttpHeaders({ 
@@ -107,7 +107,7 @@ export class RegisterManagerService {
     let loggedIn_stored = localStorage.getItem('loggedIn');
     let loggedIn: boolean;
     let user: Actor | null = null;
-    console.log("HeaderComponent->ngAfterViewChecked user_stored", loggedIn_stored);
+    //console.log("HeaderComponent->ngAfterViewChecked user_stored", loggedIn_stored);
 
     if (loggedIn_stored != null) {
       loggedIn = JSON.parse(loggedIn_stored);

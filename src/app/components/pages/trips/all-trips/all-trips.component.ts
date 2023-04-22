@@ -9,6 +9,8 @@ import { TripsService } from 'src/app/services/trips/trips.service';
 import { differenceInMilliseconds } from 'date-fns';
 import { FavouriteTrips } from 'src/app/models/favourite-trips.model';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FindersService } from 'src/app/services/finders/finders.service';
+import { Finder } from 'src/app/models/finder/finder.model';
 
 
 const PriceRangeValidator: ValidatorFn = (fg: FormGroup) => {
@@ -67,6 +69,7 @@ export class AllTripsComponent implements OnInit {
   aditional_search_parameters: any = {"published": true, "canceled": false};
   showAddTripButton: boolean = false;
   searchTripForm;
+  shouldCreateFinder: boolean = false;
   
   //Para el CountDown
   interval:any;
@@ -75,7 +78,8 @@ export class AllTripsComponent implements OnInit {
   constructor(
     private tripsService: TripsService, 
     private authService: AuthService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private findersService: FindersService
   )
   {
     this.currentDateTime = new Date;
@@ -130,7 +134,11 @@ export class AllTripsComponent implements OnInit {
             delete this.aditional_search_parameters['canceled'];
             this.aditional_search_parameters['managerId'] = actor._id;
             this.showAddTripButton = true;
-          } else if (roles.includes("EXPLORER")) {
+          } 
+          else if (roles.includes("EXPLORER")) 
+          {
+            this.shouldCreateFinder = true;
+
             this.tripsService.getFavouriteTripsByReference(this.user!.getEmail() + "-favourites")
             .subscribe(
               (response: any) => {
@@ -150,6 +158,7 @@ export class AllTripsComponent implements OnInit {
                 console.error("AllTripsComponent->getFavouriteTripsByReference error ", error);
               }
             );
+
           }
         }
       }
@@ -181,7 +190,7 @@ export class AllTripsComponent implements OnInit {
     }
 
     let formData = this.searchTripForm.value;
-    console.log("formData", formData);
+    //console.log("formData", formData);
 
     for (let [key, value] of Object.entries(formData)) {
       //console.log(`{${key}: ${value}}`);
@@ -200,30 +209,99 @@ export class AllTripsComponent implements OnInit {
     //console.log("search_parameters ", search_parameters);
 
     this.tripsService.getAllTrips(search_parameters)
-      .then((response: any) => {
+    .then((response: any) => {
 
-        console.log("AllTripsComponent->constructor tripsService.getAllTrips then response ", response);
+      console.log("AllTripsComponent->constructor tripsService.getAllTrips then response ", response);
 
-        this.total_pages = response.totalPages;
+      this.total_pages = response.totalPages;
 
-        this.pages = [];
-        for (let page = 1; page <= this.total_pages; page++) {
-          this.pages.push(page);
-        }
+      this.pages = [];
+      for (let page = 1; page <= this.total_pages; page++) {
+        this.pages.push(page);
+      }
 
-        let json_trips = response.docs;
-        //console.log("json_trips ", json_trips);
-        let casted_trips = Trip.castJsonTrips(json_trips);
-        //console.log("casted_trips ", casted_trips);
+      let json_trips = response.docs;
+      //console.log("json_trips ", json_trips);
+      let casted_trips = Trip.castJsonTrips(json_trips);
+      //console.log("casted_trips ", casted_trips);
 
-        this.trips = casted_trips;
+      this.trips = casted_trips;
 
-      })
-      .catch((error: any) => {
+      this.createFinder();
 
-        console.error("AllTripsComponent->constructor tripsService.getAllTrips catch ", error);
+    })
+    .catch((error: any) => {
 
-      });
+      console.error("AllTripsComponent->constructor tripsService.getAllTrips catch ", error);
+
+    });
+  }
+
+  createFinder()
+  {
+
+    if(this.shouldCreateFinder == true)
+    {
+      let formData = this.searchTripForm.value;
+
+      //only creates the finder if at least one search criteria has been stablished
+      if(
+        formData["keyWord"] != "" || 
+        (formData["priceLowerBound"] != "" && formData["priceUpperBound"] != "") ||
+        (formData["dateLowerBound"] != "" && formData["dateUpperBound"] != "")
+      )
+      {
+        //console.log("formData 249", formData);
+
+        let local_stored_actor = localStorage.getItem("currentActor");
+        let actor = JSON.parse(local_stored_actor);
+        let explorer_Id = actor._id;
+  
+        //delete the ticker because it breaks the json
+        let cleaned_trips = this.trips.map((trip) => {
+          delete trip['ticker'];
+          return trip;
+        })
+        console.log("cleaned_trips", cleaned_trips);
+    
+        let results = {
+          'results': cleaned_trips,
+        };
+    
+        let other_fields = {
+          'explorer_Id': explorer_Id,
+          //'expiration_date': new Date(),
+        };
+  
+        let finder = {
+          ...formData,
+          ...results,
+          ...other_fields
+        };
+        console.log("finder ", finder);
+  
+        //let casted_finder = new Finder(finder);
+        //console.log("casted_finder ", casted_finder);
+  
+        //let stringified_finder = JSON.stringify(finder);
+        //console.log("stringified_finder ", stringified_finder);
+    
+        this.findersService.createFinder(finder)
+        .then((response: any) => {
+    
+          console.log("AllTripsComponent->createFinder findersService.createFinder then response ", response);
+    
+        })
+        .catch((error: any) => {
+    
+          console.error("AllTripsComponent->createFinder findersService.createFinder catch ", error);
+    
+        });
+
+      }
+
+    }
+
   }
 
   getDiffDays(start: string, now: string) {
