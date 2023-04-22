@@ -8,7 +8,46 @@ import { AuthService } from 'src/app/services/auth.service';
 import { TripsService } from 'src/app/services/trips/trips.service';
 import { differenceInMilliseconds } from 'date-fns';
 import { FavouriteTrips } from 'src/app/models/favourite-trips.model';
+import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
+
+const PriceRangeValidator: ValidatorFn = (fg: FormGroup) => {
+
+  let valid = null;
+
+  if(fg !== null && typeof fg !== "undefined")
+  {
+    const start = fg.get('priceLowerBound')?.value;
+    const end = fg.get('priceUpperBound')?.value;
+    valid = ( start !== null && end !== null && start <= end ) ? null  : {"price_range" : true};
+  }
+
+  return valid;
+};
+
+const DateRangeValidator: ValidatorFn = (fg: FormGroup) => {
+
+  let valid = null;
+
+  if(fg !== null && typeof fg !== "undefined")
+  {
+    const start = fg.get('dateLowerBound')?.value;
+    const end = fg.get('dateUpperBound')?.value;
+    //console.log("start ", start);
+    //console.log("end ", end);
+
+    if(start !== null && start !== "" && end !== null && end !== "")
+    {
+      let startDateObject = new Date(start).getTime();
+      let endDateObject = new Date(end).getTime();
+      valid = (startDateObject <= endDateObject) ? null  : {"date_range" : true};
+    }
+    
+  }
+  //console.log("valid ", valid);
+
+  return valid;
+};
 
 @Component({
   selector: 'app-all-trips',
@@ -28,14 +67,40 @@ export class AllTripsComponent implements OnInit {
   aditional_search_parameters: any = {"published": true, "canceled": false};
   showAddTripButton: boolean = false;
   keyword: string = "";
+  searchTripForm;
   
   //Para el CountDown
   interval:any;
   out_time!:string;
 
-  constructor(private tripsService: TripsService, private authService: AuthService) 
+  constructor(
+    private tripsService: TripsService, 
+    private authService: AuthService,
+    private fb: FormBuilder
+  )
   {
     this.currentDateTime = new Date;
+    this.searchTripForm = this.createForm();
+
+    /*
+    setInterval(() => {
+      //console.log("this.searchTripForm", this.searchTripForm);
+    }, 1000);
+    */
+  }
+
+  createForm()
+  {
+    return this.fb.group(
+      {
+        keyWord: ["", [Validators.pattern('^[a-zA-Z]+')]],
+        priceLowerBound: ["", [Validators.min(0), Validators.max(999999)]],
+        priceUpperBound: ["", [Validators.min(0), Validators.max(999999)]],
+        dateLowerBound: [""],
+        dateUpperBound: [""],
+      },
+      { validator: [PriceRangeValidator, DateRangeValidator] }
+    );
   }
 
   ngOnInit(): void 
@@ -105,6 +170,9 @@ export class AllTripsComponent implements OnInit {
 
   getTrips(page: number) 
   {
+    
+    let formData = this.searchTripForm.value;
+    console.log("formData", formData);
 
     let search_parameters = {"page": page as unknown as string};
 

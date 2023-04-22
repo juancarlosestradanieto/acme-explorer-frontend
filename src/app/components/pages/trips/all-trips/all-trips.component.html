@@ -10,18 +10,238 @@
 </div>
 
 <div class="row">
+    <br>
+</div>
 
-    <div class="col-md-3">
-    
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" [(ngModel)]="keyword" >
-            <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="search()">
+<form [formGroup]="searchTripForm" (ngSubmit)="search()" >
+
+    <div class="row">
+
+
+        <div class="col-md-2">
+        
+            <!--keyWord start-->
+            <div class="form-group has-danger">
+                
+                <label for="keyWord" class="form-control-label">{{'trips.keyWord' | translate}}:</label>
+
+                <input 
+                id="keyWord"
+                type="text"
+                class="form-control" 
+                formControlName="keyWord"
+                [class.is-valid]="searchTripForm.get('keyWord')?.valid && 
+                ( searchTripForm.get('keyWord')?.dirty || searchTripForm.get('keyWord')?.touched )"
+                [class.is-invalid]="searchTripForm.get('keyWord')?.invalid && 
+                ( searchTripForm.get('keyWord')?.dirty || searchTripForm.get('keyWord')?.touched )" 
+                />
+
+            </div>
+
+            <div *ngIf="searchTripForm.get('keyWord')?.invalid && 
+                searchTripForm.get('keyWord')?.errors && 
+                ( searchTripForm.get('keyWord')?.dirty || searchTripForm.get('keyWord')?.touched )" 
+            >
+
+                <small class="text-danger" *ngIf="searchTripForm.get('keyWord')?.hasError('pattern')">
+                    {{'trips.validations.keyword_pattern' | translate}}
+                </small>
+
+            </div>
+            <!--keyWord end-->
+        
+        </div>
+
+        <div class="col-md-2">
+        
+            <!--priceLowerBound start-->
+            <div class="form-group has-danger">
+                
+                <label for="priceLowerBound" class="form-control-label">{{'trips.priceLowerBound' | translate}}:</label>
+
+                <input 
+                id="priceLowerBound"
+                type="number"
+                class="form-control" 
+                formControlName="priceLowerBound"
+                [class.is-valid]="searchTripForm.get('priceLowerBound')?.valid && 
+                ( searchTripForm.get('priceLowerBound')?.dirty || searchTripForm.get('priceLowerBound')?.touched )"
+                [class.is-invalid]="searchTripForm.get('priceLowerBound')?.invalid && 
+                ( searchTripForm.get('priceLowerBound')?.dirty || searchTripForm.get('priceLowerBound')?.touched )" 
+                />
+
+            </div>
+
+            <div *ngIf="
+                (
+                    searchTripForm.get('priceLowerBound')?.invalid && 
+                    searchTripForm.get('priceLowerBound')?.errors && 
+                    ( searchTripForm.get('priceLowerBound')?.dirty || searchTripForm.get('priceLowerBound')?.touched )
+                )
+                ||
+                (searchTripForm.get('priceLowerBound')?.value != '' && searchTripForm.hasError('price_range'))
+                " 
+            >
+
+                <small class="text-danger" *ngIf="searchTripForm.get('priceLowerBound')?.hasError('min')">
+                    {{'trips.validations.minimum' | translate}} 0.
+                </small>
+                <small class="text-danger" *ngIf="searchTripForm.get('priceLowerBound')?.hasError('max')">
+                    {{'trips.validations.maximum' | translate}} 999999.
+                </small>
+                <small class="text-danger" *ngIf="searchTripForm.hasError('price_range')">
+                    {{'trips.validations.price_range_invalid' | translate}}
+                </small>
+
+            </div>
+            <!--priceLowerBound end-->
+
+        </div>
+
+        <div class="col-md-2">
+        
+            <!--priceUpperBound start-->
+            <div class="form-group has-danger">
+                
+                <label for="priceUpperBound" class="form-control-label">{{'trips.priceUpperBound' | translate}}:</label>
+        
+                <input 
+                id="priceUpperBound"
+                type="number"
+                class="form-control" 
+                formControlName="priceUpperBound"
+                [class.is-valid]="searchTripForm.get('priceUpperBound')?.valid && 
+                ( searchTripForm.get('priceUpperBound')?.dirty || searchTripForm.get('priceUpperBound')?.touched )"
+                [class.is-invalid]="searchTripForm.get('priceUpperBound')?.invalid && 
+                ( searchTripForm.get('priceUpperBound')?.dirty || searchTripForm.get('priceUpperBound')?.touched )" 
+                />
+        
+            </div>
+        
+            <div *ngIf="
+                (
+                    searchTripForm.get('priceUpperBound')?.invalid && 
+                    searchTripForm.get('priceUpperBound')?.errors && 
+                    ( searchTripForm.get('priceUpperBound')?.dirty || searchTripForm.get('priceUpperBound')?.touched )
+                )
+                ||
+                (searchTripForm.get('priceUpperBound')?.value != '' && searchTripForm.hasError('price_range'))
+                " 
+            >
+        
+                <small class="text-danger" *ngIf="searchTripForm.get('priceUpperBound')?.hasError('min')">
+                    {{'trips.validations.minimum' | translate}} 0.
+                </small>
+                <small class="text-danger" *ngIf="searchTripForm.get('priceUpperBound')?.hasError('max')">
+                    {{'trips.validations.maximum' | translate}} 999999.
+                </small>
+                <small class="text-danger" *ngIf="searchTripForm.hasError('price_range')">
+                    {{'trips.validations.price_range_invalid' | translate}}
+                </small>
+        
+            </div>
+            <!--priceUpperBound end-->
+        
+        </div>
+
+        <div class="col-md-2">
+        
+            <!--dateLowerBound start-->
+            <div class="form-group has-danger">
+                
+                <label for="dateLowerBound" class="form-control-label">{{'trips.dateLowerBound' | translate}}:</label>
+        
+                <input 
+                id="dateLowerBound"
+                type="date"
+                class="form-control" 
+                formControlName="dateLowerBound"
+                [class.is-valid]="searchTripForm.get('dateLowerBound')?.valid && 
+                ( searchTripForm.get('dateLowerBound')?.dirty || searchTripForm.get('dateLowerBound')?.touched )"
+                [class.is-invalid]="searchTripForm.get('dateLowerBound')?.invalid && 
+                ( searchTripForm.get('dateLowerBound')?.dirty || searchTripForm.get('dateLowerBound')?.touched )" 
+                />
+        
+            </div>
+        
+            <div *ngIf="
+                (
+                    searchTripForm.get('dateLowerBound')?.invalid && 
+                    searchTripForm.get('dateLowerBound')?.errors && 
+                    ( searchTripForm.get('dateLowerBound')?.dirty || searchTripForm.get('dateLowerBound')?.touched )
+                )
+                ||
+                (searchTripForm.get('dateLowerBound')?.value != '' && searchTripForm.hasError('date_range'))
+                " 
+            >
+        
+                <small class="text-danger" *ngIf="searchTripForm.hasError('date_range')">
+                    {{'trips.validations.date_range_invalid' | translate}}
+                </small>
+        
+            </div>
+            <!--dateLowerBound end-->
+        
+        </div>
+
+        <div class="col-md-2">
+        
+            <!--dateUpperBound start-->
+            <div class="form-group has-danger">
+                
+                <label for="dateUpperBound" class="form-control-label">{{'trips.dateUpperBound' | translate}}:</label>
+        
+                <input 
+                id="dateUpperBound"
+                type="date"
+                class="form-control" 
+                formControlName="dateUpperBound"
+                [class.is-valid]="searchTripForm.get('dateUpperBound')?.valid && 
+                ( searchTripForm.get('dateUpperBound')?.dirty || searchTripForm.get('dateUpperBound')?.touched )"
+                [class.is-invalid]="searchTripForm.get('dateUpperBound')?.invalid && 
+                ( searchTripForm.get('dateUpperBound')?.dirty || searchTripForm.get('dateUpperBound')?.touched )" 
+                />
+        
+            </div>
+        
+            <div *ngIf="
+                (
+                    searchTripForm.get('dateUpperBound')?.invalid && 
+                    searchTripForm.get('dateUpperBound')?.errors && 
+                    ( searchTripForm.get('dateUpperBound')?.dirty || searchTripForm.get('dateUpperBound')?.touched )
+                )
+                ||
+                (searchTripForm.get('dateUpperBound')?.value != '' && searchTripForm.hasError('date_range'))
+                " 
+            >
+        
+                <small class="text-danger" *ngIf="searchTripForm.hasError('date_range')">
+                    {{'trips.validations.date_range_invalid' | translate}}
+                </small>
+        
+            </div>
+            <!--dateUpperBound end-->
+        
+        </div>
+
+        <div class="col-md-2">
+            <button 
+                class="btn btn-outline-secondary" 
+                type="submit" id="search-button"
+                [disabled]="searchTripForm.invalid"
+            >
                 <i class="fa fa-search" aria-hidden="true"></i>
                 {{'trips.search' | translate}}
             </button>
+
         </div>
-    
+
     </div>
+    
+</form>
+
+<div class="row">
+    <br>
 </div>
 
 <div class="row ">

@@ -53,6 +53,11 @@
     "out_time":"Fuera de Tiempo",
     "search":"Buscar",
     "search-reset":"Restablecer",
+    "keyWord":"Palabra clave",
+    "priceLowerBound":"Precio mínimo",
+    "priceUpperBound":"Precio máximo",
+    "dateLowerBound":"Fecha mínima",
+    "dateUpperBound":"Fecha máxima",
     "buttons": {
       "add-favourite": "Añadir a favoritos",
       "remove-favourite": "Eliminar de favoritos",
@@ -72,7 +77,10 @@
     "validations": {
       "required": "Este campo es obligatorio.",
       "minimum": "El menor valor aceptado es",
-      "maximum": "El mayor valor aceptado es"
+      "maximum": "El mayor valor aceptado es",
+      "keyword_pattern": "La palabra clave debe ser una sola palabra",
+      "price_range_invalid": "El rango de precios es inválido",
+      "date_range_invalid": "El rango de fechas es inválido"
     }
   },
   "footer": {

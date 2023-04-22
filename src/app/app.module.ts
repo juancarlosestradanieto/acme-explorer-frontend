@@ -40,11 +40,12 @@ import { AccessdeniedComponent } from './components/shared/denied-access/accessd
 import { ThemeToggleComponent } from './components/shared/theme-toggle/theme-toggle.component';
 import { ApplicationcreationComponent } from './components/pages/applications/applicationcreation/applicationcreation.component';
 import { AddTripComponent } from './components/pages/trips/add-trip/add-trip.component';
-import { EditTripComponent } from './components/pages/trips/edit-trip/edit-trip.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AllActorsComponent } from './components/pages/actors/all-actors/all-actors.component';
 import { RegisterManagerComponent } from './components/pages/actors/register-manager/register-manager.component';
-
+import { GoBackButtonComponent } from './components/shared/go-back-button/go-back-button.component';
+import { ActorProfileEditComponent } from './components/pages/actor-profile/actor-profile-edit/actor-profile-edit.component';
+import { SystemParametersEditComponent } from './components/pages/system-parameters/system-parameters-edit/system-parameters-edit.component';
 
 //Angular Material Modules
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -53,18 +54,17 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { GoBackButtonComponent } from './components/shared/go-back-button/go-back-button.component';
-import { ActorProfileEditComponent } from './components/pages/actor-profile/actor-profile-edit/actor-profile-edit.component';
-import { SystemParametersEditComponent } from './components/pages/system-parameters/system-parameters-edit/system-parameters-edit.component';
+import {MatSliderModule} from '@angular/material/slider';
 
- let ANGULAR_MATERIAL_MODULES =[
+let ANGULAR_MATERIAL_MODULES = [
   MatPaginatorModule,
   MatDialogModule,
   BrowserAnimationsModule,
   MatIconModule,
   MatButtonModule,
-  MatToolbarModule
- ]
+  MatToolbarModule,
+  MatSliderModule
+]
 
  //Traducción
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -97,7 +97,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ThemeToggleComponent,
     ApplicationcreationComponent,
     AddTripComponent,
-    EditTripComponent,
     AllActorsComponent,
     RegisterManagerComponent,
     GoBackButtonComponent,

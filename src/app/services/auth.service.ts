@@ -40,7 +40,7 @@ export class AuthService {
         this.firebase_user_is_logged_in = false;
         user = null;
       }
-      console.log("AuthService constructor onAuthStateChanged this.firebase_user_is_logged_in", this.firebase_user_is_logged_in);
+      //console.log("AuthService constructor onAuthStateChanged this.firebase_user_is_logged_in", this.firebase_user_is_logged_in);
 
       localStorage.setItem('loggedIn', JSON.stringify(this.firebase_user_is_logged_in));
       localStorage.setItem('firebaseUser', JSON.stringify(user));

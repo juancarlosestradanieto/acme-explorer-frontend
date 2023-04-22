@@ -53,6 +53,11 @@
     "out_time":"Out of Time",
     "search":"Search",
     "search-reset":"Reset",
+    "keyWord":"Keyword",
+    "priceLowerBound":"Price lower bound",
+    "priceUpperBound":"Price upper bound",
+    "dateLowerBound":"Date lower bound",
+    "dateUpperBound":"Date upper bound",
     "buttons": {
       "add-favourite": "Add to favourites",
       "remove-favourite": "Remove from favourites",
@@ -72,7 +77,10 @@
     "validations": {
       "required": "This field is required.",
       "minimum": "The minimum accepted value is",
-      "maximum": "The maximum accepted value is"
+      "maximum": "The maximum accepted value is",
+      "keyword_pattern": "The keyword must be a single word",
+      "price_range_invalid": "The price range is invalid",
+      "date_range_invalid": "The date range is invalid"
     }
   },
   "footer": {

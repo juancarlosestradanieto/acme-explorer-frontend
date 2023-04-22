@@ -5,7 +5,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-
+import { FormBuilder } from '@angular/forms';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -28,7 +28,7 @@ describe('AllTripsComponent', () => {
           }
         })],
       declarations: [ AllTripsComponent ],
-      providers: [HttpClient, HttpHandler]
+      providers: [HttpClient, HttpHandler, FormBuilder]
     })
     .compileComponents();
 
