@@ -71,6 +71,7 @@ export class AllTripsComponent implements OnInit {
   searchTripForm;
   finderEnabled: boolean = false;
   protected actorId!: string;
+  finder_cache_minutes = 5;
   
   //Para el CountDown
   interval:any;
@@ -258,9 +259,8 @@ export class AllTripsComponent implements OnInit {
           'results': cleaned_trips,
         };
 
-        let cache_minutes = 5;
         let expiration_date = new Date();
-        expiration_date.setMinutes(expiration_date.getMinutes() + cache_minutes);     
+        expiration_date.setMinutes(expiration_date.getMinutes() + this.finder_cache_minutes);     
     
         let other_fields = {
           'explorer_Id': explorer_Id,
