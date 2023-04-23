@@ -41,4 +41,39 @@ export class FindersService {
     });
 
   }
+
+  getSingleFinder(explorer_Id: string)
+  {
+
+    const idToken = localStorage.getItem('idToken') ?? '';
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Accept-Language': 'es',
+        'idToken': idToken 
+      }),
+    };
+
+    const url = `${environment.backendApiBaseURL + '/finder/explorer/'+explorer_Id}`;
+
+    return new Promise<any>((resolve, reject) => {
+
+      this.http.get<any>(url, httpOptions).subscribe({
+        next: (response) => {
+  
+          console.log('FindersService->getSingleFinder get next response', response);
+          resolve(response);
+  
+        },
+        error: (error) => {
+  
+          console.error('FindersService->getSingleFinder get error', error);
+          reject(error);
+  
+        }
+      });
+    
+    });
+
+  }
 }

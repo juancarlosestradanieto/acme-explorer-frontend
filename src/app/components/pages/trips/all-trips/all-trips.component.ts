@@ -62,14 +62,15 @@ export class AllTripsComponent implements OnInit {
   trips: Array<Trip> = [];
   protected user!: Actor | null;
   protected activeRole: string = 'anonymous';
-  protected userId!: string | null;
+  //protected userId!: string | null;
   currentDateTime: Date;
   total_pages: number = 0;
   pages: Array<number> = [];
   aditional_search_parameters: any = {"published": true, "canceled": false};
   showAddTripButton: boolean = false;
   searchTripForm;
-  shouldCreateFinder: boolean = false;
+  finderEnabled: boolean = false;
+  protected actorId!: string;
   
   //Para el CountDown
   interval:any;
@@ -123,49 +124,38 @@ export class AllTripsComponent implements OnInit {
       let actor = JSON.parse(local_stored_actor);
       if(actor != null)
       {
+        this.actorId = actor._id;
+
         if(actor.hasOwnProperty('role'))
         {
           let roles = actor["role"];
           //console.log("actor roles ", roles);
           if(roles.includes("MANAGER"))
           {
-            //aditional_search_parameters.push({key: 'managerId', value: actor._id});
             delete this.aditional_search_parameters['published'];
             delete this.aditional_search_parameters['canceled'];
-            this.aditional_search_parameters['managerId'] = actor._id;
+            this.aditional_search_parameters['managerId'] = this.actorId;
             this.showAddTripButton = true;
           } 
           else if (roles.includes("EXPLORER")) 
           {
-            this.shouldCreateFinder = true;
-
-            this.tripsService.getFavouriteTripsByReference(this.user!.getEmail() + "-favourites")
-            .subscribe(
-              (response: any) => {
-                if (response.length > 0) {
-                  console.log("AllTripsComponent->getFavouriteTripsByReference response ", response[0]);
-                  let favourites = new FavouriteTrips(response[0]);
-                  console.log("AllTripsComponent->getFavouriteTripsByReference object ", favourites);
-                  console.log("AllTripsComponent->getFavouriteTripsByReference reference ", favourites.getReference());
-                  console.log("AllTripsComponent->getFavouriteTripsByReference trips ", favourites.getTrips());
-                  localStorage.setItem(favourites.getReference(), JSON.stringify(favourites.getTrips()));
-                }
-                else {
-                  console.log("AllTripsComponent->getFavouriteTripsByReference response is empty");
-                }
-              },
-              (error) => {
-                console.error("AllTripsComponent->getFavouriteTripsByReference error ", error);
-              }
-            );
-
+            this.finderEnabled = true;
+            this.getFavoriteTrips();
           }
         }
       }
     }
-    //console.log("aditional_search_parameters", this.aditional_search_parameters);
 
-    this.search();
+    //console.log("this.finderEnableds", this.finderEnabled);
+    if(this.finderEnabled == true)
+    {
+      this.getSingleFinder();
+    }
+    else
+    {
+      this.search();
+    }
+
     this.interval = setInterval(() => {
       this.countDownTimer("start");
     }, 1000);
@@ -240,7 +230,7 @@ export class AllTripsComponent implements OnInit {
   createFinder()
   {
 
-    if(this.shouldCreateFinder == true)
+    if(this.finderEnabled == true)
     {
       let formData = this.searchTripForm.value;
 
@@ -267,10 +257,14 @@ export class AllTripsComponent implements OnInit {
         let results = {
           'results': cleaned_trips,
         };
+
+        let cache_minutes = 5;
+        let expiration_date = new Date();
+        expiration_date.setMinutes(expiration_date.getMinutes() + cache_minutes);     
     
         let other_fields = {
           'explorer_Id': explorer_Id,
-          //'expiration_date': new Date(),
+          'expiration_date': expiration_date,
         };
   
         let finder = {
@@ -304,6 +298,34 @@ export class AllTripsComponent implements OnInit {
 
   }
 
+  getSingleFinder()
+  {
+    let explorer_Id = this.actorId;
+
+    this.findersService.getSingleFinder(explorer_Id)
+    .then((response: any) => {
+
+      console.log("AllTripsComponent->getSingleFinder findersService.getSingleFinder then response ", response);
+
+      if(response.hasOwnProperty('results'))
+      {
+        if(response.results.length > 0)
+        {
+          let json_trips = response.results;
+          let casted_trips = Trip.castJsonTrips(json_trips);
+          this.trips = casted_trips;
+        }
+
+      }
+
+    })
+    .catch((error: any) => {
+
+      console.error("AllTripsComponent->getSingleFinder findersService.getSingleFinder catch ", error);
+
+    });
+  }
+
   getDiffDays(start: string, now: string) {
     var startDate = new Date(start);
     var endDate = new Date(now);
@@ -325,8 +347,8 @@ export class AllTripsComponent implements OnInit {
     } 
     else{
        return "-"
+    }
   }
-}
 
 
   getCurrentStyles(start: string, now: string) {
@@ -348,7 +370,7 @@ export class AllTripsComponent implements OnInit {
     return this.getDiffDays(trip.getStartDate().toString(), this.currentDateTime.toISOString());
   }
 
-  favouriteTrip(trip: Trip) {
+  toggleFavouriteTrip(trip: Trip) {
     console.log("favouriteTrip user.email ", this.user!.getEmail());
     console.log("favouriteTrip user.email-favourites ", this.user!.getEmail() + "-favourites");
     let favourites = localStorage.getItem(this.user!.getEmail() + "-favourites");
@@ -425,6 +447,29 @@ export class AllTripsComponent implements OnInit {
         }
       );
     }
+  }
+
+  getFavoriteTrips()
+  {
+    this.tripsService.getFavouriteTripsByReference(this.user!.getEmail() + "-favourites")
+    .subscribe(
+      (response: any) => {
+        if (response.length > 0) {
+          console.log("AllTripsComponent->getFavouriteTripsByReference response ", response[0]);
+          let favourites = new FavouriteTrips(response[0]);
+          console.log("AllTripsComponent->getFavouriteTripsByReference object ", favourites);
+          console.log("AllTripsComponent->getFavouriteTripsByReference reference ", favourites.getReference());
+          console.log("AllTripsComponent->getFavouriteTripsByReference trips ", favourites.getTrips());
+          localStorage.setItem(favourites.getReference(), JSON.stringify(favourites.getTrips()));
+        }
+        else {
+          console.log("AllTripsComponent->getFavouriteTripsByReference response is empty");
+        }
+      },
+      (error) => {
+        console.error("AllTripsComponent->getFavouriteTripsByReference error ", error);
+      }
+    );
   }
 
   checkTripInFavourites(trip: Trip) {
