@@ -306,22 +306,57 @@ export class AllTripsComponent implements OnInit {
     .then((response: any) => {
 
       console.log("AllTripsComponent->getSingleFinder findersService.getSingleFinder then response ", response);
-
-      if(response.hasOwnProperty('results'))
+      let status = response.status; 
+      if(status == 204)//No finder was found
       {
-        if(response.results.length > 0)
+        //this.search();
+      }
+      else if(status == 200)//finder found
+      {
+        let responseBody = response.body;
+        
+        if(responseBody.hasOwnProperty('keyWord') && responseBody.keyWord !== "" && responseBody.keyWord !== null)
         {
-          let json_trips = response.results;
+          this.searchTripForm.controls.keyWord.setValue(responseBody.keyWord);
+        }
+        if(responseBody.hasOwnProperty('priceLowerBound') && responseBody.priceLowerBound !== "" && responseBody.priceLowerBound !== null)
+        {
+          this.searchTripForm.controls.priceLowerBound.setValue(responseBody.priceLowerBound);
+        }
+        
+        if(responseBody.hasOwnProperty('priceUpperBound') && responseBody.priceUpperBound !== "" && responseBody.priceUpperBound !== null)
+        {
+          this.searchTripForm.controls.priceUpperBound.setValue(responseBody.priceUpperBound);
+        }
+        
+        //console.log("responseBody.dateLowerBound ", responseBody.dateLowerBound);
+        if(responseBody.hasOwnProperty('dateLowerBound') && responseBody.dateLowerBound !== "" && responseBody.dateLowerBound !== null)
+        {
+          let dateLowerBound = (new Date(responseBody.dateLowerBound)).toLocaleDateString('en-CA');//YYY-mm-dd
+          //console.log("dateLowerBound ", dateLowerBound);
+          this.searchTripForm.controls.dateLowerBound.setValue(dateLowerBound);
+        }
+        
+        if(responseBody.hasOwnProperty('dateUpperBound') && responseBody.dateUpperBound !== "" && responseBody.dateUpperBound !== null)
+        {
+          let dateUpperBound = (new Date(responseBody.dateUpperBound)).toLocaleDateString('en-CA');//YYY-mm-dd
+          this.searchTripForm.controls.dateUpperBound.setValue(dateUpperBound);
+        }
+
+        if(responseBody.hasOwnProperty('results') && responseBody.results.length > 0)
+        {
+          let json_trips = responseBody.results;
           let casted_trips = Trip.castJsonTrips(json_trips);
           this.trips = casted_trips;
         }
-
       }
+
 
     })
     .catch((error: any) => {
 
       console.error("AllTripsComponent->getSingleFinder findersService.getSingleFinder catch ", error);
+      //this.search();
 
     });
   }

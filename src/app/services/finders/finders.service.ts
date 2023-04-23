@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Finder } from 'src/app/models/finder/finder.model';
 
@@ -46,12 +46,13 @@ export class FindersService {
   {
 
     const idToken = localStorage.getItem('idToken') ?? '';
-    const httpOptions = {
+    const httpOptions : Object = {
       headers: new HttpHeaders({ 
         'Content-Type': 'application/json',
         'Accept-Language': 'es',
         'idToken': idToken 
       }),
+      observe: "response",
     };
 
     const url = `${environment.backendApiBaseURL + '/finder/explorer/'+explorer_Id}`;
