@@ -72,7 +72,8 @@
       "trips-available": "Available trips just for you!",
       "favourite-trips-available": "Available favourite trips just for you!",
       "favourite-trips-not-found": "There are no favourite trips found",
-      "disabled-trip": "The trip has already started or has been cancelled"
+      "disabled-trip": "The trip has already started or has been cancelled",
+      "trip-saved": "Trip successfully saved"
     },
     "validations": {
       "required": "This field is required.",
@@ -220,11 +221,17 @@
     "9_digits_required": "This field requires 9 digits.",
     "email_required": "This field requires an email syntax.",
     "10_digits_alphanumeric": "This field requires a minimum of ten alphanumeric characters.",
-    "positive-number": "This field requires a positive number."
+    "positive-number": "This field requires a positive number.",
+    "something-went-wrong": "Something went wrong"
   },
   "pagination": {
     "next": "Next",
     "prev": "Previous",
     "page": "Page"
+  },
+  "finders":{
+    "messages":{
+      "finder-saved": "Finder config successfully saved"
+    }
   }
 }

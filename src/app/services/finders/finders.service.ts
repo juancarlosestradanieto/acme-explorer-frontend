@@ -2,13 +2,25 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Finder } from 'src/app/models/finder/finder.model';
+import { SystemParametersService } from '../system-parameters.service';
+
+export interface FinderConfig {
+  maxFinderResults: number;
+  cacheHour: number;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class FindersService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient, 
+    private systemParametersService: SystemParametersService
+  ) 
+  { 
+
+  }
 
   createFinder(finder: any) {
 
@@ -76,5 +88,78 @@ export class FindersService {
     
     });
 
+  }
+
+  setFinderConfig(finderConfig: FinderConfig)
+  {
+    localStorage.setItem("finderConfig", JSON.stringify(finderConfig));
+  }
+
+  getFinderConfig()
+  {
+    return new Promise<FinderConfig>((resolve, reject) => {
+
+      let defaultMaxFinderResults = 10;
+      let defaultCacheHour = 1;
+      let defaultFinderConfig: FinderConfig = {
+        maxFinderResults: defaultMaxFinderResults,
+        cacheHour: defaultCacheHour
+      };
+
+      let finderConfigLocallyStoredString = localStorage.getItem("finderConfig");
+      //console.log("finderConfigLocallyStoredString ", finderConfigLocallyStoredString);
+      
+      let getGlobalSystemParameters = true;
+
+      if(finderConfigLocallyStoredString != null)
+      {
+        let finderConfigLocallyStored = JSON.parse(finderConfigLocallyStoredString);
+        if(finderConfigLocallyStored.hasOwnProperty('maxFinderResults') && finderConfigLocallyStored.hasOwnProperty('cacheHour')) 
+        {
+          let maxFinderResultsLocallyStored = finderConfigLocallyStored.maxFinderResults;
+          let cacheHourLocallyStored = finderConfigLocallyStored.cacheHour;
+
+          if(!isNaN(maxFinderResultsLocallyStored) && !isNaN(cacheHourLocallyStored))
+          {
+            getGlobalSystemParameters = false;
+
+            let finderConfig: FinderConfig = {
+              maxFinderResults: maxFinderResultsLocallyStored,
+              cacheHour: cacheHourLocallyStored
+            };
+            resolve(finderConfig);
+          }
+        }
+      }
+
+      if(getGlobalSystemParameters == true)
+      {
+        this.systemParametersService.getSystemParameters()
+        .then((response) => {
+          console.log("FindersService->getFinderConfig->systemParametersService->getGlobalSystemParameters then response ", response);
+          if(response.hasOwnProperty('systemParameters')) 
+          {
+            //console.log("SI hay configurado systemParameters");
+            let finderConfig: FinderConfig = {
+              maxFinderResults: response.systemParameters.maxFinderResults,
+              cacheHour: response.systemParameters.cacheHour
+            };
+            resolve(finderConfig);
+          }
+          else
+          {
+            //console.log("NO hay configurado systemParameters, se toman valores por defecto");
+            resolve(defaultFinderConfig);
+          }
+        })
+        .catch((error) => {
+          console.error("FindersService->getFinderConfig->systemParametersService->getGlobalSystemParameters catch ", error);
+          //console.log("NO pudo consultar systemParameters, se toman valores por defecto");
+          resolve(defaultFinderConfig);
+        });
+      }
+
+    });
+    
   }
 }

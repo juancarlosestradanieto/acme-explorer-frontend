@@ -514,11 +514,11 @@
     </button>
 
     <div class="alert alert-success" *ngIf="success_message && success_message != ''">
-        {{success_message}}
+        {{success_message | translate}}
     </div>
 
     <div class="alert alert-danger" *ngIf="error_message && error_message != ''">
-        {{error_message}}
+        {{error_message | translate}}
     </div>
 
 </form>

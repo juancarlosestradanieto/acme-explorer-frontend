@@ -72,7 +72,8 @@
       "trips-available": "¡Viajes disponibles para ti!",
       "favourite-trips-available": "¡Viajes favoritos disponibles para ti!",
       "favourite-trips-not-found": "No se han encontrado viajes favoritos",
-      "disabled-trip": "El viaje ya ha comenzado o ha sido cancelado"
+      "disabled-trip": "El viaje ya ha comenzado o ha sido cancelado",
+      "trip-saved": "Viaje guardado exitosamente"
     },
     "validations": {
       "required": "Este campo es obligatorio.",
@@ -221,11 +222,17 @@
     "9_digits_required": "Este campo require de 9 dígitos.",
     "email_required": "Este campo require una sintaxis de email.",
     "10_digits_alphanumeric": "Este campo require un mínimo de 10 caracteres alfanuméricos.",
-    "positive-number": "Este campo require un número positivo."
+    "positive-number": "Este campo require un número positivo.",
+    "something-went-wrong": "Something went wrong"
   },
   "pagination": {
     "next": "Siguiente",
     "prev": "Anterior",
     "page": "Página"
+  },
+  "finders":{
+    "messages":{
+      "finder-saved": "Descubridor de viajes guardado exitosamente"
+    }
   }
 }

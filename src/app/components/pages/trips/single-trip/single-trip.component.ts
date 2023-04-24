@@ -288,7 +288,7 @@ export class SingleTripComponent implements OnInit {
       .catch((error) => {
 
         console.error("SingleTripComponent->deleteTrip tripsService.deleteTrip catch ", error);
-        this.error_message = "Something went wrong";
+        this.error_message = "Messages.something-went-wrong";
 
       });
 
@@ -323,7 +323,7 @@ export class SingleTripComponent implements OnInit {
         .catch((error) => {
 
           console.error("SingleTripComponent->cancelTrip tripsService.cancelTrip catch ", error);
-          this.error_message = "Something went wrong";
+          this.error_message = "Messages.something-went-wrong";
 
         });
 
@@ -351,7 +351,7 @@ export class SingleTripComponent implements OnInit {
       .catch((error) => {
 
         console.error("SingleTripComponent->publishTrip tripsService.publishTrip catch ", error);
-        this.error_message = "Something went wrong";
+        this.error_message = "Messages.something-went-wrong";
 
       });
 
