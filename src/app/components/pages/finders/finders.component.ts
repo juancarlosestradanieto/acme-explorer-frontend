@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Finder } from 'src/app/models/finder/finder.model';
 import { FinderConfig, FindersService } from 'src/app/services/finders/finders.service';
 import { SystemParametersService } from 'src/app/services/system-parameters.service';
 
@@ -12,6 +13,8 @@ export class FindersComponent implements OnInit {
 
   finderConfigForm;
   success_message!: string;
+  protected actorId!: string;
+  finders: Array<Finder>;
 
   constructor(
     private fb: FormBuilder,
@@ -23,6 +26,18 @@ export class FindersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    let local_stored_actor = localStorage.getItem("currentActor");
+    if(local_stored_actor != null)
+    {
+      let actor = JSON.parse(local_stored_actor);
+      if(actor != null)
+      {
+        this.actorId = actor._id;
+      }
+    }
+
+    this.getExplorerFinders();
 
   }
 
@@ -66,6 +81,36 @@ export class FindersComponent implements OnInit {
       console.error("FindersComponent->getFinderConfig catch ", error);
     });
 
+  }
+
+  getExplorerFinders()
+  {
+    let explorer_Id = this.actorId;
+
+    this.findersService.getExplorerFinders(explorer_Id)
+    .then((response: any) => {
+
+      console.log("FindersComponent->getExplorerFinders findersService.getExplorerFinders then response ", response);
+      let status = response.status; 
+      if(status == 204)//No finder was found
+      {
+        //this.search();
+      }
+      else if(status == 200)//finder found
+      {
+        let finders = Finder.castJsonFinders(response.body);
+        //console.log("finders ", finders);
+        this.finders = finders;
+        
+      }
+
+
+    })
+    .catch((error: any) => {
+
+      console.error("FindersComponent->getExplorerFinders findersService.getExplorerFinders catch ", error);
+
+    });
   }
 
 }

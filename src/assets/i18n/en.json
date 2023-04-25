@@ -230,6 +230,9 @@
     "page": "Page"
   },
   "finders":{
+    "buttons":{
+      "save": "Save finder"
+    },
     "messages":{
       "finder-saved": "Finder config successfully saved"
     }

@@ -87,4 +87,12 @@ export class Finder extends Entity {
         return casted_finder;
     }
 
+    public static castJsonFinders(json_finders: any): Array<Finder>
+    {
+        let casted_finders: Array<Finder> = json_finders.map((json_finder: any) => {
+            return Finder.castJsonFinder(json_finder);
+        });
+        return casted_finders;
+    }
+
 }

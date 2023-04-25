@@ -54,7 +54,7 @@ export class FindersService {
 
   }
 
-  getSingleFinder(explorer_Id: string)
+  getExplorerFinders(explorer_Id: string)
   {
 
     const idToken = localStorage.getItem('idToken') ?? '';
@@ -74,13 +74,13 @@ export class FindersService {
       this.http.get<any>(url, httpOptions).subscribe({
         next: (response) => {
   
-          console.log('FindersService->getSingleFinder get next response', response);
+          console.log('FindersService->getExplorerFinders get next response', response);
           resolve(response);
   
         },
         error: (error) => {
   
-          console.error('FindersService->getSingleFinder get error', error);
+          console.error('FindersService->getExplorerFinders get error', error);
           reject(error);
   
         }

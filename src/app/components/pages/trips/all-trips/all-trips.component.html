@@ -244,6 +244,15 @@
     <br>
 </div>
 
+<div class="row">
+    <div class="col-md-3 offset-md-9" *ngIf="showSaveFinderButton">
+        <button type="button" class="btn btn-success" (click)="createFinder()">
+            <i class="fa-solid fa-save"></i>
+            {{'finders.buttons.save' | translate}}
+        </button>
+    </div>
+</div>
+
 <div class="row ">
 
     <nav aria-label="Page navigation example">

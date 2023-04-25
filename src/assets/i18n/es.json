@@ -231,6 +231,9 @@
     "page": "Página"
   },
   "finders":{
+    "buttons":{
+      "save": "Guardar búsqueda"
+    },
     "messages":{
       "finder-saved": "Descubridor de viajes guardado exitosamente"
     }

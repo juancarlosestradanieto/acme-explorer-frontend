@@ -93,3 +93,39 @@
     </div>
 
 </form>
+
+<div class="row">
+    <div class="col-md-12">
+        <br>
+        <h2>In force finders</h2>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-12">
+        <table class="table table-responsive table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>keyWord</th>
+                    <th>priceLowerBound</th>
+                    <th>priceUpperBound</th>
+                    <th>dateLowerBound</th>
+                    <th>dateUpperBound</th>
+                    <th>expiration_date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let finder of finders">
+                    <td>{{finder.keyWord}}</td>
+                    <td>{{finder.priceLowerBound}}</td>
+                    <td>{{finder.priceUpperBound}}</td>
+                    <td>{{finder.dateLowerBound | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{finder.dateUpperBound | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{finder.expiration_date | date: 'dd/MM/yyyy H:m:s'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
