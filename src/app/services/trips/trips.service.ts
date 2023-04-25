@@ -21,11 +21,12 @@ export class TripsService {
   
   constructor(private http: HttpClient) { }
 
-  getAllTrips(search_parameters: any)
+  //getAllTrips(search_parameters: any)
+  getAllTrips(url_parameters: string)
   {
     
-    let url_parameters = new URLSearchParams(search_parameters).toString();
-    url_parameters = url_parameters != '' ? '?'+url_parameters : '';
+    //let url_parameters = new URLSearchParams(search_parameters).toString();
+    //url_parameters = url_parameters != '' ? '?'+url_parameters : '';
     //console.log("url_parameters ", url_parameters);
 
     const url = `${environment.backendApiBaseURL + '/trips'+url_parameters}`;

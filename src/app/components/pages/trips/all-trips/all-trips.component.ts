@@ -11,7 +11,7 @@ import { FavouriteTrips } from 'src/app/models/favourite-trips.model';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { FinderConfig, FindersService } from 'src/app/services/finders/finders.service';
 import { Finder } from 'src/app/models/finder/finder.model';
-
+import { environment } from 'src/environments/environment';
 
 const PriceRangeValidator: ValidatorFn = (fg: FormGroup) => {
 
@@ -203,7 +203,11 @@ export class AllTripsComponent implements OnInit {
     
     //console.log("search_parameters ", search_parameters);
 
-    this.tripsService.getAllTrips(search_parameters)
+    let url_parameters = new URLSearchParams(search_parameters).toString();
+    url_parameters = url_parameters != '' ? '?'+url_parameters : '';
+    //console.log("url_parameters ", url_parameters);
+
+    this.tripsService.getAllTrips(url_parameters)
     .then((response: any) => {
 
       console.log("AllTripsComponent->constructor tripsService.getAllTrips then response ", response);
@@ -212,9 +216,36 @@ export class AllTripsComponent implements OnInit {
       this.totalDocs = response.totalDocs;
 
       this.pages = [];
+      let urls = [];
       for (let page = 1; page <= this.totalPages; page++) {
+
         this.pages.push(page);
+
+        //cache start
+        search_parameters["page"] = page as unknown as string;
+        let url_parameters = new URLSearchParams(search_parameters).toString();
+        url_parameters = url_parameters != '' ? '?'+url_parameters : '';
+        console.log("url_parameters ", url_parameters);
+        const url = `${environment.backendApiBaseURL + '/trips'+url_parameters}`;
+
+
+        urls.push(url);
+        //cache end
+
       }
+
+      console.log("urls ", urls);
+
+
+      //cache start
+      let cacheName = 'finder'; 
+      caches.open(cacheName).then( cache => {
+        cache.addAll(urls).then( () => {
+              console.log("Data cached ")
+          });
+      });
+      //cache end
+
 
       let json_trips = response.docs;
       //console.log("json_trips ", json_trips);
