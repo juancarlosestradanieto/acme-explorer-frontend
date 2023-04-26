@@ -105,9 +105,12 @@ export class AllTripsComponent implements OnInit {
     private route: ActivatedRoute
   )
   {
+    /*
     this.route.queryParams.subscribe(params => {
       this.finder_id = params['finder_id'];
     });
+    */
+    this.finder_id = this.route.snapshot.paramMap.get('finder_id');
 
     this.currentDateTime = new Date;
     this.searchTripForm = this.createForm();

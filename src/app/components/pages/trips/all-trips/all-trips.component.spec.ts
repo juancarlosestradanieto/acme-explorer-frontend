@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute, convertToParamMap } from '@angular/router';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -28,7 +29,19 @@ describe('AllTripsComponent', () => {
           }
         })],
       declarations: [ AllTripsComponent ],
-      providers: [HttpClient, HttpHandler, FormBuilder]
+      providers: [
+        HttpClient, 
+        HttpHandler, 
+        FormBuilder,
+        {
+          provide: ActivatedRoute, 
+          useValue: { 
+            snapshot: { 
+              paramMap: convertToParamMap( { 'finder_id': 'fake-id' } ) 
+            } 
+          }
+        }
+      ]
     })
     .compileComponents();
 
