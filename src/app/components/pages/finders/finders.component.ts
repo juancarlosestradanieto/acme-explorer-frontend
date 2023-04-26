@@ -63,7 +63,7 @@ export class FindersComponent implements OnInit {
 
     this.findersService.setFinderConfig(finderConfig);
 
-    this.success_message = "finders.messages.finder-saved";
+    this.success_message = "finders.messages.finder-config-saved";
   }
 
   getFinderConfig()

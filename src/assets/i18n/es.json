@@ -231,11 +231,15 @@
     "page": "Página"
   },
   "finders":{
+    "in-force-finders": "Buscadores en vigor",
+    "expiration-date": "Fecha de vencimiento",
     "buttons":{
-      "save": "Guardar búsqueda"
+      "save": "Guardar búsqueda",
+      "show-results": "Mostrar resultados"
     },
     "messages":{
-      "finder-saved": "Descubridor de viajes guardado exitosamente"
+      "finder-config-saved": "Descubridor de viajes guardado exitosamente",
+      "finder-saved": "Búsqueda guardada exitosamente"
     }
   }
 }

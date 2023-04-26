@@ -246,10 +246,16 @@
 
 <div class="row">
     <div class="col-md-3 offset-md-9" *ngIf="showSaveFinderButton">
-        <button type="button" class="btn btn-success" (click)="createFinder()">
+
+        <button type="button" class="btn btn-success" (click)="createFinder()" [ngClass]="{ 'disabled' : (create_finder_sucess_message && create_finder_sucess_message != '') }">
             <i class="fa-solid fa-save"></i>
             {{'finders.buttons.save' | translate}}
         </button>
+
+        <div class="alert alert-success" *ngIf="create_finder_sucess_message && create_finder_sucess_message != ''">
+            {{create_finder_sucess_message | translate}}
+        </div>
+
     </div>
 </div>
 

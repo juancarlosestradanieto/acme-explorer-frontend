@@ -97,7 +97,7 @@
 <div class="row">
     <div class="col-md-12">
         <br>
-        <h2>In force finders</h2>
+        <h2>{{"finders.in-force-finders" | translate}}</h2>
     </div>
 </div>
 
@@ -107,12 +107,13 @@
         <table class="table table-responsive table-striped table-hover">
             <thead>
                 <tr>
-                    <th>keyWord</th>
-                    <th>priceLowerBound</th>
-                    <th>priceUpperBound</th>
-                    <th>dateLowerBound</th>
-                    <th>dateUpperBound</th>
-                    <th>expiration_date</th>
+                    <th>{{"trips.keyWord" | translate}}</th>
+                    <th>{{"trips.priceLowerBound" | translate}}</th>
+                    <th>{{"trips.priceUpperBound" | translate}}</th>
+                    <th>{{"trips.dateLowerBound" | translate}}</th>
+                    <th>{{"trips.dateUpperBound" | translate}}</th>
+                    <th>{{"finders.expiration-date" | translate}}</th>
+                    <th>{{"finders.buttons.show-results" | translate}}</th>
                 </tr>
             </thead>
             <tbody>
@@ -122,7 +123,16 @@
                     <td>{{finder.priceUpperBound}}</td>
                     <td>{{finder.dateLowerBound | date: 'dd/MM/yyyy'}}</td>
                     <td>{{finder.dateUpperBound | date: 'dd/MM/yyyy'}}</td>
-                    <td>{{finder.expiration_date | date: 'dd/MM/yyyy H:m:s'}}</td>
+                    <td>{{finder.expiration_date | date: 'dd/MM/yyyy H:mm:ss'}}</td>
+                    <td>
+                        <a 
+                            class="login" 
+                            routerLink="/trips/list"
+                            [queryParams]="{finder_id: finder._id}"
+                        >
+                            {{'finders.buttons.show-results' | translate}}
+                        </a>
+                    </td>
                 </tr>
             </tbody>
         </table>

@@ -230,11 +230,15 @@
     "page": "Page"
   },
   "finders":{
+    "in-force-finders": "In force finders",
+    "expiration-date": "Expiration date",
     "buttons":{
-      "save": "Save finder"
+      "save": "Save finder",
+      "show-results": "Show results"
     },
     "messages":{
-      "finder-saved": "Finder config successfully saved"
+      "finder-config-saved": "Finder config successfully saved",
+      "finder-saved": "Finder successfully saved"
     }
   }
 }
