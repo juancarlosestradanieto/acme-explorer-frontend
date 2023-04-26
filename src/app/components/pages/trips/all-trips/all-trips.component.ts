@@ -11,6 +11,7 @@ import { FavouriteTrips } from 'src/app/models/favourite-trips.model';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { FinderConfig, FindersService } from 'src/app/services/finders/finders.service';
 import { Finder } from 'src/app/models/finder/finder.model';
+import { ActivatedRoute } from '@angular/router';
 
 const PriceRangeValidator: ValidatorFn = (fg: FormGroup) => {
 
@@ -20,7 +21,16 @@ const PriceRangeValidator: ValidatorFn = (fg: FormGroup) => {
   {
     const start = fg.get('priceLowerBound')?.value;
     const end = fg.get('priceUpperBound')?.value;
-    valid = ( start !== null && end !== null && start <= end ) ? null  : {"price_range" : true};
+    //console.log("PriceRangeValidator start", start);
+    //console.log("PriceRangeValidator end", end);
+
+    let both_selected = (start !== null && end !== null);
+    let some_selected = (start !== null || end !== null);
+
+    if(some_selected)
+    {
+      valid = ( both_selected && start <= end ) ? null  : {"price_range" : true};
+    }
   }
 
   return valid;
@@ -37,11 +47,14 @@ const DateRangeValidator: ValidatorFn = (fg: FormGroup) => {
     //console.log("start ", start);
     //console.log("end ", end);
 
-    if(start !== null && start !== "" && end !== null && end !== "")
+    let both_selected = (start !== null && end !== null);
+    let some_selected = (start !== null || end !== null);
+
+    if(some_selected)
     {
       let startDateObject = new Date(start).getTime();
       let endDateObject = new Date(end).getTime();
-      valid = (startDateObject <= endDateObject) ? null  : {"date_range" : true};
+      valid = (both_selected && startDateObject <= endDateObject) ? null  : {"date_range" : true};
     }
     
   }
@@ -78,6 +91,7 @@ export class AllTripsComponent implements OnInit {
   cacheName = 'finder';
   create_finder_sucess_message;
   results_per_page = 10;
+  finder_id!: string;
 
   //Para el CountDown
   interval:any;
@@ -87,9 +101,14 @@ export class AllTripsComponent implements OnInit {
     private tripsService: TripsService, 
     private authService: AuthService,
     private fb: FormBuilder,
-    private findersService: FindersService
+    private findersService: FindersService,
+    private route: ActivatedRoute
   )
   {
+    this.route.queryParams.subscribe(params => {
+      this.finder_id = params['finder_id'];
+    });
+
     this.currentDateTime = new Date;
     this.searchTripForm = this.createForm();
   }
@@ -185,6 +204,7 @@ export class AllTripsComponent implements OnInit {
       this.renderTrips(response);
     })
     .catch((error: any) => {
+      //
       console.error("AllTripsComponent->getTripsFromCache catch ", error);
 
       this.getTripsFromService(url);
@@ -211,7 +231,7 @@ export class AllTripsComponent implements OnInit {
           if(!cacheResponse) {
             //return fetch(url);
             console.log("AllTripsComponent->getTripsFromCache url not found in cache");
-            reject(null);
+            reject({error: "Data not found in cache."});
           }
           else
           {
@@ -228,7 +248,7 @@ export class AllTripsComponent implements OnInit {
               //return fetch(url);
               console.log("AllTripsComponent->getTripsFromCache cache expired");
               cache.delete(url);
-              reject(null);
+              reject({error: "Data not found in cache."});
             }
             else
             {
@@ -483,41 +503,63 @@ export class AllTripsComponent implements OnInit {
       }
       else if(status == 200)//finder found
       {
-        let responseBody = response.body;
-        let lastFinder = responseBody[0];
-        
-        if(lastFinder.hasOwnProperty('keyWord') && lastFinder.keyWord !== "" && lastFinder.keyWord !== null)
+        //let responseBody = response.body;
+        let finders = response.body;
+        let finder: any;
+
+        if(typeof this.finder_id !== 'undefined' && this.finder_id !== '')
         {
-          this.searchTripForm.controls.keyWord.setValue(lastFinder.keyWord);
+          console.log("this.finder_id", this.finder_id);
+          console.log("finders ", finders);
+
+          let finders_filtered = finders.filter((currentFinder) => {
+            return currentFinder._id == this.finder_id;
+          });
+          console.log("finders_filtered ", finders_filtered);
+
+          if(finders_filtered.length > 0)
+          {
+            finder = finders_filtered[0];
+          }
         }
-        if(lastFinder.hasOwnProperty('priceLowerBound') && lastFinder.priceLowerBound !== "" && lastFinder.priceLowerBound !== null)
+        else
         {
-          this.searchTripForm.controls.priceLowerBound.setValue(lastFinder.priceLowerBound);
+          let lastFinder = finders[0];
+          finder = lastFinder;
         }
         
-        if(lastFinder.hasOwnProperty('priceUpperBound') && lastFinder.priceUpperBound !== "" && lastFinder.priceUpperBound !== null)
+        if(finder.hasOwnProperty('keyWord') && finder.keyWord !== "" && finder.keyWord !== null)
         {
-          this.searchTripForm.controls.priceUpperBound.setValue(lastFinder.priceUpperBound);
+          this.searchTripForm.controls.keyWord.setValue(finder.keyWord);
+        }
+        if(finder.hasOwnProperty('priceLowerBound') && finder.priceLowerBound !== "" && finder.priceLowerBound !== null)
+        {
+          this.searchTripForm.controls.priceLowerBound.setValue(finder.priceLowerBound);
         }
         
-        //console.log("lastFinder.dateLowerBound ", lastFinder.dateLowerBound);
-        if(lastFinder.hasOwnProperty('dateLowerBound') && lastFinder.dateLowerBound !== "" && lastFinder.dateLowerBound !== null)
+        if(finder.hasOwnProperty('priceUpperBound') && finder.priceUpperBound !== "" && finder.priceUpperBound !== null)
         {
-          let dateLowerBound = (new Date(lastFinder.dateLowerBound)).toLocaleDateString('en-CA');//YYY-mm-dd
+          this.searchTripForm.controls.priceUpperBound.setValue(finder.priceUpperBound);
+        }
+        
+        //console.log("finder.dateLowerBound ", finder.dateLowerBound);
+        if(finder.hasOwnProperty('dateLowerBound') && finder.dateLowerBound !== "" && finder.dateLowerBound !== null)
+        {
+          let dateLowerBound = (new Date(finder.dateLowerBound)).toLocaleDateString('en-CA');//YYY-mm-dd
           //console.log("dateLowerBound ", dateLowerBound);
           this.searchTripForm.controls.dateLowerBound.setValue(dateLowerBound);
         }
         
-        if(lastFinder.hasOwnProperty('dateUpperBound') && lastFinder.dateUpperBound !== "" && lastFinder.dateUpperBound !== null)
+        if(finder.hasOwnProperty('dateUpperBound') && finder.dateUpperBound !== "" && finder.dateUpperBound !== null)
         {
-          let dateUpperBound = (new Date(lastFinder.dateUpperBound)).toLocaleDateString('en-CA');//YYY-mm-dd
+          let dateUpperBound = (new Date(finder.dateUpperBound)).toLocaleDateString('en-CA');//YYY-mm-dd
           this.searchTripForm.controls.dateUpperBound.setValue(dateUpperBound);
         }
 
         /*
-        if(lastFinder.hasOwnProperty('results') && lastFinder.results.length > 0)
+        if(finder.hasOwnProperty('results') && finder.results.length > 0)
         {
-          let json_trips = lastFinder.results;
+          let json_trips = finder.results;
           let casted_trips = Trip.castJsonTrips(json_trips);
           this.trips = casted_trips;
         }
