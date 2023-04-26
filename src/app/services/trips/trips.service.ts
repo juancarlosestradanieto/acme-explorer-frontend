@@ -21,15 +21,21 @@ export class TripsService {
   
   constructor(private http: HttpClient) { }
 
+  getUrl(url_parameters: string = ''): string
+  {
+    const url = `${environment.backendApiBaseURL + '/trips'+url_parameters}`;
+    return url;
+  }
+
   //getAllTrips(search_parameters: any)
-  getAllTrips(url_parameters: string)
+  getAllTrips(url: string)
   {
     
     //let url_parameters = new URLSearchParams(search_parameters).toString();
     //url_parameters = url_parameters != '' ? '?'+url_parameters : '';
     //console.log("url_parameters ", url_parameters);
 
-    const url = `${environment.backendApiBaseURL + '/trips'+url_parameters}`;
+    //const url = `${environment.backendApiBaseURL + '/trips'+url_parameters}`;
 
     return new Promise<any>((resolve, reject) => {
 

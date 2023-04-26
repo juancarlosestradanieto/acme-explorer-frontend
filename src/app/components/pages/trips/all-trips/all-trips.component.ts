@@ -11,7 +11,6 @@ import { FavouriteTrips } from 'src/app/models/favourite-trips.model';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { FinderConfig, FindersService } from 'src/app/services/finders/finders.service';
 import { Finder } from 'src/app/models/finder/finder.model';
-import { environment } from 'src/environments/environment';
 
 const PriceRangeValidator: ValidatorFn = (fg: FormGroup) => {
 
@@ -75,7 +74,8 @@ export class AllTripsComponent implements OnInit {
   max_finder_results = 10;
   finder_cache_hours = 1;
   showSaveFinderButton: boolean = false;
-  
+  cacheName = 'finder';
+
   //Para el CountDown
   interval:any;
   out_time!:string;
@@ -171,6 +171,35 @@ export class AllTripsComponent implements OnInit {
     this.getTrips(1);
   }
 
+  convertUTCDateToLocalDate(date) {
+    var newDate = new Date(date.getTime() - date.getTimezoneOffset()*60*1000);
+    return newDate;   
+  }
+
+  diffInHours(date1, date2)
+  {
+    var hours = Math.abs(date1 - date2) / 36e5;
+    return hours;
+  }
+
+  renderTrips(response)
+  {
+    //console.log("renderTrips response ", response);
+    this.totalPages = response.totalPages;
+    this.totalDocs = response.totalDocs;
+    this.pages = [];
+    for (let page = 1; page <= this.totalPages; page++) {
+      this.pages.push(page);
+    }
+
+    let json_trips = response.docs;
+    //console.log("json_trips ", json_trips);
+    let casted_trips = Trip.castJsonTrips(json_trips);
+    //console.log("casted_trips ", casted_trips);
+
+    this.trips = casted_trips;
+  }
+
   getTrips(page: number) 
   {
     
@@ -202,69 +231,123 @@ export class AllTripsComponent implements OnInit {
     }
     
     //console.log("search_parameters ", search_parameters);
-
     let url_parameters = new URLSearchParams(search_parameters).toString();
     url_parameters = url_parameters != '' ? '?'+url_parameters : '';
     //console.log("url_parameters ", url_parameters);
+    let url: string = this.tripsService.getUrl(url_parameters);
 
-    this.tripsService.getAllTrips(url_parameters)
+    this.getTripsFromCache(url)
     .then((response: any) => {
-
-      console.log("AllTripsComponent->constructor tripsService.getAllTrips then response ", response);
-
-      this.totalPages = response.totalPages;
-      this.totalDocs = response.totalDocs;
-
-      this.pages = [];
-      let urls = [];
-      for (let page = 1; page <= this.totalPages; page++) {
-
-        this.pages.push(page);
-
-        //cache start
-        search_parameters["page"] = page as unknown as string;
-        let url_parameters = new URLSearchParams(search_parameters).toString();
-        url_parameters = url_parameters != '' ? '?'+url_parameters : '';
-        console.log("url_parameters ", url_parameters);
-        const url = `${environment.backendApiBaseURL + '/trips'+url_parameters}`;
-
-
-        urls.push(url);
-        //cache end
-
-      }
-
-      console.log("urls ", urls);
-
-
-      //cache start
-      let cacheName = 'finder'; 
-      caches.open(cacheName).then( cache => {
-        cache.addAll(urls).then( () => {
-              console.log("Data cached ")
-          });
-      });
-      //cache end
-
-
-      let json_trips = response.docs;
-      //console.log("json_trips ", json_trips);
-      let casted_trips = Trip.castJsonTrips(json_trips);
-      //console.log("casted_trips ", casted_trips);
-
-      this.trips = casted_trips;
-
-      if(this.finderEnabled == true && this.totalDocs > 0 && this.finderFormValidToCreateFinder() == true)
-      {
-        this.showSaveFinderButton = true;
-      }
-
+      console.log("AllTripsComponent->getTripsFromCache response ", response);
+      this.renderTrips(response);
     })
     .catch((error: any) => {
+      console.error("AllTripsComponent->getTripsFromCache catch ", error);
 
-      console.error("AllTripsComponent->constructor tripsService.getAllTrips catch ", error);
+      this.tripsService.getAllTrips(url)
+      .then((response: any) => {
+  
+        console.log("AllTripsComponent->getTrips tripsService.getAllTrips then response ", response);
+  
+        this.renderTrips(response);
+        this.storeTripsInCache(search_parameters);
+  
+        if(this.finderEnabled == true && this.totalDocs > 0 && this.finderFormValidToCreateFinder() == true)
+        {
+          this.showSaveFinderButton = true;
+        }
+  
+      })
+      .catch((error: any) => {
+  
+        console.error("AllTripsComponent->getTrips tripsService.getAllTrips catch ", error);
+  
+      });
 
     });
+
+  }
+
+  storeTripsInCache(search_parameters)
+  {
+    //cache url prepare - start
+    let urls = [];
+    for (let page = 1; page <= this.totalPages; page++) 
+    {
+      search_parameters["page"] = page as unknown as string;
+      let url_parameters = new URLSearchParams(search_parameters).toString();
+      url_parameters = url_parameters != '' ? '?'+url_parameters : '';
+      //console.log("url_parameters ", url_parameters);
+      const url = this.tripsService.getUrl(url_parameters);
+
+      urls.push(url);
+    }
+    //cache url prepare - end
+
+    //cache store - start
+    caches.open(this.cacheName).then( cache => {
+      cache.addAll(urls).then( () => {
+        //console.log("Cached data from urls", urls)
+      });
+    });
+    //cache store - end
+  }
+
+  getTripsFromCache(url: string)
+  {
+
+    return new Promise<any>((resolve, reject) => {
+
+      //cache verification - start
+
+      caches.open(this.cacheName).then(cache => {
+        cache.match(url).then(cacheResponse => {
+          console.log("cache.match(url).then(response", cacheResponse);
+          //console.log("response.body", cacheResponse.body);
+          //console.log("response.json()", response.json().);
+          
+          if(!cacheResponse) {
+            //return fetch(url);
+            console.log("fetch url 1");
+            reject(null);
+          }
+          else
+          {
+            let reponse_date = new Date(cacheResponse.headers.get('Date'));
+            //console.log("reponse_date ", reponse_date);
+            let now = Date.now();
+            //console.log("now ", now);
+            let diffInHours = this.diffInHours(reponse_date, now);
+            console.log("diffInHours ", diffInHours);
+            
+            if(diffInHours > this.finder_cache_hours)
+            {
+              //return fetch(url);
+              console.log("fetch url 2");
+              reject(null);
+            }
+            else
+            {
+              // else return cached version
+              console.log("return cached version");
+                
+              resolve(cacheResponse.json());
+    
+              //return response;
+            }
+ 
+          }
+
+        })
+      })
+      //cache verification - end
+
+    });
+  }
+
+  getTripsFromService()
+  {
+    
   }
 
   finderFormValidToCreateFinder(): boolean
