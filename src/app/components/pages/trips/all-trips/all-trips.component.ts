@@ -23,9 +23,15 @@ const PriceRangeValidator: ValidatorFn = (fg: FormGroup) => {
     const end = fg.get('priceUpperBound')?.value;
     //console.log("PriceRangeValidator start", start);
     //console.log("PriceRangeValidator end", end);
+    let start_selected = (start !== null && start !== "");
+    let end_selected = (end !== null && end !== "");
+    //console.log("start_selected", start_selected);
+    //console.log("end_selected", end_selected);
 
-    let both_selected = (start !== null && end !== null);
-    let some_selected = (start !== null || end !== null);
+    let both_selected = (start_selected && end_selected);
+    let some_selected = (start_selected || end_selected);
+    //console.log("both_selected", both_selected);
+    //console.log("some_selected", some_selected);
 
     if(some_selected)
     {
@@ -46,9 +52,13 @@ const DateRangeValidator: ValidatorFn = (fg: FormGroup) => {
     const end = fg.get('dateUpperBound')?.value;
     //console.log("start ", start);
     //console.log("end ", end);
+    let start_selected = (start !== null && start !== "");
+    let end_selected = (end !== null && end !== "");
 
-    let both_selected = (start !== null && end !== null);
-    let some_selected = (start !== null || end !== null);
+    let both_selected = (start_selected && end_selected);
+    let some_selected = (start_selected || end_selected);
+    //console.log("both_selected", both_selected);
+    //console.log("some_selected", some_selected);
 
     if(some_selected)
     {
@@ -105,33 +115,16 @@ export class AllTripsComponent implements OnInit {
     private route: ActivatedRoute
   )
   {
-    /*
-    this.route.queryParams.subscribe(params => {
-      this.finder_id = params['finder_id'];
-    });
-    */
-    this.finder_id = this.route.snapshot.paramMap.get('finder_id');
-
     this.currentDateTime = new Date;
     this.searchTripForm = this.createForm();
   }
 
-  createForm()
-  {
-    return this.fb.group(
-      {
-        keyWord: ["", [Validators.pattern('^[a-zA-Z]+')]],
-        priceLowerBound: ["", [Validators.min(0), Validators.max(999999)]],
-        priceUpperBound: ["", [Validators.min(0), Validators.max(999999)]],
-        dateLowerBound: [""],
-        dateUpperBound: [""],
-      },
-      { validator: [PriceRangeValidator, DateRangeValidator] }
-    );
-  }
-
   ngOnInit(): void 
   {
+    this.route.queryParams.subscribe(params => {
+      this.finder_id = params['finder_id'];
+    });
+    //this.finder_id = this.route.snapshot.paramMap.get('finder_id');
 
     this.user = this.authService.getCurrentActor();
     if (this.user) {
@@ -185,6 +178,20 @@ export class AllTripsComponent implements OnInit {
     }, 1000);
   }
 
+  createForm()
+  {
+    return this.fb.group(
+      {
+        keyWord: ["", [Validators.pattern('^[a-zA-Z]+')]],
+        priceLowerBound: ["", [Validators.min(0), Validators.max(999999)]],
+        priceUpperBound: ["", [Validators.min(0), Validators.max(999999)]],
+        dateLowerBound: [""],
+        dateUpperBound: [""],
+      },
+      { validator: [PriceRangeValidator, DateRangeValidator] }
+    );
+  }
+
   search()
   {
     this.create_finder_sucess_message = "";
@@ -204,6 +211,7 @@ export class AllTripsComponent implements OnInit {
     this.getTripsFromCache(url)
     .then((response: any) => {
       console.log("AllTripsComponent->getTripsFromCache response ", response);
+      this.showSaveFinderButton = false;
       this.renderTrips(response);
     })
     .catch((error: any) => {
@@ -331,7 +339,7 @@ export class AllTripsComponent implements OnInit {
     for (let [key, value] of Object.entries(formData)) {
       //console.log(`{${key}: ${value}}`);
 
-      if(value != "")
+      if(value != "" && value != null)
       {
         let new_search_parameter = JSON.parse(`{ "${key}" : "${value}" }`);
         //console.log("new_search_parameter", new_search_parameter);
@@ -383,6 +391,7 @@ export class AllTripsComponent implements OnInit {
     //cache url prepare - end
 
     //cache store - start
+    caches.delete(this.cacheName);
     caches.open(this.cacheName).then( cache => {
       cache.addAll(urls).then( () => {
         //console.log("Cached data from urls", urls)
@@ -502,15 +511,19 @@ export class AllTripsComponent implements OnInit {
       let status = response.status; 
       if(status == 204)//No finder was found
       {
-        //this.search();
+        this.search();
       }
       else if(status == 200)//finder found
       {
+        this.showSaveFinderButton = false;
+        
         //let responseBody = response.body;
         let finders = response.body;
         let finder: any;
 
-        if(typeof this.finder_id !== 'undefined' && this.finder_id !== '')
+        console.log("this.finder_id ", this.finder_id);        
+
+        if(this.finder_id != null && typeof this.finder_id !== 'undefined' && this.finder_id !== '')
         {
           console.log("this.finder_id", this.finder_id);
           console.log("finders ", finders);
@@ -524,11 +537,16 @@ export class AllTripsComponent implements OnInit {
           {
             finder = finders_filtered[0];
           }
+          else
+          {
+            //lastFinder
+            finder = finders[0];
+          }
         }
         else
         {
-          let lastFinder = finders[0];
-          finder = lastFinder;
+          //lastFinder
+          finder = finders[0];
         }
         
         if(finder.hasOwnProperty('keyWord') && finder.keyWord !== "" && finder.keyWord !== null)
