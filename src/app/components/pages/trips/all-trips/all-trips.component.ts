@@ -102,6 +102,7 @@ export class AllTripsComponent implements OnInit {
   create_finder_sucess_message;
   results_per_page = 10;
   finder_id!: string;
+  finders;
 
   //Para el CountDown
   interval:any;
@@ -117,6 +118,10 @@ export class AllTripsComponent implements OnInit {
   {
     this.currentDateTime = new Date;
     this.searchTripForm = this.createForm();
+    this.searchTripForm.valueChanges.subscribe((data) => {
+      console.log("AllTripsComponent->constructor searchTripForm.valueChanges.subscribe ", data);
+      this.showSaveFinderButton = false;
+    });
   }
 
   ngOnInit(): void 
@@ -251,8 +256,8 @@ export class AllTripsComponent implements OnInit {
             let now = Date.now();
             //console.log("now ", now);
             let diffInHours = this.diffInHours(reponse_date, now);
-            console.log("diffInHours ", diffInHours);
-            console.log("this.finder_cache_hours ", this.finder_cache_hours);
+            console.log("AllTripsComponent->getTripsFromCache diffInHours ", diffInHours);
+            console.log("AllTripsComponent->getTripsFromCache this.finder_cache_hours ", this.finder_cache_hours);
             
             if(diffInHours > this.finder_cache_hours)
             {
@@ -293,6 +298,10 @@ export class AllTripsComponent implements OnInit {
       if(this.finderEnabled == true && this.totalDocs > 0 && this.finderFormValidToCreateFinder() == true)
       {
         this.showSaveFinderButton = true;
+      }
+      else
+      {
+        this.showSaveFinderButton = false;
       }
 
     })
@@ -404,16 +413,54 @@ export class AllTripsComponent implements OnInit {
   {
     let formData = this.searchTripForm.value;
     let finderFormValidToCreateFinder = false;
+    let keyWord = formData.keyWord;
+    let priceLowerBound = formData.priceLowerBound == "" ? null : formData.priceLowerBound ;
+    let priceUpperBound = formData.priceUpperBound == "" ? null : formData.priceUpperBound ;
+    let dateLowerBound = formData.dateLowerBound;
+    let dateUpperBound = formData.dateUpperBound;
+
+    let finder_exists = false;
+    if(typeof this.finders != 'undefined' && this.finders != null && this.finders.length > 0)
+    {
+      //console.log("AllTripsComponent->finderFormValidToCreateFinder this.finders", this.finders);
+
+      let finders_filtered = this.finders.filter((currentFinder: Finder) => {
+
+        return (
+          currentFinder.getKeyWord() == keyWord 
+          && currentFinder.getPriceLowerBound() == priceLowerBound 
+          && currentFinder.getPriceUpperBound() == priceUpperBound 
+          && currentFinder.getDateLowerBoundStringYmd() == dateLowerBound 
+          && currentFinder.getDateUpperBoundStringYmd() == dateUpperBound
+        );
+
+      });
+      //console.log("AllTripsComponent->finderFormValidToCreateFinder finders_filtered ", finders_filtered);
+
+      if(finders_filtered.length > 0)
+      {
+        console.log("AllTripsComponent->finderFormValidToCreateFinder finder exists ", finders_filtered);
+        finder_exists = true;
+      }
+
+    }
 
     //only creates the finder if at least one search criterion has been stablished
+    // and finder doesn't exist
     if(
-      formData["keyWord"] != "" || 
-      (formData["priceLowerBound"] != "" && formData["priceUpperBound"] != "") ||
-      (formData["dateLowerBound"] != "" && formData["dateUpperBound"] != "")
+      (
+        formData["keyWord"] != "" || 
+        (formData["priceLowerBound"] != "" && formData["priceUpperBound"] != "") ||
+        (formData["dateLowerBound"] != "" && formData["dateUpperBound"] != "")
+      )
+      && 
+      finder_exists == false
     )
     {
       finderFormValidToCreateFinder = true;
     }
+
+    console.log("AllTripsComponent->finderFormValidToCreateFinder finderFormValidToCreateFinder ", finderFormValidToCreateFinder);
 
     return finderFormValidToCreateFinder;
   }
@@ -461,6 +508,8 @@ export class AllTripsComponent implements OnInit {
       'results': cleaned_trips,
     };
     */
+
+    //only save search parameters, not results
     let results = {};
 
     //console.log("this.finder_cache_hours ", this.finder_cache_hours);
@@ -518,20 +567,26 @@ export class AllTripsComponent implements OnInit {
         this.showSaveFinderButton = false;
         
         //let responseBody = response.body;
-        let finders = response.body;
-        let finder: any;
+        let json_finders = response.body
+        //console.log("AllTripsComponent->getExplorerFinders json_finders", json_finders);
+        let casted_finders = Finder.castJsonFinders(json_finders);
+        //console.log("AllTripsComponent->getExplorerFinders casted_finders", casted_finders);
+        this.finders = casted_finders;
+        //console.log("AllTripsComponent->getExplorerFinders this.finders", this.finders);
+        
+        let finder: Finder;
 
-        console.log("this.finder_id ", this.finder_id);        
+        //console.log("AllTripsComponent->getExplorerFinders this.finder_id ", this.finder_id);        
 
         if(this.finder_id != null && typeof this.finder_id !== 'undefined' && this.finder_id !== '')
         {
-          console.log("this.finder_id", this.finder_id);
-          console.log("finders ", finders);
+          //console.log("AllTripsComponent->getExplorerFinders this.finder_id", this.finder_id);
+          //console.log("AllTripsComponent->getExplorerFinders this.finders ", this.finders);
 
-          let finders_filtered = finders.filter((currentFinder) => {
+          let finders_filtered = this.finders.filter((currentFinder) => {
             return currentFinder._id == this.finder_id;
           });
-          console.log("finders_filtered ", finders_filtered);
+          //console.log("AllTripsComponent->getExplorerFinders finders_filtered ", finders_filtered);
 
           if(finders_filtered.length > 0)
           {
@@ -540,45 +595,49 @@ export class AllTripsComponent implements OnInit {
           else
           {
             //lastFinder
-            finder = finders[0];
+            finder = this.finders[0];
           }
         }
         else
         {
           //lastFinder
-          finder = finders[0];
+          finder = this.finders[0];
         }
-        
-        if(finder.hasOwnProperty('keyWord') && finder.keyWord !== "" && finder.keyWord !== null)
+
+        let keyWord = finder.getKeyWord();
+        if(keyWord !== "" && keyWord !== null)
         {
-          this.searchTripForm.controls.keyWord.setValue(finder.keyWord);
+          this.searchTripForm.controls.keyWord.setValue(keyWord);
         }
-        if(finder.hasOwnProperty('priceLowerBound') && finder.priceLowerBound !== "" && finder.priceLowerBound !== null)
+
+        let priceLowerBound = finder.getPriceLowerBound();
+        if(priceLowerBound !== null)
         {
-          this.searchTripForm.controls.priceLowerBound.setValue(finder.priceLowerBound);
+          this.searchTripForm.controls.priceLowerBound.setValue(priceLowerBound);
         }
-        
-        if(finder.hasOwnProperty('priceUpperBound') && finder.priceUpperBound !== "" && finder.priceUpperBound !== null)
+
+        let priceUpperBound = finder.getPriceUpperBound();
+        if(priceUpperBound !== null)
         {
-          this.searchTripForm.controls.priceUpperBound.setValue(finder.priceUpperBound);
+          this.searchTripForm.controls.priceUpperBound.setValue(priceUpperBound);
         }
-        
-        //console.log("finder.dateLowerBound ", finder.dateLowerBound);
-        if(finder.hasOwnProperty('dateLowerBound') && finder.dateLowerBound !== "" && finder.dateLowerBound !== null)
+
+        let dateLowerBound = finder.getDateLowerBoundStringYmd();
+        //console.log("AllTripsComponent->getExplorerFinders dateLowerBound ", dateLowerBound);
+        if(dateLowerBound != "")
         {
-          let dateLowerBound = (new Date(finder.dateLowerBound)).toLocaleDateString('en-CA');//YYY-mm-dd
-          //console.log("dateLowerBound ", dateLowerBound);
           this.searchTripForm.controls.dateLowerBound.setValue(dateLowerBound);
         }
-        
-        if(finder.hasOwnProperty('dateUpperBound') && finder.dateUpperBound !== "" && finder.dateUpperBound !== null)
+
+        let dateUpperBound = finder.getDateUpperBoundStringYmd();
+        if(dateUpperBound != "")
         {
-          let dateUpperBound = (new Date(finder.dateUpperBound)).toLocaleDateString('en-CA');//YYY-mm-dd
           this.searchTripForm.controls.dateUpperBound.setValue(dateUpperBound);
         }
 
         /*
-        if(finder.hasOwnProperty('results') && finder.results.length > 0)
+        let results = finder.getResults();
+        if(results != null && results.length > 0)
         {
           let json_trips = finder.results;
           let casted_trips = Trip.castJsonTrips(json_trips);
@@ -587,7 +646,6 @@ export class AllTripsComponent implements OnInit {
         */
 
         this.search();
-
       }
 
 

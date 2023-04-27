@@ -95,4 +95,22 @@ export class Finder extends Entity {
         return casted_finders;
     }
 
+    public getDateLowerBoundStringYmd(): string {
+        let dateLowerBoundString = "";
+        if(this.getDateLowerBound() != null)
+        {
+            dateLowerBoundString = (new Date(this.getDateLowerBound())).toLocaleDateString('en-CA');
+        }
+        return dateLowerBoundString;
+    }
+
+    public getDateUpperBoundStringYmd(): string {
+        let dateUpperBoundString = "";
+        if(this.getDateUpperBound() != null)
+        {
+            dateUpperBoundString = (new Date(this.getDateUpperBound())).toLocaleDateString('en-CA');
+        }
+        return dateUpperBoundString;
+    }
+
 }
