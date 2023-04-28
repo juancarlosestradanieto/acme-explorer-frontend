@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  acme-explorer-frontend-service:
+    container_name: acme-explorer-frontend-container
+    hostname: acme-explorer-frontend-host
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+    volumes:
+      - ../:/var/www/html
+      - ./apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
+      - ./apache/logs:/var/log/apache2
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

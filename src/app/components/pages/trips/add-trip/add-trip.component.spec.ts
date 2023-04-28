@@ -156,7 +156,7 @@ describe('AddTripComponent', () => {
     expect(serviceSpy).toHaveBeenCalled();
     expect(formatFormDataSpy).toHaveBeenCalled();
     expect(component).toBeTruthy();
-    expect(component.error_message).toEqual("Something went wrong");
+    expect(component.error_message).toEqual("Messages.something-went-wrong");
   }));
 
 });

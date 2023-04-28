@@ -59,13 +59,19 @@ npm install --g ts-node
 
 Go to the backend deployment documentation [here](https://github.com/juancarlosestradanieto/acme-explorer-backend/tree/main/docker).
 
-## 5. Start the application
+## 5. Start the JSON server with the mockup of the favourite lists synchronisation
+
+Json server is now part of the backend services, so there is no need to start it anymore.
+
+It can be accessed in the same backend url at port 3000.
+
+## 6. Start the application
 
 ```
 npm start
 ```
 
-## 6. Run the tests
+## 7. Run the tests
 
 ```
 npm run test

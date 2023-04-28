@@ -14,6 +14,7 @@ const targetPathProd = './src/environments/environment.prod.ts';
 const envConfigFile = `export const environment = {
     production: false,
     backendApiBaseURL: '${process.env['API_URL']}',
+    backendMockupBaseURL: '${process.env['FAVOURITES_URL']}',
     firebase : {
       apiKey: "${process.env['apiKey']}",
       authDomain: "${process.env['authDomain']}",
@@ -52,6 +53,7 @@ writeFile(targetPath, envConfigFile, function (err: any) {
 const envProdConfigFile = `export const environment = {
     production: true,
     backendApiBaseURL: '${process.env['API_URL']}',
+    backendMockupBaseURL: '${process.env['FAVOURITES_URL']}',
     firebase : {
       apiKey: "${process.env['apiKey']}",
       authDomain: "${process.env['authDomain']}",

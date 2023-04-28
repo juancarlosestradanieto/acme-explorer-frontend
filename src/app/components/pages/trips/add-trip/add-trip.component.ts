@@ -235,11 +235,13 @@ export class AddTripComponent implements OnInit {
   onAddStage() {
     const control = <FormArray>this.tripForm.controls['stages'];
     control.push(this.getStage());
+    this.updateTotalPrice();
   }
 
   onRemoveStage(i: number) {
     const control = <FormArray>this.tripForm.controls['stages'];
     control.removeAt(i);
+    this.updateTotalPrice();
   }
 
   private getPicture()
@@ -364,7 +366,7 @@ export class AddTripComponent implements OnInit {
         {
           this.tripForm.reset();
         }
-        this.success_message = "Trip successfully saved";
+        this.success_message = "trips.messages.trip-saved";
       }
       else
       {
@@ -398,14 +400,15 @@ export class AddTripComponent implements OnInit {
             if(this.edit_mode == false)
             {
               this.tripForm.reset();
+              this.removeImagePrevisualizations();
             }
-            this.success_message = "Trip successfully saved";
+            this.success_message = "trips.messages.trip-saved";
   
           })
           .catch((error3) => {
       
             console.error("AddTripComponent->onSubmit->uploadFiles->updateTrip error3 ", error3);
-            this.error_message = "Something went wrong";
+            this.error_message = "Messages.something-went-wrong";
       
           });
     
@@ -413,7 +416,7 @@ export class AddTripComponent implements OnInit {
         .catch((error2) => {
     
           console.error("AddTripComponent->onSubmit->uploadFiles error2 ", error2);
-          this.error_message = "Something went wrong";
+          this.error_message = "Messages.something-went-wrong";
     
         });
       }
@@ -422,7 +425,7 @@ export class AddTripComponent implements OnInit {
     .catch((error1) => {
 
       console.error("AddTripComponent->onSubmit error1 ", error1);
-      this.error_message = "Something went wrong";
+      this.error_message = "Messages.something-went-wrong";
 
     });
 
@@ -505,6 +508,33 @@ export class AddTripComponent implements OnInit {
       });
 
     }
+  }
+
+  updateTotalPrice()
+  {
+    let formData = this.tripForm.value;
+    let stages = formData.stages;
+    let total_price = 0;
+    if(stages != null && stages.length > 0)
+    {
+      //console.log("updateTotalPrice stages", stages);
+      stages.map((stage) => {
+        total_price += stage.price ?? 0;
+      })
+    }
+
+    this.tripForm.patchValue({
+      price: total_price
+    });
+  }
+
+  removeImagePrevisualizations()
+  {
+    //document.querySelectorAll(".image-previsualization")
+    Array.from(document.querySelectorAll(".image-previsualization")).map((element) => {
+      let image = element as HTMLImageElement;
+      image.src = "";
+    });
   }
 
 }

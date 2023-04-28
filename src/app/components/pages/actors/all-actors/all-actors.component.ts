@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 import { Actor } from 'src/app/models/actor.model';
 import { Trip } from 'src/app/models/trip.model';
 import { ActorsService } from 'src/app/services/actors.service';
@@ -14,6 +15,7 @@ import { ActorsService } from 'src/app/services/actors.service';
 export class AllActorsComponent implements OnInit {
 
   actors!:Actor[];
+  actor!:Actor;
 
  
   //paginación
@@ -22,7 +24,7 @@ export class AllActorsComponent implements OnInit {
   desde:number = 0;
   hasta:number = 10;
 
-  constructor(private _actorsService:ActorsService, ){ }
+  constructor(private _actorsService:ActorsService, private router:Router ){ }
 
   ngOnInit(): void {
     this.getAllActors();
@@ -48,5 +50,13 @@ export class AllActorsComponent implements OnInit {
           this.getAllActors(); //Para rellenar la tabla con los datos cada vez que borremos alguno
         });
       }
+
+  getActorById(actorId:string){
+    this._actorsService.getActorById(actorId).subscribe(res=>{
+      this.actor=res;
+      this.router.navigateByUrl(`/actor/${actorId}/profile`)
+
+    })
+  }
 
 }

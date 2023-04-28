@@ -1,0 +1,50 @@
+<div>
+    <legend *ngIf="pageMode == 'display'">{{"system-parameters.title" | translate}}</legend>
+    <legend *ngIf="pageMode == 'create'">{{"system-parameters.title-create" | translate}}</legend>
+    <legend *ngIf="pageMode == 'update'">{{"system-parameters.title-update" | translate}}</legend>
+</div>
+<form [formGroup]="parametersForm" (ngSubmit)="onSubmit()">
+    <div class="form-group has-danger">
+        <label for="maxFinderResults" class="center-block">{{"system-parameters.maxFinderResults" | translate}}:</label>
+        <input type="number" class="form-control" formControlName="maxFinderResults">
+        <div class="alert alert-danger" *ngIf="parametersForm.get('maxFinderResults')?.hasError('required') && parametersForm.get('maxFinderResults')?.dirty">
+            {{"Messages.field_required" | translate}}
+        </div>
+        <div class="alert alert-danger" *ngIf="parametersForm.get('maxFinderResults')?.hasError('min') && parametersForm.get('maxFinderResults')?.dirty">
+            {{"Messages.positive-number" | translate}}
+        </div>
+        <br />
+
+        <label for="flatRateSponsorships" class="center-block">{{"system-parameters.flatRateSponsorships" | translate}}:</label>
+        <input type="number" class="form-control" formControlName="flatRateSponsorships">
+        <div class="alert alert-danger" *ngIf="parametersForm.get('flatRateSponsorships')?.hasError('required') && parametersForm.get('flatRateSponsorships')?.dirty">
+            {{"Messages.field_required" | translate}}
+        </div>
+        <div class="alert alert-danger" *ngIf="parametersForm.get('flatRateSponsorships')?.hasError('min') && parametersForm.get('flatRateSponsorships')?.dirty">
+            {{"Messages.positive-number" | translate}}
+        </div>
+        <br />
+
+        <label for="cacheHour" class="center-block">{{"system-parameters.cacheHour" | translate}}:</label>
+        <input type="number" class="form-control" formControlName="cacheHour">
+        <div class="alert alert-danger" *ngIf="parametersForm.get('cacheHour')?.hasError('required') && parametersForm.get('cacheHour')?.dirty">
+            {{"Messages.field_required" | translate}}
+        </div>
+        <div class="alert alert-danger" *ngIf="parametersForm.get('cacheHour')?.hasError('min') && parametersForm.get('cacheHour')?.dirty">
+            {{"Messages.positive-number" | translate}}
+        </div>
+        <br />
+
+        <div class="btn-group">
+            <button type="submit" *ngIf="pageMode == 'create'" class="btn btn-success" [disabled]="parametersForm.invalid">
+                {{"buttons.create" | translate}}
+            </button>
+            <button type="submit" *ngIf="pageMode == 'update'" class="btn btn-success" [disabled]="parametersForm.invalid">
+                {{"buttons.update" | translate}}
+            </button>
+            <button *ngIf="pageMode == 'display'" class="btn btn-success" (click)="goToUpdate()">
+                {{"buttons.edit-mode" | translate}}
+            </button>
+        </div>
+    </div>
+</form>
