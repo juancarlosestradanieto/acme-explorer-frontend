@@ -211,7 +211,11 @@
     "title-update": "Actualizar parámetros del sistema",
     "maxFinderResults": "Cantidad máxima de resultados mostrados en descubridores de viajes",
     "flatRateSponsorships": "Tarifa plana del coste de los patrocinios",
-    "cacheHour": "Duración máxima en horas de la caché"
+    "cacheHour": "Duración máxima en horas de la caché",
+    "messages": {
+      "created": "Parámetros del sistema creados correctamente",
+      "updated": "Parámetros del sistema actualizados correctamente"
+    }
   },
   "dark": "Modo Oscuro activado",
   "light": "Modo Claro activado",

@@ -210,7 +210,11 @@
     "title-update": "Update system parameters",
     "maxFinderResults": "Maximum amount of results shown in finders",
     "flatRateSponsorships": "Flat rate cost of sponsorships",
-    "cacheHour": "Maximum cache duration in hours"
+    "cacheHour": "Maximum cache duration in hours",
+    "messages": {
+      "created": "System parameters created successfully",
+      "updated": "System parameters updated successfully"
+    }
   },
   "dark": "Dark theme activated",
   "light": "Light theme activated",
