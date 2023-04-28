@@ -182,7 +182,10 @@
       "due-applications-not-found": "No se han encontrado solicitudes en espera de pago",
       "accepted-applications-not-found": "No se han encontrado solicitudes aceptadas",
       "payed-application": "La solicitud ha sido pagada correctamente",
-      "payed-application-error": "Se ha encontrado un error durante el pago"
+      "payed-application-error": "Se ha encontrado un error durante el pago",
+      "comments-empty": "No se pueden dejar comentarios en blanco",
+      "application-exists": "No se pueden crear múltiples solicitudes para el mismo viaje",
+      "application-created": "Solicitud creada correctamente"
     }
   },
   "sponsorships": {
