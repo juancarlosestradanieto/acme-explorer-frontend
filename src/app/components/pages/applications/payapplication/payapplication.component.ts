@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { ApplicationsService } from 'src/app/services/applications.service';
 import { environment } from 'src/environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-payapplication',
@@ -13,9 +14,10 @@ export class PayapplicationComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private applicationService: ApplicationsService,
-    private router: Router) { }
+    private router: Router,
+    private translate: TranslateService) { }
 
-  public payPalConfig ? : IPayPalConfig;
+  public payPalConfig?: IPayPalConfig;
 
   application_id!: string;
 
@@ -27,60 +29,67 @@ export class PayapplicationComponent implements OnInit {
   private initConfig(): void {
     this.application_id = this.route.snapshot.params['id'];
     let tripPrice = this.route.snapshot.queryParams['price'];
-    
+
     if (tripPrice == undefined) {
       tripPrice = 20;
     }
 
     this.payPalConfig = {
-        currency: 'EUR',
-        clientId: environment.paypal.PAYPAL_CLIENT_ID,
-        createOrderOnClient: (data) => < ICreateOrderRequest > {
-            intent: 'CAPTURE',
-            purchase_units: [{
-                amount: {
-                    currency_code: 'EUR',
-                    value: tripPrice
-                }
-            }]
-        },
-        advanced: {
-            commit: 'true'
-        },
-        style: {
-            label: 'paypal',
-            layout: 'vertical'
-        },
-        onApprove: (data, actions) => {
-            console.log('onApprove - transaction was approved, but not authorized', data, actions);
-            actions.order.get().then((details: any) => {
-                console.log('onApprove - you can get full order details inside onApprove: ', details);
-            });
+      currency: 'EUR',
+      clientId: environment.paypal.PAYPAL_CLIENT_ID,
+      createOrderOnClient: (data) => <ICreateOrderRequest>{
+        intent: 'CAPTURE',
+        purchase_units: [{
+          amount: {
+            currency_code: 'EUR',
+            value: tripPrice
+          }
+        }]
+      },
+      advanced: {
+        commit: 'true'
+      },
+      style: {
+        label: 'paypal',
+        layout: 'vertical'
+      },
+      onApprove: (data, actions) => {
+        console.log('onApprove - transaction was approved, but not authorized', data, actions);
+        actions.order.get().then((details: any) => {
+          console.log('onApprove - you can get full order details inside onApprove: ', details);
+        });
 
-        },
-        onClientAuthorization: (data) => {
-            console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
-            //alert("{{'buttons.go_to_trip' | translate}}");
-            this.applicationService.payApplication(this.application_id)
-            .then((response) => {
-              console.log("PayapplicationComponent-> applicationService.payApplication then response ", response);
-              this.router.navigate(['/applications/']);
-            })      
-            .catch((error) => {
-              console.error("PayapplicationComponent-> applicationService.payApplication catch ", error);
-      
+      },
+      onClientAuthorization: (data) => {
+        console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+
+        this.applicationService.payApplication(this.application_id)
+          .then((response) => {
+            console.log("PayapplicationComponent-> applicationService.payApplication then response ", response);
+            this.translate.get('applications.messages.payed-application')
+              .subscribe((message: string) => {
+                alert(message);
+                this.router.navigate(['/applications/']);
+              })
+          })
+          .catch((error) => {
+            console.error("PayapplicationComponent-> applicationService.payApplication catch ", error);
+            this.translate.get('applications.messages.payed-application-error')
+            .subscribe((message: string) => {
+              alert(message);
             })
-        },
-        onCancel: (data, actions) => {
-            console.log('OnCancel', data, actions);
+          })
+      },
+      onCancel: (data, actions) => {
+        console.log('OnCancel', data, actions);
 
-        },
-        onError: err => {
-            console.log('OnError', err);
-        },
-        onClick: (data, actions) => {
-            console.log('onClick', data, actions);
-        }
+      },
+      onError: err => {
+        console.log('OnError', err);
+      },
+      onClick: (data, actions) => {
+        console.log('onClick', data, actions);
+      }
     };
   }
 
