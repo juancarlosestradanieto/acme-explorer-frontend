@@ -292,7 +292,8 @@
                 <li class="list-group-item"
                     [ngStyle]="getCurrentStyles(trip.getStartDate().toString(), currentDateTime.toISOString())">
                     <b>{{'trips.startDate' | translate}}</b>: {{trip.getStartDate() | date: 'dd/MM/yyyy'}}
-                    <p *ngIf="getNowAndStartDateDiffInDays(trip) > 0 && getNowAndStartDateDiffInDays(trip) <= 7"><b>Soon!</b></p>
+                    <p *ngIf="getNowAndStartDateDiffInDays(trip) > 0 && getNowAndStartDateDiffInDays(trip) <= 7">
+                        <b>{{'trips.messages.start-soon' | translate}}</b></p>
                 </li>
                 <li class="list-group-item"><b>{{'trips.endDate' | translate}}</b>: {{trip.getEndDate() | date: 'dd/MM/yyyy'}}</li>
                 <li class="list-group-item"><b>{{'trips.starting' | translate}}</b>: {{countDownTimer(trip.getStartDate().toString())}}</li>

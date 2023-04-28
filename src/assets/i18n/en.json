@@ -73,7 +73,8 @@
       "favourite-trips-available": "Available favourite trips just for you!",
       "favourite-trips-not-found": "There are no favourite trips found",
       "disabled-trip": "The trip has already started or has been cancelled",
-      "trip-saved": "Trip successfully saved"
+      "trip-saved": "Trip successfully saved",
+      "start-soon": "Soon!"
     },
     "validations": {
       "required": "This field is required.",

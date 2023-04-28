@@ -48,7 +48,7 @@
                         <b>{{'trips.startDate' | translate}}</b>: {{trip.getStartDate() | date: 'dd/MM/yyyy'}}
                         <p *ngIf="getDiffDays(trip.getStartDate().toString(), currentDateTime.toISOString()) > 0
                                 && getDiffDays(trip.getStartDate().toString(), currentDateTime.toISOString()) <= 7">
-                            <b>Soon!</b>
+                            <b>{{'trips.messages.start-soon' | translate}}</b>
                         </p>
                     </li>
                     <li class="list-group-item"><b>{{'trips.endDate' | translate}}</b>: {{trip.getEndDate() | date:

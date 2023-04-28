@@ -73,7 +73,8 @@
       "favourite-trips-available": "¡Viajes favoritos disponibles para ti!",
       "favourite-trips-not-found": "No se han encontrado viajes favoritos",
       "disabled-trip": "El viaje ya ha comenzado o ha sido cancelado",
-      "trip-saved": "Viaje guardado exitosamente"
+      "trip-saved": "Viaje guardado exitosamente",
+      "start-soon": "¡Próximamente!"
     },
     "validations": {
       "required": "Este campo es obligatorio.",
