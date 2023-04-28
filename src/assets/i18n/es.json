@@ -179,7 +179,9 @@
       "pending-applications-not-found": "No se han encontrado solicitudes pendientes",
       "rejected-applications-not-found": "No se han encontrado solicitudes rechazadas",
       "due-applications-not-found": "No se han encontrado solicitudes en espera de pago",
-      "accepted-applications-not-found": "No se han encontrado solicitudes aceptadas"
+      "accepted-applications-not-found": "No se han encontrado solicitudes aceptadas",
+      "payed-application": "La solicitud ha sido pagada correctamente",
+      "payed-application-error": "Se ha encontrado un error durante el pago"
     }
   },
   "sponsorships": {

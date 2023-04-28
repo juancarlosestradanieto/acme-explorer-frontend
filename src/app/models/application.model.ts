@@ -13,6 +13,8 @@ export class Application extends Entity {
 
     private _rejected_reason!: string;
 
+    private _tripPrice!: number;
+
     constructor(obj: any) {
         super();
         obj && Object.assign(this, obj);
@@ -64,6 +66,14 @@ export class Application extends Entity {
 
     public set rejected_reason(value: string) {
         this._rejected_reason = value;
+    }
+
+    public get tripPrice(): number {
+        return this._tripPrice;
+    }
+
+    public set tripPrice(value: number) {
+        this._tripPrice = value;
     }
 
     public static castJsonApplication(json_application: any): Application {

@@ -43,6 +43,7 @@ import { AddTripComponent } from './components/pages/trips/add-trip/add-trip.com
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AllActorsComponent } from './components/pages/actors/all-actors/all-actors.component';
 import { RegisterManagerComponent } from './components/pages/actors/register-manager/register-manager.component';
+import { NgxPayPalModule } from 'ngx-paypal';
 import { GoBackButtonComponent } from './components/shared/go-back-button/go-back-button.component';
 import { ActorProfileEditComponent } from './components/pages/actor-profile/actor-profile-edit/actor-profile-edit.component';
 import { SystemParametersEditComponent } from './components/pages/system-parameters/system-parameters-edit/system-parameters-edit.component';
@@ -54,6 +55,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { PayTripComponent } from './components/pages/trips/pay-trip/pay-trip.component';
+import { PayapplicationComponent } from './components/pages/applications/payapplication/payapplication.component';
 import {MatSliderModule} from '@angular/material/slider';
 
 let ANGULAR_MATERIAL_MODULES = [
@@ -99,6 +102,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AddTripComponent,
     AllActorsComponent,
     RegisterManagerComponent,
+    PayTripComponent,
+    PayapplicationComponent,
     GoBackButtonComponent,
     ActorProfileEditComponent,
     SystemParametersEditComponent,
@@ -124,7 +129,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
             deps: [HttpClient]
         }
     }),
-
+    NgxPayPalModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -134,6 +134,12 @@ export class ApplicationslistComponent implements OnInit {
       })
   }
 
+  onApplicationPay(application: Application) {
+    console.log("onApplicationPay -> application", application)
+    this.router.navigate(['/applications/' + application.id + '/pay'],
+    { queryParams: { price: application.tripPrice }});
+  }
+
   toggleExpandCancelledRow(row: any) {
     this.cancelledTable.rowDetail.toggleExpandRow(row);
   }

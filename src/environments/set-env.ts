@@ -30,6 +30,11 @@ const envConfigFile = `export const environment = {
       secretAccessKey: "${process.env['AWS_S3_SECRET_ACCESS_KEY']}",
       region: "${process.env['AWS_S3_REGION']}",
       bucket: "${process.env['AWS_S3_BUCKET_NAME']}"
+    },
+    paypal : {
+      PAYPAL_APP_NAME: "${process.env['PAYPAL_APP_NAME']}",
+      PAYPAL_CLIENT_ID: "${process.env['PAYPAL_CLIENT_ID']}",
+      PAYPAL_SECRET: "${process.env['PAYPAL_SECRET']}",
     }
   };
 `;
@@ -64,6 +69,11 @@ const envProdConfigFile = `export const environment = {
       secretAccessKey: "${process.env['AWS_S3_SECRET_ACCESS_KEY']}",
       region: "${process.env['AWS_S3_REGION']}",
       bucket: "${process.env['AWS_S3_BUCKET_NAME']}"
+    },
+    paypal : {
+      PAYPAL_APP_NAME: "${process.env['PAYPAL_APP_NAME']}",
+      PAYPAL_CLIENT_ID: "${process.env['PAYPAL_CLIENT_ID']}",
+      PAYPAL_SECRET: "${process.env['PAYPAL_SECRET']}",
     }
   };
 `;
