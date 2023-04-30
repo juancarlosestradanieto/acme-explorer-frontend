@@ -15,6 +15,8 @@ export class SponsorshipComponent implements OnInit {
   sponsorships_loaded!: Promise<boolean>;
   id!:string;
   sponsorshipID!:string;
+  
+
 
 
   constructor( private SponsorshipsService: SponsorshipsService,
@@ -54,6 +56,8 @@ export class SponsorshipComponent implements OnInit {
         }
       }
     );
+    
+    
     return this.sponsorships;
   }
 

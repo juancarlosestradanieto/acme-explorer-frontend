@@ -1,6 +1,8 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { SponsorshipsService } from 'src/app/services/sponsorships.service';
 import { create } from 'ts-node';
 
@@ -20,16 +22,18 @@ export class AddSponsorshipComponent implements OnInit {
     private _fb:FormBuilder,
     private route:ActivatedRoute,
     private _sponsorshipService:SponsorshipsService,
-    private _router:Router
-    ) 
+    private _router:Router,
+    private _translateService: TranslateService,
+    private _location:Location) 
+    
     { 
       this.sponsorID = this.route.snapshot.params['id']
       console.log("console desde constructor",this.sponsorID);
 
       this.sponsorshipForm = this._fb.group({
         sponsor_Id: [this.sponsorID],
-        tripTicker: ["",Validators.required],
-        page: ["",Validators.required],
+        tripTicker: [""],
+        page: [""],
         banner: this._fb.array([this.getBanner()]),
         isPayed: [false]
         
@@ -61,17 +65,14 @@ export class AddSponsorshipComponent implements OnInit {
 
 
   onSubmit(){
-    // const sponsorShip = this.sponsorshipForm.value;
-    // const formData = new FormData();
-    // formData.append('sponsorship', JSON.stringify(sponsorShip));
     this._sponsorshipService.createSponsorship(this.sponsorshipForm.value).subscribe(res =>{
-      console.log("Esto es el res tras hacer submit: ",res)
-    })
-    this._router.navigate([`actor/${this.sponsorID}/sponsorships`])
-   
+
+      console.log("Esto es el res tras hacer submit: ",res);
+      this._translateService.get('sponsorships.operation_successfull').subscribe((res: string) => {
+        alert(res);
+      });
+     
+    });
   }
 
-  botonPrueba(){
-    console.log(this.sponsorshipForm.controls)
-  }
 }

@@ -183,7 +183,16 @@
     "create":"Create new sponsorship",
     "delete":"Delete",
     "edit":"Modify",
-    "detail":"View details"
+    "edit_sponsorship":"Modify sponsorship",
+    "detail":"View details",
+    "page":"Page",
+    "banners":"Banners",
+    "add_banner":"Add banner",
+    "delete_banner":"Delete banner",
+    "confirm_sponsorship":"Confirm creation of sponsorhip",
+    "operation_successfull":"New sponsorship created!",
+    "confirm_edit_sponsorship":"Confirm edit of sponsorhip",
+    "operation_edit_successfull":"Sponsorship modified!"
   },
   "dashboard": {
     "title": "Dashboard",

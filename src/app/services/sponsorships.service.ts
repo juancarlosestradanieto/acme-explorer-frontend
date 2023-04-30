@@ -70,4 +70,31 @@ export class SponsorshipsService {
     console.log(body)
     return this.http.post<any>(url,body,httpOptions)
   }
+
+  getSponsorshipById(sponsorshipID:string):Observable<any>{
+    const url = `${environment.backendApiBaseURL+'/sponsorships/'+sponsorshipID}`;
+    const idToken = localStorage.getItem('idToken') ?? '';
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Accept-Language': 'es',
+        'idToken': idToken 
+      }),
+    };
+    return this.http.get<any>(url,httpOptions);
+  }
+
+  updateSponsorship(sponsorship:Sponsorship):Observable<Sponsorship>{
+    const url = `${environment.backendApiBaseURL+'/sponsorships/'+sponsorship.id}`;
+    const idToken = localStorage.getItem('idToken') ?? '';
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Accept-Language': 'es',
+        'idToken': idToken 
+      }),
+    };
+    const body = JSON.stringify(sponsorship);
+    return this.http.put<Sponsorship>(url,body,httpOptions)
+  }
 }

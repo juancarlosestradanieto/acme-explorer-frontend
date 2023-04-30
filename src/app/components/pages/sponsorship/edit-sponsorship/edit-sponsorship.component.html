@@ -1,1 +1,66 @@
-<p>edit-sponsorship works!</p>
+<h3>{{'sponsorships.edit_sponsorship' | translate}}</h3>
+<app-go-back-button></app-go-back-button>
+
+<form [formGroup]="editSponsorshipForm" (ngSubmit)="onSubmit()">
+    <br/>
+    <div class="form-group">
+    <label for="tripTicker">Trip Ticker</label>
+    <input
+      type="text"
+      class="form-control"
+      formControlName="tripTicker"
+      id="tripTicker"
+
+    />
+  </div>
+  <br/>
+  <div class="form-group">
+    <label for="page">{{'sponsorships.page' | translate}}</label>
+    <input
+      type="text"
+      class="form-control"
+      formControlName="page"
+      id="page"
+
+    />
+  </div>
+<!-- 
+
+  <div class="form-group has-danger">
+    <label for="banner" class="form-control-label">Banners:</label>
+
+    <button type="button" class="btn btn-success" (click)="onAddBanner()">
+      <i class="fa-solid fa-plus"></i>
+      {{'sponsorships.add_banner' | translate}}
+    </button>
+
+    <div class="col-md-10 offset-md-2">
+      <div formArrayName="banner">
+        <div
+          *ngFor="
+            let row of editSponsorshipForm.controls['banner'].value;
+            let i = index
+          "
+        >
+          <div [formGroupName]="i">
+            <label>banner {{ i + 1 }}</label>
+            <div class="form-group">
+              <input
+                id="banner[{{ i }}]"
+                type="text"
+                class="form-control"
+                formControlName="banner"
+              />
+            </div>
+            <button class="btn btn-danger" (click)="onRemoveBanner(i)">
+              <i class="fa-solid fa-trash"></i>
+              {{'sponsorships.delete_banner' | translate}}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+<br/>
+  <button type="submit" class="btn btn-primary">{{'sponsorships.edit_sponsorship' | translate}}</button>
+</form>
