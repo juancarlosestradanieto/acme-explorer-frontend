@@ -1,0 +1,30 @@
+<h3 class="mt-3">{{'sponsorships.detail_sponsorship' | translate}}</h3>
+
+<div class="right" >
+  <app-go-back-button></app-go-back-button>
+</div>
+
+<div class="row center">
+    <div class="col-md-4 col-xs-12">
+      <div class="card" *ngIf="sponsorship">
+        <img src="../../../../assets/images/Dabid.jpg" class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">
+            {{ "sponsorships.sponsorship" | translate }}
+          </h5>
+          <p class="card-text">TripTicker: {{ sponsorship.tripTicker}}</p>
+          <p class="card-text">{{"sponsorships.isPayed" | translate}}: {{ sponsorship.isPayed  ? 'OK' : 'No'}}</p>
+          <p class="card-text"><a href="{{sponsorship.page}}">{{"sponsorships.page" | translate}}: {{sponsorship.page}}</a></p>
+          </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="buttons">
+            <button type="button" class="btn btn-warning" routerLink="edit-sponsorship">
+                <i class="fas fa-edit"></i>
+                <!-- {{'sponsorships.edit' | translate}} -->
+            </button>
+        </div>
+    </div>
+</div>
+  

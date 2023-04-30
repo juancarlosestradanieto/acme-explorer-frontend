@@ -1,0 +1,32 @@
+<br/>
+
+<h3>{{'sponsorships.edit_sponsorship' | translate}}</h3>
+<app-go-back-button></app-go-back-button>
+
+<form [formGroup]="editSponsorshipForm" (ngSubmit)="onSubmit()">
+    <br/>
+    <div class="form-group">
+    <label for="tripTicker">Trip Ticker</label>
+    <input
+      type="text"
+      class="form-control"
+      formControlName="tripTicker"
+      id="tripTicker"
+
+    />
+  </div>
+  <br/>
+  <div class="form-group">
+    <label for="page">{{'sponsorships.page' | translate}}</label>
+    <input
+      type="text"
+      class="form-control"
+      formControlName="page"
+      id="page"
+
+    />
+  </div>
+
+<br/>
+  <button type="submit" class="btn btn-primary">{{'sponsorships.edit_sponsorship' | translate}}</button>
+</form>

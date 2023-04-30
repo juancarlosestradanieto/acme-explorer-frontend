@@ -43,10 +43,15 @@ import { AddTripComponent } from './components/pages/trips/add-trip/add-trip.com
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AllActorsComponent } from './components/pages/actors/all-actors/all-actors.component';
 import { RegisterManagerComponent } from './components/pages/actors/register-manager/register-manager.component';
+
+import { AllSponsorshipsComponent } from './components/pages/sponsorship/all-sponsorships/all-sponsorships.component';
+import { AddSponsorshipComponent } from './components/pages/sponsorship/add-sponsorship/add-sponsorship.component';
+import { EditSponsorshipComponent } from './components/pages/sponsorship/edit-sponsorship/edit-sponsorship.component';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { GoBackButtonComponent } from './components/shared/go-back-button/go-back-button.component';
 import { ActorProfileEditComponent } from './components/pages/actor-profile/actor-profile-edit/actor-profile-edit.component';
 import { SystemParametersEditComponent } from './components/pages/system-parameters/system-parameters-edit/system-parameters-edit.component';
+
 
 //Angular Material Modules
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -55,9 +60,16 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
+
+import { GoBackButtonComponent } from './components/shared/go-back-button/go-back-button.component';
+import { ActorProfileEditComponent } from './components/pages/actor-profile/actor-profile-edit/actor-profile-edit.component';
+import { SystemParametersEditComponent } from './components/pages/system-parameters/system-parameters-edit/system-parameters-edit.component';
+import { DetailSponsorshipComponent } from './components/pages/sponsorship/detail-sponsorship/detail-sponsorship.component';
+
 import { PayTripComponent } from './components/pages/trips/pay-trip/pay-trip.component';
 import { PayapplicationComponent } from './components/pages/applications/payapplication/payapplication.component';
 import {MatSliderModule} from '@angular/material/slider';
+
 
 let ANGULAR_MATERIAL_MODULES = [
   MatPaginatorModule,
@@ -107,6 +119,10 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     GoBackButtonComponent,
     ActorProfileEditComponent,
     SystemParametersEditComponent,
+    AllSponsorshipsComponent,
+    AddSponsorshipComponent,
+    EditSponsorshipComponent,
+    DetailSponsorshipComponent
   ],
   imports: [
     BrowserModule,

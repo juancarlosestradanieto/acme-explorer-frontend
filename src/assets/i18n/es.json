@@ -187,7 +187,29 @@
   },
   "sponsorships": {
     "title": "Patrocinios",
-    "sponsorship":"Patrocinio"
+    "sponsorship":"Patrocinio",
+    "my_sponsorhips":"Mis patrocinios",
+    "all_sponsorships":"Todos los patrocinios"  ,
+    "isPayed":"¿Pagado?",
+    "all_sponsorships_title":"Estos son todos los patrocinios",
+    "all_sponsorships_sponsor":"Estos son tus patrocinios",
+    "all_sponsorships_text":"Recuerde que para modificar y/o eliminar patrocinios, debe navegar a 'Mis Patrocinios'",
+    "create":"Crear nuevo patrocinio",
+    "edit_sponsorship":"Editar patrocinio",
+    "delete":"Eliminar",
+    "edit":"Modificar",
+    "detail":"Ver en detalle",
+    "page":"Página",
+    "banners":"Banners",
+    "add_banner":"Añadir banner",
+    "delete_banner":"Eliminar banner",
+    "confirm_sponsorship":"Confirmar creación de patrocinio",
+    "operation_successfull":"¡Nuevo patrocinio creado satisfactoriamente!",
+    "confirm_edit_sponsorship":"Confirmar edición de patrocinio",
+    "operation_edit_successfull":"¡Patrocinio modificado!",
+    "operation_delete_successfull":"¡Patrocinio eliminado correctamente!",
+    "detail_sponsorship":"Vista detallada de un sponsorship"        
+  
   },
   "dashboard": {
     "title": "Panel de control",

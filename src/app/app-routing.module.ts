@@ -27,6 +27,10 @@ import { PayTripComponent } from './components/pages/trips/pay-trip/pay-trip.com
 import { PayapplicationComponent } from './components/pages/applications/payapplication/payapplication.component';
 import { ActorProfileEditComponent } from './components/pages/actor-profile/actor-profile-edit/actor-profile-edit.component';
 import { SystemParametersEditComponent } from './components/pages/system-parameters/system-parameters-edit/system-parameters-edit.component';
+import { AllSponsorshipsComponent } from './components/pages/sponsorship/all-sponsorships/all-sponsorships.component';
+import { AddSponsorshipComponent } from './components/pages/sponsorship/add-sponsorship/add-sponsorship.component';
+import { EditSponsorshipComponent } from './components/pages/sponsorship/edit-sponsorship/edit-sponsorship.component';
+import { DetailSponsorshipComponent } from './components/pages/sponsorship/detail-sponsorship/detail-sponsorship.component';
 
 const routes: Routes = [
   {
@@ -56,7 +60,27 @@ const routes: Routes = [
         path: 'finder', component: FindersComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'EXPLORER' }
       },
       {
-        path: 'sponsorships', component: SponsorshipComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'SPONSOR' }
+        path: 'all-sponsorships', component: AllSponsorshipsComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'SPONSOR' }
+      },
+      {
+        path: 'sponsorships', children:[
+          {
+            path:'', component: SponsorshipComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'SPONSOR' }
+            
+          },
+          {
+            path: 'add-sponsorship', component: AddSponsorshipComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'SPONSOR' }
+          },
+         {
+           path:':id', component: DetailSponsorshipComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'SPONSOR' }
+
+         },
+
+         {
+           path: ':id/edit-sponsorship', component: EditSponsorshipComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'SPONSOR' }
+         },
+          
+        ] 
       },
     ]
   },

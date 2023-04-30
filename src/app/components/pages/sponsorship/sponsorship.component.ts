@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Sponsorship } from 'src/app/models/sponsorship.model';
 import { SponsorshipsService } from '../../../services/sponsorships.service';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sponsorship',
@@ -14,12 +15,19 @@ export class SponsorshipComponent implements OnInit {
   sponsorship!: Sponsorship;  
   sponsorships_loaded!: Promise<boolean>;
   id!:string;
+  sponsorshipID!:string;
+  
+
+
 
   constructor( private SponsorshipsService: SponsorshipsService,
-               private route: ActivatedRoute) { }
+               private route: ActivatedRoute,
+               private _translateService:TranslateService) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
+    this.sponsorshipID = this.route.snapshot.params['sponsorshipID']
+
     this.getSponsorships();
     console.log("¿Que id está cogiendo?:",this.id);
     
@@ -50,7 +58,24 @@ export class SponsorshipComponent implements OnInit {
         }
       }
     );
+    
+    
     return this.sponsorships;
   }
+
+
+  deleteSponsorship(sponsorshipID: string) {
+    this.SponsorshipsService.deleteSponsorship(sponsorshipID).subscribe(res=>{
+      this.getSponsorships();
+      alert(this._translateService.instant('sponsorships.operation_delete_successfull'));
+      location.reload();
+    }, error =>{
+      alert(this._translateService.instant('sponsorships.operation_delete_successfull'));  
+      location.reload();
+      this.getSponsorships();
+    });
+
+  }
+
 
 }
