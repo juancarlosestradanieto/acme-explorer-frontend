@@ -7,6 +7,7 @@
     "build": "npm run config-env && ng build",
     "watch": "npm run config-env && ng build --watch --configuration development",
     "test": "npm run config-env && ng test",
+    "test-headless": "npm run config-env && ng test --browsers ChromeHeadlessNoSandbox",
     "fake-backend": "json-server --watch src/assets/json-server/acme-explorer.json",
     "fake-backend-routes": "json-server --watch src/assets/json-server/acme-explorer.json routes src/assets/json-server/routes.json",
     "config-env": "ts-node src/environments/set-env.ts"
@@ -35,6 +36,7 @@
     "bootstrap": "^5.2.3",
     "date-fns": "^2.29.3",
     "dotenv": "^16.0.3",
+    "ngx-paypal": "^10.0.0",
     "rxjs": "~7.5.0",
     "ts-node": "^10.9.1",
     "tslib": "^2.5.0",

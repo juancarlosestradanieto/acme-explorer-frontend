@@ -60,9 +60,9 @@ export class ApplicationslistComponent implements OnInit {
           let casted_application = Application.castJsonApplications(response);
           this.applications.push(...casted_application);
 
-          console.log("ApplicationslistComponent->constructor authService.getApplicationsByExplorerId this.applications.length ", this.applications.length);
+          //console.log("ApplicationslistComponent->constructor authService.getApplicationsByExplorerId this.applications.length ", this.applications.length);
 
-          console.log("ApplicationslistComponent->constructor authService.getApplicationsByExplorerId this.applications ", this.applications);
+          //console.log("ApplicationslistComponent->constructor authService.getApplicationsByExplorerId this.applications ", this.applications);
 
           this.cancelledApplications = this.applications.filter(a => a.status == "CANCELLED");
           this.pendingApplications = this.applications.filter(a => a.status == "PENDING");
@@ -81,9 +81,9 @@ export class ApplicationslistComponent implements OnInit {
           let casted_application = Application.castJsonApplications(response);
           this.applications.push(...casted_application);
 
-          console.log("ApplicationslistComponent->constructor authService.getApplicationsByTripId this.applications.length ", this.applications.length);
+          //console.log("ApplicationslistComponent->constructor authService.getApplicationsByTripId this.applications.length ", this.applications.length);
 
-          console.log("ApplicationslistComponent->constructor authService.getApplicationsByTripId this.applications ", this.applications);
+          //console.log("ApplicationslistComponent->constructor authService.getApplicationsByTripId this.applications ", this.applications);
 
           this.cancelledApplications = this.applications.filter(a => a.status == "CANCELLED");
           this.pendingApplications = this.applications.filter(a => a.status == "PENDING");
@@ -107,7 +107,7 @@ export class ApplicationslistComponent implements OnInit {
   }
 
   onApplicationReject(applicationId: string, rejectionForm: NgForm) {
-    console.log("ApplicationslistComponent->constructor applicationService.onApplicationReject rejected_reason ", rejectionForm.value.rejected_reason);
+    //console.log("ApplicationslistComponent->constructor applicationService.onApplicationReject rejected_reason ", rejectionForm.value.rejected_reason);
     this.applicationService.rejectApplication(applicationId, rejectionForm.value.rejected_reason).
       then(() => {
         this.reloadPage();
@@ -132,6 +132,12 @@ export class ApplicationslistComponent implements OnInit {
       }).catch((error: any) => {
         console.log("ApplicationslistComponent->constructor applicationService.onApplicationCancel catch ", error);
       })
+  }
+
+  onApplicationPay(application: Application) {
+    console.log("onApplicationPay -> application", application)
+    this.router.navigate(['/applications/' + application.id + '/pay'],
+    { queryParams: { price: application.tripPrice }});
   }
 
   toggleExpandCancelledRow(row: any) {

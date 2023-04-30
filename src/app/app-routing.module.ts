@@ -20,10 +20,11 @@ import { NotFoundComponent } from './components/shared/not-found/not-found.compo
 import { ActorRoleGuard } from './guards/actor-role.guard';
 import { ApplicationcreationComponent } from './components/pages/applications/applicationcreation/applicationcreation.component';
 import { AddTripComponent } from './components/pages/trips/add-trip/add-trip.component';
-import { EditTripComponent } from './components/pages/trips/edit-trip/edit-trip.component';
 import { ManagerApplicationsGuard } from './guards/manager-applications.guard';
 import { AllActorsComponent } from './components/pages/actors/all-actors/all-actors.component';
 import { RegisterManagerComponent } from './components/pages/actors/register-manager/register-manager.component';
+import { PayTripComponent } from './components/pages/trips/pay-trip/pay-trip.component';
+import { PayapplicationComponent } from './components/pages/applications/payapplication/payapplication.component';
 import { ActorProfileEditComponent } from './components/pages/actor-profile/actor-profile-edit/actor-profile-edit.component';
 import { SystemParametersEditComponent } from './components/pages/system-parameters/system-parameters-edit/system-parameters-edit.component';
 import { AllSponsorshipsComponent } from './components/pages/sponsorship/all-sponsorships/all-sponsorships.component';
@@ -38,9 +39,6 @@ const routes: Routes = [
   {
     path: 'login', component: LoginComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'anonymous' }
   },
-  /*{
-    path: 'trip-list', component: AllTripsComponent
-  },*/
   {
     path: 'termsandconditions', component: TermsandconditionsComponent
   },
@@ -86,28 +84,13 @@ const routes: Routes = [
       },
     ]
   },
-  /*
-  {
-    path: 'trip/:id', children: [
-      {
-        path: 'applications/new', component: ApplicationcreationComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'EXPLORER' }
-      },
-      {
-        path: 'applications', component: ApplicationslistComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'MANAGER' }
-      },
-      {
-        path: 'sponsorships', component: TripSponsorshipsComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'MANAGER' }
-      },
-      {
-        path: '', component: SingleTripComponent
-      }
-    ]
-  },
-  */
   {
     path: 'trips', children: [
       {
         path: 'list', component: AllTripsComponent
+      },
+      {
+        path: 'pay-trip', component: PayTripComponent
       },
       {
         path: 'add', component: AddTripComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'MANAGER|ADMINISTRATOR' }
@@ -137,6 +120,9 @@ const routes: Routes = [
     path: 'applications', children: [
       {
         path: ':id', component: ApplicationdisplayComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'EXPLORER|MANAGER' }
+      },
+      {
+        path: ':id/pay', component: PayapplicationComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'EXPLORER' }
       },
       {
         path: '', component: ApplicationslistComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'EXPLORER|MANAGER' }

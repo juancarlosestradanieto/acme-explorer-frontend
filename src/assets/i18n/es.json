@@ -52,6 +52,12 @@
     "starting":"Tiempo Restante de Inicio",
     "out_time":"Fuera de Tiempo",
     "search":"Buscar",
+    "search-reset":"Restablecer",
+    "keyWord":"Palabra clave",
+    "priceLowerBound":"Precio mínimo",
+    "priceUpperBound":"Precio máximo",
+    "dateLowerBound":"Fecha mínima",
+    "dateUpperBound":"Fecha máxima",
     "buttons": {
       "add-favourite": "Añadir a favoritos",
       "remove-favourite": "Eliminar de favoritos",
@@ -66,12 +72,17 @@
       "trips-available": "¡Viajes disponibles para ti!",
       "favourite-trips-available": "¡Viajes favoritos disponibles para ti!",
       "favourite-trips-not-found": "No se han encontrado viajes favoritos",
-      "disabled-trip": "El viaje ya ha comenzado o ha sido cancelado"
+      "disabled-trip": "El viaje ya ha comenzado o ha sido cancelado",
+      "trip-saved": "Viaje guardado exitosamente",
+      "start-soon": "¡Próximamente!"
     },
     "validations": {
       "required": "Este campo es obligatorio.",
       "minimum": "El menor valor aceptado es",
-      "maximum": "El mayor valor aceptado es"
+      "maximum": "El mayor valor aceptado es",
+      "keyword_pattern": "La palabra clave debe ser una sola palabra",
+      "price_range_invalid": "El rango de precios es inválido",
+      "date_range_invalid": "El rango de fechas es inválido"
     }
   },
   "footer": {
@@ -119,7 +130,7 @@
     "email":"Email",
     "address":"Dirección",
     "phone_number":"Número de Teléfono",
-    "actions":"Acciones",    
+    "actions":"Acciones",
     "profile_edition":"Edición del perfil de usuario",
     "confirm_edition":"Confirmar perfil de usuario",
 
@@ -169,7 +180,9 @@
       "pending-applications-not-found": "No se han encontrado solicitudes pendientes",
       "rejected-applications-not-found": "No se han encontrado solicitudes rechazadas",
       "due-applications-not-found": "No se han encontrado solicitudes en espera de pago",
-      "accepted-applications-not-found": "No se han encontrado solicitudes aceptadas"
+      "accepted-applications-not-found": "No se han encontrado solicitudes aceptadas",
+      "payed-application": "La solicitud ha sido pagada correctamente",
+      "payed-application-error": "Se ha encontrado un error durante el pago"
     }
   },
   "sponsorships": {
@@ -234,6 +247,24 @@
     "9_digits_required": "Este campo require de 9 dígitos.",
     "email_required": "Este campo require una sintaxis de email.",
     "10_digits_alphanumeric": "Este campo require un mínimo de 10 caracteres alfanuméricos.",
-    "positive-number": "Este campo require un número positivo."
+    "positive-number": "Este campo require un número positivo.",
+    "something-went-wrong": "Something went wrong"
+  },
+  "pagination": {
+    "next": "Siguiente",
+    "prev": "Anterior",
+    "page": "Página"
+  },
+  "finders":{
+    "in-force-finders": "Buscadores en vigor",
+    "expiration-date": "Fecha de vencimiento",
+    "buttons":{
+      "save": "Guardar búsqueda",
+      "show-results": "Mostrar resultados"
+    },
+    "messages":{
+      "finder-config-saved": "Descubridor de viajes guardado exitosamente",
+      "finder-saved": "Búsqueda guardada exitosamente"
+    }
   }
 }

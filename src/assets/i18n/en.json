@@ -52,6 +52,12 @@
     "starting":"Starting Time Left",
     "out_time":"Out of Time",
     "search":"Search",
+    "search-reset":"Reset",
+    "keyWord":"Keyword",
+    "priceLowerBound":"Price lower bound",
+    "priceUpperBound":"Price upper bound",
+    "dateLowerBound":"Date lower bound",
+    "dateUpperBound":"Date upper bound",
     "buttons": {
       "add-favourite": "Add to favourites",
       "remove-favourite": "Remove from favourites",
@@ -66,12 +72,17 @@
       "trips-available": "Available trips just for you!",
       "favourite-trips-available": "Available favourite trips just for you!",
       "favourite-trips-not-found": "There are no favourite trips found",
-      "disabled-trip": "The trip has already started or has been cancelled"
+      "disabled-trip": "The trip has already started or has been cancelled",
+      "trip-saved": "Trip successfully saved",
+      "start-soon": "Soon!"
     },
     "validations": {
       "required": "This field is required.",
       "minimum": "The minimum accepted value is",
-      "maximum": "The maximum accepted value is"
+      "maximum": "The maximum accepted value is",
+      "keyword_pattern": "The keyword must be a single word",
+      "price_range_invalid": "The price range is invalid",
+      "date_range_invalid": "The date range is invalid"
     }
   },
   "footer": {
@@ -168,7 +179,9 @@
       "pending-applications-not-found": "There are no pending applications found",
       "rejected-applications-not-found": "There are no rejected applications found",
       "due-applications-not-found": "There are no due applications found",
-      "accepted-applications-not-found": "There are no accepted applications found"
+      "accepted-applications-not-found": "There are no accepted applications found",
+      "payed-application": "The application has been payed successfully",
+      "payed-application-error": "An error has been found during the payment"
     }
   },
   "sponsorships": {
@@ -232,6 +245,24 @@
     "9_digits_required": "This field requires 9 digits.",
     "email_required": "This field requires an email syntax.",
     "10_digits_alphanumeric": "This field requires a minimum of ten alphanumeric characters.",
-    "positive-number": "This field requires a positive number."
+    "positive-number": "This field requires a positive number.",
+    "something-went-wrong": "Something went wrong"
+  },
+  "pagination": {
+    "next": "Next",
+    "prev": "Previous",
+    "page": "Page"
+  },
+  "finders":{
+    "in-force-finders": "In force finders",
+    "expiration-date": "Expiration date",
+    "buttons":{
+      "save": "Save finder",
+      "show-results": "Show results"
+    },
+    "messages":{
+      "finder-config-saved": "Finder config successfully saved",
+      "finder-saved": "Finder successfully saved"
+    }
   }
 }

@@ -17,7 +17,7 @@ export class ActorsService {
     const url = `${environment.backendApiBaseURL + "/actors"}`;
 
     const idToken = localStorage.getItem('idToken') ?? '';
-    console.log("PANEL_ACTORES -> idToken del administrator actual: ",idToken)
+    //console.log("PANEL_ACTORES -> idToken del administrator actual: ",idToken)
   
     const httpOptions = {
       headers: new HttpHeaders({ 
@@ -32,7 +32,7 @@ export class ActorsService {
   deleteActor(actorID:string):Observable<any>{
     const url = `${environment.backendApiBaseURL + '/actors/'+actorID}`;
     const idToken = localStorage.getItem('idToken') ?? '';
-    console.log("PANEL_ACTORES -> idToken del administrator actual: ",idToken)
+    //console.log("PANEL_ACTORES -> idToken del administrator actual: ",idToken)
   
     const httpOptions = {
       headers: new HttpHeaders({ 

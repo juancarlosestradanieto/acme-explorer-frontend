@@ -76,6 +76,7 @@
         ( tripForm.get('price')?.dirty || tripForm.get('price')?.touched )"
         [class.is-invalid]="tripForm.get('price')?.invalid && 
         ( tripForm.get('price')?.dirty || tripForm.get('price')?.touched )" 
+        [readonly]="true"
         />
     
     </div>
@@ -309,7 +310,7 @@
                                 </div>
         
                                 <div class="col-md-6">
-                                    <img id="picture-previsualization-{{i}}" height="150" >
+                                    <img id="picture-previsualization-{{i}}" class="image-previsualization" height="150" >
                                 </div>
                             </div>
     
@@ -444,6 +445,7 @@
                             ( row.get('price')?.dirty || row.get('price')?.touched )"
                             [class.is-invalid]="row.get('price')?.invalid && 
                             ( row.get('price')?.dirty || row.get('price')?.touched )" 
+                            (keyup)="updateTotalPrice()"
                             />
                             
                             <div *ngIf="row.get('price')?.invalid && 
@@ -512,11 +514,11 @@
     </button>
 
     <div class="alert alert-success" *ngIf="success_message && success_message != ''">
-        {{success_message}}
+        {{success_message | translate}}
     </div>
 
     <div class="alert alert-danger" *ngIf="error_message && error_message != ''">
-        {{error_message}}
+        {{error_message | translate}}
     </div>
 
 </form>

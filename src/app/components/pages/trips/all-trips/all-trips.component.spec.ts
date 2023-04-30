@@ -5,7 +5,9 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute, convertToParamMap } from '@angular/router';
+import { of } from 'rxjs';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -28,7 +30,19 @@ describe('AllTripsComponent', () => {
           }
         })],
       declarations: [ AllTripsComponent ],
-      providers: [HttpClient, HttpHandler]
+      providers: [
+        HttpClient, 
+        HttpHandler, 
+        FormBuilder,
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            queryParams: of({
+              finder_id: "fake-id"
+            })
+          }
+        }
+      ]
     })
     .compileComponents();
 
