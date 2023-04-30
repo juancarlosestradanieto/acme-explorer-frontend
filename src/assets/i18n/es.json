@@ -194,7 +194,8 @@
     "operation_successfull":"¡Nuevo patrocinio creado satisfactoriamente!",
     "confirm_edit_sponsorship":"Confirmar edición de patrocinio",
     "operation_edit_successfull":"¡Patrocinio modificado!",
-    "operation_delete_successfull":"¡Patrocinio eliminado correctamente!"      
+    "operation_delete_successfull":"¡Patrocinio eliminado correctamente!",
+    "detail_sponsorship":"Vista detallada de un sponsorship"        
   
   },
   "dashboard": {
