@@ -53,6 +53,21 @@ export class SponsorshipsService {
     };
   
     return this.http.delete(url,httpOptions)
+  }
 
+  createSponsorship(sponsorhip:Sponsorship):Observable<any>{
+    const url = `${environment.backendApiBaseURL+'/sponsorships'}`;
+    const idToken = localStorage.getItem('idToken') ?? '';
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Accept-Language': 'es',
+        'idToken':idToken
+      }),
+    };
+    const body = JSON.stringify(sponsorhip);
+
+    console.log(body)
+    return this.http.post<any>(url,body,httpOptions)
   }
 }
