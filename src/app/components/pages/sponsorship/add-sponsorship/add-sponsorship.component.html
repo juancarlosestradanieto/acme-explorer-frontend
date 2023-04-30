@@ -29,42 +29,5 @@
   </div>
   <br/>
 
-  <div class="form-group has-danger">
-    <label for="banner" class="form-control-label">Banners:</label>
-
-    <button type="button" class="btn btn-success" (click)="onAddBanner()">
-      <i class="fa-solid fa-plus"></i>
-      {{'sponsorships.add_banner' | translate}}
-    </button>
-
-    <div class="col-md-10 offset-md-2">
-      <div formArrayName="banner">
-        <div
-          *ngFor="
-            let row of sponsorshipForm.controls['banner'].value;
-            let i = index
-          "
-        >
-          <div [formGroupName]="i">
-            <label>banner {{ i + 1 }}</label>
-            <div class="form-group">
-              <input
-                id="banner[{{ i }}]"
-                type="text"
-                class="form-control"
-                formControlName="banner"
-              />
-            </div>
-            <button class="btn btn-danger" (click)="onRemoveBanner(i)">
-              <i class="fa-solid fa-trash"></i>
-              {{'sponsorships.delete_banner' | translate}}
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <br/>
-
   <button type="submit" class="btn btn-primary">{{'sponsorships.confirm_sponsorship' | translate}}</button>
 </form>

@@ -192,7 +192,8 @@
     "confirm_sponsorship":"Confirm creation of sponsorhip",
     "operation_successfull":"New sponsorship created!",
     "confirm_edit_sponsorship":"Confirm edit of sponsorhip",
-    "operation_edit_successfull":"Sponsorship modified!"
+    "operation_edit_successfull":"Sponsorship modified!",
+    "operation_delete_successfull":"Sponsorship deleted correctly!"      
   },
   "dashboard": {
     "title": "Dashboard",

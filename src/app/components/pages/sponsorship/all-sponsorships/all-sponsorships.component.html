@@ -18,12 +18,12 @@
           <p class="card-text">TripTicker: {{ sponsorship.tripTicker}}</p>
           <p class="card-text">{{"sponsorships.isPayed" | translate}}: {{ sponsorship.isPayed  ? 'OK' : 'No'}}</p>
           <p class="card-text"><a href="{{sponsorship.page}}">{{"sponsorships.page" | translate}}: {{sponsorship.page}}</a></p>
-          <div *ngIf="sponsorship.banner ">
+          <!-- <div *ngIf="sponsorship.banner ">
             <h4>Banners: </h4>
             <div class="card-text" *ngFor="let item of sponsorship.banner | keyvalue">
               {{ item.value | json }}
             </div>
-          </div>
+          </div> -->
             
           </div>
         </div>

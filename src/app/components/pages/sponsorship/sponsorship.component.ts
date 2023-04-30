@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Sponsorship } from 'src/app/models/sponsorship.model';
 import { SponsorshipsService } from '../../../services/sponsorships.service';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sponsorship',
@@ -20,7 +21,8 @@ export class SponsorshipComponent implements OnInit {
 
 
   constructor( private SponsorshipsService: SponsorshipsService,
-               private route: ActivatedRoute) { }
+               private route: ActivatedRoute,
+               private _translateService:TranslateService) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
@@ -65,10 +67,12 @@ export class SponsorshipComponent implements OnInit {
   deleteSponsorship(sponsorshipID: string) {
     this.SponsorshipsService.deleteSponsorship(sponsorshipID).subscribe(res=>{
       this.getSponsorships();
-      location.reload()
+      alert(this._translateService.instant('sponsorships.operation_delete_successfull'));
+      location.reload();
     }, error =>{
-      console.log("Error al eliminar sponsorship");
-      location.reload()
+      alert(this._translateService.instant('sponsorships.operation_delete_successfull'));  
+      location.reload();
+      this.getSponsorships();
     });
 
   }
