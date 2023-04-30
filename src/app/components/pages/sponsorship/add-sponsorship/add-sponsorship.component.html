@@ -1,7 +1,10 @@
-<p>{{'sponsorships.create' | translate}}</p>
+<br/>
+<h3>{{'sponsorships.create' | translate}}</h3>
+
 <app-go-back-button></app-go-back-button>
 
 <form [formGroup]="sponsorshipForm" (ngSubmit)="onSubmit()">
+  <br/>
   <div class="form-group">
     <label for="tripTicker">Trip Ticker</label>
     <input
@@ -12,6 +15,7 @@
 
     />
   </div>
+  <br/>
 
   <div class="form-group">
     <label for="page">{{'sponsorships.page' | translate}}</label>
@@ -23,6 +27,7 @@
 
     />
   </div>
+  <br/>
 
   <div class="form-group has-danger">
     <label for="banner" class="form-control-label">Banners:</label>
@@ -59,6 +64,7 @@
       </div>
     </div>
   </div>
+  <br/>
 
   <button type="submit" class="btn btn-primary">{{'sponsorships.confirm_sponsorship' | translate}}</button>
 </form>
