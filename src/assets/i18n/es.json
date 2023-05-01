@@ -185,7 +185,13 @@
       "payed-application-error": "Se ha encontrado un error durante el pago",
       "comments-empty": "No se pueden dejar comentarios en blanco",
       "application-exists": "No se pueden crear múltiples solicitudes para el mismo viaje",
-      "application-created": "Solicitud creada correctamente"
+      "application-created": "Solicitud creada correctamente",
+      "cancel-application-confirmation": "¿Está seguro de que quiere cancelar la solicitud?",
+      "accept-application-confirmation": "¿Está seguro de que quiere aceptar la solicitud?",
+      "reject-application-confirmation": "¿Está seguro de que quiere rechazar la solicitud?",
+      "cancel-application-error": "Se ha encontrado un error durante el proceso de cancelar",
+      "accept-application-error": "Se ha encontrado un error durante el proceso de aceptar",
+      "reject-application-error": "Se ha encontrado un error durante el proceso de rechazar"
     }
   },
   "sponsorships": {

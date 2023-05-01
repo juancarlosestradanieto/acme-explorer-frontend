@@ -184,7 +184,13 @@
       "payed-application-error": "An error has been found during the payment",
       "comments-empty": "Comments cannot be empty",
       "application-exists": "Multiple applications cannot be created for the same trip",
-      "application-created": "Application created successfully"
+      "application-created": "Application created successfully",
+      "cancel-application-confirmation": "Are you sure to cancel this application?",
+      "accept-application-confirmation": "Are you sure to accept this application?",
+      "reject-application-confirmation": "Are you sure to reject this application?",
+      "cancel-application-error": "An error has been encountered during the cancel process",
+      "accept-application-error": "An error has been encountered during the accept process",
+      "reject-application-error": "An error has been encountered during the reject process"
     }
   },
   "sponsorships": {
