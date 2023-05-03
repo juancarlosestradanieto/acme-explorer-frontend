@@ -15,6 +15,9 @@ export class DashboardComponent implements OnInit {
   price_range_in_finder: any = [];
   top10_in_finder: any = [];
   dashboard_loaded!: Promise<boolean>;
+  minimum:number;
+  maximum:number;
+  promedio:number;
 
   constructor(private dashboardService: DashboardService) { }
 
@@ -54,21 +57,40 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLatestDashboard();
-    this.getAveragePriceFinders();
-    this.getTop10WordsFinder();
+    this.getPriceRangeAndTop10KeyWords();
+    
   }
 
-  getTop10WordsFinder():void{
-    this.dashboardService.getTop10KeyWords().subscribe((res)=>{
-      this.top10_in_finder= res;
-      console.log("Dashboard.component ->getTop10WordsFinder()",res)
-    });
-  }
+  // getTop10WordsFinder():void{
+  //   this.dashboardService.getTop10KeyWords().subscribe((res)=>{
+  //     this.top10_in_finder= res;
+  //     console.log("Dashboard.component ->getTop10WordsFinder()",res)
+  //   });
+  // }
 
-  getAveragePriceFinders():void{
-    this.dashboardService.getAveragePriceFinders().subscribe((res)=>{
-      this.price_range_in_finder = [res.normal,res.positive,res.decimal];
-      console.log("Dashboard.component -> getAveragePriceFinders() ",res);
+  // getAveragePriceFinders():void{
+  //   this.dashboardService.getAveragePriceFinders().subscribe((res)=>{
+  //     this.price_range_in_finder = [res.normal,res.positive,res.decimal];
+  //     console.log("Dashboard.component -> getAveragePriceFinders() ",res);
+  //   })
+  //}
+
+  getPriceRangeAndTop10KeyWords():void{
+
+    this.dashboardService.getPriceRangeAndTop10KeyWords().subscribe((data)=>{
+      console.log("Esto es lo que devuelve el metodo tocho este: ",data)
+      this.minimum = data[0].lowerPrice
+      this.maximum = data[0].upperPrice;
+      this.promedio= (data[0].lowerPrice + data[0].upperPrice)/2; //Backend no devuelve un valor promedio como tal. Hacemos la media
+      console.log("lowerprice: ",data[0].lowerPrice)
+      console.log("upperprice: ",data[0].upperPrice)
+      console.log("promedio : ",this.promedio)
+      const array_top_finders = data[0].topKeyWords.slice(0,9).map(keyword => keyword._id);
+      this.top10_in_finder = array_top_finders.filter((keyword)=>{ return keyword !== ""})
+      console.log("estas son las key words", this.top10_in_finder)
+
+
+
     })
   }
 

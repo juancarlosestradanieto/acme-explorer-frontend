@@ -4,12 +4,15 @@ import { PayapplicationComponent } from './payapplication.component';
 import { ActivatedRoute } from '@angular/router';
 import { Application } from 'src/app/models/application.model';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
+
 
 describe('PayapplicationComponent', () => {
   let component: PayapplicationComponent;
@@ -23,9 +26,6 @@ describe('PayapplicationComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         HttpClientModule,
-        /*RouterTestingModule,
-        FormsModule,
-        AngularFireModule.initializeApp(environment.firebase),*/
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
