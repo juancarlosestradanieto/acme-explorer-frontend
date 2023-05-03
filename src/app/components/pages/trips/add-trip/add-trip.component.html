@@ -439,7 +439,7 @@
                             <input
                             id="price[{{i}}]"
                             type="number"
-                            class="form-control" 
+                            class="form-control price" 
                             formControlName="price"
                             [class.is-valid]="row.get('price')?.valid && 
                             ( row.get('price')?.dirty || row.get('price')?.touched )"
@@ -505,7 +505,7 @@
     </div>
     <!--MANAGER ID END-->
 
-    <button type="submit" class="btn btn-primary" 
+    <button type="submit"id="add-trip-submit" class="btn btn-primary" 
         [disabled]="tripForm.invalid
         || tripForm.controls.requirements.controls.length < 1
         || tripForm.controls.stages.controls.length < 1

@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-md-6"><p>{{'trips.messages.trips-available' | translate}}</p></div>
     <div class="col-md-3 offset-md-3" *ngIf="showAddTripButton">
-        <button type="button" class="btn btn-success" routerLink="/trips/add">
+        <button type="button" class="btn btn-success" routerLink="/trips/add"  id="add-trip">
             <i class="fa-solid fa-plus"></i>
             {{'trips.buttons.add' | translate}}
         </button>
@@ -300,7 +300,7 @@
 
             </ul>
             <div class="card-body">
-                <button type="button" class="btn btn-success" routerLink="/trips/{{trip.id}}">
+                <button type="button" class="btn btn-success" routerLink="/trips/{{trip.id}}" name="trip-details">
                     <i class="fa-solid fa-magnifying-glass"></i>
                     {{'trips.buttons.more' | translate}}
                 </button>
