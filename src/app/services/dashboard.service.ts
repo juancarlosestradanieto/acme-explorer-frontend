@@ -53,16 +53,34 @@ export class DashboardService {
   //*dos endpoints de APIs alojadas en la nube que devuelven palabras y números random
 
   //?The average price range that explorers indicate in their finders.
-  getTop10KeyWords():Observable<any>{
-    const url="https://random-word-api.vercel.app/api?words=10";
-    return this.http.get<any>(url);
+  // getTop10KeyWords():Observable<any>{
+  //   const url="https://random-word-api.vercel.app/api?words=10";
+  //   return this.http.get<any>(url);
+  // }
+
+  //  //?The average price range that explorers indicate in their finders.
+
+  //   getAveragePriceFinders():Observable<any>{
+  //     const url="https://random-data-api.com/api/number/random_number"
+  //     return this.http.get<any>(url);
+  //   }
+  getPriceRangeAndTop10KeyWords():Observable<any>{
+    const url = `${environment.backendApiBaseURL + "/finder/stats"}`;
+
+    const idToken = localStorage.getItem('idToken') ?? '';
+
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Accept-Language': 'es',
+        'idToken': idToken 
+      }),
+    };
+
+    return this.http.get<any>(url,httpOptions);
+
   }
 
-   //?The average price range that explorers indicate in their finders.
 
-    getAveragePriceFinders():Observable<any>{
-      const url="https://random-data-api.com/api/number/random_number"
-      return this.http.get<any>(url);
-    }
 
 }

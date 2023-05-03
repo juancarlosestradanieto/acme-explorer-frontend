@@ -19,8 +19,8 @@ describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
   let getDashboardSpy: any;
-  let getTop10KeyWordsSpy: any;
-  let getAveragePriceFindersSpy: any;
+  let getPriceRangeAndTop10KeyWordsSpy: any;
+  
 
   const mockManagerActor = Actor.castJsonActor({
     "_id": "64304c9dae7efef4708d821q",
@@ -104,11 +104,7 @@ describe('DashboardComponent', () => {
 
     };
 
-    const mockAveragePriceFinder = {
-      normal:10,
-      decimal:100,
-      positive:200
-    }
+   
 
     const mockTop10Words = {
       decimal: 32.26,
@@ -124,10 +120,10 @@ describe('DashboardComponent', () => {
       uid: "694e15c0-df70-4bd6-b16c-2fc16080f6d6"
     }
 
-    let dashboardSpy = jasmine.createSpyObj('DashboardService', ['getDashboard','getTop10KeyWords','getAveragePriceFinders']);
+    let dashboardSpy = jasmine.createSpyObj('DashboardService', ['getDashboard','getPriceRangeAndTop10KeyWords']);
     getDashboardSpy = dashboardSpy.getDashboard.and.returnValue(Promise.resolve(mockDashboard));
-    getTop10KeyWordsSpy = dashboardSpy.getTop10KeyWords.and.returnValue(of(mockTop10Words));
-    getAveragePriceFindersSpy = dashboardSpy.getAveragePriceFinders.and.returnValue(of(mockAveragePriceFinder));
+    getPriceRangeAndTop10KeyWordsSpy = dashboardSpy.getPriceRangeAndTop10KeyWords.and.returnValue(of(mockTop10Words));
+
 
 
     await TestBed.configureTestingModule({
