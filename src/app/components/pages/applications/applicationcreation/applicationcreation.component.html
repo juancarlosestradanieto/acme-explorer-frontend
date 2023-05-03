@@ -14,6 +14,10 @@
             <input type="hidden" id="tripPrice" formControlName="tripPrice" class="form-control">
         </div>
 
+        <div *ngIf="application_exists" class="alert alert-danger">
+            {{'applications.messages.application-exists' | translate}}
+        </div>
+
         <div formArrayName="comments" class="form-group has-danger">
             <button type="button" class="btn btn-primary" (click)="addComment()">
                 <i class="fa-solid fa-plus"></i>
@@ -23,14 +27,21 @@
                     {{'applications.comments' | translate}}:
                     <input id="comment-{{ i }}" type="text" formControlName="{{i}}">
                 </label>
-                <button type="button" class="btn btn-danger" (click)="removeComment(i)">
+                <button type="button" class="btn btn-danger" (click)="removeComment(i)" *ngIf="i>0">
                     <i class="fa-solid fa-trash"></i>
                     {{'applications.remove-comment' | translate}}
                 </button>
+                <div *ngIf="comments!.controls[i].errors?.['required'] && comments.dirty" class="alert alert-danger">
+                    {{'applications.messages.comments-empty' | translate}}
+                </div>
             </div>
         </div>
 
-        <button class="btn btn-primary" type="submit">
+        <div *ngIf="application_created" class="alert alert-success">
+            {{'applications.messages.application-created' | translate}}
+        </div>
+
+        <button class="btn btn-primary" type="submit" [disabled]="applicationForm.invalid">
             <i class="fa-solid fa-envelope-open-text"></i>
             {{'buttons.create' | translate}}
         </button>

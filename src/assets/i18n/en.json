@@ -181,7 +181,16 @@
       "due-applications-not-found": "There are no due applications found",
       "accepted-applications-not-found": "There are no accepted applications found",
       "payed-application": "The application has been payed successfully",
-      "payed-application-error": "An error has been found during the payment"
+      "payed-application-error": "An error has been found during the payment",
+      "comments-empty": "Comments cannot be empty",
+      "application-exists": "Multiple applications cannot be created for the same trip",
+      "application-created": "Application created successfully",
+      "cancel-application-confirmation": "Are you sure to cancel this application?",
+      "accept-application-confirmation": "Are you sure to accept this application?",
+      "reject-application-confirmation": "Are you sure to reject this application?",
+      "cancel-application-error": "An error has been encountered during the cancel process",
+      "accept-application-error": "An error has been encountered during the accept process",
+      "reject-application-error": "An error has been encountered during the reject process"
     }
   },
   "sponsorships": {
@@ -228,7 +237,11 @@
     "title-update": "Update system parameters",
     "maxFinderResults": "Maximum amount of results shown in finders",
     "flatRateSponsorships": "Flat rate cost of sponsorships",
-    "cacheHour": "Maximum cache duration in hours"
+    "cacheHour": "Maximum cache duration in hours",
+    "messages": {
+      "created": "System parameters created successfully",
+      "updated": "System parameters updated successfully"
+    }
   },
   "dark": "Dark theme activated",
   "light": "Light theme activated",

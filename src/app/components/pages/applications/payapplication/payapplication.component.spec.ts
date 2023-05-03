@@ -4,8 +4,10 @@ import { PayapplicationComponent } from './payapplication.component';
 import { ActivatedRoute } from '@angular/router';
 import { Application } from 'src/app/models/application.model';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -31,11 +33,6 @@ describe('PayapplicationComponent', () => {
             deps: [HttpClient]
           }
         })
-
-        /*RouterTestingModule,
-        AngularFireModule.initializeApp(environment.firebase),
-        Formsmodule,
-        */
       ],
       declarations: [ PayapplicationComponent ],
       providers: [

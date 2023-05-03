@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { SystemParameters } from 'src/app/models/system-parameters.model';
 import { SystemParametersService } from 'src/app/services/system-parameters.service';
 
@@ -19,7 +20,8 @@ export class SystemParametersEditComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private sps: SystemParametersService) {
+    private sps: SystemParametersService,
+    private translate: TranslateService) {
     this.parametersForm = this.fb.group({
       maxFinderResults: ['', Validators.compose([Validators.required, Validators.min(0)])],
       flatRateSponsorships: ['', Validators.compose([Validators.required, Validators.min(0)])],
@@ -121,7 +123,11 @@ export class SystemParametersEditComponent implements OnInit {
     this.sps.createSystemParameters(formModel)
       .then((response) => {
         console.log("SystemParametersEditComponent->onCreateSubmit SystemParametersService.createSystemParameters then response ", response);
-        this.goToDisplay();
+        this.translate.get('system-parameters.messages.created')
+        .subscribe((message: string) => {
+          alert(message);
+          this.goToDisplay();
+        })
       })
       .catch((error) => {
         console.error("SystemParametersEditComponent->onCreateSubmit SystemParametersService.createSystemParameters catch ", error);
@@ -133,7 +139,11 @@ export class SystemParametersEditComponent implements OnInit {
     this.sps.updateSystemParameters(formModel)
       .then((response) => {
         console.log("SystemParametersEditComponent->onUpdateSubmit SystemParametersService.updateSystemParameters then response ", response);
-        this.goToDisplay();
+        this.translate.get('system-parameters.messages.updated')
+        .subscribe((message: string) => {
+          alert(message);
+          this.goToDisplay();
+        })
       })
       .catch((error) => {
         console.error("SystemParametersEditComponent->onUpdateSubmit SystemParametersService.updateSystemParameters catch ", error);
