@@ -126,7 +126,7 @@
                             <input
                             id="requirement[{{i}}]"
                             type="text"
-                            class="form-control" 
+                            class="form-control requirement" 
                             formControlName="requirement"
                             [class.is-valid]="row.get('requirement')?.valid && 
                             ( row.get('requirement')?.dirty || row.get('requirement')?.touched )"
@@ -383,7 +383,7 @@
                             <input
                             id="title[{{i}}]"
                             type="text"
-                            class="form-control" 
+                            class="form-control stage_title" 
                             formControlName="title"
                             [class.is-valid]="row.get('title')?.valid && 
                             ( row.get('title')?.dirty || row.get('title')?.touched )"
@@ -411,7 +411,7 @@
                             <input
                             id="description[{{i}}]"
                             type="text"
-                            class="form-control" 
+                            class="form-control stage_description" 
                             formControlName="description"
                             [class.is-valid]="row.get('description')?.valid && 
                             ( row.get('description')?.dirty || row.get('description')?.touched )"
