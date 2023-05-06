@@ -23,7 +23,6 @@ import { AddTripComponent } from './components/pages/trips/add-trip/add-trip.com
 import { ManagerApplicationsGuard } from './guards/manager-applications.guard';
 import { AllActorsComponent } from './components/pages/actors/all-actors/all-actors.component';
 import { RegisterManagerComponent } from './components/pages/actors/register-manager/register-manager.component';
-import { PayTripComponent } from './components/pages/trips/pay-trip/pay-trip.component';
 import { PayapplicationComponent } from './components/pages/applications/payapplication/payapplication.component';
 import { ActorProfileEditComponent } from './components/pages/actor-profile/actor-profile-edit/actor-profile-edit.component';
 import { SystemParametersEditComponent } from './components/pages/system-parameters/system-parameters-edit/system-parameters-edit.component';
@@ -88,9 +87,6 @@ const routes: Routes = [
     path: 'trips', children: [
       {
         path: 'list', component: AllTripsComponent
-      },
-      {
-        path: 'pay-trip', component: PayTripComponent
       },
       {
         path: 'add', component: AddTripComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'MANAGER|ADMINISTRATOR' }

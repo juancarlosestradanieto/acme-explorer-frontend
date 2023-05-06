@@ -64,7 +64,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 
 import { DetailSponsorshipComponent } from './components/pages/sponsorship/detail-sponsorship/detail-sponsorship.component';
 
-import { PayTripComponent } from './components/pages/trips/pay-trip/pay-trip.component';
 import { PayapplicationComponent } from './components/pages/applications/payapplication/payapplication.component';
 import {MatSliderModule} from '@angular/material/slider';
 
@@ -112,7 +111,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AddTripComponent,
     AllActorsComponent,
     RegisterManagerComponent,
-    PayTripComponent,
     PayapplicationComponent,
     GoBackButtonComponent,
     ActorProfileEditComponent,
