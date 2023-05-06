@@ -1489,6 +1489,209 @@
         }
       ],
       "id": 1
+    },
+    {
+      "_id": "0",
+      "_version": 0,
+      "reference": "test1682177507722@gmail.com-favourites",
+      "trips": [
+        {
+          "_id": "6443fce204ad3396b840c61f",
+          "_version": 0,
+          "requirements": [],
+          "ticker": "+hC*?XwNpLq",
+          "title": "A trip to Garnetview",
+          "description": "Totam voluptatem illum sit magni. Aut porro ipsa dolorem. Deserunt quaerat est voluptatem dolore consequatur consequuntur natus deserunt consequuntur. Distinctio dolore illum cupiditate est. Vitae et minus itaque rem. Totam enim vero.",
+          "price": 97,
+          "publicationDate": "2022-10-16T20:08:29.330Z",
+          "startDate": "2023-11-11T16:14:54.557Z",
+          "endDate": "2024-02-27T04:07:06.253Z",
+          "managerId": "6443fce204ad3396b840c5ca",
+          "stages": [
+            {
+              "_id": "0",
+              "_version": 0,
+              "title": "Zone 1 of city Garnetview",
+              "description": "Asperiores ut corrupti qui nemo sed sit qui iure. Expedita libero numquam ut labore consequatur aliquid voluptatum. Dolor maiores quisquam quos aut inventore hic aut optio similique. Delectus neque nam consequuntur consequatur tempore. Omnis ea accusamus dolores quos et cum. Sint et eos officiis at expedita quos beatae omnis.",
+              "price": 44
+            },
+            {
+              "_id": "0",
+              "_version": 0,
+              "title": "Zone 2 of city Garnetview",
+              "description": "Cum incidunt voluptas molestiae temporibus pariatur eum quo voluptates officiis. Ullam tempora enim et. Occaecati voluptate animi voluptatem fuga alias.",
+              "price": 19
+            },
+            {
+              "_id": "0",
+              "_version": 0,
+              "title": "Zone 3 of city Garnetview",
+              "description": "Ea dolore reprehenderit illum. Dolores est voluptatibus. Est saepe dolor ut est aspernatur. Voluptates sint quis molestiae cumque et.",
+              "price": 34
+            }
+          ],
+          "canceled": false,
+          "cancelReason": "",
+          "pictures": []
+        },
+        {
+          "_id": "6443fce204ad3396b840c61e",
+          "_version": 0,
+          "requirements": [],
+          "ticker": "E[yOw}Bz3P(",
+          "title": "A trip to North Isabelmouth",
+          "description": "Alias non delectus velit error. Voluptatem sit repudiandae enim quo saepe voluptatibus quia. Accusamus a consequatur quo odit cumque pariatur ab.",
+          "price": 101,
+          "publicationDate": "2020-12-18T13:47:44.152Z",
+          "startDate": "2021-03-30T13:52:18.503Z",
+          "endDate": "2023-09-06T04:22:19.599Z",
+          "managerId": "6443fce204ad3396b840c5cc",
+          "stages": [
+            {
+              "_id": "0",
+              "_version": 0,
+              "title": "Zone 1 of city North Isabelmouth",
+              "description": "Dolorem beatae vitae et excepturi. Ab est tempora eaque quidem deserunt eos id. Earum voluptate error omnis tenetur pariatur voluptatibus.",
+              "price": 48
+            },
+            {
+              "_id": "0",
+              "_version": 0,
+              "title": "Zone 2 of city North Isabelmouth",
+              "description": "Quae ipsam id illo cumque dicta. Molestiae debitis non et libero commodi rerum omnis. Blanditiis veniam sequi deleniti sunt. Temporibus porro non ea aut consectetur. Dolorem deleniti consequatur ratione blanditiis rem ut minus et. Consequatur et nulla id dignissimos corrupti.",
+              "price": 23
+            },
+            {
+              "_id": "0",
+              "_version": 0,
+              "title": "Zone 3 of city North Isabelmouth",
+              "description": "Et deserunt consequuntur facere cum suscipit est. Voluptate ab iure ipsa ut. Perferendis a praesentium repudiandae non in. Ut consectetur laudantium quas repellendus et qui. Qui qui quas expedita pariatur ut illum molestiae. Corporis ut sed.",
+              "price": 30
+            }
+          ],
+          "canceled": false,
+          "cancelReason": "",
+          "pictures": []
+        },
+        {
+          "_id": "6443fce204ad3396b840c622",
+          "_version": 0,
+          "requirements": [],
+          "ticker": ")_IbFGlB*4Z",
+          "title": "A trip to Beattyburgh",
+          "description": "Voluptatem distinctio est et voluptas voluptates. Quia et sed eveniet laboriosam laboriosam. Aliquam aut voluptas. Cum qui sunt doloribus perspiciatis aliquid.",
+          "price": 103,
+          "publicationDate": "2021-11-02T05:06:18.014Z",
+          "startDate": "2022-07-13T02:46:48.963Z",
+          "endDate": "2022-11-26T11:28:08.864Z",
+          "managerId": "6443fce204ad3396b840c5fe",
+          "stages": [
+            {
+              "_id": "0",
+              "_version": 0,
+              "title": "Zone 1 of city Beattyburgh",
+              "description": "Corporis accusamus corrupti aspernatur sapiente voluptatem nobis. Provident consequatur aperiam ut aspernatur aut architecto consequatur. Ad ratione labore dignissimos animi eos doloremque voluptatem.",
+              "price": 37
+            },
+            {
+              "_id": "0",
+              "_version": 0,
+              "title": "Zone 2 of city Beattyburgh",
+              "description": "Quasi et laboriosam ea. Voluptatem doloribus est fuga. Officia culpa nesciunt non autem perferendis tempore aut.",
+              "price": 34
+            },
+            {
+              "_id": "0",
+              "_version": 0,
+              "title": "Zone 3 of city Beattyburgh",
+              "description": "Repellat ut quo itaque. Ipsam officia fuga inventore quia expedita velit officia tempora. Tempore quae possimus natus sed ut.",
+              "price": 32
+            }
+          ],
+          "canceled": false,
+          "cancelReason": "",
+          "pictures": []
+        },
+        {
+          "_id": "6443fce204ad3396b840c628",
+          "_version": 0,
+          "requirements": [],
+          "ticker": "=HrZei*pp]E",
+          "title": "A trip to Alejandramouth",
+          "description": "Repellendus voluptates saepe et. Inventore necessitatibus necessitatibus nostrum sit laudantium mollitia officia. Commodi dolorum vero enim. Et eius porro eum a qui commodi placeat libero sequi.",
+          "price": 66,
+          "publicationDate": "2021-12-16T03:00:49.570Z",
+          "startDate": "2023-02-09T12:46:03.367Z",
+          "endDate": "2024-09-05T17:58:38.913Z",
+          "managerId": "6443fce204ad3396b840c5ca",
+          "stages": [
+            {
+              "_id": "0",
+              "_version": 0,
+              "title": "Zone 1 of city Alejandramouth",
+              "description": "Minima cupiditate omnis corporis tempora commodi et dolores vel possimus. Tempora doloribus tempore. Molestiae quae adipisci iste aut aliquid sapiente aliquam in voluptatum. Dolor velit deleniti at temporibus et. Similique iusto voluptates minus consequuntur tempora animi possimus omnis ab. Sint ipsum labore ex.",
+              "price": 13
+            },
+            {
+              "_id": "0",
+              "_version": 0,
+              "title": "Zone 2 of city Alejandramouth",
+              "description": "Et et laudantium sunt quis. Et id id adipisci. Molestiae doloremque nulla asperiores atque. Dicta atque aperiam fuga quod. Velit nihil occaecati voluptate minus maxime saepe quam.",
+              "price": 31
+            },
+            {
+              "_id": "0",
+              "_version": 0,
+              "title": "Zone 3 of city Alejandramouth",
+              "description": "Et velit doloremque. Repellendus placeat corrupti. Deserunt architecto non fugiat odit placeat nihil quia dicta.",
+              "price": 22
+            }
+          ],
+          "canceled": false,
+          "cancelReason": "",
+          "pictures": []
+        },
+        {
+          "_id": "6443fce204ad3396b840c627",
+          "_version": 0,
+          "requirements": [],
+          "ticker": "-ib#0HqC.9U",
+          "title": "A trip to Tyresebury",
+          "description": "Maxime libero aut. Magnam facere qui voluptatibus sapiente quod. Ut delectus voluptatem nihil quaerat. At illum sed ut nostrum architecto. Earum aspernatur deleniti illo sit. Excepturi et molestiae eligendi impedit aut.",
+          "price": 77,
+          "publicationDate": "2020-09-21T10:45:23.114Z",
+          "startDate": "2022-08-08T18:51:04.315Z",
+          "endDate": "2024-09-30T18:55:45.004Z",
+          "managerId": "6443fce204ad3396b840c5cc",
+          "stages": [
+            {
+              "_id": "0",
+              "_version": 0,
+              "title": "Zone 1 of city Tyresebury",
+              "description": "Eligendi sed vel. In molestiae aut molestiae recusandae ut totam maxime aut. Repudiandae qui quia. Voluptatem corrupti et ipsum quos et natus dolorum odit aut. Quisquam non quis iste minima quia impedit debitis sint. Numquam ullam corporis explicabo dolores.",
+              "price": 32
+            },
+            {
+              "_id": "0",
+              "_version": 0,
+              "title": "Zone 2 of city Tyresebury",
+              "description": "Consequatur eaque totam voluptatem neque. Quam quia est eaque doloremque aut accusantium doloremque atque reiciendis. Consequuntur maiores ipsam officiis ea consequuntur aut delectus et. Qui similique accusantium placeat fuga aperiam quos sit hic. Ipsa voluptatibus ducimus nesciunt quo ratione consequatur laboriosam.",
+              "price": 19
+            },
+            {
+              "_id": "0",
+              "_version": 0,
+              "title": "Zone 3 of city Tyresebury",
+              "description": "Dolorem explicabo architecto. Tempora numquam aut facilis provident culpa fuga quaerat debitis. Aliquam voluptatem voluptas explicabo ipsum quidem non. Quam sit est quibusdam nulla odit corporis commodi accusantium. Repellendus maiores omnis consequatur assumenda illum optio praesentium.",
+              "price": 26
+            }
+          ],
+          "canceled": false,
+          "cancelReason": "",
+          "pictures": []
+        }
+      ],
+      "id": 2
     }
   ]
 }

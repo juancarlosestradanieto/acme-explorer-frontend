@@ -182,7 +182,16 @@
       "due-applications-not-found": "No se han encontrado solicitudes en espera de pago",
       "accepted-applications-not-found": "No se han encontrado solicitudes aceptadas",
       "payed-application": "La solicitud ha sido pagada correctamente",
-      "payed-application-error": "Se ha encontrado un error durante el pago"
+      "payed-application-error": "Se ha encontrado un error durante el pago",
+      "comments-empty": "No se pueden dejar comentarios en blanco",
+      "application-exists": "No se pueden crear múltiples solicitudes para el mismo viaje",
+      "application-created": "Solicitud creada correctamente",
+      "cancel-application-confirmation": "¿Está seguro de que quiere cancelar la solicitud?",
+      "accept-application-confirmation": "¿Está seguro de que quiere aceptar la solicitud?",
+      "reject-application-confirmation": "¿Está seguro de que quiere rechazar la solicitud?",
+      "cancel-application-error": "Se ha encontrado un error durante el proceso de cancelar",
+      "accept-application-error": "Se ha encontrado un error durante el proceso de aceptar",
+      "reject-application-error": "Se ha encontrado un error durante el proceso de rechazar"
     }
   },
   "sponsorships": {
@@ -230,7 +239,11 @@
     "title-update": "Actualizar parámetros del sistema",
     "maxFinderResults": "Cantidad máxima de resultados mostrados en descubridores de viajes",
     "flatRateSponsorships": "Tarifa plana del coste de los patrocinios",
-    "cacheHour": "Duración máxima en horas de la caché"
+    "cacheHour": "Duración máxima en horas de la caché",
+    "messages": {
+      "created": "Parámetros del sistema creados correctamente",
+      "updated": "Parámetros del sistema actualizados correctamente"
+    }
   },
   "dark": "Modo Oscuro activado",
   "light": "Modo Claro activado",
