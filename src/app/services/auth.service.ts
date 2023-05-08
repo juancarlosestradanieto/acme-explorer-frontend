@@ -120,7 +120,7 @@ export class AuthService {
 
   login(email: string, password: string) {
 
-    console.log(email + " - " + password);
+    //console.log(email + " - " + password);
     const url = environment.backendApiBaseURL + '/login?email=' + email + '&password='+password;
 
     return new Promise<any>((resolve, reject) => {
@@ -143,32 +143,32 @@ export class AuthService {
             user?.getIdToken()
             .then((response3) => {
               let idToken = response3;
-              console.log('user->getIdToken then idToken', idToken);
+              //console.log('user->getIdToken then idToken', idToken);
 
               let actor: any = this.currentActor;
 
-              console.log('user->getIdToken then actor.hasOwnProperty password', actor.hasOwnProperty('password'));
+              //console.log('user->getIdToken then actor.hasOwnProperty password', actor.hasOwnProperty('password'));
               if (actor.hasOwnProperty('password')) {
                 delete actor['password'];
-                console.log('user->getIdToken then actor', actor);
+                //console.log('user->getIdToken then actor', actor);
               }
 
-              console.log('user->getIdToken then actor.hasOwnProperty password', actor.hasOwnProperty('address'));
+              //console.log('user->getIdToken then actor.hasOwnProperty address', actor.hasOwnProperty('address'));
               if (actor.hasOwnProperty('address')) {
                 delete actor['address'];
-                console.log('user->getIdToken then actor', actor);
+                //console.log('user->getIdToken then actor', actor);
               }
 
-              console.log('user->getIdToken then actor.hasOwnProperty phone', actor.hasOwnProperty('phone'));
+              //console.log('user->getIdToken then actor.hasOwnProperty phone', actor.hasOwnProperty('phone'));
               if (actor.hasOwnProperty('phone')) {
                 delete actor['phone'];
-                console.log('user->getIdToken then actor', actor);
+                //console.log('user->getIdToken then actor', actor);
               }
 
-              console.log('user->getIdToken then actor.hasOwnProperty customToken', actor.hasOwnProperty('customToken'));
+              //console.log('user->getIdToken then actor.hasOwnProperty customToken', actor.hasOwnProperty('customToken'));
               if (actor.hasOwnProperty('customToken')) {
                 delete actor['customToken'];
-                console.log('user->getIdToken then actor', actor);
+                //console.log('user->getIdToken then actor', actor);
               }
 
 

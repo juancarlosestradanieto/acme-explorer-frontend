@@ -236,7 +236,7 @@ export class AllTripsComponent implements OnInit {
 
       //cache verification - start
 
-      console.log("AllTripsComponent->getTripsFromCache url", url);
+      //console.log("AllTripsComponent->getTripsFromCache url", url);
 
       caches.open(this.cacheName).then(cache => {
         cache.match(url).then(cacheResponse => {
@@ -246,7 +246,7 @@ export class AllTripsComponent implements OnInit {
           
           if(!cacheResponse) {
             //return fetch(url);
-            console.log("AllTripsComponent->getTripsFromCache url not found in cache");
+            //console.log("AllTripsComponent->getTripsFromCache url not found in cache");
             reject({error: "Data not found in cache."});
           }
           else
@@ -256,20 +256,20 @@ export class AllTripsComponent implements OnInit {
             let now = Date.now();
             //console.log("now ", now);
             let diffInHours = this.diffInHours(reponse_date, now);
-            console.log("AllTripsComponent->getTripsFromCache diffInHours ", diffInHours);
-            console.log("AllTripsComponent->getTripsFromCache this.finder_cache_hours ", this.finder_cache_hours);
+            //console.log("AllTripsComponent->getTripsFromCache diffInHours ", diffInHours);
+            //console.log("AllTripsComponent->getTripsFromCache this.finder_cache_hours ", this.finder_cache_hours);
             
             if(diffInHours > this.finder_cache_hours)
             {
               //return fetch(url);
-              console.log("AllTripsComponent->getTripsFromCache cache expired");
+              //console.log("AllTripsComponent->getTripsFromCache cache expired");
               cache.delete(url);
               reject({error: "Data not found in cache."});
             }
             else
             {
               // else return cached version
-              console.log("AllTripsComponent->getTripsFromCache returning cached version");
+              //console.log("AllTripsComponent->getTripsFromCache returning cached version");
                 
               resolve(cacheResponse.json());
     

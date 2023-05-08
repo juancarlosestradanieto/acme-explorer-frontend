@@ -25,9 +25,9 @@ let mockJungleTripTripFormData = {
     "Requirement 1",
     "Requirement 2"
   ],
-  publicationDate: "2021-06-23",
-  startDate: "2021-07-01",
-  endDate: "2021-07-06",
+  startDate: "2023-07-01",
+  endDate: "2023-07-06",
+  publicationDate: "2023-06-23",
   pictures: [],
   stages: [
     {
@@ -53,9 +53,9 @@ let mockJungleTripServiceResponse = {
     "Requirement 1",
     "Requirement 2"
   ],
-  publicationDate: new Date("2021-06-23"),
-  startDate: new Date("2021-07-01"),
-  endDate: new Date("2021-07-06"),
+  publicationDate: new Date("2023-06-23"),
+  startDate: new Date("2023-07-01"),
+  endDate: new Date("2023-07-06"),
   pictures: [],
   stages: [
     {
@@ -135,16 +135,18 @@ describe('AddTripComponent', () => {
     expect(component).toBeTruthy();
     expect(component.created_trip.getTitle()).toEqual("Jungle party");
     expect(component.created_trip.getPrice()).toEqual(1000);
-    expect(component.created_trip.getPublicationDate()).toEqual(new Date("2021-06-23"));
-    expect(component.created_trip.getStartDate()).toEqual(new Date("2021-07-01"));
-    expect(component.created_trip.getEndDate()).toEqual(new Date("2021-07-06"));
+    expect(component.created_trip.getPublicationDate()).toEqual(new Date("2023-06-23"));
+    expect(component.created_trip.getStartDate()).toEqual(new Date("2023-07-01"));
+    expect(component.created_trip.getEndDate()).toEqual(new Date("2023-07-06"));
   }));
 
   it('Should fail to create a trip with description "Jungle Party"', fakeAsync(() => {
     
+    mockJungleTripTripFormData.endDate = "2023-02-06";
+
     let formatFormDataSpy = spyOn(component, 'formatFormData').and.returnValue(mockJungleTripTripFormData);
 
-    let mockResponse = 'The actor has not the required roles.';
+    let mockResponse = 'Trips validation failed: endDate: This field must greater than or equal to startDate.';
     let tripService = TestBed.inject(TripsService);
     let serviceSpy = spyOn(tripService, 'createTrip').and.returnValue(Promise.reject(mockResponse));
 

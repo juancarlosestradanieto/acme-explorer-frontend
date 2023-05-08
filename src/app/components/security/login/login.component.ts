@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
 
   onLogin(form: NgForm) {
 
-    console.log("Formulario de login -> ", form)
+    //console.log("Formulario de login -> ", form)
 
     this.success_message = "";
     this.error_message = "";
@@ -43,8 +43,8 @@ export class LoginComponent implements OnInit {
     const email = form.value.email;
     const password = form.value.password;
 
-    console.log("LoginComponent->onlogin email", email);
-    console.log("LoginComponent->onlogin password", password);
+    //console.log("LoginComponent->onlogin email", email);
+    //console.log("LoginComponent->onlogin password", password);
 
     this.authService.login(email, password);
     
@@ -53,13 +53,13 @@ export class LoginComponent implements OnInit {
 
         console.log("LoginComponent->onlogin then response", response);
         let idToken = response.idToken;
-        console.log("LoginComponent->onlogin idToken", idToken);
+        //console.log("LoginComponent->onlogin idToken", idToken);
 
         this.success_message = `The user has been authenticated in firebase`;
 
         form.reset();
 
-        console.log("LoginComponent->returning to", this.returnUrl);
+        //console.log("LoginComponent->returning to", this.returnUrl);
 
         this.router.navigateByUrl(this.returnUrl);
 
