@@ -87,7 +87,7 @@ export class SingleTripComponent implements OnInit {
             console.error(response.message);
             this.sponsorships_loaded = Promise.resolve(false);
           } else {
-            this.sponsorships = Sponsorship.castJsonSponsorships(response.sponsorships);
+            this.sponsorships = response.sponsorships;
             console.log("SingleTripComponent->getPaidSponsorships this.sponsorships length ", this.sponsorships.length);
 
             this.paidSponsorships = this.sponsorships.filter(sponsorship => sponsorship.getIsPayed() == true);
@@ -127,7 +127,7 @@ export class SingleTripComponent implements OnInit {
         const randomBannerIndex = Math.floor(Math.random() * this.sponsorship.getBanner().length);
         console.log("SingleTripComponent->constructor selectRandomPaidSponsorship randomBannerIndex ", randomBannerIndex);
 
-        this.sponsorship.setBanner([this.sponsorship.getBanner()[randomBannerIndex]]);
+        this.sponsorship.setBanner(this.sponsorship.getBanner());
 
         console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship ", this.sponsorship);
         console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship.getBanner() ", this.sponsorship.getBanner());

@@ -40,8 +40,8 @@ export class EditSponsorshipComponent implements OnInit {
     return this._fb.group({
       sponsor_Id: [""],
       tripTicker: [""],
+      banner:[""],
       page: [""],
-      banner: this._fb.array([this.getBanner()]),
       isPayed: [false]
     });
   }
@@ -57,6 +57,7 @@ export class EditSponsorshipComponent implements OnInit {
     const sponsorship: any = {
       id: this.sponsorship_id,
       tripTicker: this.sponsorshipForm['tripTicker'].value,
+      banner: this.sponsorshipForm['banner'].value,
       page: this.sponsorshipForm['page'].value,
       sponsor_Id: this.sponsorshipForm['sponsor_Id'].value,
       isPayed: this.sponsorshipForm['isPayed'].value,
@@ -87,30 +88,11 @@ export class EditSponsorshipComponent implements OnInit {
       
           this.sponsorshipForm['tripTicker'].setValue(res.sponsorship.tripTicker)
           this.sponsorshipForm['page'].setValue(res.sponsorship.page)
+          this.sponsorshipForm['banner'].setValue(res.sponsorship.banner)
           this.sponsorshipForm['sponsor_Id'].setValue(res.sponsorship.sponsor_Id)
           this.sponsorshipForm['isPayed'].setValue(res.sponsorship.isPayed)
    
         })
       }
-
-
-
-  private getBanner()
-  {
-    return this._fb.group({
-      banner: [""],
-    });
-  }
-
-  onAddBanner() {
-    const control = <FormArray>this.editSponsorshipForm.controls['banner'];
-    control.push(this.getBanner());
-  }
-
-  onRemoveBanner(i: number) {
-    const control = <FormArray>this.editSponsorshipForm.controls['banner'];
-    control.removeAt(i);
-  }
-
 
 }
