@@ -185,6 +185,7 @@
       "comments-empty": "Comments cannot be empty",
       "application-exists": "Multiple applications cannot be created for the same trip",
       "application-created": "Application created successfully",
+      "trip-started": "Trip has already started",
       "cancel-application-confirmation": "Are you sure to cancel this application?",
       "accept-application-confirmation": "Are you sure to accept this application?",
       "reject-application-confirmation": "Are you sure to reject this application?",

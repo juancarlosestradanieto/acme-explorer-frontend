@@ -18,6 +18,10 @@
             {{'applications.messages.application-exists' | translate}}
         </div>
 
+        <div *ngIf="trip_started" class="alert alert-danger">
+            {{'applications.messages.trip-started' | translate}}
+        </div>
+
         <div formArrayName="comments" class="form-group has-danger">
             <button type="button" class="btn btn-primary" (click)="addComment()">
                 <i class="fa-solid fa-plus"></i>
