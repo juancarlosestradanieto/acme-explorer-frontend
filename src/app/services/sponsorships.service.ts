@@ -97,4 +97,29 @@ export class SponsorshipsService {
     const body = JSON.stringify(sponsorship);
     return this.http.put<Sponsorship>(url,body,httpOptions)
   }
+
+  paySponsorship(sponsorshipID:string){
+    const url = `${environment.backendApiBaseURL+'/sponsorships/'+sponsorshipID+'/pay'}`;
+    const idToken = localStorage.getItem('idToken') ?? '';
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Accept-Language': 'es',
+        'idToken': idToken 
+      }),
+    }
+    return new Promise<any>((resolve, reject) => {
+      this.http.patch<any>(url, {}, httpOptions).subscribe({
+        next: (response) => {
+          console.log('SponsorshipService->paySponsorship get next response: ', response);
+          resolve(response);
+        },
+        error: (error) => {
+          console.error('SponsorshipService->paySponsorship get error: ', error);
+          reject(error);
+        }
+      });
+    });
+  }
+
 }

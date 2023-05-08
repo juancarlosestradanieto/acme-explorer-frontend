@@ -39,6 +39,10 @@
             <!-- {{'sponsorships.delete' | translate}} -->
 
           </button>
+          <button type="button"  class="btn btn-success" routerLink="{{sponsorship._id}}/pay" *ngIf="activeRole == 'SPONSOR'">
+          <i class="fa-regular fa-credit-card"></i>
+          {{'applications.pay' | translate}}
+      </button>
         </div>
         </div>
       </div>

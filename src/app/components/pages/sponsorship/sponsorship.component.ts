@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Sponsorship } from 'src/app/models/sponsorship.model';
 import { SponsorshipsService } from '../../../services/sponsorships.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { Actor } from 'src/app/models/actor.model';
 
 @Component({
   selector: 'app-sponsorship',
@@ -16,17 +18,27 @@ export class SponsorshipComponent implements OnInit {
   sponsorships_loaded!: Promise<boolean>;
   id!:string;
   sponsorshipID!:string;
-  
+  protected user!: Actor | null;
+  protected activeRole: string = 'anonymous';
 
 
 
   constructor( private SponsorshipsService: SponsorshipsService,
                private route: ActivatedRoute,
-               private _translateService:TranslateService) { }
+               private _translateService:TranslateService,
+               private router: Router,
+               private authService:AuthService) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.sponsorshipID = this.route.snapshot.params['sponsorshipID']
+
+    this.user = this.authService.getCurrentActor();
+    if (this.user) {
+      this.activeRole = this.user.getRole().toString();
+    } else {
+      this.activeRole = 'anonymous';
+    }
 
     this.getSponsorships();
     console.log("¿Que id está cogiendo?:",this.id);
@@ -76,6 +88,7 @@ export class SponsorshipComponent implements OnInit {
     });
 
   }
+
 
 
 }
