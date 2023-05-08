@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, timer } from 'rxjs';
@@ -39,9 +39,9 @@ export class EditSponsorshipComponent implements OnInit {
   createForm(){
     return this._fb.group({
       sponsor_Id: [""],
-      tripTicker: [""],
-      banner:[""],
-      page: [""],
+      tripTicker: ["",Validators.required],
+      banner:["",Validators.required],
+      page: ["",Validators.required],
       isPayed: [false]
     });
   }
