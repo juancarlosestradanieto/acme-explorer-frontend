@@ -32,9 +32,9 @@ export class AddSponsorshipComponent implements OnInit {
 
       this.sponsorshipForm = this._fb.group({
         sponsor_Id: [this.sponsorID],
-        tripTicker: [""],
-        page: [""],
-        banner: this._fb.array([this.getBanner()]),
+        tripTicker: ["AMR-23",Validators.required],
+        page: ["https://www.astonmartinf1.com/en-GB/",Validators.required],
+        banner: ["https://www.palco23.com/files/2020/19_redaccion/competiciones/motor/formula%201/aston-martin-cognizant-728.jpg",Validators.required],
         isPayed: [false]
         
       })
@@ -44,26 +44,6 @@ export class AddSponsorshipComponent implements OnInit {
   ngOnInit(): void {
   }
 
- 
-  private getBanner()
-  {
-    return this._fb.group({
-      banner: [""],
-    });
-  }
-
-  onAddBanner() {
-    const control = <FormArray>this.sponsorshipForm.controls['banner'];
-    control.push(this.getBanner());
-  }
-
-  onRemoveBanner(i: number) {
-    const control = <FormArray>this.sponsorshipForm.controls['banner'];
-    control.removeAt(i);
-  }
-
-
-
   onSubmit(){
     this._sponsorshipService.createSponsorship(this.sponsorshipForm.value).subscribe(res =>{
 
@@ -71,6 +51,7 @@ export class AddSponsorshipComponent implements OnInit {
       this._translateService.get('sponsorships.operation_successfull').subscribe((res: string) => {
         alert(res);
       });
+      this._location.back();
      
     });
   }

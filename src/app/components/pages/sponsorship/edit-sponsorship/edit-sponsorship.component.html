@@ -7,26 +7,25 @@
     <br/>
     <div class="form-group">
     <label for="tripTicker">Trip Ticker</label>
-    <input
-      type="text"
-      class="form-control"
-      formControlName="tripTicker"
-      id="tripTicker"
-
-    />
+    <input type="text" class="form-control" formControlName="tripTicker" id="tripTicker"/>
+      <small class="text-danger" *ngIf="editSponsorshipForm.get('tripTicker')?.hasError('required')">{{"Messages.field_required" | translate}}</small>
   </div>
+
   <br/>
   <div class="form-group">
     <label for="page">{{'sponsorships.page' | translate}}</label>
-    <input
-      type="text"
-      class="form-control"
-      formControlName="page"
-      id="page"
+    <input type="text" class="form-control" formControlName="page" id="page"/>
+    <small class="text-danger" *ngIf="editSponsorshipForm.get('page')?.hasError('required')">{{"Messages.field_required" | translate}}</small>
 
-    />
   </div>
-
 <br/>
-  <button type="submit" class="btn btn-primary">{{'sponsorships.edit_sponsorship' | translate}}</button>
+  <div class="form-group">
+    <label for="banner">{{'sponsorships.banner' | translate}}</label>
+    <input type="text" class="form-control" formControlName="banner" id="banner"/>
+    <small class="text-danger" *ngIf="editSponsorshipForm.get('banner')?.hasError('required')">{{"Messages.field_required" | translate}}</small>
+
+  </div>
+<br/>
+
+  <button type="submit" class="btn btn-primary" [disabled]="editSponsorshipForm.invalid">{{'sponsorships.edit_sponsorship' | translate}}</button>
 </form>
