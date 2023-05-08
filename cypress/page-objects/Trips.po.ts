@@ -22,6 +22,7 @@ export class TripsPage
     description_card_text_selector = '.card-text';
     edit_trip_selector = '#edit-trip';
     trip_details_selector = '[name=trip-details]';
+    trip_card_title_selector = '.card-title';
 
     goToCreateTripPage()
     {
@@ -64,6 +65,11 @@ export class TripsPage
         cy.get(this.keyword_selector).clear().type(random_word);
   
         cy.get(this.search_selector).click();
+    }
+
+    goToDisplayTrip(title)
+    {
+        cy.get(this.trip_card_selector).contains(title).get(this.trip_details_selector).click();
     }
 
     goToEditTrip(title)
