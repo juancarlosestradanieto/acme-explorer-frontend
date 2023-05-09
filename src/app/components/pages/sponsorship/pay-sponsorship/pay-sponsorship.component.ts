@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -15,7 +16,7 @@ export class PaySponsorshipComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private sponsorshipService: SponsorshipsService,
-    private router: Router,
+    private location:Location,
     private translate: TranslateService) { }
 
   public payPalConfig?: IPayPalConfig;
@@ -23,6 +24,7 @@ export class PaySponsorshipComponent implements OnInit {
 
   ngOnInit(): void {
     this.initConfig();
+    console.log(this.sponsorship_id)
   }
 
   private initConfig(): void {
@@ -68,7 +70,7 @@ export class PaySponsorshipComponent implements OnInit {
             this.translate.get('applications.messages.payed-sponsorship')
               .subscribe((message: string) => {
                 alert(message);
-                this.router.navigate(['/sponsorships/']);
+                this.location.back();
               })
           })
           .catch((error) => {
