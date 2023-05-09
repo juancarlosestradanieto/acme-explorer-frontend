@@ -16,7 +16,11 @@
           {{ "sponsorships.sponsorship" | translate }} {{ i + 1 }}
         </h5>
         <p class="card-text">TripTicker: {{ sponsorship.tripTicker}}</p>
-        <p class="card-text">{{"sponsorships.isPayed" | translate}}: {{ sponsorship.isPayed  ? 'OK' : 'No'}}</p>
+        <div class="black-bar"></div>
+        <p class="card-text">{{"sponsorships.isPayed" | translate}}: <b>{{ sponsorship.isPayed  ? 'OK' : 'No'}}</b></p>
+        <p class="card-text-green" *ngIf="sponsorship.isPayed"></p>
+        <p class="card-text-red" *ngIf="!sponsorship.isPayed"></p>
+        <div class="black-bar"></div>
         <p class="card-text"><a href="{{sponsorship.page}}">{{"sponsorships.page" | translate}}: {{sponsorship.page}}</a></p>
         <p class="card-text"><a href="{{sponsorship.banner}}">{{"sponsorships.banner" | translate}}: {{sponsorship.banner}}</a></p>
     
@@ -39,6 +43,10 @@
             <!-- {{'sponsorships.delete' | translate}} -->
 
           </button>
+          <button type="button"  class="btn btn-success" routerLink="{{sponsorship._id}}/pay" *ngIf="activeRole == 'SPONSOR'">
+          <i class="fa-regular fa-credit-card"></i>
+          {{'applications.pay' | translate}}
+      </button>
         </div>
         </div>
       </div>

@@ -182,6 +182,8 @@
       "accepted-applications-not-found": "There are no accepted applications found",
       "payed-application": "The application has been payed successfully",
       "payed-application-error": "An error has been found during the payment",
+      "payed-sponsorship": "The sponsorship has been payed successfully",
+      "payed-sponsorship-error": "An error has been found during the payment",
       "comments-empty": "Comments cannot be empty",
       "application-exists": "Multiple applications cannot be created for the same trip",
       "application-created": "Application created successfully",

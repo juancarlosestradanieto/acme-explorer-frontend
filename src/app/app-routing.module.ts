@@ -30,6 +30,7 @@ import { AllSponsorshipsComponent } from './components/pages/sponsorship/all-spo
 import { AddSponsorshipComponent } from './components/pages/sponsorship/add-sponsorship/add-sponsorship.component';
 import { EditSponsorshipComponent } from './components/pages/sponsorship/edit-sponsorship/edit-sponsorship.component';
 import { DetailSponsorshipComponent } from './components/pages/sponsorship/detail-sponsorship/detail-sponsorship.component';
+import { PaySponsorshipComponent } from './components/pages/sponsorship/pay-sponsorship/pay-sponsorship.component';
 
 const routes: Routes = [
   {
@@ -74,6 +75,9 @@ const routes: Routes = [
            path:':id', component: DetailSponsorshipComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'SPONSOR' }
 
          },
+         {
+          path: ':id/pay', component: PaySponsorshipComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'SPONSOR' }
+        },
 
          {
            path: ':id/edit-sponsorship', component: EditSponsorshipComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'SPONSOR' }
