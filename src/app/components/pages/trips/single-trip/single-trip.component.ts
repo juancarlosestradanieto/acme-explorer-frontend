@@ -35,7 +35,7 @@ export class SingleTripComponent implements OnInit {
   protected userId!: string | null;
   currentDateTime: Date;
 
-  constructor(private tripService: TripsService, private router:Router, private sponsorshipService: SponsorshipsService, private route: ActivatedRoute, private authService: AuthService, config: NgbCarouselConfig) {
+  constructor(private tripService: TripsService, private router:Router, private sponsorshipService: SponsorshipsService, private route: ActivatedRoute, private authService: AuthService, config: NgbCarouselConfig, private translate:TranslateService) {
 
     config.interval = 2000;
     config.keyboard = true;
