@@ -17,7 +17,13 @@ export class ApplicationsService {
 
   createApplication(application: any) {
     console.log("ApplicationsService->createApplication application.comments ", application.comments);
-    let commentsString: string = application.comments.map((comment: string) => comment).join("[/||/]");
+    let commentsString: string;
+    if(application.comments.length > 0) {
+      commentsString = application.comments.map((comment: string) => comment).join("[/||/]");
+    }
+    else {
+      commentsString = " ";
+    }
     console.log("ApplicationsService->createApplication string application.comments ", commentsString);
     application.comments = commentsString;
 
@@ -140,9 +146,11 @@ export class ApplicationsService {
       this.http.get<any>(url, httpOptionsByExplorer).subscribe({
         next: (response) => {
           console.log('ApplicationsService->getApplicationsByExplorerId get next response: ', response);
-          console.log('ApplicationsService->getAllApplications get next response[0]: ', response[0]);
-          console.log('ApplicationsService->getAllApplications get next response[0].id: ', response[0].id);
-          console.log('ApplicationsService->getAllApplications get next response[0].actor: ', response[0].actor);
+          if(response.length > 0) {
+            console.log('ApplicationsService->getAllApplications get next response[0]: ', response[0]);
+            console.log('ApplicationsService->getAllApplications get next response[0].id: ', response[0].id);
+            console.log('ApplicationsService->getAllApplications get next response[0].actor: ', response[0].actor);
+          }
           resolve(response);
         },
         error: (error) => {

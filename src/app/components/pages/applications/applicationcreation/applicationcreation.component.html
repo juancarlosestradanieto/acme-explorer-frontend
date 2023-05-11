@@ -31,7 +31,7 @@
                     {{'applications.comments' | translate}}:
                     <input id="comment-{{ i }}" type="text" formControlName="{{i}}">
                 </label>
-                <button type="button" class="btn btn-danger" (click)="removeComment(i)" *ngIf="i>0">
+                <button type="button" class="btn btn-danger" (click)="removeComment(i)">
                     <i class="fa-solid fa-trash"></i>
                     {{'applications.remove-comment' | translate}}
                 </button>
