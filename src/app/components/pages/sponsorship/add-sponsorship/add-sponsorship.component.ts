@@ -54,7 +54,7 @@ export class AddSponsorshipComponent implements OnInit {
       this._translateService.get('sponsorships.operation_successfull').subscribe((res: string) => {
         alert(res);
       });
-      this._router.navigate(["/actor"+this.sponsorID+"/sponsorships"])
+      this._router.navigate(["/actor/"+this.sponsorID+"/sponsorships"])
      
     },
     (error)=>{
