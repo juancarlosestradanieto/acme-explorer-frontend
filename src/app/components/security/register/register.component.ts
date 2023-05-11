@@ -21,7 +21,7 @@ export class RegisterComponent {
     private fb: FormBuilder,
     private router: Router
   ) {
-    this.roleList = this.authService.getRoles();
+    this.roleList = ["EXPLORER"];
     this.registrationForm = this.createForm();
   }
 
