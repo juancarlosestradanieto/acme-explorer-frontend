@@ -17,6 +17,7 @@ export class AddSponsorshipComponent implements OnInit {
   success_message!:string;
   error_message!:string;
   sponsorID!:string;
+  tripTicker!:string;
 
   constructor( 
     private _fb:FormBuilder,
@@ -28,11 +29,13 @@ export class AddSponsorshipComponent implements OnInit {
     
     { 
       this.sponsorID = this.route.snapshot.params['id']
-      console.log("console desde constructor",this.sponsorID);
+      this.tripTicker = localStorage.getItem("tripTicker")
+      console.log("sponsor ID: ",this.sponsorID);
+      console.log("tripticker: ",this.tripTicker);
 
       this.sponsorshipForm = this._fb.group({
         sponsor_Id: [this.sponsorID],
-        tripTicker: ["AMR-23",Validators.required],
+        tripTicker: [this.tripTicker,Validators.required],
         page: ["https://www.astonmartinf1.com/en-GB/",Validators.required],
         banner: ["https://www.palco23.com/files/2020/19_redaccion/competiciones/motor/formula%201/aston-martin-cognizant-728.jpg",Validators.required],
         isPayed: [false]
@@ -51,8 +54,13 @@ export class AddSponsorshipComponent implements OnInit {
       this._translateService.get('sponsorships.operation_successfull').subscribe((res: string) => {
         alert(res);
       });
-      this._location.back();
+      this._router.navigate(["/actor"+this.sponsorID+"/sponsorships"])
      
+    },
+    (error)=>{
+      this._translateService.get('sponsorships.operation_alreadycreated').subscribe((res: string) => {
+        alert(res);
+      });
     });
   }
 

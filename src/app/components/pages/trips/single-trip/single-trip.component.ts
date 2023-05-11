@@ -28,21 +28,15 @@ export class SingleTripComponent implements OnInit {
   json_trip: any;
   error_message: string = "";
   success_message: string = "";
+  sponsorshipNotCreated:boolean= true;
 
   protected user!: Actor | null;
   protected activeRole: string = 'anonymous';
   protected userId!: string | null;
   currentDateTime: Date;
 
-  constructor(
-    private tripService: TripsService, 
-    private sponsorshipService: SponsorshipsService, 
-    private route: ActivatedRoute, 
-    private authService: AuthService, 
-    config: NgbCarouselConfig,
-    private translate: TranslateService
-  ) 
-  {
+  constructor(private tripService: TripsService, private router:Router, private sponsorshipService: SponsorshipsService, private route: ActivatedRoute, private authService: AuthService, config: NgbCarouselConfig) {
+
     config.interval = 2000;
     config.keyboard = true;
     config.pauseOnHover = true;
@@ -400,6 +394,18 @@ export class SingleTripComponent implements OnInit {
 
     });
 
+  }
+
+  onSponsorshipCreate(trip:Trip) {
+    // console.log("onSponsorshipPay -> trip", trip)
+    let currentActor = JSON.parse(localStorage.getItem("currentActor"));
+    let currentActorId= currentActor.id;
+    console.log(currentActorId)
+    let ticker = trip.getTicker();
+    localStorage.setItem("tripTicker",ticker)
+    this.router.navigate(['/actor/' + currentActorId + '/sponsorships/add-sponsorship']);
+
+    
   }
 
 }

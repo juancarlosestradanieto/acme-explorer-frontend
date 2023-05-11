@@ -223,6 +223,7 @@
     "delete_banner":"Eliminar banner",
     "confirm_sponsorship":"Confirmar creación de patrocinio",
     "operation_successfull":"¡Nuevo patrocinio creado satisfactoriamente!",
+    "operation_alreadycreated":"El patrocinio con este Trip Ticker ya ha sido creado.",
     "confirm_edit_sponsorship":"Confirmar edición de patrocinio",
     "operation_edit_successfull":"¡Patrocinio modificado!",
     "operation_delete_successfull":"¡Patrocinio eliminado correctamente!",
