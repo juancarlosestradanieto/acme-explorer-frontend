@@ -75,7 +75,12 @@
       "favourite-trips-not-found": "No se han encontrado viajes favoritos",
       "disabled-trip": "El viaje ya ha comenzado o ha sido cancelado",
       "trip-saved": "Viaje guardado exitosamente",
-      "start-soon": "¡Próximamente!"
+      "start-soon": "¡Próximamente!",
+      "delete-trip-confirmation": "¿Seguro que deseas borrarlo?, Esta acción no se puede deshacer.",
+      "publish-trip-confirmation": "¿Seguro que deseas publicarlo?",
+      "cancel-trip-confirmation": "¿Seguro que deseas cancelarlo?",
+      "cancel-trip-reason-request": "Por favor indica el motivo de la cancelación",
+      "cancel-trip-denied": "Un viaje podrá ser cancelado siempre que se realice con al menos una semana de anticipación a su fecha de inicio."
     },
     "validations": {
       "required": "Este campo es obligatorio.",

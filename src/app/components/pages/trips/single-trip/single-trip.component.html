@@ -71,7 +71,11 @@
     </div>
 
     <div class="card-body">
-      <h5 class="card-title">{{trip.getTitle()}}</h5>
+      <h5 class="card-title">
+        {{trip.getTicker()}}
+        <br>
+        {{trip.getTitle()}}
+      </h5>
       <p class="card-text">{{trip.getDescription()}}</p>
     </div>
     <ul class="list-group list-group-flush">

@@ -278,7 +278,11 @@
             <img *ngIf="trip.getPictures().length > 0" src="{{trip.getPictures()[0]['picture']}}" class="card-img-top" alt="...">
             <img *ngIf="trip.getPictures().length == 0" src="assets/images/trips/default-trip.jpg" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">{{trip.getTitle()}}</h5>
+                <h5 class="card-title">
+                    {{trip.getTicker()}} 
+                    <br> 
+                    {{trip.getTitle()}}
+                </h5>
                 <p class="card-text">{{trip.getDescription() | slice:0:20}} ...</p>
             </div>
             <ul class="list-group list-group-flush">

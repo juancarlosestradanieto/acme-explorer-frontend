@@ -187,7 +187,7 @@ export class AllTripsComponent implements OnInit {
   {
     return this.fb.group(
       {
-        keyWord: ["", [Validators.pattern('^[a-zA-Z]+')]],
+        keyWord: ["", [Validators.pattern('^[0-9A-Za-z\-]+')]],
         priceLowerBound: ["", [Validators.min(0), Validators.max(999999)]],
         priceUpperBound: ["", [Validators.min(0), Validators.max(999999)]],
         dateLowerBound: [""],

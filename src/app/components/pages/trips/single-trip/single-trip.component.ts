@@ -10,6 +10,7 @@ import { Sponsorship } from 'src/app/models/sponsorship.model';
 import { SponsorshipsService } from 'src/app/services/sponsorships.service';
 import { SponsorshipsResponse } from 'src/app/models/sponsorships-response.model';
 import { FavouriteTrips } from 'src/app/models/favourite-trips.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-single-trip',
@@ -33,7 +34,15 @@ export class SingleTripComponent implements OnInit {
   protected userId!: string | null;
   currentDateTime: Date;
 
-  constructor(private tripService: TripsService, private sponsorshipService: SponsorshipsService, private route: ActivatedRoute, private authService: AuthService, config: NgbCarouselConfig) {
+  constructor(
+    private tripService: TripsService, 
+    private sponsorshipService: SponsorshipsService, 
+    private route: ActivatedRoute, 
+    private authService: AuthService, 
+    config: NgbCarouselConfig,
+    private translate: TranslateService
+  ) 
+  {
     config.interval = 2000;
     config.keyboard = true;
     config.pauseOnHover = true;
@@ -275,24 +284,28 @@ export class SingleTripComponent implements OnInit {
     this.error_message = "";
     this.success_message = "";
 
-    if(confirm("Are you sure to delete?, this action can't be undone."))
-    {
+    this.translate.get('trips.messages.delete-trip-confirmation')
+    .subscribe((message: string) => {
+      if (confirm(message)) 
+      {
 
-      this.tripService.deleteTrip(trip.id)
-      .then((response) => {
+        this.tripService.deleteTrip(trip.id)
+        .then((response) => {
+  
+          console.log("SingleTripComponent->deleteTrip tripsService.deleteTrip then response ", response);
+          this.success_message = response.message;
+  
+        })
+        .catch((error) => {
+  
+          console.error("SingleTripComponent->deleteTrip tripsService.deleteTrip catch ", error);
+          this.error_message = error.error;
+  
+        });
 
-        console.log("SingleTripComponent->deleteTrip tripsService.deleteTrip then response ", response);
-        this.success_message = response.message;
+      }
+    });
 
-      })
-      .catch((error) => {
-
-        console.error("SingleTripComponent->deleteTrip tripsService.deleteTrip catch ", error);
-        this.error_message = "Messages.something-went-wrong";
-
-      });
-
-    }
   }
 
   cancelTrip(trip: Trip) {
@@ -300,36 +313,61 @@ export class SingleTripComponent implements OnInit {
     this.error_message = "";
     this.success_message = "";
 
-    if(confirm("Are you sure to cancel?"))
+    let diff_in_days = this.getNowAndStartDateDiffInDays(trip);
+    console.log("diff_in_days ", diff_in_days);
+
+    if(diff_in_days < 7)
     {
-
-      let cancelReason = prompt("Please enter the cancel reason");
-
-      if (cancelReason == null || cancelReason == "")
-      {
-        //User cancelled the prompt"
-      }
-      else
-      {
-
-        this.tripService.cancelTrip(trip.id, cancelReason)
-        .then((response) => {
-
-          console.log("SingleTripComponent->cancelTrip tripsService.cancelTrip then response ", response);
-          this.success_message = response.message;
-          this.getTrip();
-
-        })
-        .catch((error) => {
-
-          console.error("SingleTripComponent->cancelTrip tripsService.cancelTrip catch ", error.error[0]);
-          this.error_message = error.error[0];
-
-        });
-
-      }
-
+      this.translate.get('trips.messages.cancel-trip-denied')
+      .subscribe((message: string) => {
+        alert(message);
+      });
     }
+    else
+    {
+      this.translate.get('trips.messages.cancel-trip-confirmation')
+      .subscribe((message1: string) => {
+  
+        if(confirm(message1))
+        {
+  
+          this.translate.get('trips.messages.cancel-trip-reason-request')
+          .subscribe((message2: string) => {
+    
+            let cancelReason = prompt(message2);
+      
+            if (cancelReason == null || cancelReason == "")
+            {
+              //User cancelled the prompt"
+            }
+            else
+            {
+      
+              this.tripService.cancelTrip(trip.id, cancelReason)
+              .then((response) => {
+      
+                console.log("SingleTripComponent->cancelTrip tripsService.cancelTrip then response ", response);
+                this.success_message = response.message;
+                this.getTrip();
+      
+              })
+              .catch((error) => {
+      
+                console.error("SingleTripComponent->cancelTrip tripsService.cancelTrip catch ", error.error[0]);
+                this.error_message = error.error[0];
+      
+              });
+      
+            }
+  
+          });
+    
+        }
+  
+      });
+  
+    }
+
   }
 
   publishTrip(trip: Trip) {
@@ -337,25 +375,31 @@ export class SingleTripComponent implements OnInit {
     this.error_message = "";
     this.success_message = "";
 
-    if(confirm("Are you sure to publish?"))
-    {
+    this.translate.get('trips.messages.publish-trip-confirmation')
+    .subscribe((message: string) => {
 
-      this.tripService.publishTrip(trip.id)
-      .then((response) => {
+      if(confirm(message))
+      {
+  
+        this.tripService.publishTrip(trip.id)
+        .then((response) => {
+  
+          console.log("SingleTripComponent->publishTrip tripsService.publishTrip then response ", response);
+          this.success_message = response.message;
+          this.getTrip();
+  
+        })
+        .catch((error) => {
+  
+          console.error("SingleTripComponent->publishTrip tripsService.publishTrip catch ", error);
+          this.error_message = "Messages.something-went-wrong";
+  
+        });
+  
+      }
 
-        console.log("SingleTripComponent->publishTrip tripsService.publishTrip then response ", response);
-        this.success_message = response.message;
-        this.getTrip();
+    });
 
-      })
-      .catch((error) => {
-
-        console.error("SingleTripComponent->publishTrip tripsService.publishTrip catch ", error);
-        this.error_message = "Messages.something-went-wrong";
-
-      });
-
-    }
   }
 
 }

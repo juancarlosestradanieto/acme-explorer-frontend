@@ -75,7 +75,12 @@
       "favourite-trips-not-found": "There are no favourite trips found",
       "disabled-trip": "The trip has already started or has been cancelled",
       "trip-saved": "Trip successfully saved",
-      "start-soon": "Soon!"
+      "start-soon": "Soon!",
+      "delete-trip-confirmation": "Are you sure to delete?, this action can't be undone.",
+      "publish-trip-confirmation": "Are you sure to publish?",
+      "cancel-trip-confirmation": "Are you sure to cancel?",
+      "cancel-trip-reason-request": "Please enter the cancel reason",
+      "cancel-trip-denied": "A trip may be cancelled as long as it is done at least one week in advance of its starting date."
     },
     "validations": {
       "required": "This field is required.",
