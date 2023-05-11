@@ -37,8 +37,8 @@ export class RegisterComponent {
       surname: [(production == true) ? '' : 'test', Validators.required],
       email: [(production == true) ? '' : 'test'+(new Date().getTime())+'@gmail.com',[Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}')]],
       password: [(production == true) ? '' : '1234567890', [Validators.required, Validators.minLength(10)]],
-      phone_number: [(production == true) ? '' : '123456789',[Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{9}$")]],
-      address: [(production == true) ? '' : 'test',Validators.required],
+      phone_number: [(production == true) ? '' : '123456789'],
+      address: [(production == true) ? '' : 'test'],
       role: [(production == true) ? [] : ['EXPLORER']],
       isActive: [true]
     });

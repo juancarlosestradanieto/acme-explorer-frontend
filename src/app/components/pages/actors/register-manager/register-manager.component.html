@@ -4,8 +4,12 @@
 
     
     <div class="form-group has-danger">
-      <label for="role" class="form-control-label">{{'REGISTER.ROLE' | translate}} </label>
-      <input id="role" type="text" formControlName="role" class="form-control" readonly>
+      <label for="role" class="form-control-label">{{'REGISTER.MANAGER-SPONSOR' | translate}} </label>
+      <select id="role" class="form-control" formControlName="role">
+        <option  *ngFor="let role of roleList" [value]="role">
+          {{role}}
+        </option>
+      </select>
     </div>
     
     <div class="form-group has-danger">
@@ -23,14 +27,11 @@
     <div class="form-group has-danger">
       <label for="phone_number" class="form-control-label">{{'REGISTER.PHONE' | translate}}</label>
       <input id="phone_number" type="text" formControlName="phone_number" class="form-control">
-      <small class="text-danger" *ngIf="registrationForm.get('phone_number')?.hasError('required')">{{"Messages.field_required" | translate}}</small>
-      <small class="text-danger" *ngIf="registrationForm.get('phone_number')?.hasError('pattern')">{{"Messages.9_digits_required" | translate}}</small>
     </div>
     
     <div class="form-group has-danger">
       <label for="address" class="form-control-label">{{'REGISTER.ADDRESS' | translate}}</label>
       <input id="address" type="text" formControlName="address" class="form-control">
-      <small class="text-danger" *ngIf="registrationForm.get('address')?.hasError('required')">{{"Messages.field_required" | translate}}</small>
 
     </div>
     
@@ -53,7 +54,7 @@
       <i class="fa-solid fa-user-secret">  {{ "actor.add_manager" | translate}}</i>
     </button>
     <button  class="btn btn-outline-secondary" routerLink="/all-actors">
-      <i class="fa-sharp fa-solid fa-arrow-left">  {{ "actor.back_actors_control_panel" | translate}}</i>
+      <i class="fa-sharp fa-solid fa-arrow-left">  {{ "buttons.back" | translate}}</i>
     </button>
   </div>
             
