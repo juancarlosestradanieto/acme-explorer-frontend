@@ -7,8 +7,12 @@ import { environment } from 'src/environments/environment';
 import { of } from 'rxjs';
 import { TripsService } from 'src/app/services/trips/trips.service';
 import { Trip } from 'src/app/models/trip.model';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
-
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}
 
 describe('SingleTripComponent', () => {
   let component: SingleTripComponent;
@@ -48,7 +52,15 @@ describe('SingleTripComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         HttpClientModule,
-        AngularFireModule.initializeApp(environment.firebase)],
+        AngularFireModule.initializeApp(environment.firebase),
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient]
+          }
+        })
+      ],
       declarations: [ SingleTripComponent ],
       providers: [
         HttpClient, 
