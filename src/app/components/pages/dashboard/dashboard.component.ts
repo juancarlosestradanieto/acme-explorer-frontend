@@ -85,7 +85,7 @@ export class DashboardComponent implements OnInit {
       console.log("lowerprice: ",data[0].lowerPrice)
       console.log("upperprice: ",data[0].upperPrice)
       console.log("promedio : ",this.promedio)
-      const array_top_finders = data[0].topKeyWords.slice(0,10).map(keyword => keyword._id);
+      const array_top_finders = data[0].topKeyWords.slice(0,11).map(keyword => keyword._id);
       this.top10_in_finder = array_top_finders.filter((keyword)=>{ return keyword !== ""})
       console.log("estas son las key words", this.top10_in_finder)
 
