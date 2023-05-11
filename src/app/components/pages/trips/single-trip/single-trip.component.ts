@@ -90,7 +90,7 @@ export class SingleTripComponent implements OnInit {
             this.sponsorships = response.sponsorships;
             console.log("SingleTripComponent->getPaidSponsorships this.sponsorships length ", this.sponsorships.length);
 
-            this.paidSponsorships = this.sponsorships.filter(sponsorship => sponsorship.getIsPayed() == true);
+            this.paidSponsorships = this.sponsorships.filter(sponsorship => sponsorship.isPayed == true);
             console.log("SingleTripComponent->getPaidSponsorships this.paidSponsorships length ", this.paidSponsorships.length);
           }
 
