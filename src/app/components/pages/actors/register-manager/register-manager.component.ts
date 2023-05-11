@@ -14,6 +14,7 @@ export class RegisterManagerComponent implements OnInit {
   registrationForm: FormGroup;
   error_message!: string;
   success_message!: string;
+  roleList:string[]=["MANAGER","SPONSOR"]
   
   constructor(
     private _registerManagerService: RegisterManagerService ,
@@ -22,6 +23,7 @@ export class RegisterManagerComponent implements OnInit {
     { 
       
       this.registrationForm = this.createForm();
+      this.roleList;
     }
 
               
@@ -37,8 +39,8 @@ export class RegisterManagerComponent implements OnInit {
       surname: ['Diano', Validators.required],
       email: ['WakanManager@elplan.es',[Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}')]],
       password: ['1234567890', [Validators.required, Validators.minLength(10)]],
-      phone_number: ['698231406',[Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{9}$")]],
-      address: ['Plaza Mozambique',Validators.required],
+      phone_number: [''],
+      address: [''],
       role: ['MANAGER'],
       isActive: [true]
     });

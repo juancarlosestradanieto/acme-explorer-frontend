@@ -3,6 +3,7 @@
     "REGISTER": "Register",
     "NEW_ACTOR": "Register a new actor",
     "ROLE": "Role",
+    "MANAGER-SPONSOR":"Role. You can select MANAGER or SPONSOR",
     "NAME": "Name",
     "SURNAME": "Surname",
     "PHONE": "Telephone Number",
@@ -123,7 +124,7 @@
   "actor": {
     "profile": "Profile",
     "control_panel":"Actors Panel",
-    "add_manager":"Register new Manager",
+    "add_manager":"Register new Manager/Sponsor",
     "back_actors_control_panel":"Back to Actors Panel",
     "name":"Name",
     "surname":"Surname",
