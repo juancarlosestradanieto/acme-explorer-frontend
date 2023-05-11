@@ -1,0 +1,24 @@
+<div *ngIf="no_lists" class="alert alert-danger">
+    {{'favourite_lists.messages.no-lists' | translate}}
+</div>
+
+<div *ngIf="update_success" class="alert alert-success">
+    {{'favourite_lists.messages.update-success' | translate}}
+</div>
+
+<div *ngIf="no_changes" class="alert alert-danger">
+    {{'favourite_lists.messages.no-changes' | translate}}
+</div>
+
+<form [formGroup]="favouriteTripsForm" (ngSubmit)="onSubmit()" *ngIf="!no_lists">
+    <div class="row">
+        <label formArrayName="favouriteLists" *ngFor="let order of favouriteListsFormArray.controls; let i = index" >
+            <input type="checkbox" [formControlName]="i">
+            {{ListReference[i]}}
+        </label>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-lg btn-block" *ngIf="charged_trip">
+        {{'favourite_lists.buttons.update' | translate}}
+    </button>
+</form>

@@ -203,6 +203,24 @@
       "reject-application-error": "Se ha encontrado un error durante el proceso de rechazar"
     }
   },
+  "favourite_lists": {
+    "buttons": {
+      "new": "Nuevo listado",
+      "create": "Crear listado",
+      "update": "Actualizar listado",
+      "cancel": "Cancelar"
+    },
+    "messages": {
+      "favourite-trips-available": "¡Viajes favoritos disponibles para ti!",
+      "favourite-trips-not-found": "No se han encontrado listados de viajes favoritos",
+      "created": "La lista se ha creado correctamente",
+      "already-exists": "Un listado con dicho nombre ya existe",
+      "no-lists": "Debe crear una lista antes de poder proceder",
+      "reference-required": "Se requiere de un nombre para el listado",
+      "no-changes": "No se han realizado modificaciones",
+      "update-success": "La actualización se ha realizado correctamente"
+    }
+  },
   "sponsorships": {
     "title": "Patrocinios",
     "sponsorship":"Patrocinio",

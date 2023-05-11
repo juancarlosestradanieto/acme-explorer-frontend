@@ -202,6 +202,24 @@
       "reject-application-error": "An error has been encountered during the reject process"
     }
   },
+  "favourite_lists": {
+    "buttons": {
+      "new": "New list",
+      "create": "Create list",
+      "update": "Update list",
+      "cancel": "Cancel"
+    },
+    "messages": {
+      "favourite-trips-available": "Available favourite trips just for you!",
+      "favourite-trips-not-found": "There are no favourite trip lists found",
+      "created": "The list has been created successfully",
+      "already-exists": "A list with that name already exists",
+      "no-lists": "You must create a list before proceding",
+      "reference-required": "A name is required for the list",
+      "no-changes": "There were no changes done",
+      "update-success": "The update was done successfully"
+    }
+  },
   "sponsorships": {
     "title": "Sponsorships",
     "sponsorship":"Sponsorship",
