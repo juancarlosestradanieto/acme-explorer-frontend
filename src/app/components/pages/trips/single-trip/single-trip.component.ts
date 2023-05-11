@@ -322,8 +322,8 @@ export class SingleTripComponent implements OnInit {
         })
         .catch((error) => {
 
-          console.error("SingleTripComponent->cancelTrip tripsService.cancelTrip catch ", error);
-          this.error_message = "Messages.something-went-wrong";
+          console.error("SingleTripComponent->cancelTrip tripsService.cancelTrip catch ", error.error[0]);
+          this.error_message = error.error[0];
 
         });
 
