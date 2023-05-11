@@ -6,16 +6,6 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { environment } from 'src/environments/environment';
 
 
-const idToken = localStorage.getItem('idToken') ?? '';
-//console.log("PANEL_ACTORES -> idToken del administrator actual: ",idToken)
-
-const httpOptions = {
-  headers: new HttpHeaders({ 
-    'Content-Type': 'application/json',
-    'Accept-Language': 'es',
-    'idToken': idToken 
-  }),
-};
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +42,15 @@ export class RegisterManagerService {
         console.log('registerManagerService->registerUserManager->createUserWithEmailAndPassword then response', response);
         const url = `${environment.backendApiBaseURL + '/actors2'}`;
         const body = JSON.stringify(actor);
+        const idToken = localStorage.getItem('idToken') ?? '';
+        //console.log("PANEL_ACTORES -> idToken del administrator actual: ",idToken)
+          const httpOptions = {
+          headers: new HttpHeaders({ 
+            'Content-Type': 'application/json',
+            'Accept-Language': 'es',
+            'idToken': idToken 
+          }),
+          };
   
         this.http.post<any>(url,body,httpOptions).subscribe({
           next: (response2)=>{
@@ -59,7 +58,8 @@ export class RegisterManagerService {
             console.log('registerManagerService->registerUserManager-> post next response', response2);
             console.log('Registro Realizado Correctamente!');
             console.log('Firebase login automatically after creating an account, so it has to be logged out explicitly because it is not the desired behaviour');
-            resolve(response2);
+            this.logout();
+            resolve(response2);  
   
           },
           error: (error2) => {
