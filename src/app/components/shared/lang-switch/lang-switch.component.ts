@@ -15,9 +15,11 @@ export class LangSwitchComponent  {
 
   changeEN(){
     this.translate.use('en');
+    localStorage.setItem("language","en");
   }
 
   changeES(){
     this.translate.use('es');
+    localStorage.setItem("language","es");
   }
 }
