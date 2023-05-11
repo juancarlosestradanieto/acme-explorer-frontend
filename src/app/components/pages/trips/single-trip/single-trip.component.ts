@@ -399,7 +399,7 @@ export class SingleTripComponent implements OnInit {
   onSponsorshipCreate(trip:Trip) {
     // console.log("onSponsorshipPay -> trip", trip)
     let currentActor = JSON.parse(localStorage.getItem("currentActor"));
-    let currentActorId= currentActor.id;
+    let currentActorId= currentActor._id;
     console.log(currentActorId)
     let ticker = trip.getTicker();
     localStorage.setItem("tripTicker",ticker)
