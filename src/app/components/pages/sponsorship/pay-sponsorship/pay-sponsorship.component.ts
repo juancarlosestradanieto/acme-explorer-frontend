@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { SponsorshipsService } from 'src/app/services/sponsorships.service';
+import { SystemParametersService } from 'src/app/services/system-parameters.service';
 import { environment } from 'src/environments/environment';
 
 
@@ -17,12 +18,13 @@ export class PaySponsorshipComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private sponsorshipService: SponsorshipsService,
     private location:Location,
-    private translate: TranslateService) { }
+    private translate: TranslateService, private _systemParameters:SystemParametersService) { }
 
   public payPalConfig?: IPayPalConfig;
   sponsorship_id!: string;
 
   ngOnInit(): void {
+    this.getParameterSystem()
     this.initConfig();
     console.log(this.sponsorship_id)
   }
@@ -43,7 +45,7 @@ export class PaySponsorshipComponent implements OnInit {
         purchase_units: [{
           amount: {
             currency_code: 'EUR',
-            value: sponsorshipPrice
+            value: localStorage.getItem("flatRate")
           }
         }]
       },
@@ -92,5 +94,15 @@ export class PaySponsorshipComponent implements OnInit {
         console.log('onClick', data, actions);
       }
     };
+  }
+
+  getParameterSystem(){
+    let flatRate:number;
+    this._systemParameters.getSystemParameters().then((res)=>{
+      flatRate = res.systemParameters.flatRateSponsorships;
+      console.log("Este es el flatRate",flatRate)
+      localStorage.setItem("flatRate",flatRate.toString())
+    })
+
   }
 }
