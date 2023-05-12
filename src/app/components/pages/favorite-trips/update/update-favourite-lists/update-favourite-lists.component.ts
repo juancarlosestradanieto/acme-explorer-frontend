@@ -50,6 +50,9 @@ export class UpdateFavouriteListsComponent implements OnInit {
             let favourites = new FavouriteLists(response[0]);
             console.log("UpdateFavouriteListsComponent->getFavouriteTripsListsByExplorerId object ", favourites);
             console.log("UpdateFavouriteListsComponent->getFavouriteTripsListsByExplorerId trips ", favourites.favourite_trips);
+            if (favourites.favourite_trips == undefined || favourites.favourite_trips == undefined) {
+              favourites.favourite_trips = [];
+            }
             localStorage.setItem(this.user!.id + "-favourites", JSON.stringify(favourites.favourite_trips));
             this.getListReferences();
             this.getTrip();
@@ -162,7 +165,7 @@ export class UpdateFavouriteListsComponent implements OnInit {
   getListReferences() {
     let favouritesLists = localStorage.getItem(this.user!.id + "-favourites");
     console.log("getListReferences " + this.user!.id + "-favourites", favouritesLists);
-    if (!favouritesLists) { // Local Storage is empty
+    if (!favouritesLists || favouritesLists.length < 1) { // Local Storage is empty
       this.no_lists = true;
     }
     else { // Local Storage has data

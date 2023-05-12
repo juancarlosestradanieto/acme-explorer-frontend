@@ -100,6 +100,9 @@ export class FavoriteTripsComponent implements OnInit {
               let favourites = new FavouriteLists(response[0]);
               console.log("FavoriteTripsComponent->getFavouriteTripsListsByExplorerId object ", favourites);
               console.log("FavoriteTripsComponent->getFavouriteTripsListsByExplorerId trips ", favourites.favourite_trips);
+              if (favourites.favourite_trips == undefined || favourites.favourite_trips == undefined) {
+                favourites.favourite_trips = [];
+              }
               localStorage.setItem(this.user!.id + "-favourites", JSON.stringify(favourites.favourite_trips));
             }
             else {
