@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FavouriteLists } from 'src/app/models/favourite-lists.model';
 import { FavouriteTrips } from 'src/app/models/favourite-trips.model';
 import { Trip } from 'src/app/models/trip.model';
 
@@ -259,33 +260,33 @@ export class TripsService {
 
   }
 
-  createFavouriteTripsReference(favouriteTrips: FavouriteTrips) {
-    console.log("TripsService.createFavouriteTripsReference favouriteTrips ", favouriteTrips);
+  createFavouriteTripsListsReference(favouriteTripsLists: FavouriteLists) {
+    console.log("TripsService.createFavouriteTripsReference favouriteTrips ", favouriteTripsLists);
     const url = `${environment.backendMockupBaseURL + '/favourite-trips'}`;
 
-    console.log("TripsService.createFavouriteTripsReference url ", url);
+    console.log("TripsService.createFavouriteTripsListsReference url ", url);
 
-    const body = JSON.stringify(favouriteTrips);
+    const body = JSON.stringify(favouriteTripsLists);
 
     return this.http.post<JSON>(url, body , httpOptions);
   }
 
-  getFavouriteTripsByReference(reference: string) {
-    console.log("TripsService.getFavouriteTripsByReference reference ", reference);
-    const url = `${environment.backendMockupBaseURL + '/favourite-trips?reference=' + reference}`;
+  getFavouriteTripsListsByExplorerId(explorer_Id: string) {
+    console.log("TripsService.getFavouriteTripsByReference reference ", explorer_Id);
+    const url = `${environment.backendMockupBaseURL + '/favourite-trips?explorer_Id=' + explorer_Id}`;
 
-    console.log("TripsService.getFavouriteTripsByReference url ", url);
+    console.log("TripsService.getFavouriteTripsListsByExplorerId url ", url);
 
     return this.http.get<JSON>(url, httpOptions);
   }
 
-  updateFavouriteTripsReference(favouriteTrips: FavouriteTrips, id: string) {
-    console.log("TripsService.updateFavouriteTripsReference favouriteTrips ", favouriteTrips);
+  updateFavouriteTripsListsReference(favouriteTripsLists: FavouriteLists, id: string) {
+    console.log("TripsService.updateFavouriteTripsReference favouriteTrips ", favouriteTripsLists);
     const url = `${environment.backendMockupBaseURL + '/favourite-trips/' + id}`;
 
-    console.log("TripsService.updateFavouriteTripsReference url ", url);
+    console.log("TripsService.updateFavouriteTripsListsReference url ", url);
 
-    const body = JSON.stringify(favouriteTrips);
+    const body = JSON.stringify(favouriteTripsLists);
 
     return this.http.patch<JSON>(url, body , httpOptions);
   }

@@ -41,7 +41,7 @@
 
   <div *ngIf="(sponsorships_loaded | async)" class="card">
     <div class="card-header" *ngIf="sponsorship">
-      <img [src]="sponsorship.banner" class="card-img-top">
+      <img [src]="sponsorship.banner" class="card-img-top" style="max-height:500px; max-width:500px; display: block; margin-left: auto; margin-right: auto;">
       <a href="{{sponsorship.page}}" style="display: flex;justify-content: center;">{{sponsorship.page}}</a>
     </div>
   </div>
@@ -101,14 +101,10 @@
         {{'applications.title-plural' | translate}}
       </button>
 
-      <button type="button" class="btn btn-success" *ngIf="activeRole == 'EXPLORER' && !checkTripInFavourites(trip)" (click)="favouriteTrip(trip)">
+      <button type="button" class="btn btn-success" *ngIf="activeRole == 'EXPLORER'" routerLink="/trips/{{trip.id}}/favourites-lists">
         <i class="fa-solid fa-heart-circle-plus"></i>
         {{'trips.buttons.add-favourite' | translate}}
       </button>
-      <button type="button" class="btn btn-danger" *ngIf="activeRole == 'EXPLORER' && checkTripInFavourites(trip)" (click)="favouriteTrip(trip)">
-        <i class="fa-solid fa-heart-circle-xmark"></i>
-        {{'trips.buttons.remove-favourite' | translate}}
-       </button>
 
     </div>
     <div class="card-body">

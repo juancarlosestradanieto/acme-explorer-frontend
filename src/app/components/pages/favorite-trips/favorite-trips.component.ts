@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actor } from 'src/app/models/actor.model';
+import { FavouriteLists } from 'src/app/models/favourite-lists.model';
 import { FavouriteTrips } from 'src/app/models/favourite-trips.model';
 import { Trip } from 'src/app/models/trip.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -14,8 +16,11 @@ import { TripsService } from 'src/app/services/trips/trips.service';
 export class FavoriteTripsComponent implements OnInit {
 
   storeTheme: string = localStorage.getItem('theme-color')!;
+  favouriteLists: FavouriteTrips[];
+  favouriteLists_loaded!: Promise<boolean>;
+  favouriteListsReferences: string[];
   trips: Array<Trip> = [];
-  filteredTrips: Array<Trip> = [];
+  filteredReferences: Array<string> = [];
   trips_loaded!: Promise<boolean>;
   protected user!: Actor | null;
   protected activeRole: string = 'anonymous';
@@ -24,22 +29,61 @@ export class FavoriteTripsComponent implements OnInit {
   curPage: number = 1;
   pageSize: number = 10;
 
+  curReference: string;
+
+  listCreation: boolean = false;
+  listCreated: boolean = false;
+  listExists: boolean = false;
+
   keyword: string = "";
 
   constructor(private tripsService: TripsService, private router: Router, private authService: AuthService, private route: ActivatedRoute) {
     this.currentDateTime = new Date;
   }
 
-  getTrips() {
-    let storedFavourites: Trip[] = JSON.parse(localStorage.getItem(this.user!.getEmail() + "-favourites") || '{}');
-    if (storedFavourites && storedFavourites.length > 0) {
-      this.trips = Trip.castJsonTrips(storedFavourites);
-      console.log("FavoriteTripsComponent->constructor getTrips this.trips ", this.trips);
+  getFavouriteLists() {
+    let storedFavouritesLists = JSON.parse(localStorage.getItem(this.user!.id + "-favourites"));
+    console.log(storedFavouritesLists);
+    if (storedFavouritesLists) {
+      this.favouriteLists = storedFavouritesLists.map(storedList => {
+        return new FavouriteTrips(storedList)
+      });
+      this.favouriteListsReferences = this.favouriteLists.map(storedList => {
+        return storedList.getReference();
+      });
       this.search();
+      this.getTrips(this.curReference);
     } else {
-      this.trips = [];
+      this.favouriteLists = [];
+      this.favouriteListsReferences = [];
     }
 
+    this.favouriteLists_loaded = Promise.resolve(true);
+
+  }
+
+  getTrips(reference: string) {
+    this.curReference = reference;
+    this.trips = [];
+
+    this.favouriteLists.forEach(list => {
+      if (list.getReference() == reference) {
+        console.log("list.getTrips()", list.getTrips());
+        this.trips = Trip.castJsonTrips(list.getTrips());
+        this.trips_loaded = Promise.resolve(true);
+      }
+    });
+    console.log("trips", this.trips);
+  }
+
+  getCurrentNavigatorStyles(reference: string) {
+    let actual = this.curReference == reference;
+    let currenStyles = {
+      'font-weight': actual ? 'bold' : '',
+      'font-size': actual ? '115%' : ''
+    };
+
+    return currenStyles;
   }
 
   ngOnInit(): void {
@@ -48,33 +92,28 @@ export class FavoriteTripsComponent implements OnInit {
     if (this.user) {
       this.activeRole = this.user.getRole().toString();
       console.log("actor roles ", this.user.getRole());
-      this.tripsService.getFavouriteTripsByReference(this.user!.getEmail() + "-favourites")
+      this.tripsService.getFavouriteTripsListsByExplorerId(this.user!.id)
         .subscribe(
           (response: any) => {
             if (response.length > 0) {
-              console.log("SingleTripComponent->getFavouriteTripsByReference response ", response[0]);
-              let favourites = new FavouriteTrips(response[0]);
-              console.log("SingleTripComponent->getFavouriteTripsByReference object ", favourites);
-              console.log("SingleTripComponent->getFavouriteTripsByReference reference ", favourites.getReference());
-              console.log("SingleTripComponent->getFavouriteTripsByReference trips ", favourites.getTrips());
-              localStorage.setItem(favourites.getReference(), JSON.stringify(favourites.getTrips()));
-              this.getTrips();
-              this.trips_loaded = Promise.resolve(true);
+              console.log("FavoriteTripsComponent->getFavouriteTripsListsByExplorerId response ", response[0]);
+              let favourites = new FavouriteLists(response[0]);
+              console.log("FavoriteTripsComponent->getFavouriteTripsListsByExplorerId object ", favourites);
+              console.log("FavoriteTripsComponent->getFavouriteTripsListsByExplorerId trips ", favourites.favourite_trips);
+              localStorage.setItem(this.user!.id + "-favourites", JSON.stringify(favourites.favourite_trips));
             }
             else {
-              console.log("SingleTripComponent->getFavouriteTripsByReference response is empty");
-              this.trips_loaded = Promise.resolve(false);
+              console.log("FavoriteTripsComponent->getFavouriteTripsListsByExplorerId response is empty");
             }
+            this.getFavouriteLists();
           },
           (error) => {
-            console.error("SingleTripComponent->getFavouriteTripsByReference error ", error);
-            this.trips_loaded = Promise.resolve(false);
+            console.error("FavoriteTripsComponent->getFavouriteTripsListsByExplorerId error ", error);
           }
         );
     }
     else {
       this.activeRole = 'anonymous';
-      this.getTrips();
     }
   }
 
@@ -105,20 +144,32 @@ export class FavoriteTripsComponent implements OnInit {
 
   }
 
-  favouriteTrip(trip: Trip) {
-    console.log("favouriteTrip user.email ", this.user!.getEmail());
-    console.log("favouriteTrip user.email-favourites ", this.user!.getEmail() + "-favourites");
-    let favourites = localStorage.getItem(this.user!.getEmail() + "-favourites");
-    console.log("favouriteTrip " + this.user!.getEmail() + "-favourites ", favourites);
-    if (!favourites) { // Local Storage is empty
-      let newFavourites = [];
-      newFavourites.push(trip);
-      console.log("favouriteTrip newFavourites ", newFavourites);
-      localStorage.setItem(this.user!.getEmail() + "-favourites", JSON.stringify(newFavourites));
-      let favouriteTrips = new FavouriteTrips(null);
-      favouriteTrips.setReference(this.user!.getEmail() + "-favourites");
-      favouriteTrips.setTrips(newFavourites);
-      this.tripsService.createFavouriteTripsReference(favouriteTrips)
+  startListCreation() {
+    this.listCreation = true;
+    console.log("Cargado", this.listCreation)
+  }
+
+  createFavoriteList(referenceForm: NgForm) {
+    console.log("createFavoriteList referenceForm.value.reference", referenceForm.value.reference);
+
+    console.log("createFavoriteList user.id ", this.user!.id);
+    console.log("createFavoriteList user.id-favourites ", this.user!.id + "-favourites");
+    let favouritesLists = localStorage.getItem(this.user!.id + "-favourites");
+    console.log("createFavoriteList " + this.user!.id + "-favourites", favouritesLists);
+    if (!favouritesLists) { // Local Storage is empty
+      let newFavouritesLists = [];
+      let newFavouriteTrips = new FavouriteTrips({
+        reference: referenceForm.value.reference, trips: []
+      });
+      console.log("createFavoriteList newFavouriteTrips", newFavouriteTrips);
+      newFavouritesLists.push(newFavouriteTrips);
+      console.log("createFavoriteList newFavouritesLists", newFavouritesLists);
+      localStorage.setItem(this.user!.id + "-favourites", JSON.stringify(newFavouritesLists));
+
+      let favouriteTripsLists = new FavouriteLists(null);
+      favouriteTripsLists.explorer_Id = this.user!.id;
+      favouriteTripsLists.favourite_trips = newFavouritesLists;
+      this.tripsService.createFavouriteTripsListsReference(favouriteTripsLists)
         .subscribe(
           (response: any) => {
             console.log("AllTripsComponent->favouriteTrip createReference response", response);
@@ -127,78 +178,68 @@ export class FavoriteTripsComponent implements OnInit {
             console.error("AllTripsComponent->favouriteTrip createReference error", error);
           }
         );
+
+      this.listCreated = true;
+      this.listCreation = false;
+      console.log("createFavoriteList Descargado", this.listCreation);
     }
     else { // Local Storage has data
-      let storedFavourites: Trip[] = JSON.parse(localStorage.getItem(this.user!.getEmail() + "-favourites") || '{}');
-      let existsInFavourites: boolean = storedFavourites.some(storedTrip => Trip.castJsonTrip(storedTrip).getTicker() === trip.getTicker());
-      console.log("favouriteTrip trip is in storedFavourites ", existsInFavourites);
-      let updatedFavouriteTrips = new FavouriteTrips(null);
-      let favouritesId: string;
-      if (existsInFavourites) { // Trip exists in favourites
-        storedFavourites.forEach((storedTrip, index) => {
-          if (Trip.castJsonTrip(storedTrip).getTicker() === trip.getTicker()) {
-            storedFavourites.splice(index, 1);
-          }
-        });
-        console.log("favouriteTrip storedFavourites ", storedFavourites);
-        localStorage.setItem(this.user!.getEmail() + "-favourites", JSON.stringify(storedFavourites));
-        updatedFavouriteTrips.setReference(this.user!.getEmail() + "-favourites");
-        updatedFavouriteTrips.setTrips(storedFavourites);
-      } else {// Trip does not exist in favourites
-        console.log("favouriteTrip storedFavourites ", storedFavourites);
-        storedFavourites.push(trip);
-        localStorage.setItem(this.user!.getEmail() + "-favourites", JSON.stringify(storedFavourites));
-        updatedFavouriteTrips.setReference(this.user!.getEmail() + "-favourites");
-        updatedFavouriteTrips.setTrips(storedFavourites);
-      }
-      this.tripsService.getFavouriteTripsByReference(this.user!.getEmail() + "-favourites")
+      let storedFavouritesLists: FavouriteTrips[] = JSON.parse(localStorage.getItem(this.user!.id + "-favourites") || '{}');
+      let castedStoredFavouritesLists = storedFavouritesLists.map(storedList => {
+        return new FavouriteTrips(storedList)
+      });
+      let favouriteLists = new FavouriteLists({
+        favourite_trips: castedStoredFavouritesLists, explorer_Id: this.user!.id
+      });
+      console.log("createFavoriteList favouriteLists", favouriteLists);
+      console.log("createFavoriteList favouriteLists.favourite_trips", favouriteLists.favourite_trips);
+      let existsInFavouritesLists: boolean = storedFavouritesLists.some(storedList => new FavouriteTrips(storedList).getReference() === referenceForm.value.reference);
+      console.log("createFavoriteList list is in storedFavouritesLists ", existsInFavouritesLists);
+      let newFavouriteLists = new FavouriteTrips({
+        reference: referenceForm.value.reference, trips: []
+      });
+      if (!existsInFavouritesLists) { // List does not exist in favourites
+        favouriteLists.favourite_trips.push(newFavouriteLists);
+        console.log("favouriteTrip favouriteLists ", favouriteLists);
+        localStorage.setItem(this.user!.id + "-favourites", JSON.stringify(favouriteLists.favourite_trips));
+
+        this.tripsService.getFavouriteTripsListsByExplorerId(this.user!.id)
         .subscribe(
           (response: any) => {
             if (response.length > 0) {
-              console.log("AllTripsComponent->getFavouriteTripsByReference response ", response[0]);
-              let favourites = new FavouriteTrips(response[0]);
-              console.log("AllTripsComponent->getFavouriteTripsByReference object ", favourites);
-              console.log("AllTripsComponent->getFavouriteTripsByReference reference ", favourites.getReference());
-              console.log("AllTripsComponent->getFavouriteTripsByReference trips ", favourites.getTrips());
-              favouritesId = response[0].id;
+              console.log("FavoriteTripsComponent->getFavouriteTripsListsByExplorerId response ", response[0]);
+              let favourites = new FavouriteLists(response[0]);
+              console.log("FavoriteTripsComponent->getFavouriteTripsListsByExplorerId object ", favourites);
+              console.log("FavoriteTripsComponent->getFavouriteTripsListsByExplorerId trips ", favourites.favourite_trips);
+              let favouritesId = favourites.id;
               console.log("AllTripsComponent->getFavouriteTripsByReference response id ", favouritesId);
 
-              this.tripsService.updateFavouriteTripsReference(updatedFavouriteTrips, favouritesId)
+              this.tripsService.updateFavouriteTripsListsReference(favouriteLists, favouritesId)
                 .subscribe(
                   (response: any) => {
-                    console.log("AllTripsComponent->favouriteTrip updateReference response", response);
+                    console.log("FavoriteTripsComponent->favouriteTrip updateReference response", response);
                   },
                   (error) => {
-                    console.error("AllTripsComponent->favouriteTrip updateReference error", error);
+                    console.error("FavoriteTripsComponent->favouriteTrip updateReference error", error);
                   }
                 );
             }
             else {
-              console.log("AllTripsComponent->getFavouriteTripsByReference response is empty");
+              console.log("FavoriteTripsComponent->getFavouriteTripsListsByExplorerId response is empty");
             }
           },
           (error) => {
-            console.error("AllTripsComponent->getFavouriteTripsByReference error", error);
+            console.error("FavoriteTripsComponent->getFavouriteTripsListsByExplorerId error", error);
           }
         );
-    }
-  }
 
-  checkTripInFavourites(trip: Trip) {
-    let result: boolean = false;
-    //console.log("favouriteTrip user.email ", this.user!.getEmail());
-    //console.log("favouriteTrip user.email-favourites ", this.user!.getEmail() + "-favourites");
-    let favourites = localStorage.getItem(this.user!.getEmail() + "-favourites");
-    //console.log("favouriteTrip " + this.user!.getEmail() + "-favourites ", favourites);
-    if (favourites) {
-      let storedFavourites: Trip[] = JSON.parse(localStorage.getItem(this.user!.getEmail() + "-favourites") || '{}');
-      let existsInFavourites: boolean = storedFavourites.some(storedTrip => Trip.castJsonTrip(storedTrip).getTicker() === trip.getTicker());
-      //console.log("favouriteTrip trip is in storedFavourites ", existsInFavourites);
-      if (existsInFavourites) {
-        result = true;
+        this.listCreated = true;
+        this.listCreation = false;
+        console.log("createFavoriteList Descargado", this.listCreation);
+      } else {// List exists in favourites
+        this.listExists = true;
       }
     }
-    return result;
   }
 
   disabledTrip(trip: Trip) {
@@ -220,7 +261,7 @@ export class FavoriteTripsComponent implements OnInit {
   }
 
   totalPages() {
-    let pages = Math.ceil(this.filteredTrips.length / this.pageSize);
+    let pages = Math.ceil(this.trips.length / this.pageSize);
     if (pages <= 0) {
       pages = 1;
     }
@@ -231,15 +272,16 @@ export class FavoriteTripsComponent implements OnInit {
   search() {
     console.log("FavoriteTripsComponent-> search this.keyword ", this.keyword);
 
-    
     if (this.keyword) {
-      this.filteredTrips = this.trips.filter(trip => trip.getTitle().toLowerCase().includes(this.keyword.toLowerCase()));
-      console.log("FavoriteTripsComponent-> search this.filteredTrips ", this.filteredTrips);
-    } 
+      this.filteredReferences = this.favouriteListsReferences.filter(reference => reference.toLowerCase().includes(this.keyword.toLowerCase()));
+      console.log("FavoriteTripsComponent-> search this.filteredTrips ", this.filteredReferences);
+    }
     else {
-      this.filteredTrips = this.trips;
+      this.filteredReferences = this.favouriteListsReferences;
     }
 
+    this.curReference = this.filteredReferences[0];
+    this.getTrips(this.curReference);
   }
 
   resetSearch() {

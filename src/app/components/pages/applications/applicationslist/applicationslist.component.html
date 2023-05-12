@@ -30,8 +30,13 @@
                     <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
                         <div style="padding-left: 1%;">
                             <div><strong>{{'applications.comments' | translate}}</strong></div>
-                            <div *ngFor="let comment of row.getComments(); let i = index">
-                                <p>{{i+1}} - {{comment}}</p>
+                            <div *ngIf="row.getComments().length >= 1 && row.getComments()[0] != ' '"> 
+                                <div *ngFor="let comment of row.getComments(); let i = index" >
+                                    <p>{{i+1}} - {{comment}}</p>
+                                </div>
+                            </div>
+                            <div *ngIf="row.getComments().length == 1 && row.getComments()[0] == ' '"> 
+                                {{'applications.messages.comments-not-found' | translate}}
                             </div>
                         </div>
 
@@ -59,13 +64,13 @@
                     <ng-template let-value="value" ngx-datatable-cell-template>
                         {{value}}
                     </ng-template>
-                </ngx-datatable-column>
+                </ngx-datatable-column>-->
         
                  <ngx-datatable-column name="{{'applications.moment' | translate}}" prop="applicationMoment" [canAutoResize]="true">
                     <ng-template let-value="value" ngx-datatable-cell-template>
-                        {{value}}
+                        {{value | date: 'dd/MM/yyyy hh:mm:ss'}}
                     </ng-template>
-                </ngx-datatable-column>-->
+                </ngx-datatable-column>
 
                 <ngx-datatable-column name="{{'applications.actor-id' | translate}}" prop="explorer_Id"
                     [canAutoResize]="true">
@@ -124,8 +129,13 @@
                     <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
                         <div style="padding-left: 1%;">
                             <div><strong>{{'applications.comments' | translate}}</strong></div>
-                            <div *ngFor="let comment of row.getComments(); let i = index">
-                                <p>{{i+1}} - {{comment}}</p>
+                            <div *ngIf="row.getComments().length >= 1 && row.getComments()[0] != ' '"> 
+                                <div *ngFor="let comment of row.getComments(); let i = index" >
+                                    <p>{{i+1}} - {{comment}}</p>
+                                </div>
+                            </div>
+                            <div *ngIf="row.getComments().length == 1 && row.getComments()[0] == ' '"> 
+                                {{'applications.messages.comments-not-found' | translate}}
                             </div>
                         </div>
 
@@ -153,13 +163,13 @@
                     <ng-template let-value="value" ngx-datatable-cell-template>
                         {{value}}
                     </ng-template>
-                </ngx-datatable-column>
+                </ngx-datatable-column>-->
         
                  <ngx-datatable-column name="{{'applications.moment' | translate}}" prop="applicationMoment" [canAutoResize]="true">
                     <ng-template let-value="value" ngx-datatable-cell-template>
-                        {{value}}
+                        {{value | date: 'dd/MM/yyyy hh:mm:ss'}}
                     </ng-template>
-                </ngx-datatable-column>-->
+                </ngx-datatable-column>
 
                 <ngx-datatable-column name="{{'applications.actor-id' | translate}}" prop="explorer_Id"
                     [canAutoResize]="true">
@@ -245,8 +255,14 @@
                                 </form>
                             </div>
                             <div><strong>{{'applications.comments' | translate}}</strong></div>
-                            <div *ngFor="let comment of row.getComments(); let i = index">
-                                <p>{{i+1}} - {{comment}}</p>
+                            <div *ngIf="row.getComments().length >= 1 && row.getComments()[0] != ' '"> 
+                                <div *ngFor="let comment of row.getComments(); let i = index" >
+                                    <p>{{i+1}} - {{comment}}</p>
+                                </div>
+                            </div>
+                            <div *ngIf="row.getComments().length == 1 && row.getComments()[0] == ' '"> 
+                                {{row.getComments()}}
+                                {{'applications.messages.comments-not-found' | translate}}
                             </div>
                         </div>
 
@@ -288,13 +304,13 @@
                     <ng-template let-value="value" ngx-datatable-cell-template>
                         {{value}}
                     </ng-template>
-                </ngx-datatable-column>
+                </ngx-datatable-column>-->
         
                  <ngx-datatable-column name="{{'applications.moment' | translate}}" prop="applicationMoment" [canAutoResize]="true">
                     <ng-template let-value="value" ngx-datatable-cell-template>
-                        {{value}}
+                        {{value | date: 'dd/MM/yyyy hh:mm:ss'}}
                     </ng-template>
-                </ngx-datatable-column>-->
+                </ngx-datatable-column>
 
                 <ngx-datatable-column name="{{'applications.actor-id' | translate}}" prop="explorer_Id"
                     [canAutoResize]="true">
@@ -373,8 +389,13 @@
                     <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
                         <div style="padding-left: 1%;">
                             <div><strong>{{'applications.comments' | translate}}</strong></div>
-                            <div *ngFor="let comment of row.getComments(); let i = index">
-                                <p>{{i+1}} - {{comment}}</p>
+                            <div *ngIf="row.getComments().length >= 1 && row.getComments()[0] != ' '"> 
+                                <div *ngFor="let comment of row.getComments(); let i = index" >
+                                    <p>{{i+1}} - {{comment}}</p>
+                                </div>
+                            </div>
+                            <div *ngIf="row.getComments().length == 1 && row.getComments()[0] == ' '"> 
+                                {{'applications.messages.comments-not-found' | translate}}
                             </div>
                         </div>
 
@@ -402,13 +423,13 @@
                     <ng-template let-value="value" ngx-datatable-cell-template>
                         {{value}}
                     </ng-template>
-                </ngx-datatable-column>
+                </ngx-datatable-column>-->
         
                  <ngx-datatable-column name="{{'applications.moment' | translate}}" prop="applicationMoment" [canAutoResize]="true">
                     <ng-template let-value="value" ngx-datatable-cell-template>
-                        {{value}}
+                        {{value | date: 'dd/MM/yyyy hh:mm:ss'}}
                     </ng-template>
-                </ngx-datatable-column>-->
+                </ngx-datatable-column>
 
                 <ngx-datatable-column name="{{'applications.actor-id' | translate}}" prop="explorer_Id"
                     [canAutoResize]="true">
@@ -488,13 +509,18 @@
                 [loadingIndicator]="true" [headerHeight]="40" [footerHeight]="80" [limit]="10" [rowHeight]="'auto'"
                 [columnMode]="'force'" [scrollbarH]="true">
 
-                <ngx-datatable-row-detail [rowHeight]="350" [scrollLeft]="true" #acceptedCommentsRow
+                <ngx-datatable-row-detail [rowHeight]="500" [scrollLeft]="true" #acceptedCommentsRow
                     (toggle)="onDetailToggle($event)">
                     <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
                         <div style="padding-left: 1%;">
                             <div><strong>{{'applications.comments' | translate}}</strong></div>
-                            <div *ngFor="let comment of row.getComments(); let i = index">
-                                <p>{{i+1}} - {{comment}}</p>
+                            <div *ngIf="row.getComments().length >= 1 && row.getComments()[0] != ' '"> 
+                                <div *ngFor="let comment of row.getComments(); let i = index" >
+                                    <p>{{i+1}} - {{comment}}</p>
+                                </div>
+                            </div>
+                            <div *ngIf="row.getComments().length == 1 && row.getComments()[0] == ' '"> 
+                                {{'applications.messages.comments-not-found' | translate}}
                             </div>
                         </div>
 
@@ -522,13 +548,13 @@
                     <ng-template let-value="value" ngx-datatable-cell-template>
                         {{value}}
                     </ng-template>
-                </ngx-datatable-column>
+                </ngx-datatable-column>-->
         
                  <ngx-datatable-column name="{{'applications.moment' | translate}}" prop="applicationMoment" [canAutoResize]="true">
                     <ng-template let-value="value" ngx-datatable-cell-template>
-                        {{value}}
+                        {{value | date: 'dd/MM/yyyy hh:mm:ss'}}
                     </ng-template>
-                </ngx-datatable-column>-->
+                </ngx-datatable-column>
 
                 <ngx-datatable-column name="{{'applications.actor-id' | translate}}" prop="explorer_Id"
                     [canAutoResize]="true">

@@ -18,7 +18,7 @@ export class ApplicationslistComponent implements OnInit {
   @ViewChild('rejectedTable') rejectedTable: any;
   @ViewChild('pendingTable') pendingTable: any;
   @ViewChild('dueTable') dueTable: any;
-  @ViewChild('dueTable') acceptedTable: any;
+  @ViewChild('acceptedTable') acceptedTable: any;
 
   applications: Array<Application> = [];
   cancelledApplications: Array<Application> = [];
