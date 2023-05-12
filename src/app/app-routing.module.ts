@@ -32,6 +32,7 @@ import { EditSponsorshipComponent } from './components/pages/sponsorship/edit-sp
 import { DetailSponsorshipComponent } from './components/pages/sponsorship/detail-sponsorship/detail-sponsorship.component';
 import { PaySponsorshipComponent } from './components/pages/sponsorship/pay-sponsorship/pay-sponsorship.component';
 import { ExplorersStatsComponent } from './components/pages/explorers-stats/explorers-stats.component';
+import { UpdateFavouriteListsComponent } from './components/pages/favorite-trips/update/update-favourite-lists/update-favourite-lists.component';
 
 const routes: Routes = [
   {
@@ -109,6 +110,9 @@ const routes: Routes = [
           },
           {
             path: 'sponsorships', component: TripSponsorshipsComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'MANAGER' }
+          },
+          {
+            path: 'favourites-lists', component: UpdateFavouriteListsComponent, canActivate: [ActorRoleGuard], data: { expectedRole: 'EXPLORER' }
           },
           {
             path: '', component: SingleTripComponent
