@@ -18,21 +18,21 @@ export class RegisterManagerService {
 
   constructor(private http: HttpClient, private afAuth2: AngularFireAuth) {
         //para controlar el login y el logout
-        this.afAuth2.onAuthStateChanged((user) => {
+        // this.afAuth2.onAuthStateChanged((user) => {
 
-          if (user) {
-            this.firebase_user_is_logged_in = true;
-          }
-          else {
-            this.firebase_user_is_logged_in = false;
-            user = null;
-          }
-          //console.log("AuthService constructor onAuthStateChanged this.firebase_user_is_logged_in", this.firebase_user_is_logged_in);
+        //   if (user) {
+        //     this.firebase_user_is_logged_in = true;
+        //   }
+        //   else {
+        //     this.firebase_user_is_logged_in = false;
+        //     user = null;
+        //   }
+        //   //console.log("AuthService constructor onAuthStateChanged this.firebase_user_is_logged_in", this.firebase_user_is_logged_in);
     
-          localStorage.setItem('loggedIn', JSON.stringify(this.firebase_user_is_logged_in));
-          localStorage.setItem('firebaseUser', JSON.stringify(user));
+        //   localStorage.setItem('loggedIn', JSON.stringify(this.firebase_user_is_logged_in));
+        //   localStorage.setItem('firebaseUser', JSON.stringify(user));
     
-        });
+        // });
    }
 
   registerUserManager(actor:Actor){
