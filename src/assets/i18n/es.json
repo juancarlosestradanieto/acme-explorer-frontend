@@ -289,5 +289,19 @@
       "finder-config-saved": "Descubridor de viajes guardado exitosamente",
       "finder-saved": "Búsqueda guardada exitosamente"
     }
+  },
+  "explorers-stats":{
+    "menu-link": "Estadísticas de los exploradores",
+    "explorer-id": "id del explorador",
+    "month-expense": "gasto mensual",
+    "year-expense": "gasto anual",
+    "money": "dinero",
+    "month": "mes",
+    "year": "año",
+    "start-date": "fecha inicio",
+    "end-date": "fecha fin",
+    "money-spent": "dinero gastado",
+    "comparison": "comparación",
+    "search": "buscar"
   }
 }

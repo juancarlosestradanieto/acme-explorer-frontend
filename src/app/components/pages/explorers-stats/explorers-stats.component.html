@@ -1,0 +1,190 @@
+<p>explorer-stats works!</p>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <br>
+        <h2>{{"explorers-stats.menu-link" | translate}}</h2>
+    </div>
+</div>
+
+<form [formGroup]="searchExplorersStatsForm" (ngSubmit)="search()" >
+
+    <div class="row">
+
+        <div class="col-md-2">
+        
+            <!--explorerId start-->
+            <div class="form-group has-danger">
+                
+                <label for="explorerId" class="form-control-label">{{'explorers-stats.explorer-id' | translate}}:</label>
+
+                <input 
+                id="explorerId"
+                type="text"
+                class="form-control" 
+                formControlName="explorerId"
+                />
+
+            </div>
+            <!--explorerId end-->
+        </div>
+
+        <div class="col-md-2">
+    
+            <!--startDate start-->
+            <div class="form-group has-danger">
+                
+                <label for="startDate" class="form-control-label">{{'explorers-stats.start-date' | translate}}:</label>
+        
+                <input 
+                id="startDate"
+                type="date"
+                class="form-control" 
+                formControlName="startDate"
+                />
+        
+            </div>
+            <!--startDate end-->
+        
+        </div>
+    
+        <div class="col-md-2">
+        
+            <!--endDate start-->
+            <div class="form-group has-danger">
+                
+                <label for="endDate" class="form-control-label">{{'explorers-stats.end-date' | translate}}:</label>
+        
+                <input 
+                id="endDate"
+                type="date"
+                class="form-control" 
+                formControlName="endDate"
+                />
+        
+            </div>
+            <!--endDate end-->
+        
+        </div>
+
+        <div class="col-md-2">
+
+            <div class="form-group has-danger">
+                <label for="comparison" class="form-control-label">{{'explorers-stats.comparison' | translate}} </label>
+                <select id="comparison" class="form-control" formControlName="comparison">
+                  <option *ngFor="let comparison of comparisonList" [value]="comparison">
+                    {{comparison}}
+                  </option>
+                </select>
+            </div>
+
+        </div>
+
+
+        <div class="col-md-2">
+    
+            <!--moneySpent start-->
+            <div class="form-group has-danger">
+                
+                <label for="moneySpent" class="form-control-label">{{'explorers-stats.money-spent' | translate}}:</label>
+
+                <input 
+                id="moneySpent"
+                type="number"
+                class="form-control" 
+                formControlName="moneySpent"
+                />
+
+            </div>
+            <!--moneySpent end-->
+
+        </div>
+
+        <div class="col-md-2">
+            <button 
+                class="btn btn-outline-secondary" 
+                type="submit" id="search-button"
+                style="position: absolute;margin-top: 24px;"
+            >
+                <i class="fa fa-search" aria-hidden="true"></i>
+                {{'explorers-stats.search' | translate}}
+            </button>
+
+        </div>
+        
+    </div>
+
+</form>
+
+<div class="row">
+
+    <div class="col-md-12">
+        <table class="table table-responsive table-hover">
+            <thead>
+                <tr>
+                    <th>{{"explorers-stats.explorer-id" | translate}}</th>
+                    <th>{{"explorers-stats.month-expense" | translate}}</th>
+                    <th>{{"explorers-stats.year-expense" | translate}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let explorerStats of explorersStats">
+                    <td>{{explorerStats.explorerId}}</td>
+                    <td>
+                        <ul>
+                            <ng-container *ngFor="let singleMonthExpense of explorerStats.monthExpense">
+                                <li *ngIf="
+                                    
+                                    (
+                                        showYear(singleMonthExpense.year)
+                                    )
+                                    &&
+                                    (
+                                        showMonth(singleMonthExpense.month)
+                                    )
+                                    &&
+                                    (
+                                        showMoneySpent(singleMonthExpense.moneySpent)
+                                    )
+                                    
+                                ">
+                                    {{"explorers-stats.money" | translate}}
+                                    {{singleMonthExpense.moneySpent}},
+                                    {{"explorers-stats.month" | translate}}
+                                    {{singleMonthExpense.month}},
+                                    {{"explorers-stats.year" | translate}}
+                                    {{singleMonthExpense.year}}
+                                </li>
+                            </ng-container>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <ng-container *ngFor="let singleYearExpense of explorerStats.yearExpense">
+                                <li 
+                                *ngIf="
+                                    (
+                                        showYear(singleYearExpense.year)
+                                    )
+                                    &&
+                                    (
+                                        showMoneySpent(singleYearExpense.moneySpent)
+                                    )
+
+                                "
+                                >
+                                    {{"explorers-stats.money" | translate}}
+                                    {{singleYearExpense.moneySpent}},
+                                    {{"explorers-stats.year" | translate}}
+                                    {{singleYearExpense.year}}
+                                </li>
+                            </ng-container>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

@@ -67,6 +67,7 @@ import { DetailSponsorshipComponent } from './components/pages/sponsorship/detai
 import { PayapplicationComponent } from './components/pages/applications/payapplication/payapplication.component';
 import {MatSliderModule} from '@angular/material/slider';
 import { PaySponsorshipComponent } from './components/pages/sponsorship/pay-sponsorship/pay-sponsorship.component';
+import { ExplorersStatsComponent } from './components/pages/explorers-stats/explorers-stats.component';
 
 
 let ANGULAR_MATERIAL_MODULES = [
@@ -120,7 +121,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AddSponsorshipComponent,
     EditSponsorshipComponent,
     DetailSponsorshipComponent,
-    PaySponsorshipComponent
+    PaySponsorshipComponent,
+    ExplorersStatsComponent
   ],
   imports: [
     BrowserModule,

@@ -31,6 +31,7 @@ import { AddSponsorshipComponent } from './components/pages/sponsorship/add-spon
 import { EditSponsorshipComponent } from './components/pages/sponsorship/edit-sponsorship/edit-sponsorship.component';
 import { DetailSponsorshipComponent } from './components/pages/sponsorship/detail-sponsorship/detail-sponsorship.component';
 import { PaySponsorshipComponent } from './components/pages/sponsorship/pay-sponsorship/pay-sponsorship.component';
+import { ExplorersStatsComponent } from './components/pages/explorers-stats/explorers-stats.component';
 
 const routes: Routes = [
   {
@@ -144,6 +145,9 @@ const routes: Routes = [
   },
   {
     path:'register-manager',component: RegisterManagerComponent, canActivate: [ActorRoleGuard], data:{ expectedRole: 'ADMINISTRATOR'}
+  },
+  {
+    path:'explorers-stats',component: ExplorersStatsComponent, canActivate: [ActorRoleGuard], data:{ expectedRole: 'ADMINISTRATOR'}
   },
   {
     path: 'denied-access', component: AccessdeniedComponent

@@ -287,5 +287,19 @@
       "finder-config-saved": "Finder config successfully saved",
       "finder-saved": "Finder successfully saved"
     }
+  },
+  "explorers-stats":{
+    "menu-link": "Explorers stats",
+    "explorer-id": "explorer id",
+    "month-expense": "month expense",
+    "year-expense": "year expense",
+    "money": "money",
+    "month": "month",
+    "year": "year",
+    "start-date": "start date",
+    "end-date": "end date",
+    "money-spent": "money spent",
+    "comparison": "comparison",
+    "search": "search"
   }
 }
