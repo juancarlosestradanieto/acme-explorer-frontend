@@ -33,6 +33,12 @@ export class ApplicationsService {
 
     console.log("ApplicationsService->createApplication idToken ", idToken);
 
+    let moment = Date.now();
+
+    console.log("ApplicationsService->createApplication Date.now() ", moment);
+
+    application.applicationMoment = moment;
+
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
