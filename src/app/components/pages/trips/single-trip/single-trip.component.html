@@ -41,7 +41,7 @@
 
   <div *ngIf="(sponsorships_loaded | async)" class="card">
     <div class="card-header" *ngIf="sponsorship">
-      <img [src]="sponsorship.banner" class="card-img-top">
+      <img [src]="sponsorship.banner" class="card-img-top" style="max-height:500px; max-width:500px; display: block; margin-left: auto; margin-right: auto;">
       <a href="{{sponsorship.page}}" style="display: flex;justify-content: center;">{{sponsorship.page}}</a>
     </div>
   </div>
