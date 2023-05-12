@@ -217,7 +217,8 @@
       "no-lists": "You must create a list before proceding",
       "reference-required": "A name is required for the list",
       "no-changes": "There were no changes done",
-      "update-success": "The update was done successfully"
+      "update-success": "The update was done successfully",
+      "list-filter-placeholder": "Filter the favourite lists"
     }
   },
   "sponsorships": {

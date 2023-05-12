@@ -218,7 +218,8 @@
       "no-lists": "Debe crear una lista antes de poder proceder",
       "reference-required": "Se requiere de un nombre para el listado",
       "no-changes": "No se han realizado modificaciones",
-      "update-success": "La actualización se ha realizado correctamente"
+      "update-success": "La actualización se ha realizado correctamente",
+      "list-filter-placeholder": "Filtre los listados de favoritos"
     }
   },
   "sponsorships": {

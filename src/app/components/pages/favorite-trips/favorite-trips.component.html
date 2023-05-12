@@ -13,7 +13,10 @@
             {{'favourite_lists.messages.created' | translate}}
         </div>
         <div *ngIf="!listCreation">
-            <button (click)="listCreation = true" type="button" class="btn-primary btn">{{'favourite_lists.buttons.new' | translate}}</button>
+            <button (click)="listCreation = true" type="button" class="btn-primary btn">
+                <i class="fa-solid fa-heart"></i>
+                {{'favourite_lists.buttons.new' | translate}}
+            </button>
         </div>
         <form class="form-horizontal" (ngSubmit)="createFavoriteList(f)" #f="ngForm" *ngIf="listCreation">
             <div class="form-group">
@@ -28,15 +31,18 @@
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-success" [disabled]="reference!.errors?.['required']">
-                    <i class="fa-solid fa-ban"></i>
+                    <i class="fa-solid fa-heart-circle-plus"></i>
                     {{'favourite_lists.buttons.create' | translate}}
                 </button>
-                <button (click)="listCreation = false" type="button" class="btn-danger btn">{{'favourite_lists.buttons.cancel' | translate}}</button>
+                <button (click)="listCreation = false" type="button" class="btn-danger btn">
+                    <i class="fa-solid fa-heart-circle-xmark"></i>
+                    {{'favourite_lists.buttons.cancel' | translate}}
+                </button>
             </div>
         </form>
     </div>
     
-    <div class="row" *ngIf="favouriteListsReferences.length > 0">
+    <div class="row" *ngIf="favouriteListsReferences.length > 0" style="padding-top:1%;display:flex;justify-content:center;">
         <div class="col-md-7">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" [(ngModel)]="keyword">
@@ -120,14 +126,15 @@
                     </div>
                 </div>
             </div>
-            <p class="pagination" style="display: flex;justify-content: center; padding-top: 1%;">
-                <button [disabled]="curPage == 1" (click)="curPage = curPage - 1">
-                    <i class="fa-solid fa-arrow-left"></i> {{'pagination.prev' | translate}}</button>
-                <span>{{'pagination.page' | translate}} {{curPage}} / {{ totalPages() }}</span>
-                <button [disabled]="curPage >= trips.length/pageSize" (click)="curPage = curPage + 1">
-                    {{'pagination.next' | translate}} <i class="fa-solid fa-arrow-right"></i></button>
-            </p>
-    
+            <div style="display: flex;justify-content: center; padding-top: 1%;">
+                <p class="pagination">
+                    <button [disabled]="curPage == 1" (click)="curPage = curPage - 1" class="btn">
+                        <i class="fa-solid fa-arrow-left"></i> {{'pagination.prev' | translate}}</button>
+                    <span style="margin-top: auto;margin-bottom: auto;">{{'pagination.page' | translate}} {{curPage}} / {{ totalPages() }}</span>
+                    <button [disabled]="curPage >= trips.length/pageSize" (click)="curPage = curPage + 1" class="btn">
+                        {{'pagination.next' | translate}} <i class="fa-solid fa-arrow-right"></i></button>
+                </p>
+            </div>
         </div>
     </div>
 </div>

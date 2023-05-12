@@ -1,7 +1,7 @@
 {
   "favourite-trips": [
     {
-      "_id": 1,
+      "_id": "0",
       "_version": 0,
       "_explorer_Id": "645d00e9b9946e938b6387e1",
       "_favourite_trips": [
@@ -133,6 +133,12 @@
               "publicationDate": "2023-05-11T11:35:02.130Z"
             }
           ]
+        },
+        {
+          "_id": "0",
+          "_version": 0,
+          "reference": "Propuestas familiares",
+          "trips": []
         }
       ],
       "id": 1
