@@ -710,4 +710,67 @@ export class AllTripsComponent implements OnInit {
     var hours = Math.abs(date1 - date2) / 36e5;
     return hours;
   }
+
+  addTripToPriceTracker(trip: Trip)
+  {
+    let history = [];
+    history.push({
+      "price": trip.getPrice(),
+      "date": (new Date()).getTime()
+    });
+    let tripData = {
+      "id": trip._id,
+      "title": trip.getTitle(),
+      "history": history
+    };
+
+    let priceTrackerTrips = JSON.parse(localStorage.getItem("priceTrackerTrips"));
+
+    if(priceTrackerTrips)
+    {
+      priceTrackerTrips.push(tripData);
+    }
+    else
+    {
+      priceTrackerTrips = [];
+      priceTrackerTrips.push(tripData);
+    }
+    localStorage.setItem("priceTrackerTrips", JSON.stringify(priceTrackerTrips));
+  }
+
+  removeTripFromPriceTracker(trip: Trip)
+  {
+    let priceTrackerTrips = JSON.parse(localStorage.getItem("priceTrackerTrips"));
+    priceTrackerTrips = priceTrackerTrips.filter((currentTrip) => {
+      //console.log("currentTrip.id '"+currentTrip.id+"'");
+      //console.log("trip._id '"+trip._id+"'");
+      return currentTrip.id != trip._id;
+    });
+    localStorage.setItem("priceTrackerTrips", JSON.stringify(priceTrackerTrips));
+  }
+
+  tripPriceIsTracked(trip: Trip)
+  {
+    let priceTrackerTrips = JSON.parse(localStorage.getItem("priceTrackerTrips"));
+
+    let tripPriceIsTracked = false;
+    if(priceTrackerTrips)
+    {
+      priceTrackerTrips = priceTrackerTrips.filter((currentTrip) => {
+        //console.log("currentTrip.id '"+currentTrip.id+"'");
+        //console.log("trip._id '"+trip._id+"'");
+        return currentTrip.id == trip._id;
+      });
+      //console.log("priceTrackerTrips ", priceTrackerTrips);
+
+      if(priceTrackerTrips.length > 0)
+      {
+        tripPriceIsTracked = true;
+      }
+    }
+    //console.log("tripPriceIsTracked ", tripPriceIsTracked);
+    
+    
+    return tripPriceIsTracked;
+  }
 }

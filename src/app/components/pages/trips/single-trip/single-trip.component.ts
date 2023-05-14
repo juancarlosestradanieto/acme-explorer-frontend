@@ -35,6 +35,9 @@ export class SingleTripComponent implements OnInit {
   protected userId!: string | null;
   currentDateTime: Date;
 
+  priceIncreased: boolean = false;
+  priceDecreased: boolean = false;
+
   constructor(private tripService: TripsService, private router:Router, private sponsorshipService: SponsorshipsService, private route: ActivatedRoute, private authService: AuthService, config: NgbCarouselConfig, private translate:TranslateService) {
 
     config.interval = 2000;
@@ -149,6 +152,8 @@ export class SingleTripComponent implements OnInit {
         this.trip = casted_trip;
 
         this.getPaidSponsorships();
+
+        this.verifyPriceTracker(this.trip);
       })
       .catch((error) => {
         this.sponsorships = [];
@@ -291,6 +296,53 @@ export class SingleTripComponent implements OnInit {
     this.router.navigate(['/actor/' + currentActorId + '/sponsorships/add-sponsorship']);
 
     
+  }
+
+  verifyPriceTracker(trip: Trip)
+  {
+    let priceTrackerTrips = JSON.parse(localStorage.getItem("priceTrackerTrips"));
+    if(priceTrackerTrips)
+    {
+      priceTrackerTrips = priceTrackerTrips.map((currentTrip) => {
+
+        if(currentTrip.id == trip._id)
+        {
+          let history = currentTrip.history;
+          let lastRecord = history.at(-1);
+
+          let currentPrice = trip.getPrice();
+          if(currentPrice != lastRecord.price)
+          {
+            history.push({
+              "price": currentPrice,
+              "date": (new Date()).getTime()
+            });
+          }
+          console.log("history.length ", history.length);
+
+          if(history.length >= 2)
+          {
+            lastRecord = history.at(-1);
+            let secondLastRecord = history.at(-2);
+  
+            if(lastRecord.price > secondLastRecord.price)
+            {
+              this.priceIncreased = true;
+            }
+  
+            if(lastRecord.price < secondLastRecord.price)
+            {
+              this.priceDecreased = true;
+            }
+          }
+
+        }
+
+        return currentTrip;
+      });
+      //console.log("priceTrackerTrips ", priceTrackerTrips);
+      localStorage.setItem("priceTrackerTrips", JSON.stringify(priceTrackerTrips));
+    }
   }
 
 }

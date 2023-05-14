@@ -1,0 +1,37 @@
+<div class="row">
+
+    <div class="col-md-12">
+        <table class="table table-responsive table-hover">
+            <thead>
+                <tr>
+                    <th>{{"price-tracker.id" | translate}}</th>
+                    <th>{{"price-tracker.title" | translate}}</th>
+                    <th>{{"price-tracker.history" | translate}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let trip of priceTrackerTrips">
+                    <td>{{trip.id}}</td>
+                    <td>{{trip.title}}</td>
+                    <td>
+                        <table class="table table-responsive table-hover">
+                            <thead>
+                                <tr>
+                                    <th>{{"price-tracker.price" | translate}}</th>
+                                    <th>{{"price-tracker.date" | translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let record of trip.history">
+                                    <td>{{record.price}}</td>
+                                    <td>{{record.date | date: 'dd/MM/yyyy H:mm:ss'}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

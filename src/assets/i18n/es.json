@@ -322,5 +322,15 @@
     "money-spent": "dinero gastado",
     "comparison": "comparación",
     "search": "buscar"
+  },
+  "price-tracker": {
+    "menu-link": "Seguimiento de precios",
+    "start-price-tracking":"Iniciar seguimiento de precios",
+    "stop-price-tracking":"Detener seguimiento de precios",
+    "id":"Id",
+    "title":"Título",
+    "history":"Historial",
+    "price":"Precio",
+    "date":"Fecha"
   }
 }

@@ -320,5 +320,15 @@
     "money-spent": "money spent",
     "comparison": "comparison",
     "search": "search"
+  },
+  "price-tracker": {
+    "menu-link": "Price tracker",
+    "start-price-tracking":"Start price tracking",
+    "stop-price-tracking":"Stop price tracking",
+    "id":"Id",
+    "title":"Title",
+    "history":"History",
+    "price":"Price",
+    "date":"Date"
   }
 }

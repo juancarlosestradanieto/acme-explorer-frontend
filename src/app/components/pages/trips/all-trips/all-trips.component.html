@@ -318,6 +318,14 @@
                     <i class="fa-solid fa-heart-circle-plus"></i>
                     {{'trips.buttons.add-favourite' | translate}}
                 </button>
+                <button type="button" class="btn btn-success" *ngIf="activeRole == 'EXPLORER' && tripPriceIsTracked(trip) == false" (click)="addTripToPriceTracker(trip)">
+                    <i class="fa-solid fa-magnifying-glass-plus"></i>
+                    {{'price-tracker.start-price-tracking' | translate}}
+                </button>
+                <button type="button" class="btn btn-danger" *ngIf="activeRole == 'EXPLORER' && tripPriceIsTracked(trip) == true" (click)="removeTripFromPriceTracker(trip)">
+                    <i class="fa-solid fa-magnifying-glass-minus"></i>
+                    {{'price-tracker.stop-price-tracking' | translate}}
+                </button>
             </div>
         </div>
     </div>
