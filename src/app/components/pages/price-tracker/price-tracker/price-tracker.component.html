@@ -7,6 +7,7 @@
                     <th>{{"price-tracker.id" | translate}}</th>
                     <th>{{"price-tracker.title" | translate}}</th>
                     <th>{{"price-tracker.history" | translate}}</th>
+                    <th>{{"price-tracker.chart" | translate}}</th>
                 </tr>
             </thead>
             <tbody>
@@ -14,6 +15,7 @@
                     <td>{{trip.id}}</td>
                     <td>{{trip.title}}</td>
                     <td>
+
                         <table class="table table-responsive table-hover">
                             <thead>
                                 <tr>
@@ -28,6 +30,19 @@
                                 </tr>
                             </tbody>
                         </table>
+                        
+                    </td>
+                    <td>
+
+                        <div style="display: block;">
+                            <canvas baseChart width="400" height="400"
+                              [type]="'line'"
+                              [data]="lineChartsData[trip.id]"
+                              [options]="lineChartOptions"
+                              [legend]="lineChartLegend">
+                            </canvas>
+                        </div>
+
                     </td>
                 </tr>
             </tbody>

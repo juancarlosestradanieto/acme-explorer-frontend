@@ -329,6 +329,7 @@
     "title":"Title",
     "history":"History",
     "price":"Price",
-    "date":"Date"
+    "date":"Date",
+    "chart":"Chart"
   }
 }

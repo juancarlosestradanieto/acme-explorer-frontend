@@ -71,6 +71,8 @@ import { ExplorersStatsComponent } from './components/pages/explorers-stats/expl
 import { UpdateFavouriteListsComponent } from './components/pages/favorite-trips/update/update-favourite-lists/update-favourite-lists.component';
 import { PriceTrackerComponent } from './components/pages/price-tracker/price-tracker/price-tracker.component';
 
+import { NgChartsModule } from 'ng2-charts';
+import { DatePipe } from '@angular/common';
 
 let ANGULAR_MATERIAL_MODULES = [
   MatPaginatorModule,
@@ -149,9 +151,12 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
             deps: [HttpClient]
         }
     }),
-    NgxPayPalModule
+    NgxPayPalModule,
+    NgChartsModule
   ],
-  providers: [],
+  providers: [
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

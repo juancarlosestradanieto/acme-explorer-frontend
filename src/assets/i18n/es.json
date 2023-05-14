@@ -331,6 +331,7 @@
     "title":"Título",
     "history":"Historial",
     "price":"Precio",
-    "date":"Fecha"
+    "date":"Fecha",
+    "chart":"Gráfico"
   }
 }
