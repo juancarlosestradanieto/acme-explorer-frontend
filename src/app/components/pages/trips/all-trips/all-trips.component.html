@@ -318,6 +318,10 @@
                     <i class="fa-solid fa-heart-circle-plus"></i>
                     {{'trips.buttons.add-favourite' | translate}}
                 </button>
+                <button type="button" class="btn btn-warning" *ngIf="activeRole == 'EXPLORER'" (click)="startTrackingTrip(trip)">
+                    <i class="fa-solid fa-heart-circle-plus"></i>
+                    {{'trips.buttons.mark-trip' | translate}}
+                </button>
             </div>
         </div>
     </div>

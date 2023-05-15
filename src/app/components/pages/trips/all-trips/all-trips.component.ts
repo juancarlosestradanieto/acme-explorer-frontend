@@ -103,29 +103,35 @@ export class AllTripsComponent implements OnInit {
   results_per_page = 10;
   finder_id!: string;
   finders;
+ 
 
+  //Tracking
+  trackingTrips:any[]=[];
+  
+  
   //Para el CountDown
   interval:any;
   out_time!:string;
-
+  
   constructor(
     private tripsService: TripsService, 
     private authService: AuthService,
     private fb: FormBuilder,
     private findersService: FindersService,
     private route: ActivatedRoute
-  )
-  {
-    this.currentDateTime = new Date;
-    this.searchTripForm = this.createForm();
-    this.searchTripForm.valueChanges.subscribe((data) => {
-      console.log("AllTripsComponent->constructor searchTripForm.valueChanges.subscribe ", data);
-      this.showSaveFinderButton = false;
-    });
-  }
-
-  ngOnInit(): void 
-  {
+    )
+    {
+      this.currentDateTime = new Date;
+      this.searchTripForm = this.createForm();
+      this.searchTripForm.valueChanges.subscribe((data) => {
+        console.log("AllTripsComponent->constructor searchTripForm.valueChanges.subscribe ", data);
+        this.showSaveFinderButton = false;
+      });
+      
+    }
+    
+    ngOnInit(): void 
+    {
     this.route.queryParams.subscribe(params => {
       this.finder_id = params['finder_id'];
     });
@@ -709,5 +715,25 @@ export class AllTripsComponent implements OnInit {
   {
     var hours = Math.abs(date1 - date2) / 36e5;
     return hours;
+  }
+
+  startTrackingTrip(trip:Trip){
+
+    let trackTrip = {
+      id: trip._id,
+      name: trip.getTitle(),
+      price: trip.getPrice(),
+      current_date: new Date().toISOString()
+    };
+    
+    console.log(trackTrip)
+    this.trackingTrips.push(trackTrip);
+    console.log("Esta es la lista de trips que se encuentran en trackingTrips: ",this.trackingTrips);
+    
+    let trackingTripsJson = JSON.stringify(this.trackingTrips)
+    
+    localStorage.setItem("TrackedTrips",trackingTripsJson);
+    
+   
   }
 }

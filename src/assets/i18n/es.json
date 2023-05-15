@@ -62,6 +62,8 @@
     "buttons": {
       "add-favourite": "Añadir a favoritos",
       "remove-favourite": "Eliminar de favoritos",
+      "mark-trip":"Seguir este viaje",
+      "update_mark-trip":"Actualizar seguimiento de Trip",
       "add": "Añadir viaje",
       "more": "Detalles",
       "edit": "Editar",

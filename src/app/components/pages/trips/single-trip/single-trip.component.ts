@@ -34,6 +34,9 @@ export class SingleTripComponent implements OnInit {
   protected activeRole: string = 'anonymous';
   protected userId!: string | null;
   currentDateTime: Date;
+  greenDownArrow:boolean;
+  redUpArrow:boolean;
+  equalArrow:boolean;
 
   constructor(private tripService: TripsService, private router:Router, private sponsorshipService: SponsorshipsService, private route: ActivatedRoute, private authService: AuthService, config: NgbCarouselConfig, private translate:TranslateService) {
 
@@ -48,6 +51,7 @@ export class SingleTripComponent implements OnInit {
 
   ngOnInit(): void {
 
+    
     this.user = this.authService.getCurrentActor();
     if (this.user) {
       this.activeRole = this.user.getRole().toString();
@@ -55,8 +59,9 @@ export class SingleTripComponent implements OnInit {
     } else {
       this.activeRole = 'anonymous';
     }
-
+    
     this.getTrip();
+   
 
   }
 
@@ -65,17 +70,17 @@ export class SingleTripComponent implements OnInit {
     this.sponsorshipService.getSponsorshipsByTrip(this.trip.getTicker())
       .subscribe(
         (response: any) => {
-          console.log("SingleTripComponent->getPaidSponsorships response ", response);
-          console.log("SingleTripComponent->getPaidSponsorships response.values ", response.sponsorships);
+          // console.log("SingleTripComponent->getPaidSponsorships response ", response);
+          // console.log("SingleTripComponent->getPaidSponsorships response.values ", response.sponsorships);
           if (response.error) {
             console.error(response.message);
             this.sponsorships_loaded = Promise.resolve(false);
           } else {
             this.sponsorships = response.sponsorships;
-            console.log("SingleTripComponent->getPaidSponsorships this.sponsorships length ", this.sponsorships.length);
+            // console.log("SingleTripComponent->getPaidSponsorships this.sponsorships length ", this.sponsorships.length);
 
             this.paidSponsorships = this.sponsorships.filter(sponsorship => sponsorship.isPayed == true);
-            console.log("SingleTripComponent->getPaidSponsorships this.paidSponsorships length ", this.paidSponsorships.length);
+            // console.log("SingleTripComponent->getPaidSponsorships this.paidSponsorships length ", this.paidSponsorships.length);
           }
 
           if (this.sponsorships.length > 0) {
@@ -97,15 +102,15 @@ export class SingleTripComponent implements OnInit {
   selectRandomPaidSponsorship() {
     if(this.paidSponsorships.length > 0) {
       const randomSponsorshipIndex = Math.floor(Math.random() * this.paidSponsorships.length);
-      console.log("SingleTripComponent->constructor selectRandomPaidSponsorship randomSponsorshipIndex ", randomSponsorshipIndex);
+      // console.log("SingleTripComponent->constructor selectRandomPaidSponsorship randomSponsorshipIndex ", randomSponsorshipIndex);
 
       this.sponsorship = new Sponsorship(this.paidSponsorships[randomSponsorshipIndex]);
 
-      console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship ", this.sponsorship);
-      console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship.getBanner() ", this.sponsorship.getBanner());
-      console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship.getPage() ", this.sponsorship.getPage());
+      // console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship ", this.sponsorship);
+      // console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship.getBanner() ", this.sponsorship.getBanner());
+      // console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship.getPage() ", this.sponsorship.getPage());
 
-      console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship.getBanner().length ", this.sponsorship.banner.length);
+      // console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship.getBanner().length ", this.sponsorship.banner.length);
 
       if(this.sponsorship.getBanner().length > 1) {
         const randomBannerIndex = Math.floor(Math.random() * this.sponsorship.getBanner().length);
@@ -113,9 +118,9 @@ export class SingleTripComponent implements OnInit {
 
         this.sponsorship.setBanner(this.sponsorship.getBanner());
 
-        console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship ", this.sponsorship);
-        console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship.getBanner() ", this.sponsorship.getBanner());
-        console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship.getPage() ", this.sponsorship.getPage());
+        // console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship ", this.sponsorship);
+        // console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship.getBanner() ", this.sponsorship.getBanner());
+        // console.log("SingleTripComponent->constructor selectRandomPaidSponsorship this.sponsorship.getPage() ", this.sponsorship.getPage());
       }
 
       this.sponsorships_loaded = Promise.resolve(true);
@@ -171,7 +176,7 @@ export class SingleTripComponent implements OnInit {
         this.tripService.deleteTrip(trip.id)
         .then((response) => {
   
-          console.log("SingleTripComponent->deleteTrip tripsService.deleteTrip then response ", response);
+          // console.log("SingleTripComponent->deleteTrip tripsService.deleteTrip then response ", response);
           this.success_message = response.message;
   
         })
@@ -193,7 +198,7 @@ export class SingleTripComponent implements OnInit {
     this.success_message = "";
 
     let diff_in_days = this.getNowAndStartDateDiffInDays(trip);
-    console.log("diff_in_days ", diff_in_days);
+    // console.log("diff_in_days ", diff_in_days);
 
     if(diff_in_days < 7)
     {
@@ -225,7 +230,7 @@ export class SingleTripComponent implements OnInit {
               this.tripService.cancelTrip(trip.id, cancelReason)
               .then((response) => {
       
-                console.log("SingleTripComponent->cancelTrip tripsService.cancelTrip then response ", response);
+                // console.log("SingleTripComponent->cancelTrip tripsService.cancelTrip then response ", response);
                 this.success_message = response.message;
                 this.getTrip();
       
@@ -263,7 +268,7 @@ export class SingleTripComponent implements OnInit {
         this.tripService.publishTrip(trip.id)
         .then((response) => {
   
-          console.log("SingleTripComponent->publishTrip tripsService.publishTrip then response ", response);
+          // console.log("SingleTripComponent->publishTrip tripsService.publishTrip then response ", response);
           this.success_message = response.message;
           this.getTrip();
   
@@ -288,9 +293,27 @@ export class SingleTripComponent implements OnInit {
     console.log(currentActorId)
     let ticker = trip.getTicker();
     localStorage.setItem("tripTicker",ticker)
-    this.router.navigate(['/actor/' + currentActorId + '/sponsorships/add-sponsorship']);
-
-    
+    this.router.navigate(['/actor/' + currentActorId + '/sponsorships/add-sponsorship']);    
   }
 
+  updateTracker(trip:Trip){
+    console.log("Este es el precio del trip en detalle actual: ",trip.getPrice())
+    if(localStorage.getItem("TrackedTrips") == null){
+      console.log("No hay ningún trip que trackear")
+    }
+    else{
+      let markedTripsJSON = localStorage.getItem("TrackedTrips");
+      let markedTrips = JSON.parse(markedTripsJSON);
+      console.log("Estos son los trips trackeados", markedTrips)
+
+      
+
+    
+      
+
+
+  } //Fin Else
+
+
+  }//Fin Funcion
 }
