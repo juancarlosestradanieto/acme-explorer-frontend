@@ -33,6 +33,7 @@ export class SingleTripComponent implements OnInit {
 
   priceIncreased:boolean = false;
   priceDecreased:boolean = false;
+  descriptionmodified:boolean = false
 
   protected user!: Actor | null;
   protected activeRole: string = 'anonymous';
@@ -319,6 +320,14 @@ export class SingleTripComponent implements OnInit {
         if(tripTracked.price < currentTrip.price){
           this.priceIncreased = true
           console.log("El precio se ha incrementado")
+        }
+        if(tripTracked.description != currentTrip.description){
+          this.descriptionmodified = true;
+          console.log("La descripción ha sido modificada")
+        }
+        if(tripTracked.description == currentTrip.description){
+          this.descriptionmodified = false;
+          console.log("La descripcion no ha sido modificada.")
         }
         tripsTracked.push(currentTrip)
         console.log("tripsTracked actualizado: ",tripsTracked)

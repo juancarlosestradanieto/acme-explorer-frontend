@@ -84,6 +84,7 @@
         {{trip.getTitle()}}
       </h5>
       <p class="card-text">{{trip.getDescription()}}</p>
+      <i class="fa-solid fa-arrow-up" style="color:red" *ngIf="this.descriptionmodified">Este texto ha sido modificado</i>
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item"><b>{{'trips.price' | translate}}</b>: {{trip.getPrice()}}
