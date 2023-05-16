@@ -155,7 +155,7 @@ export class SingleTripComponent implements OnInit {
         this.trip = casted_trip;
 
         this.getPaidSponsorships();
-        this.verifyChangesTrackingTrip()
+        this.verifyChangesTrackingTrip(this.trip)
       })
       .catch((error) => {
         this.sponsorships = [];
@@ -298,16 +298,31 @@ export class SingleTripComponent implements OnInit {
     this.router.navigate(['/actor/' + currentActorId + '/sponsorships/add-sponsorship']);    
   }
 
-  verifyChangesTrackingTrip():boolean{
+  verifyChangesTrackingTrip(trip:Trip):boolean{
     let IncreasedPrice:boolean = false;
 
     let parsedTrackingTrips = JSON.parse(localStorage.getItem("TrackingTripList"));
     console.log(parsedTrackingTrips);
 
-    // let currentTrip:TrackingTrip = {
-    //   id: this.trip_id,
-    // }
+     let currentTrip:TrackingTrip = {
+       id: this.trip_id,
+       name: trip.getTitle(),
+       price: trip.getPrice(),
+       currentDate: new Date().toISOString()
+     }
 
+    parsedTrackingTrips =  parsedTrackingTrips.map( (trip:TrackingTrip)=>{
+      if(trip.id = this.trip_id){
+        if(currentTrip.price > trip.price){
+          IncreasedPrice = true
+        }
+        if(currentTrip.price < trip.price){
+          IncreasedPrice = false
+        }
+        trip = currentTrip;
+      }
+     })
+     console.log("Precio incrementado o decrementado", IncreasedPrice)
 
     //Fin función
     return  IncreasedPrice
