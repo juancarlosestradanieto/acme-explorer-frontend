@@ -315,6 +315,8 @@ export class SingleTripComponent implements OnInit {
      }
 
     parsedTrackingTrips =  parsedTrackingTrips.map( (tripTracked:TrackingTrip)=>{
+      
+      //El trip que tenga el mismo ID se le compara los precios y se realiza el cambio
       if(trip.id = this.trip_id){
         if(currentTrip.price > tripTracked.price){
           this.priceIncreased = true
@@ -324,15 +326,17 @@ export class SingleTripComponent implements OnInit {
           this.priceDecreased = true
           console.log("Precio decrementado ", this.priceDecreased )
         }
-        tripTracked = currentTrip;
+        tripTracked = currentTrip; //*Aquí se realiza el cambio
         console.log("este es el currentTrip", currentTrip)
       }
+
+
+      return  currentTrip //se devuelven todos los trips a parsedTrackingTrips
      })
 
      
      //Fin función
      localStorage.setItem("TrackingTripsList",JSON.stringify(parsedTrackingTrips))
-     return  currentTrip
   }
 
 
