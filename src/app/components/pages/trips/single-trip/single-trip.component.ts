@@ -314,10 +314,10 @@ export class SingleTripComponent implements OnInit {
        currentDate: new Date().toISOString()
      }
 
-    let modifiedTrackingTrips =  parsedTrackingTrips.map( (tripTracked:TrackingTrip)=>{
+     parsedTrackingTrips =  parsedTrackingTrips.map( (tripTracked:TrackingTrip)=>{
       
       //El trip que tenga el mismo ID se le compara los precios y se realiza el cambio
-      if(currentTrip.id === tripTracked.id){
+      if(currentTrip.id === tripTracked.id && currentTrip.price != tripTracked.price){
         if(currentTrip.price > tripTracked.price){
           this.priceIncreased = true
           console.log("Precio incrementado ", this.priceIncreased)
@@ -329,21 +329,20 @@ export class SingleTripComponent implements OnInit {
         if(currentTrip.price === tripTracked.price){
           console.log("El precio no se ha visto ni incrementado ni decrementado");
         }
-        tripTracked = currentTrip; 
-        //*Aquí se realiza la asignación del currentTrip al trip que tenia el mismo id, sobrescribiendo los valores
+        parsedTrackingTrips.push(tripTracked)
+        //*Aquí se realiza el push del nuevo tripTracked que se ha visto modificado
         
-        return tripTracked
        
       }
 
+      localStorage.setItem("TrackingTripsList",JSON.stringify(parsedTrackingTrips))
       return parsedTrackingTrips
 
-       //se devuelven todos los trips que no se han visto modificados parsedTrackingTrips
+       //se devuelven todos los trips, con el tripTracked modificado agregado también
      })
 
      
      //Fin función
-     localStorage.setItem("TrackingTripsList",JSON.stringify(modifiedTrackingTrips))
   }
 
 
