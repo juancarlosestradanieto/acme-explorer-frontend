@@ -724,16 +724,17 @@ export class AllTripsComponent implements OnInit {
       current_date: new Date().toISOString()
     }
 
-    // if(JSON.parse(localStorage.getItem("TrackingTripList")){
+    let trackingTripsList:TrackingTrip[] = JSON.parse(localStorage.getItem("TrackingTripList"))
 
-    // }
+    if(trackingTripsList){
+      trackingTripsList.push(trackTrip)
+    }
+    else{
+      trackingTripsList= [];
+      trackingTripsList.push(trackTrip)
+    }
 
-    //   this.trackingTripsList.push(trackTrip)
-    //   console.log(trackTrip);
-    //   console.log(this.trackingTripsList);
-  
-    //   let trackingTripListJSON = JSON.stringify(this.trackingTripsList)
-    //   localStorage.setItem("TrackingTripsList",trackingTripListJSON)      
+    localStorage.setItem("TrackingTripList", JSON.stringify(trackingTripsList))   
 
   }
 
@@ -744,10 +745,10 @@ export class AllTripsComponent implements OnInit {
 
     let parsedTrackingTrip = JSON.parse(localStorage.getItem("TrackingTripList"))
     //Eliminamos del array el trip que no queremos trackear
-    let TrackingListTripRemoved =  parsedTrackingTrip.filter( trackTrip => {
+    parsedTrackingTrip =  parsedTrackingTrip.filter( trackTrip => {
       return  trackTrip.id != trip._id
     })
-    localStorage.setItem("TrackingTripList",JSON.stringify(TrackingListTripRemoved)); 
+    localStorage.setItem("TrackingTripList",JSON.stringify(parsedTrackingTrip)); 
   }
 
   tripIsTracked(trip:Trip):boolean{
@@ -766,9 +767,7 @@ export class AllTripsComponent implements OnInit {
         //Significa que en el LocalStorage ya hay un trip con el mismo ID 
         tripIsTracked = true;
       }
-      if(parsedTrackingTrip.length = 0){
-        tripIsTracked=false;
-      }
+
     }
       
       
