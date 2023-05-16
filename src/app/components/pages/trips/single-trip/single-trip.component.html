@@ -87,8 +87,8 @@
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item"><b>{{'trips.price' | translate}}</b>: {{trip.getPrice()}}
-      <i class="fa-arrow" style="color:red" *ngIf="this.priceIncreased">Subió precio</i>
-      <i class="fa-arrow" style="color:green" *ngIf="this.priceDecreased">Bajó precio</i>
+      <i class="fa-arrow-up" style="color:red" *ngIf="this.priceIncreased">Subió precio</i>
+      <i class="fa-arrow-down" style="color:green" *ngIf="this.priceDecreased">Bajó precio</i>
       </li>
       <li class="list-group-item"><b>{{'trips.startDate' | translate}}</b>: {{trip.getStartDate() | date: 'dd/MM/yyyy'}}</li>
       <li class="list-group-item"><b>{{'trips.endDate' | translate}}</b>: {{trip.getEndDate() | date: 'dd/MM/yyyy'}}</li>
