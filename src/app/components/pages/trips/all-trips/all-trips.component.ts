@@ -105,10 +105,6 @@ export class AllTripsComponent implements OnInit {
   finder_id!: string;
   finders;
  
-
-  //Tracking
-  trackingTripsList:TrackingTrip[] = [];
-  trackButton = true;
   
   //Para el CountDown
   interval:any;
@@ -728,6 +724,10 @@ export class AllTripsComponent implements OnInit {
       current_date: new Date().toISOString()
     }
 
+    if(JSON.parse(localStorage.getItem("TrackingTripList")){
+      
+    }
+
       this.trackingTripsList.push(trackTrip)
       console.log(trackTrip);
       console.log(this.trackingTripsList);
@@ -755,19 +755,23 @@ export class AllTripsComponent implements OnInit {
     let tripIsTracked:boolean = false;
 
     let parsedTrackingTrip = JSON.parse(localStorage.getItem("TrackingTripList"))
-    
-    parsedTrackingTrip = parsedTrackingTrip.filter(trackTrip => {
-      return trackTrip.id == trip._id
-    })
-    if(parsedTrackingTrip.length > 0){
-      //Significa que en el LocalStorage ya hay un trip con el mismo ID 
-      tripIsTracked = true;
-    }
-    if(parsedTrackingTrip.length = 0){
-      tripIsTracked=false;
-    }
 
+    if(parsedTrackingTrip){
 
+      
+      parsedTrackingTrip = parsedTrackingTrip.filter(trackTrip => {
+        return trackTrip.id == trip._id
+      })
+      if(parsedTrackingTrip.length > 0){
+        //Significa que en el LocalStorage ya hay un trip con el mismo ID 
+        tripIsTracked = true;
+      }
+      if(parsedTrackingTrip.length = 0){
+        tripIsTracked=false;
+      }
+    }
+      
+      
     return tripIsTracked
 
   }
