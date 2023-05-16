@@ -304,7 +304,7 @@ export class SingleTripComponent implements OnInit {
 
   verifyChangesTrackingTrip(trip:Trip){
 
-    let parsedTrackingTrips = JSON.parse(localStorage.getItem("TrackingTripList"));
+    let parsedTrackingTrips = JSON.parse(localStorage.getItem("TrackingTripsList"));
     console.log(parsedTrackingTrips);
 
      let currentTrip:TrackingTrip = {
@@ -314,10 +314,10 @@ export class SingleTripComponent implements OnInit {
        currentDate: new Date().toISOString()
      }
 
-    parsedTrackingTrips =  parsedTrackingTrips.map( (tripTracked:TrackingTrip)=>{
+    let modifiedTrackingTrips =  parsedTrackingTrips.map( (tripTracked:TrackingTrip)=>{
       
       //El trip que tenga el mismo ID se le compara los precios y se realiza el cambio
-      if(trip.id = this.trip_id){
+      if(currentTrip.id === tripTracked.id){
         if(currentTrip.price > tripTracked.price){
           this.priceIncreased = true
           console.log("Precio incrementado ", this.priceIncreased)
@@ -326,17 +326,24 @@ export class SingleTripComponent implements OnInit {
           this.priceDecreased = true
           console.log("Precio decrementado ", this.priceDecreased )
         }
-        tripTracked = currentTrip; //*Aquí se realiza el cambio
-        console.log("este es el currentTrip", currentTrip)
+        if(currentTrip.price === tripTracked.price){
+          console.log("El precio no se ha visto ni incrementado ni decrementado");
+        }
+        tripTracked = currentTrip; 
+        //*Aquí se realiza la asignación del currentTrip al trip que tenia el mismo id, sobrescribiendo los valores
+        
+        return tripTracked
+       
       }
 
+      return parsedTrackingTrips
 
-      return  currentTrip //se devuelven todos los trips a parsedTrackingTrips
+       //se devuelven todos los trips que no se han visto modificados parsedTrackingTrips
      })
 
      
      //Fin función
-     localStorage.setItem("TrackingTripsList",JSON.stringify(parsedTrackingTrips))
+     localStorage.setItem("TrackingTripsList",JSON.stringify(modifiedTrackingTrips))
   }
 
 

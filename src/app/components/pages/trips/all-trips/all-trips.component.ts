@@ -724,7 +724,7 @@ export class AllTripsComponent implements OnInit {
       currentDate: new Date().toISOString()
     }
 
-    let trackingTripsList:TrackingTrip[] = JSON.parse(localStorage.getItem("TrackingTripList"))
+    let trackingTripsList:TrackingTrip[] = JSON.parse(localStorage.getItem("TrackingTripsList"))
 
     if(trackingTripsList){
       trackingTripsList.push(trackTrip)
@@ -734,7 +734,7 @@ export class AllTripsComponent implements OnInit {
       trackingTripsList.push(trackTrip)
     }
 
-    localStorage.setItem("TrackingTripList", JSON.stringify(trackingTripsList))   
+    localStorage.setItem("TrackingTripsList", JSON.stringify(trackingTripsList))   
 
   }
 
@@ -743,19 +743,19 @@ export class AllTripsComponent implements OnInit {
     //en el callback colocamos trackTrip.id != trip._id para devolver un array que no contenga el mismo id del trip seleccionado
     //De esta forma nos queda un array con ese trip borrado y lo guardamos en el LocalStorage de nuevo
 
-    let parsedTrackingTrip = JSON.parse(localStorage.getItem("TrackingTripList"))
+    let parsedTrackingTrip = JSON.parse(localStorage.getItem("TrackingTripsList"))
     //Eliminamos del array el trip que no queremos trackear
     parsedTrackingTrip =  parsedTrackingTrip.filter( trackTrip => {
       return  trackTrip.id != trip._id
     })
-    localStorage.setItem("TrackingTripList",JSON.stringify(parsedTrackingTrip)); 
+    localStorage.setItem("TrackingTripsList",JSON.stringify(parsedTrackingTrip)); 
   }
 
   tripIsTracked(trip:Trip):boolean{
 
     let tripIsTracked:boolean = false;
 
-    let parsedTrackingTrip = JSON.parse(localStorage.getItem("TrackingTripList"))
+    let parsedTrackingTrip = JSON.parse(localStorage.getItem("TrackingTripsList"))
 
     if(parsedTrackingTrip){
 
