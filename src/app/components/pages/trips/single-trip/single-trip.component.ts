@@ -326,15 +326,15 @@ export class SingleTripComponent implements OnInit {
           this.priceDecreased = true
           console.log("Precio decrementado ", this.priceDecreased )
         }
-        if(currentTrip.price === tripTracked.price){
-          console.log("El precio no se ha visto ni incrementado ni decrementado");
-        }
         parsedTrackingTrips.push(tripTracked)
         //*Aquí se realiza el push del nuevo tripTracked que se ha visto modificado
         
-       
+        
       }
-
+      if(currentTrip.id === tripTracked.id && currentTrip.price === tripTracked.price && currentTrip.currentDate != tripTracked.currentDate){
+        console.log("El precio no se ha visto ni incrementado ni decrementado");
+      }
+      
       return parsedTrackingTrips
       
       //se devuelven todos los trips, con el tripTracked modificado agregado también
