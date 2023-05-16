@@ -304,9 +304,9 @@ export class SingleTripComponent implements OnInit {
     let parsedTrackingTrips = JSON.parse(localStorage.getItem("TrackingTripList"));
     console.log(parsedTrackingTrips);
 
-    let currentTrip:TrackingTrip = {
-      id: this.trip_id,
-    }
+    // let currentTrip:TrackingTrip = {
+    //   id: this.trip_id,
+    // }
 
 
     //Fin función
