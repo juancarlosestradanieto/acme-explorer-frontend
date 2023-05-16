@@ -296,24 +296,5 @@ export class SingleTripComponent implements OnInit {
     this.router.navigate(['/actor/' + currentActorId + '/sponsorships/add-sponsorship']);    
   }
 
-  updateTracker(trip:Trip){
-    console.log("Este es el precio del trip en detalle actual: ",trip.getPrice())
-    if(localStorage.getItem("TrackedTrips") == null){
-      console.log("No hay ningún trip que trackear")
-    }
-    else{
-      let markedTripsJSON = localStorage.getItem("TrackedTrips");
-      let markedTrips = JSON.parse(markedTripsJSON);
-      console.log("Estos son los trips trackeados", markedTrips)
 
-      
-
-    
-      
-
-
-  } //Fin Else
-
-
-  }//Fin Funcion
 }

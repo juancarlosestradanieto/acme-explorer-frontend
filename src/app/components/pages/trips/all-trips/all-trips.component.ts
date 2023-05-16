@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms'
 import { FinderConfig, FindersService } from 'src/app/services/finders/finders.service';
 import { Finder } from 'src/app/models/finder/finder.model';
 import { ActivatedRoute } from '@angular/router';
+import { TrackingTrip } from 'src/app/interface/trackingTripList';
 
 const PriceRangeValidator: ValidatorFn = (fg: FormGroup) => {
 
@@ -106,8 +107,8 @@ export class AllTripsComponent implements OnInit {
  
 
   //Tracking
-  trackingTrips:any[]=[];
-  
+  trackingTripsList:TrackingTrip[] = [];
+  trackButton = true;
   
   //Para el CountDown
   interval:any;
@@ -717,23 +718,43 @@ export class AllTripsComponent implements OnInit {
     return hours;
   }
 
-  startTrackingTrip(trip:Trip){
+  
+  addTrackingTrip(trip:Trip){
+
+
 
     let trackTrip = {
       id: trip._id,
       name: trip.getTitle(),
-      price: trip.getPrice(),
+      price:trip.getPrice(),
       current_date: new Date().toISOString()
-    };
-    
-    console.log(trackTrip)
-    this.trackingTrips.push(trackTrip);
-    console.log("Esta es la lista de trips que se encuentran en trackingTrips: ",this.trackingTrips);
-    
-    let trackingTripsJson = JSON.stringify(this.trackingTrips)
-    
-    localStorage.setItem("TrackedTrips",trackingTripsJson);
-    
-   
+    }
+
+    if(this.trackingTripsList.filter(trackTrip => trackTrip.id != trip.id)){
+      
+      this.trackingTripsList.push(trackTrip)
+      console.log(trackTrip);
+      console.log(this.trackingTripsList);
+  
+      let trackingTripListJSON = JSON.stringify(this.trackingTripsList)
+      localStorage.setItem("TrackingTripsList",trackingTripListJSON)
+      this.trackButton = false
+
+    }  
+
   }
+
+  removeTrackingTrip(trip:Trip){
+
+
+    let parsedTrackingTrip = JSON.parse(localStorage.getItem("TrackingTripList"))
+    //Eliminamos del array el trip que no queremos trackear
+    let TrackingTripDuplicated =  parsedTrackingTrip.filter( trackTrip => trackTrip.id != trip._id)
+    localStorage.setItem("TrackingTripList",JSON.stringify(TrackingTripDuplicated));
+
+    this.trackButton = true;  
+    
+  }
+
+ 
 }
