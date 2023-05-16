@@ -302,7 +302,7 @@ export class SingleTripComponent implements OnInit {
     this.router.navigate(['/actor/' + currentActorId + '/sponsorships/add-sponsorship']);    
   }
 
-  verifyChangesTrackingTrip(trip:Trip){
+  verifyChangesTrackingTrip  (trip:Trip){
 
     let parsedTrackingTrips = JSON.parse(localStorage.getItem("TrackingTripsList"));
     console.log(parsedTrackingTrips);
@@ -326,20 +326,21 @@ export class SingleTripComponent implements OnInit {
           this.priceDecreased = true
           console.log("Precio decrementado ", this.priceDecreased )
         }
-        parsedTrackingTrips.push(tripTracked)
+        parsedTrackingTrips.push(currentTrip)
+        localStorage.setItem("TrackingTripsList",JSON.stringify(parsedTrackingTrips))
         //*Aquí se realiza el push del nuevo tripTracked que se ha visto modificado
+        console.log("Price Actual del trip",currentTrip.price)
+        console.log("Price anterior del trip",tripTracked.price)
+        if( currentTrip.price === tripTracked.price){
+          console.log("El precio no se ha visto ni incrementado ni decrementado");
+        }
+        
         
         
       }
-      if(currentTrip.id === tripTracked.id && currentTrip.price === tripTracked.price && currentTrip.currentDate != tripTracked.currentDate){
-        console.log("El precio no se ha visto ni incrementado ni decrementado");
-      }
-      
-      return parsedTrackingTrips
       
       //se devuelven todos los trips, con el tripTracked modificado agregado también
     })
-    localStorage.setItem("TrackingTripsList",JSON.stringify(parsedTrackingTrips))
 
      
      //Fin función
