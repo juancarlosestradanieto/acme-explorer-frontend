@@ -315,14 +315,17 @@ export class SingleTripComponent implements OnInit {
       if(trip.id = this.trip_id){
         if(currentTrip.price > trip.price){
           IncreasedPrice = true
+          console.log("Precio incrementado ", IncreasedPrice)
         }
         if(currentTrip.price < trip.price){
           IncreasedPrice = false
+          console.log("Precio decrementado ", IncreasedPrice)
         }
         trip = currentTrip;
       }
      })
-     console.log("Precio incrementado o decrementado", IncreasedPrice)
+
+     localStorage.setItem("TrackingTripsList",JSON.stringify(parsedTrackingTrips))
 
     //Fin función
     return  IncreasedPrice
