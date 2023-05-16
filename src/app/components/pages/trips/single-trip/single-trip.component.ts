@@ -39,6 +39,10 @@ export class SingleTripComponent implements OnInit {
   redUpArrow:boolean;
   equalArrow:boolean;
 
+  //TrackingApp
+  priceIncreased: boolean = false;
+  priceDecreased: boolean = false;
+
   constructor(private tripService: TripsService, private router:Router, private sponsorshipService: SponsorshipsService, private route: ActivatedRoute, private authService: AuthService, config: NgbCarouselConfig, private translate:TranslateService) {
 
     config.interval = 2000;
@@ -298,8 +302,7 @@ export class SingleTripComponent implements OnInit {
     this.router.navigate(['/actor/' + currentActorId + '/sponsorships/add-sponsorship']);    
   }
 
-  verifyChangesTrackingTrip(trip:Trip):boolean{
-    let IncreasedPrice:boolean = false;
+  verifyChangesTrackingTrip(trip:Trip){
 
     let parsedTrackingTrips = JSON.parse(localStorage.getItem("TrackingTripList"));
     console.log(parsedTrackingTrips);
@@ -311,24 +314,25 @@ export class SingleTripComponent implements OnInit {
        currentDate: new Date().toISOString()
      }
 
-    parsedTrackingTrips =  parsedTrackingTrips.map( (trip:TrackingTrip)=>{
+    parsedTrackingTrips =  parsedTrackingTrips.map( (tripTracked:TrackingTrip)=>{
       if(trip.id = this.trip_id){
-        if(currentTrip.price > trip.price){
-          IncreasedPrice = true
-          console.log("Precio incrementado ", IncreasedPrice)
+        if(currentTrip.price > tripTracked.price){
+          this.priceIncreased = true
+          console.log("Precio incrementado ", this.priceIncreased)
         }
-        if(currentTrip.price < trip.price){
-          IncreasedPrice = false
-          console.log("Precio decrementado ", IncreasedPrice)
+        if(currentTrip.price < tripTracked.price){
+          this.priceDecreased = true
+          console.log("Precio decrementado ", this.priceDecreased )
         }
-        trip = currentTrip;
+        tripTracked = currentTrip;
+        console.log("este es el currentTrip", currentTrip)
       }
      })
 
+     
+     //Fin función
      localStorage.setItem("TrackingTripsList",JSON.stringify(parsedTrackingTrips))
-
-    //Fin función
-    return  IncreasedPrice
+     return  currentTrip
   }
 
 
