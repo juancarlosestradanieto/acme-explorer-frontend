@@ -33,6 +33,7 @@ import { DetailSponsorshipComponent } from './components/pages/sponsorship/detai
 import { PaySponsorshipComponent } from './components/pages/sponsorship/pay-sponsorship/pay-sponsorship.component';
 import { ExplorersStatsComponent } from './components/pages/explorers-stats/explorers-stats.component';
 import { UpdateFavouriteListsComponent } from './components/pages/favorite-trips/update/update-favourite-lists/update-favourite-lists.component';
+import { PriceTrackerComponent } from './components/pages/price-tracker/price-tracker.component';
 
 const routes: Routes = [
   {
@@ -152,6 +153,9 @@ const routes: Routes = [
   },
   {
     path:'explorers-stats',component: ExplorersStatsComponent, canActivate: [ActorRoleGuard], data:{ expectedRole: 'ADMINISTRATOR'}
+  },
+  {
+    path:'price-tracker',component: PriceTrackerComponent, canActivate: [ActorRoleGuard], data:{ expectedRole:'EXPLORER'}
   },
   {
     path: 'denied-access', component: AccessdeniedComponent

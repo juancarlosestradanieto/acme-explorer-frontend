@@ -1,6 +1,11 @@
 
 <div class="row">
-    <div class="col-md-6"><p>{{'trips.messages.trips-available' | translate}}</p></div>
+    <div class="col-md-6"><p>{{'trips.messages.trips-available' | translate}}</p>
+        <button type="button" class="btn btn-danger" *ngIf="activeRole == 'EXPLORER'" routerLink="/price-tracker">
+            <i class="fa-solid fa-glasses"></i>
+            Ir al price-Tracker App
+        </button>
+    </div>
     <div class="col-md-3 offset-md-3" *ngIf="showAddTripButton">
         <button type="button" class="btn btn-success" routerLink="/trips/add"  id="add-trip">
             <i class="fa-solid fa-plus"></i>

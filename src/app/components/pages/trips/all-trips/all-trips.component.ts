@@ -755,17 +755,21 @@ export class AllTripsComponent implements OnInit {
     let tripIsTracked:boolean = false
     let tripsTracked: tripTrack[] = JSON.parse(localStorage.getItem("TrackedTripsList"));
 
-    tripsTracked = tripsTracked.filter((trackTrip) =>{
-      return trackTrip.id ==trip._id
-    })
+    if(tripsTracked){
 
+      
+      tripsTracked = tripsTracked.filter((trackTrip) =>{
+        return trackTrip.id ==trip._id
+    })
+    
     if(tripsTracked.length > 0){
       tripIsTracked = true;
     }
-
+    
+  } 
     return tripIsTracked;
-
-    }
+    
+  }
 
 
 }

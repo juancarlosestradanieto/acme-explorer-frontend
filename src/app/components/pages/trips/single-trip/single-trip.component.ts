@@ -153,6 +153,7 @@ export class SingleTripComponent implements OnInit {
         this.trip = casted_trip;
 
         this.getPaidSponsorships();
+        this.updateInformationTrackedTrip(this.trip)
       })
       .catch((error) => {
         this.sponsorships = [];
@@ -295,7 +296,7 @@ export class SingleTripComponent implements OnInit {
     this.router.navigate(['/actor/' + currentActorId + '/sponsorships/add-sponsorship']); 
   }
 
-  updateInformationTrackedTrip(trip:Trip){
+  updateInformationTrackedTrip(trip:Trip){ //?Recordar de llamar a esta funcion en el getTrip()
     let tripsTracked:tripTrack[] = JSON.parse(localStorage.getItem("TrackedTripsList"));
 
     let currentTrip:tripTrack = {
@@ -306,20 +307,27 @@ export class SingleTripComponent implements OnInit {
       currentDate: new Date().toISOString()
     }
 
-    let tripsTrackedupdate = tripsTracked.map((tripTracked)=>{
-      if(tripTracked.id == currentTrip.id && tripTracked.price != currentTrip.price && tripTracked.currentDate != currentTrip.currentDate){
-        if(tripTracked.price > currentTrip.price){
+    if(tripsTracked){
+
+      
+      tripsTracked.forEach((tripTracked:tripTrack)=>{
+        if(tripTracked.id == currentTrip.id && tripTracked.price != currentTrip.price && tripTracked.currentDate != currentTrip.currentDate){
+          if(tripTracked.price > currentTrip.price){
           this.priceDecreased = true;
+          console.log("El precio ha descendido")
         }
         if(tripTracked.price < currentTrip.price){
           this.priceIncreased = true
+          console.log("El precio se ha incrementado")
         }
-        tripsTracked.push(tripTracked)
+        tripsTracked.push(currentTrip)
         console.log("tripsTracked actualizado: ",tripsTracked)
         localStorage.setItem("TrackedTripsList",JSON.stringify(tripsTracked))
       }
     })
-  
+
+  }
+    
   }
 
 }
