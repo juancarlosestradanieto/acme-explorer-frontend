@@ -721,7 +721,7 @@ export class AllTripsComponent implements OnInit {
       id: trip._id,
       name: trip.getTitle(),
       price:trip.getPrice(),
-      current_date: new Date().toISOString()
+      currentDate: new Date().toISOString()
     }
 
     let trackingTripsList:TrackingTrip[] = JSON.parse(localStorage.getItem("TrackingTripList"))

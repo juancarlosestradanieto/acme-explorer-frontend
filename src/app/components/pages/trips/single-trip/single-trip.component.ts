@@ -11,6 +11,7 @@ import { SponsorshipsService } from 'src/app/services/sponsorships.service';
 import { SponsorshipsResponse } from 'src/app/models/sponsorships-response.model';
 import { FavouriteTrips } from 'src/app/models/favourite-trips.model';
 import { TranslateService } from '@ngx-translate/core';
+import { TrackingTrip } from 'src/app/interface/trackingTripList';
 
 @Component({
   selector: 'app-single-trip',
@@ -154,6 +155,7 @@ export class SingleTripComponent implements OnInit {
         this.trip = casted_trip;
 
         this.getPaidSponsorships();
+        this.verifyChangesTrackingTrip()
       })
       .catch((error) => {
         this.sponsorships = [];
@@ -294,6 +296,21 @@ export class SingleTripComponent implements OnInit {
     let ticker = trip.getTicker();
     localStorage.setItem("tripTicker",ticker)
     this.router.navigate(['/actor/' + currentActorId + '/sponsorships/add-sponsorship']);    
+  }
+
+  verifyChangesTrackingTrip():boolean{
+    let IncreasedPrice:boolean = false;
+
+    let parsedTrackingTrips = JSON.parse(localStorage.getItem("TrackingTripList"));
+    console.log(parsedTrackingTrips);
+
+    let currentTrip:TrackingTrip = {
+      id: this.trip_id,
+    }
+
+
+    //Fin función
+    return  IncreasedPrice
   }
 
 
