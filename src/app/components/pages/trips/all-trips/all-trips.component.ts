@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms'
 import { FinderConfig, FindersService } from 'src/app/services/finders/finders.service';
 import { Finder } from 'src/app/models/finder/finder.model';
 import { ActivatedRoute } from '@angular/router';
+import { tripTrack } from 'src/app/interface/tripTrack';
 
 const PriceRangeValidator: ValidatorFn = (fg: FormGroup) => {
 
@@ -710,4 +711,61 @@ export class AllTripsComponent implements OnInit {
     var hours = Math.abs(date1 - date2) / 36e5;
     return hours;
   }
+
+  addTriptoTracking(trip:Trip){
+
+    let tripToTrack:tripTrack = {
+      id: trip._id,
+      title: trip.getTitle(),
+      price: trip.getPrice(),
+      description: trip.getDescription(),
+      currentDate: new Date().toISOString()
+    }
+
+    let tripsTracked: tripTrack[] = JSON.parse(localStorage.getItem("TrackedTripsList"));
+
+    if(tripsTracked){
+      tripsTracked.push(tripToTrack);
+    }else{
+      tripsTracked = []
+      tripsTracked.push(tripToTrack)
+    }
+
+    localStorage.setItem("TrackedTripsList", JSON.stringify(tripsTracked))
+    console.log(tripsTracked)
+  }
+
+  deleteTripToTracking(trip:Trip){
+
+    let tripsTracked: tripTrack[] = JSON.parse(localStorage.getItem("TrackedTripsList"));
+
+    tripsTracked = tripsTracked.filter((trackTrip) =>{
+      return trackTrip.id !=trip._id
+    })
+
+    localStorage.setItem("TrackedTripsList", JSON.stringify(tripsTracked))
+
+
+    console.log("Este es el array sin el trip que quiero eliminar",tripsTracked)
+
+  }
+
+  verifyTripIsTracked(trip:Trip):boolean{
+    
+    let tripIsTracked:boolean = false
+    let tripsTracked: tripTrack[] = JSON.parse(localStorage.getItem("TrackedTripsList"));
+
+    tripsTracked = tripsTracked.filter((trackTrip) =>{
+      return trackTrip.id ==trip._id
+    })
+
+    if(tripsTracked.length > 0){
+      tripIsTracked = true;
+    }
+
+    return tripIsTracked;
+
+    }
+
+
 }

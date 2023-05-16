@@ -11,6 +11,7 @@ import { SponsorshipsService } from 'src/app/services/sponsorships.service';
 import { SponsorshipsResponse } from 'src/app/models/sponsorships-response.model';
 import { FavouriteTrips } from 'src/app/models/favourite-trips.model';
 import { TranslateService } from '@ngx-translate/core';
+import { tripTrack } from 'src/app/interface/tripTrack';
 
 @Component({
   selector: 'app-single-trip',
@@ -29,6 +30,9 @@ export class SingleTripComponent implements OnInit {
   error_message: string = "";
   success_message: string = "";
   sponsorshipNotCreated:boolean= true;
+
+  priceIncreased:boolean = false;
+  priceDecreased:boolean = false;
 
   protected user!: Actor | null;
   protected activeRole: string = 'anonymous';
@@ -288,9 +292,34 @@ export class SingleTripComponent implements OnInit {
     console.log(currentActorId)
     let ticker = trip.getTicker();
     localStorage.setItem("tripTicker",ticker)
-    this.router.navigate(['/actor/' + currentActorId + '/sponsorships/add-sponsorship']);
+    this.router.navigate(['/actor/' + currentActorId + '/sponsorships/add-sponsorship']); 
+  }
 
-    
+  updateInformationTrackedTrip(trip:Trip){
+    let tripsTracked: tripTrack[] = JSON.parse(localStorage.getItem("TrackedTripsList"));
+
+    let currentTrip:tripTrack = {
+      id: trip._id,
+      title: trip.getTitle(),
+      description : trip.getDescription(),
+      price: trip.getPrice(),
+      currentDate: new Date().toISOString()
+    }
+
+    // tripsTracked = tripsTracked.map((tripTracked)=>{
+    //   if(tripTracked.id == currentTrip.id && tripTracked.price != currentTrip.price && tripTracked.currentDate != currentTrip.currentDate){
+    //     if(tripTracked.price > currentTrip.price){
+    //       this.priceDecreased = true;
+    //     }
+    //     if(tripTracked.price < currentTrip.price){
+    //       this.priceIncreased = true
+    //     }
+    //     tripsTracked.push(tripTracked)
+    //     console.log("tripsTracked actualizado: ",tripsTracked)
+    //     localStorage.setItem("TrackedTripsList",JSON.stringify(tripsTracked))
+    //   }
+    // })
+  
   }
 
 }

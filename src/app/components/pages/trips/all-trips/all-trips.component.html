@@ -318,6 +318,14 @@
                     <i class="fa-solid fa-heart-circle-plus"></i>
                     {{'trips.buttons.add-favourite' | translate}}
                 </button>
+                <button type="button" class="btn btn-warning" *ngIf="activeRole == 'EXPLORER' && verifyTripIsTracked(trip) == false" (click)="addTriptoTracking(trip)">
+                    <i class="fa-solid fa-glasses"></i>
+                    Agregar trip al tracking
+                </button>
+                <button type="button" class="btn btn-danger" *ngIf="activeRole == 'EXPLORER' && verifyTripIsTracked(trip) == true" (click)="deleteTripToTracking(trip)">
+                    <i class="fa-solid fa-glasses"></i>
+                    Eliminar trip al tracking
+                </button>
             </div>
         </div>
     </div>
