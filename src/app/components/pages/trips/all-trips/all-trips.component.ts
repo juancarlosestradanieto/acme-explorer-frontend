@@ -724,16 +724,16 @@ export class AllTripsComponent implements OnInit {
       current_date: new Date().toISOString()
     }
 
-    if(JSON.parse(localStorage.getItem("TrackingTripList")){
-      
-    }
+    // if(JSON.parse(localStorage.getItem("TrackingTripList")){
 
-      this.trackingTripsList.push(trackTrip)
-      console.log(trackTrip);
-      console.log(this.trackingTripsList);
+    // }
+
+    //   this.trackingTripsList.push(trackTrip)
+    //   console.log(trackTrip);
+    //   console.log(this.trackingTripsList);
   
-      let trackingTripListJSON = JSON.stringify(this.trackingTripsList)
-      localStorage.setItem("TrackingTripsList",trackingTripListJSON)      
+    //   let trackingTripListJSON = JSON.stringify(this.trackingTripsList)
+    //   localStorage.setItem("TrackingTripsList",trackingTripListJSON)      
 
   }
 
