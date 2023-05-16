@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TrackingTrip } from 'src/app/interface/trackingTripList';
 import { Trip } from 'src/app/models/trip.model';
-import { TripsService } from '../../../services/trips/trips.service';
 
 @Component({
   selector: 'app-price-tracker',
@@ -9,13 +9,22 @@ import { TripsService } from '../../../services/trips/trips.service';
 })
 export class PriceTrackerComponent implements OnInit {
 
-  trips:Trip[]= []
+  trackingTrips:TrackingTrip[]= []
 
-  constructor(private TripsService:TripsService) { }
+  constructor() { }
 
   ngOnInit(): void {
+    this.displayTrips()
   }
 
+  displayTrips(){
+    let parsedTripsList = JSON.parse(localStorage.getItem("TrackingTripsList"));
+    console.log(parsedTripsList)
+
+    if(parsedTripsList){
+      this.trackingTrips = parsedTripsList;
+    }
+  }
 
 
 }

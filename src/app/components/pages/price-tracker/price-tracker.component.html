@@ -1,7 +1,7 @@
 <div class="row">
 
     <div class="col-md-12">
-        <table class="table table-responsive table-hover">
+        <table class="table table-responsive" *ngIf="trackingTrips">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -11,11 +11,11 @@
                 </tr>
             </thead>
                 <tbody>
-                    <tr>
-                        <th>1</th>
-                        <th>2</th>
-                        <th>3</th>
-                        <th>4</th>
+                    <tr *ngFor="let trackingTrip of trackingTrips">
+                        <th>{{trackingTrip.id}}</th>
+                        <th>{{trackingTrip.name}}</th>
+                        <th>{{trackingTrip.price}}</th>
+                        <th>{{trackingTrip.currentDate | date}}</th>
                     </tr>
                 </tbody>
             <tbody>
