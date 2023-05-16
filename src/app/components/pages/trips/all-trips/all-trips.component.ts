@@ -737,7 +737,10 @@ export class AllTripsComponent implements OnInit {
 
   }
 
-  removeTrackingTrip(trip:Trip){
+  removeTrackingTrip(trip:Trip){ 
+    //Con esta función hacemos un filter del array que obtenemos del localStorage.
+    //en el callback colocamos trackTrip.id != trip._id para devolver un array que no contenga el mismo id del trip seleccionado
+    //De esta forma nos queda un array con ese trip borrado y lo guardamos en el LocalStorage de nuevo
 
     let parsedTrackingTrip = JSON.parse(localStorage.getItem("TrackingTripList"))
     //Eliminamos del array el trip que no queremos trackear
@@ -755,6 +758,9 @@ export class AllTripsComponent implements OnInit {
     if(parsedTrackingTrip.length > 0){
       //Significa que en el LocalStorage ya hay un trip con el mismo ID 
       tripIsTracked = true;
+    }
+    if(parsedTrackingTrip.length = 0){
+      tripIsTracked=false;
     }
 
 
