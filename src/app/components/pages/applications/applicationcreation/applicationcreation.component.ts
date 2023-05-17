@@ -145,4 +145,6 @@ export class ApplicationcreationComponent implements OnInit {
     return this.getDiffDays(trip.getStartDate().toString(), currentDateTime.toISOString());
   }
 
+  
+
 }

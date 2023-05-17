@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms'
 import { FinderConfig, FindersService } from 'src/app/services/finders/finders.service';
 import { Finder } from 'src/app/models/finder/finder.model';
 import { ActivatedRoute } from '@angular/router';
+import { tripPreCanceled } from 'src/app/interfaces/tripPreCanceled';
 
 const PriceRangeValidator: ValidatorFn = (fg: FormGroup) => {
 
@@ -710,4 +711,50 @@ export class AllTripsComponent implements OnInit {
     var hours = Math.abs(date1 - date2) / 36e5;
     return hours;
   }
+
+  addTripToPreCancel(trip:Trip){
+
+    let TripPreCancel:tripPreCanceled = {
+      id : trip._id,
+      title: trip.getTitle(),
+      description: trip.getDescription(),
+      price: trip.getPrice(),
+      requirements: trip.getRequirements(),
+      startDate: trip.getStartDate(),
+      endDate: trip.getEndDate(),
+      publicationDate: trip.getPublicationDate(),
+      pictures:trip.getPictures(),
+      canceled:false,
+      cancelReason:trip.getCancelReason(),
+      stages: trip.getStages(),
+      managerId: trip.getManagerId()
+
+    }
+    
+    let preCanceledTripsList:tripPreCanceled[] = JSON.parse(localStorage.getItem("preCanceledTripsList"));
+
+    if(preCanceledTripsList){
+      preCanceledTripsList.push(TripPreCancel)
+    }
+    else{
+      preCanceledTripsList = [];
+      preCanceledTripsList.push(TripPreCancel)
+    }
+
+    localStorage.setItem("preCanceledTripsList",JSON.stringify(preCanceledTripsList))
+
+  }
+
+  removeTripToPreCancel(trip:Trip){
+
+    let preCanceledTripsList:tripPreCanceled[] = JSON.parse(localStorage.getItem("preCanceledTripsList"));
+
+    if(preCanceledTripsList){
+
+      // preCanceledTripsList = preCanceledTripsList.map((tripPreCancel:trip)=>{
+      //   return tripPreCancel.id != trip._id
+      // })
+    }
+  }
+
 }
