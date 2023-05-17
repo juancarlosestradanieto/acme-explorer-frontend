@@ -322,5 +322,20 @@
     "money-spent": "dinero gastado",
     "comparison": "comparación",
     "search": "buscar"
+  },
+  "pre-cancelled-trips": {
+    "add-to-list": "Agregar a la lista de viajes pre cancelados",
+    "remove-from-list": "Remover de la lista de viajes pre cancelados",
+    "trip-id": "Id del viaje",
+    "trip-title": "Título del viaje",
+    "menu-link": "Viajes pre cancelados",
+    "trip-start-date": "Fecha de inicio del viaje",
+    "days-to-start": "Días para empezar",
+    "cancell-all-trips": "Cancelar todos los viajes",
+    "confirm-cancel-all-trips": "¿Seguro desea cancelar todos los viajes? Esta acción no se puede deshacer.",
+    "successful-cancelation": "Cancelación exitosa",
+    "message": "Mensaje",
+    "cancelled": "Canceldo",
+    "cancel-reason": "Motivo de la cancelación"
   }
 }

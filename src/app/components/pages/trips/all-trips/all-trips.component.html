@@ -318,6 +318,14 @@
                     <i class="fa-solid fa-heart-circle-plus"></i>
                     {{'trips.buttons.add-favourite' | translate}}
                 </button>
+                <button type="button" class="btn btn-success" *ngIf="activeRole == 'MANAGER' && getNowAndStartDateDiffInDays(trip) >= 7 && tripIsPreCancelled(trip) == false" (click)="addTripToPreCancelledList(trip)">
+                    <i class="fa-solid fa-plus"></i>
+                    {{'pre-cancelled-trips.add-to-list' | translate}}
+                </button>
+                <button type="button" class="btn btn-danger" *ngIf="activeRole == 'MANAGER' && tripIsPreCancelled(trip) == true" (click)="removeTripFromPreCancelledList(trip)">
+                    <i class="fa-solid fa-remove"></i>
+                    {{'pre-cancelled-trips.remove-from-list' | translate}}
+                </button>
             </div>
         </div>
     </div>

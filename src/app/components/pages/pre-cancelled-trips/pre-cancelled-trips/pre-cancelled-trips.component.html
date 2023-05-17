@@ -1,0 +1,65 @@
+<p>Pre cancelled trips</p>
+
+<div class="row" *ngIf="preCancelledTrips && preCancelledTrips.length > 0">
+
+    <div class="col-md-12">
+        <table class="table table-responsive table-hover">
+            <thead>
+                <tr>
+                    <th>{{"pre-cancelled-trips.trip-id" | translate}}</th>
+                    <th>{{"pre-cancelled-trips.trip-title" | translate}}</th>
+                    <th>{{"pre-cancelled-trips.trip-start-date" | translate}}</th>
+                    <th>{{"pre-cancelled-trips.days-to-start" | translate}}</th>
+                    <th>{{"pre-cancelled-trips.cancelled" | translate}}</th>
+                    <th>{{"pre-cancelled-trips.cancel-reason" | translate}}</th>
+                    <th>{{"pre-cancelled-trips.message" | translate}}</th>
+                    <th>{{'pre-cancelled-trips.remove-from-list' | translate}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let trip of preCancelledTrips">
+                    <td>{{trip._id}}</td>
+                    <td>{{trip.getTitle()}}</td>
+                    <td>{{trip.getStartDate() | date: 'dd/MM/yyyy'}}</td>
+                    <td [ngClass]="{
+                        'red': getNowAndStartDateDiffInDays(trip) < 10, 
+                        'green' : getNowAndStartDateDiffInDays(trip) > 10
+                    }" >
+                        {{getNowAndStartDateDiffInDays(trip)}}
+                    </td>
+                    <td>{{trip.isCanceled()}}</td>
+                    <td>{{trip.getCancelReason()}}</td>
+                    <td>
+
+                        <div class="alert alert-success" *ngIf="success_messages[trip._id]">
+                        {{success_messages[trip._id]}}
+                        </div>
+                        
+                        <div class="alert alert-danger" *ngIf="error_messages[trip._id]">
+                        {{error_messages[trip._id]}}
+                        </div>
+
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" (click)="removeTripFromPreCancelledList(trip)">
+                            <i class="fa-solid fa-remove"></i>
+                            {{'pre-cancelled-trips.remove-from-list' | translate}}
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-12">
+        <button class="btn btn-danger" (click)="cancelAllTrips()">
+            {{"pre-cancelled-trips.cancell-all-trips" | translate}}
+        </button>
+    </div>
+
+    
+
+
+
+</div>
+

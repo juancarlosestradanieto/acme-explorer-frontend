@@ -320,5 +320,20 @@
     "money-spent": "money spent",
     "comparison": "comparison",
     "search": "search"
+  },
+  "pre-cancelled-trips": {
+    "add-to-list": "Add to pre cancelled trips list",
+    "remove-from-list": "Remove from pre cancelled trips list",
+    "trip-id": "Trip id",
+    "trip-title": "Trip title",
+    "menu-link": "Pre cancelled trips",
+    "trip-start-date": "Trip start date",
+    "days-to-start": "Days to start",
+    "cancell-all-trips": "Cancell all trips",
+    "confirm-cancel-all-trips": "Are you sure you want to cancel all trips? This action can not be undone.",
+    "successful-cancelation": "Successful cancelation",
+    "message": "Message",
+    "cancelled": "Cancelled",
+    "cancel-reason": "Cancel reason"
   }
 }

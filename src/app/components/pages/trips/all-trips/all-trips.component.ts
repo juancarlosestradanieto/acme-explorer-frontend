@@ -10,6 +10,7 @@ import { differenceInMilliseconds } from 'date-fns';
 import { FavouriteTrips } from 'src/app/models/favourite-trips.model';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { FinderConfig, FindersService } from 'src/app/services/finders/finders.service';
+import { PreCancelledTripsService } from 'src/app/services/pre-cancelled-trips/pre-cancelled-trips.service';
 import { Finder } from 'src/app/models/finder/finder.model';
 import { ActivatedRoute } from '@angular/router';
 
@@ -113,7 +114,8 @@ export class AllTripsComponent implements OnInit {
     private authService: AuthService,
     private fb: FormBuilder,
     private findersService: FindersService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private preCancelledTripsService: PreCancelledTripsService
   )
   {
     this.currentDateTime = new Date;
@@ -710,4 +712,21 @@ export class AllTripsComponent implements OnInit {
     var hours = Math.abs(date1 - date2) / 36e5;
     return hours;
   }
+
+  addTripToPreCancelledList(trip: Trip)
+  {
+    this.preCancelledTripsService.addTripToPreCancelledList(trip);
+  }
+
+  removeTripFromPreCancelledList(trip: Trip)
+  {
+    this.preCancelledTripsService.removeTripFromPreCancelledList(trip);
+  }
+
+  tripIsPreCancelled(trip: Trip)
+  {
+    return this.preCancelledTripsService.tripIsPreCancelled(trip);
+  }
+  
+
 }
