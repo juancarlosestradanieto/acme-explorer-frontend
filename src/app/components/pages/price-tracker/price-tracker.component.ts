@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { tripTrack } from 'src/app/interface/tripTrack';
 import 'chart.js';
-import { Chart, ChartOptions } from 'chart.js';
-
+import { ChartOptions } from 'chart.js';
+import Chart from 'chart.js/auto';
 @Component({
   selector: 'app-price-tracker',
   templateUrl: './price-tracker.component.html',
