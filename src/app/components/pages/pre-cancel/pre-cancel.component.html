@@ -1,1 +1,39 @@
-<p>pre-cancel works!</p>
+<div class="row" >
+
+    <div class="col-md-12">
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Descripcion</th>
+                    <th>Precio</th>
+                    <th>Requisitos</th>
+                    <th>Fecha de inicio</th>
+                    <th>Fecha de Fin</th>
+                    <th>Fecha de publicación</th>
+                    <th>Fotos</th>
+                    <th>Estado</th>
+                    <th>Manager ID</th>
+
+                </tr>
+            </thead>
+                <tbody>
+                    <tr *ngFor="let preCancelTrip of preCancelTrips">
+                        <th>{{preCancelTrip.id}}</th>
+                        <th>{{preCancelTrip.title}}</th>
+                        <th>{{preCancelTrip.description}}</th>
+                        <th>{{preCancelTrip.price}}</th>
+                        <th>{{preCancelTrip.requirements}}</th>
+                        <th>{{preCancelTrip.startDate}}</th>
+                        <th>{{preCancelTrip.endDate}}</th>
+                        <th>{{preCancelTrip.publicationDate}}</th>
+                        <th>{{preCancelTrip.pictures}}</th>
+                        <th>{{preCancelTrip.stages}}</th>
+                        <th>{{preCancelTrip.managerId}}</th>
+                    </tr>
+                </tbody>
+            <tbody>
+                </table>
+        </div>
+</div>
