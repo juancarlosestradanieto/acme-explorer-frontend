@@ -10,7 +10,7 @@
   <div class="row" *ngIf="activeRole == 'MANAGER'" >
 
     <div class="col-md-2 offset-md-4">
-      <button type="button" id="edit-trip" class="btn btn-info" [ngClass]="{ 'disabled' : !( !trip.isPublished() ) }" routerLink="/trips/{{trip.id}}/edit/">
+      <button type="button" id="edit-trip" class="btn btn-info" [ngClass]="{ 'disabled' : !( getNowAndStartDateDiffInDays(trip) >= 10 ) }" routerLink="/trips/{{trip.id}}/edit/">
         <i class="fa-solid fa-edit"></i>
         {{'trips.buttons.edit' | translate}}
       </button>
