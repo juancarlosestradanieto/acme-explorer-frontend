@@ -1,0 +1,140 @@
+<div *ngIf="(favouriteLists_loaded | async)">
+    <div class="row">
+        <div class="col-md-6" *ngIf="favouriteListsReferences.length > 0">
+            <p>{{'favourite_lists.messages.favourite-trips-available' | translate}}</p>
+        </div>
+        <div class="col-md-6" *ngIf="favouriteListsReferences.length == 0">
+            <p>{{'favourite_lists.messages.favourite-trips-not-found' | translate}}</p>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div *ngIf="listCreated" class="alert alert-success">
+            {{'favourite_lists.messages.created' | translate}}
+        </div>
+        <div *ngIf="!listCreation">
+            <button (click)="listCreation = true" type="button" class="btn-primary btn">
+                <i class="fa-solid fa-heart"></i>
+                {{'favourite_lists.buttons.new' | translate}}
+            </button>
+        </div>
+        <form class="form-horizontal" (ngSubmit)="createFavoriteList(f)" #f="ngForm" *ngIf="listCreation">
+            <div class="form-group">
+                <input type="text" class="form-control" id="reference" name="reference" required
+                    #reference="ngModel" ngModel>
+            </div>
+            <div *ngIf="reference!.errors?.['required'] && reference.dirty" class="alert alert-danger">
+                {{'favourite_lists.messages.reference-required' | translate}}
+            </div>
+            <div *ngIf="listExists" class="alert alert-danger">
+                {{'favourite_lists.messages.already-exists' | translate}}
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success" [disabled]="reference!.errors?.['required']">
+                    <i class="fa-solid fa-heart-circle-plus"></i>
+                    {{'favourite_lists.buttons.create' | translate}}
+                </button>
+                <button (click)="listCreation = false" type="button" class="btn-danger btn">
+                    <i class="fa-solid fa-heart-circle-xmark"></i>
+                    {{'favourite_lists.buttons.cancel' | translate}}
+                </button>
+            </div>
+        </form>
+    </div>
+    
+    <div class="row" *ngIf="favouriteListsReferences.length > 0" style="padding-top:1%;display:flex;justify-content:center;">
+        <div class="col-md-7">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" [(ngModel)]="keyword">
+                <button class="btn btn-danger" *ngIf="keyword" type="button" id="button-reset-search"
+                    (click)="resetSearch()">
+                    <i class="fa-solid fa-square-xmark" aria-hidden="true"></i>
+                    {{'trips.search-reset' | translate}}
+                </button>
+                <button class="btn btn-outline-secondary" type="button" id="button-search" (click)="search()">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    {{'trips.search' | translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="row">
+        <nav>
+            <ul class="pagination justify-content-center">
+                <li *ngFor="let reference of filteredReferences" class="page-item" >
+                    <a href="javascript:void(null)" class="page-link" (click)="getTrips(reference)" 
+                    [ngStyle]="getCurrentNavigatorStyles(reference)">{{reference}}</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    
+    <div *ngIf="(trips_loaded | async)">
+        <div class="row" *ngIf="trips.length > 0">
+            <div class="col-md-4 col-xs-12"
+                *ngFor="let trip of trips | slice: (curPage * pageSize) - pageSize :curPage * pageSize">
+                <div class="card">
+                    <div class="card-header" *ngIf="disabledTrip(trip)">
+                        {{'trips.messages.disabled-trip' | translate}}
+                    </div>
+                    <img *ngIf="trip.getPictures().length > 0" src="{{trip.getPictures()[0]['picture']}}"
+                        class="card-img-top" alt="...">
+                    <img *ngIf="trip.getPictures().length == 0" src="assets/images/trips/default-trip.jpg"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{trip.getTitle()}}</h5>
+                        <p class="card-text">{{trip.getDescription() | slice:0:50}} ...</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><b>{{'trips.price' | translate}}</b>: {{trip.getPrice()}}</li>
+                        <li class="list-group-item"
+                            [ngStyle]="getCurrentStyles(trip.getStartDate().toString(), currentDateTime.toISOString())">
+                            <b>{{'trips.startDate' | translate}}</b>: {{trip.getStartDate() | date: 'dd/MM/yyyy'}}
+                            <p *ngIf="getDiffDays(trip.getStartDate().toString(), currentDateTime.toISOString()) > 0
+                                    && getDiffDays(trip.getStartDate().toString(), currentDateTime.toISOString()) <= 7">
+                                <b>{{'trips.messages.start-soon' | translate}}</b>
+                            </p>
+                        </li>
+                        <li class="list-group-item"><b>{{'trips.endDate' | translate}}</b>: {{trip.getEndDate() | date:
+                            'dd/MM/yyyy'}}</li>
+                    </ul>
+                    <div class="card-body">
+                        <button type="button" class="btn btn-success" routerLink="/trips/{{trip.id}}"
+                            [disabled]="disabledTrip(trip)">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            {{'trips.buttons.more' | translate}}
+                        </button>
+                        <button type="button" class="btn btn-primary"
+                            *ngIf="activeRole == 'EXPLORER' && trip.getStartDate().toString() > currentDateTime.toISOString() && !trip.isCanceled()"
+                            routerLink="/trips/{{trip.id}}/applications/new">
+                            <i class="fa-solid fa-envelope"></i>
+                            {{'applications.apply-for' | translate}}
+                        </button>
+                        <button type="button" class="btn btn-primary"
+                            *ngIf="activeRole == 'MANAGER' && user!.id == trip.getManagerId()"
+                            routerLink="/trips/{{trip.id}}/applications/">
+                            <i class="fa-solid fa-envelope"></i>
+                            {{'applications.title-plural' | translate}}
+                        </button>
+                        <button type="button" class="btn btn-success"
+                            *ngIf="activeRole == 'EXPLORER'" routerLink="/trips/{{trip.id}}/favourites-lists">
+                            <i class="fa-solid fa-heart-circle-plus"></i>
+                            {{'trips.buttons.add-favourite' | translate}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex;justify-content: center; padding-top: 1%;">
+                <p class="pagination">
+                    <button [disabled]="curPage == 1" (click)="curPage = curPage - 1" class="btn">
+                        <i class="fa-solid fa-arrow-left"></i> {{'pagination.prev' | translate}}</button>
+                    <span style="margin-top: auto;margin-bottom: auto;">{{'pagination.page' | translate}} {{curPage}} / {{ totalPages() }}</span>
+                    <button [disabled]="curPage >= trips.length/pageSize" (click)="curPage = curPage + 1" class="btn">
+                        {{'pagination.next' | translate}} <i class="fa-solid fa-arrow-right"></i></button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

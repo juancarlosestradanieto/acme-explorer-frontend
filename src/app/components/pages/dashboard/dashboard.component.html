@@ -1,0 +1,146 @@
+<h2>{{"dashboard.title" | translate}}</h2>
+<div class="card" *ngIf="(dashboard_loaded | async)">
+  <div class="card-body">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <table class="full-container" id="trip_by_manager" style="width:100%">
+          <thead>    
+            <tr>
+              <th colspan="4"><h5 class="card-title"><b>{{"dashboard.trip_by_manager" | translate}}</b></h5></th>          
+            </tr>
+          </thead>     
+          <tbody>  
+            <tr>     
+              <th scope="col" style="width:25%">{{"dashboard.avg" | translate}}</th>  
+              <th scope="col" style="width:25%">{{"dashboard.min" | translate}}</th>
+              <th scope="col" style="width:25%">{{"dashboard.max" | translate}}</th>  
+              <th scope="col" style="width:25%">{{"dashboard.desv" | translate}}</th> 
+            </tr>     
+            <tr> 
+              <td>{{trips_by_manager.average}}</td>  
+              <td>{{trips_by_manager.minimum}}</td>
+              <td>{{trips_by_manager.maximum}}</td>
+              <td>{{trips_by_manager.standardDeviation}}</td>
+            </tr> 
+          </tbody>
+        </table>
+      </li>
+
+      <li class="list-group-item">
+        <table class="full-container" id="applications_by_trip" style="width:100%">
+          <thead>    
+            <tr>
+              <th colspan="4"><h5 class="card-title"><b>{{"dashboard.applications_by_trip" | translate}}</b></h5></th>          
+            </tr>
+          </thead>     
+          <tbody>  
+            <tr>     
+              <th scope="col" style="width:25%">{{"dashboard.avg" | translate}}</th>  
+              <th scope="col" style="width:25%">{{"dashboard.min" | translate}}</th>
+              <th scope="col" style="width:25%">{{"dashboard.max" | translate}}</th>  
+              <th scope="col" style="width:25%">{{"dashboard.desv" | translate}}</th> 
+            </tr>     
+            <tr> 
+              <td>{{applications_by_trip.average}}</td>  
+              <td>{{applications_by_trip.minimum}}</td>
+              <td>{{applications_by_trip.maximum}}</td>
+              <td>{{applications_by_trip.standardDeviation}}</td>
+            </tr> 
+          </tbody>
+        </table>
+      </li>
+
+      <li class="list-group-item">
+        <table class="full-container" id="price_of_trips" style="width:100%">
+          <thead>    
+            <tr>
+              <th colspan="4"><h5 class="card-title"><b>{{"dashboard.price_of_trips" | translate}}</b></h5></th>          
+            </tr>
+          </thead>     
+          <tbody>  
+            <tr>     
+              <th scope="col" style="width:25%">{{"dashboard.avg" | translate}}</th>  
+              <th scope="col" style="width:25%">{{"dashboard.min" | translate}}</th>
+              <th scope="col" style="width:25%">{{"dashboard.max" | translate}}</th>  
+              <th scope="col" style="width:25%">{{"dashboard.desv" | translate}}</th> 
+            </tr>     
+            <tr> 
+              <td>{{price_of_trips.average}}</td>  
+              <td>{{price_of_trips.minimum}}</td>
+              <td>{{price_of_trips.maximum}}</td>
+              <td>{{price_of_trips.standardDeviation}}</td>
+            </tr> 
+          </tbody>
+        </table>
+      </li>
+
+      <li class="list-group-item">
+        <table class="full-container" id="applications_by_status" style="width:100%">
+          <thead>    
+            <tr>
+              <th colspan="4"><h5 class="card-title"><b>{{"dashboard.applications_by_status" | translate}}</b></h5></th>          
+            </tr>
+          </thead>     
+          <tbody>  
+            <tr>   
+              <th scope="col" style="width:20%">{{"applications.status.cancelled" | translate}}</th>  
+              <th scope="col" style="width:20%">{{"applications.status.rejected" | translate}}</th>   
+              <th scope="col" style="width:20%">{{"applications.status.pending" | translate}}</th> 
+              <th scope="col" style="width:20%">{{"applications.status.due" | translate}}</th> 
+              <th scope="col" style="width:20%">{{"applications.status.accepted" | translate}}</th> 
+            </tr>     
+            <tr> 
+              <td>{{applications_by_status["CANCELLED"].ratio}}</td>
+              <td>{{applications_by_status["REJECTED"].ratio}}</td>
+              <td>{{applications_by_status["PENDING"].ratio}}</td>
+              <td>{{applications_by_status["DUE"].ratio}}</td>
+              <td>{{applications_by_status["ACCEPTED"].ratio}}</td>
+            </tr> 
+          </tbody>
+        </table>
+      </li>  
+      <li class="list-group-item">
+        <table class="full-container" id="price_range_in_finder" style="width:100%">
+          <thead>    
+            <tr>
+              <th colspan="3"><h5 class="card-title"><b>{{"dashboard.price_range_in_finder" | translate}}</b></h5></th>          
+            </tr>
+          </thead>     
+          <tbody>  
+            <tr>     
+              <th scope="col" style="width:50%">{{"dashboard.min" | translate}}</th>
+              <th scope="col" style="width:50%">{{"dashboard.avg" | translate}}</th>
+              <th scope="col" style="width:50%">{{"dashboard.max" | translate}}</th>  
+            </tr>     
+            <tr> 
+              <td>{{minimum | number: '1.2-2'}}</td>
+              <td>{{promedio | number: '1.2-2'}}</td>
+              <td>{{maximum | number: '1.2-2'}}</td>
+            </tr> 
+          </tbody>
+        </table>
+      </li>
+      <li class="list-group-item">
+        <table class="full-container" id="top10_in_finder" style="width:100%">
+          <thead>    
+            <tr>
+              <th colspan="10"><h5 class="card-title"><b>{{"dashboard.top10_in_finder" | translate}}</b></h5></th>          
+            </tr>
+          </thead>     
+          <tbody class="flex">  
+            <div *ngFor="let word of top10_in_finder; let i=index">
+              <tr> 
+                <th>{{i+1}}º</th>  
+              </tr> 
+              <tr >     
+                <td scope="col" style="width:10%">{{word}}</td>   
+              </tr>     
+            </div>
+          </tbody>
+        </table>
+      </li>
+    </ul>  
+  </div>  
+</div>  
+
+<app-go-back-button></app-go-back-button>

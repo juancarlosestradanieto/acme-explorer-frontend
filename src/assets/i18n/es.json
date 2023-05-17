@@ -1,0 +1,326 @@
+{
+  "REGISTER": {
+    "REGISTER": "Registrarse",
+    "NEW_ACTOR": "Registro de nuevo actor",
+    "ROLE": "Rol",
+    "MANAGER-SPONSOR":"Rol. Puedes seleccionar rol MANAGER o SPONSOR",
+    "NAME": "Nombre",
+    "SURNAME": "Apellido/s",
+    "PHONE": "Número de teléfono",
+    "ADDRESS": "Dirección",
+    "EMAIL": "Correo electrónico/email",
+    "PASSWORD": "Contraseña",
+    "ALREADY_REGISTER": "¿Estás ya registrado/a",
+    "LOGIN": "¡Inicia sesión ya!"
+  },
+  "LOGIN": {
+    "LOGIN_ACTION": "Inicio de sesión",
+    "LOGIN": "Iniciar sesión",
+    "EMAIL": "Introduce tu correo electrónico/email",
+    "PASSWORD": "Introduce tu contraseña",
+    "NOT_ALREADY_REGISTER": "¿No te has registrado todavía?",
+    "REGISTER_NOW": "¡Regístrate ya!"
+  },
+  "Home": "Inicio",
+  "Trips": "Viajes",
+  "auth": {
+    "register": "Registrar",
+    "login": "Ingresar",
+    "logout": "Cerrar sesión",
+    "errors": {
+      "access-denied": "Acceso restringido al recurso"
+    }
+  },
+  "home": "Inicio",
+  "trips": {
+    "title": "Viajes",
+    "title-control": "Título",
+    "description": "Descripción",
+    "price": "Precio",
+    "stage": "Etapa",
+    "stages": "Etapas",
+    "startDate": "Fecha de inicio",
+    "endDate": "Fecha de fin",
+    "requirement": "Requisito",
+    "requirements": "Requisitos",
+    "favourites": "Viajes favoritos",
+    "finder": "Descubridor de viajes",
+    "add": "Agregar",
+    "delete": "Borrar",
+    "pictures": "Imágenes",
+    "picture": "Imagen",
+    "previous-pictures": "Imágenes cargadas previamente.",
+    "starting":"Tiempo Restante de Inicio",
+    "out_time":"Fuera de Tiempo",
+    "search":"Buscar",
+    "search-reset":"Restablecer",
+    "keyWord":"Palabra clave",
+    "priceLowerBound":"Precio mínimo",
+    "priceUpperBound":"Precio máximo",
+    "dateLowerBound":"Fecha mínima",
+    "dateUpperBound":"Fecha máxima",
+    "buttons": {
+      "add-favourite": "Añadir a favoritos",
+      "remove-favourite": "Eliminar de favoritos",
+      "add": "Añadir viaje",
+      "more": "Detalles",
+      "edit": "Editar",
+      "delete": "Borrar",
+      "cancel":"Cancelar",
+      "publish":"Publicar"
+    },
+    "messages": {
+      "trips-available": "¡Viajes disponibles para ti!",
+      "favourite-trips-available": "¡Viajes favoritos disponibles para ti!",
+      "favourite-trips-not-found": "No se han encontrado viajes favoritos",
+      "disabled-trip": "El viaje ya ha comenzado o ha sido cancelado",
+      "trip-saved": "Viaje guardado exitosamente",
+      "start-soon": "¡Próximamente!",
+      "delete-trip-confirmation": "¿Seguro que deseas borrarlo?, Esta acción no se puede deshacer.",
+      "publish-trip-confirmation": "¿Seguro que deseas publicarlo?",
+      "cancel-trip-confirmation": "¿Seguro que deseas cancelarlo?",
+      "cancel-trip-reason-request": "Por favor indica el motivo de la cancelación",
+      "cancel-trip-denied": "Un viaje podrá ser cancelado siempre que se realice con al menos una semana de anticipación a su fecha de inicio."
+    },
+    "validations": {
+      "required": "Este campo es obligatorio.",
+      "minimum": "El menor valor aceptado es",
+      "maximum": "El mayor valor aceptado es",
+      "keyword_pattern": "La palabra clave debe ser una sola palabra",
+      "price_range_invalid": "El rango de precios es inválido",
+      "date_range_invalid": "El rango de fechas es inválido"
+    }
+  },
+  "footer": {
+    "terms": "Términos y condiciones"
+  },
+  "termsandconditions": {
+    "init": "El presente contrato describe los términos y condiciones aplicables al uso del contenido, productos y/o servicios del sitio web Acme Explorer. Para hacer uso del contenido, productos y/o servicios del sitio web el usuario deberá sujetarse a los presentes términos y condiciones.",
+    "last": "Acme Explorer no se responsabiliza por la indebida utilización del contenido, productos y/o servicios del sitio web y del incumplimiento de los presentes términos y condiciones.",
+    "first": {
+      "title": "I. OBJETO",
+      "description": "El objeto es regular el acceso y utilización del contenido, productos y/o servicios a disposición del público en general en el dominio https://www.acmeexplorer.com. El titular se reserva el derecho de realizar cualquier tipo de modificación en el sitio web en cualquier momento y sin previo aviso, el usuario acepta dichas modificaciones. El acceso al sitio web por parte del usuario es libre y gratuito, la utilización del contenido, productos y/o servicios implica un costo de suscripción para el usuario. El sitio web solo admite el acceso a personas mayores de edad y no se hace responsable por el incumplimiento de esto. El sitio web está dirigido a usuarios residentes en España y cumple con la legislación establecida en dicho país, si el usuario reside en otro país y decide acceder al sitio web lo hará bajo su responsabilidad. La administración del sitio web puede ejercerse por terceros, es decir, personas distintas al titular, sin afectar esto los presentes términos y condiciones."
+    },
+    "second": {
+      "title": "II. USUARIO",
+      "description": "La actividad del usuario en el sitio web como publicaciones o comentarios estarán sujetos a los presentes términos y condiciones. El usuario se compromete a utilizar el contenido, productos y/o servicios de forma lícita, sin faltar a la moral o al orden público, absteniéndose de realizar cualquier acto que afecte los derechos de terceros o el funcionamiento del sitio web. El usuario se compromete a proporcionar información verídica en los formularios del sitio web. El acceso al sitio web no supone una relación entre el usuario y el titular del sitio web. El usuario manifiesta ser mayor de edad y contar con la capacidad jurídica de acatar los presentes términos y condiciones."
+    },
+    "third": {
+      "title": "III. ACCESO Y NAVEGACIÓN EN EL SITIO WEB",
+      "description": "El titular no garantiza la continuidad y disponibilidad del contenido, productos y/o servicios en el sitito web, realizará acciones que fomenten el buen funcionamiento de dicho sitio web sin responsabilidad alguna. El titular no se responsabiliza de que el software esté libre de errores que puedan causar un daño al software y/o hardware del equipo del cual el usuario accede al sitio web. De igual forma, no se responsabiliza por los daños causados por el acceso y/o utilización del sitio web."
+    },
+    "fourth": {
+      "title": "IV. POLÍTICA DE PRIVACIDAD Y PROTECCIÓN DE DATOS",
+      "description": "Conforme a lo establecido en la Ley General de Protección de Datos Personales en Posesión de Particulares, el titular de compromete a tomar las medidas necesarias que garanticen la seguridad del usuario, evitando que se haga uso indebido de los datos personales que el usuario proporcione en el sitio web. El titular corroborará que los datos personales contenidos en las bases de datos sean correctos, verídicos y actuales, así como que se utilicen únicamente con el fin con el que fueron recabados. Acme Explorer se reserva el derecho de realizar cualquier tipo de modificación en el Aviso de Privacidad en cualquier momento y sin previo aviso, de acuerdo con sus necesidades o cambios en la legislación aplicable, el usuario acepta dichas modificaciones. El sitio web implica la utilización de cookies que son pequeñas cantidades de información que se almacenan en el navegador utilizado por el usuario como datos de ingreso, preferencias del usuario, fecha y hora en que se accede al sitio web, sitios visitados y dirección IP, esta información es anónima y solo se utilizará para mejorar el sitio web. Los cookies facilitan la navegación y la hacen más amigable, sin embargo, el usuario puede desactivarlos en cualquier momento desde su navegador en el entendido de que esto puede afectar algunas funciones del sitio web."
+    },
+    "fifth": {
+      "title": "V. POLÍTICA DE ENLACES",
+      "description": "En el sitio web puede contener enlaces a otros sitios de internet pertenecientes a terceros de los cuales no se hace responsable."
+    },
+    "sixth": {
+      "title": "VI. POLÍTICA DE PROPIEDAD INTELECTUAL E INDUSTRIAL",
+      "description": "El titular manifiesta tener los derechos de propiedad intelectual e industrial del sitio web incluyendo imágenes, archivos de audio o video, logotipos, marcas, colores, estructuras, tipografías, diseños y demás elementos que lo distinguen, protegidos por la legislación española e internacional en materia de propiedad intelectual e industrial. El usuario se compromete a respetar los derechos de propiedad industrial e intelectual del titular pudiendo visualizar los elementos del sitio web, almacenarlos, copiarlos e imprimirlos exclusivamente para uso personal."
+    },
+    "seventh": {
+      "title": "VI. POLÍTICA DE PROPIEDAD INTELECTUAL E INDUSTRIAL",
+      "description": "La relación entre el usuario y el titular se regirá por las legislaciones aplicables en España."
+    }
+  },
+  "actor": {
+    "profile": "Perfil",
+    "control_panel":"Panel de actores",
+    "add_manager":"Registrar nuevo Manager/Sponsor",
+    "back_actors_control_panel":"Volver al Panel de Actores",
+    "name":"Nombre",
+    "surname":"Apellido",
+    "email":"Email",
+    "address":"Dirección",
+    "phone_number":"Número de Teléfono",
+    "actions":"Acciones",
+    "profile_edition":"Edición del perfil de usuario",
+    "confirm_edition":"Confirmar perfil de usuario",
+
+    "role": {
+      "title": "Rol",
+      "explorer": "Explorador",
+      "manager": "Manager",
+      "sponsor": "Patrocinador",
+      "admin": "Administrador"
+    }
+  },
+  "customize-ui": "Personalizar interfaz",
+  "applications": {
+    "title-plural": "Solicitudes",
+    "title-sing": "Solicitud",
+    "moment": "Creación",
+    "id": "Id",
+    "trip-id": "Id del Viaje",
+    "actor-id": "Id del Explorador",
+    "comments": "Comentarios",
+    "rejection_reason": "Motivo del rechazo",
+    "create": "Crear nueva solicitud",
+    "list-by-explorer": "Solicitudes de explorador",
+    "list-by-trip": "Solicitudes del viaje",
+    "accept": "Aceptar",
+    "reject": "Rechazar",
+    "pay": "Pagar",
+    "cancel": "Cancelar",
+    "apply-for": "Solicitar",
+    "edit-comments": "Editar comentarios",
+    "add-comment": "Añadir comentario",
+    "remove-comment": "Eliminar comentario",
+    "status": {
+      "title": "Estado",
+      "cancelled": "Cancelada",
+      "pending": "Pendiente",
+      "rejected": "Denegada",
+      "due": "En espera de pago",
+      "accepted": "Aceptada"
+    },
+    "messages": {
+      "expand-collapse-comments": "Expandir/Colapsar Comentarios",
+      "expand-collapse-comments-reject": "Expandir/Colapsar Comentarios y Rechazar",
+      "rejection-reason-required": "Es necesario un motivo para el rechazo",
+      "comments-not-found": "No se han encontrado comentarios",
+      "cancelled-applications-not-found": "No se han encontrado solicitudes canceladas",
+      "pending-applications-not-found": "No se han encontrado solicitudes pendientes",
+      "rejected-applications-not-found": "No se han encontrado solicitudes rechazadas",
+      "due-applications-not-found": "No se han encontrado solicitudes en espera de pago",
+      "accepted-applications-not-found": "No se han encontrado solicitudes aceptadas",
+      "payed-application": "La solicitud ha sido pagada correctamente",
+      "payed-application-error": "Se ha encontrado un error durante el pago",
+      "payed-sponsorship": "El patrocinio ha sido pagado correctamente",
+      "payed-sponsorship-error": "Se ha encontrado un error durante el pago",
+      "comments-empty": "No se pueden dejar comentarios en blanco",
+      "application-exists": "No se pueden crear múltiples solicitudes para el mismo viaje",
+      "application-created": "Solicitud creada correctamente",
+      "trip-started": "El viaje ya ha comenzado",
+      "cancel-application-confirmation": "¿Está seguro de que quiere cancelar la solicitud?",
+      "accept-application-confirmation": "¿Está seguro de que quiere aceptar la solicitud?",
+      "reject-application-confirmation": "¿Está seguro de que quiere rechazar la solicitud?",
+      "cancel-application-error": "Se ha encontrado un error durante el proceso de cancelar",
+      "accept-application-error": "Se ha encontrado un error durante el proceso de aceptar",
+      "reject-application-error": "Se ha encontrado un error durante el proceso de rechazar"
+    }
+  },
+  "favourite_lists": {
+    "buttons": {
+      "new": "Nuevo listado",
+      "create": "Crear listado",
+      "update": "Actualizar listado",
+      "cancel": "Cancelar"
+    },
+    "messages": {
+      "favourite-trips-available": "¡Viajes favoritos disponibles para ti!",
+      "favourite-trips-not-found": "No se han encontrado listados de viajes favoritos",
+      "created": "La lista se ha creado correctamente",
+      "already-exists": "Un listado con dicho nombre ya existe",
+      "no-lists": "Debe crear una lista antes de poder proceder",
+      "reference-required": "Se requiere de un nombre para el listado",
+      "no-changes": "No se han realizado modificaciones",
+      "update-success": "La actualización se ha realizado correctamente",
+      "list-filter-placeholder": "Filtre los listados de favoritos"
+    }
+  },
+  "sponsorships": {
+    "title": "Patrocinios",
+    "sponsorship":"Patrocinio",
+    "my_sponsorhips":"Mis patrocinios",
+    "all_sponsorships":"Todos los patrocinios"  ,
+    "isPayed":"¿Pagado?",
+    "all_sponsorships_title":"Estos son todos los patrocinios",
+    "all_sponsorships_sponsor":"Estos son tus patrocinios",
+    "all_sponsorships_text":"Recuerde que para modificar y/o eliminar patrocinios, debe navegar a 'Mis Patrocinios'",
+    "create":"Crear nuevo patrocinio",
+    "edit_sponsorship":"Editar patrocinio",
+    "delete":"Eliminar",
+    "edit":"Modificar",
+    "detail":"Ver en detalle",
+    "page":"Página",
+    "banner":"Banner",
+    "add_banner":"Añadir banner",
+    "delete_banner":"Eliminar banner",
+    "confirm_sponsorship":"Confirmar creación de patrocinio",
+    "operation_successfull":"¡Nuevo patrocinio creado satisfactoriamente!",
+    "operation_alreadycreated":"El patrocinio con este Trip Ticker ya ha sido creado.",
+    "confirm_edit_sponsorship":"Confirmar edición de patrocinio",
+    "operation_edit_successfull":"¡Patrocinio modificado!",
+    "operation_delete_successfull":"¡Patrocinio eliminado correctamente!",
+    "detail_sponsorship":"Vista detallada de un sponsorship"        
+  
+  },
+  "dashboard": {
+    "title": "Panel de control",
+    "trip_by_manager": "Número de viajes gestinados por manager",
+    "applications_by_trip": "Número de solicitudes por viaje",
+    "price_of_trips": "Precio de los viajes",
+    "applications_by_status": "Ratio de solicitudes agrupadas por estado",
+    "price_range_in_finder": "Rango de precio promedio en descubridor de viajes",
+    "top10_in_finder": "10 palabras clave más utilizadas en descubridor de viajes",
+    "avg": "Promedio",
+    "min": "Mínimo",
+    "max": "Máximo",
+    "desv": "Desviación estándar"
+  },
+  "system-parameters": {
+    "title": "Parámetros del sistema",
+    "title-create": "Crear parámetros del sistema",
+    "title-update": "Actualizar parámetros del sistema",
+    "maxFinderResults": "Cantidad máxima de resultados mostrados en descubridores de viajes",
+    "flatRateSponsorships": "Tarifa plana del coste de los patrocinios",
+    "cacheHour": "Duración máxima en horas de la caché",
+    "messages": {
+      "created": "Parámetros del sistema creados correctamente",
+      "updated": "Parámetros del sistema actualizados correctamente"
+    }
+  },
+  "dark": "Modo Oscuro activado",
+  "light": "Modo Claro activado",
+  "buttons": {
+    "create": "Crear",
+    "update": "Actualizar",
+    "edit-mode": "Modo edición",
+    "more": "Ver más",
+    "go_to_trip": "Ir al viaje",
+    "back":"Volver"
+  },
+  "Messages": {
+    "field_required": "Este campo es obligatorio.",
+    "9_digits_required": "Este campo require de 9 dígitos.",
+    "email_required": "Este campo require una sintaxis de email.",
+    "10_digits_alphanumeric": "Este campo require un mínimo de 10 caracteres alfanuméricos.",
+    "positive-number": "Este campo require un número positivo.",
+    "something-went-wrong": "Something went wrong"
+  },
+  "pagination": {
+    "next": "Siguiente",
+    "prev": "Anterior",
+    "page": "Página"
+  },
+  "finders":{
+    "in-force-finders": "Buscadores en vigor",
+    "expiration-date": "Fecha de vencimiento",
+    "buttons":{
+      "save": "Guardar búsqueda",
+      "show-results": "Mostrar resultados"
+    },
+    "messages":{
+      "finder-config-saved": "Descubridor de viajes guardado exitosamente",
+      "finder-saved": "Búsqueda guardada exitosamente"
+    }
+  },
+  "explorers-stats":{
+    "menu-link": "Estadísticas de los exploradores",
+    "explorer-id": "id del explorador",
+    "month-expense": "gasto mensual",
+    "year-expense": "gasto anual",
+    "money": "dinero",
+    "month": "mes",
+    "year": "año",
+    "start-date": "fecha inicio",
+    "end-date": "fecha fin",
+    "money-spent": "dinero gastado",
+    "comparison": "comparación",
+    "search": "buscar"
+  }
+}

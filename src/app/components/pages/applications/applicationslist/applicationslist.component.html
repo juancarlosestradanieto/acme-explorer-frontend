@@ -1,0 +1,591 @@
+<h2 *ngIf="activeRole == 'EXPLORER'">{{'applications.list-by-explorer' | translate}} </h2>
+<h2 *ngIf="activeRole == 'MANAGER'">{{'applications.list-by-trip' | translate}} </h2>
+
+<div class="row">
+    <div class="alert alert-danger" *ngIf="error_message && error_message != ''">
+        {{error_message | translate}}
+    </div>
+</div>
+
+<div class="accordion" id="statusCancelledAccordion">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="statusCancelled">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCancelled"
+                aria-expanded="true" aria-controls="collapseCancelled">
+                {{'applications.status.cancelled' | translate}}
+            </button>
+        </h2>
+    </div>
+    <div id="collapseCancelled" class="accordion-collapse collapse" data-parent="statusCancelledAccordion">
+        <div class="accordion-body" *ngIf="cancelledApplications.length < 1">
+            <p>{{'applications.messages.cancelled-applications-not-found' | translate}}</p>
+        </div>
+        <div>
+            <ngx-datatable [rows]="cancelledApplications" #cancelledTable class="bootstrap expandable"
+                [loadingIndicator]="true" [headerHeight]="40" [footerHeight]="80" [limit]="10" [rowHeight]="'auto'"
+                [columnMode]="'force'" [scrollbarH]="true">
+
+                <ngx-datatable-row-detail [rowHeight]="500" [scrollLeft]="true" #cancelledCommentsRow
+                    (toggle)="onDetailToggle($event)">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                        <div style="padding-left: 1%;">
+                            <div><strong>{{'applications.comments' | translate}}</strong></div>
+                            <div *ngIf="row.getComments().length >= 1 && row.getComments()[0] != ' '"> 
+                                <div *ngFor="let comment of row.getComments(); let i = index" >
+                                    <p>{{i+1}} - {{comment}}</p>
+                                </div>
+                            </div>
+                            <div *ngIf="row.getComments().length == 1 && row.getComments()[0] == ' '"> 
+                                {{'applications.messages.comments-not-found' | translate}}
+                            </div>
+                        </div>
+
+                    </ng-template>
+                </ngx-datatable-row-detail>
+
+                <ngx-datatable-column [resizeable]="false" [sortable]="false" [draggable]="false"
+                    [canAutoResize]="false" [canAutoResize]="true">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                        <a href="javascript:void(0)"
+                            title="{{'applications.messages.expand-collapse-comments' | translate}}"
+                            (click)="toggleExpandCancelledRow(row)">
+                            <i class="fa-solid fa-comments"></i>
+                        </a>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.title-sing' | translate}}" prop="id" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        #{{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <!--<ngx-datatable-column name="{{'applications.status.title' | translate}}" prop="status" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>-->
+        
+                 <ngx-datatable-column name="{{'applications.moment' | translate}}" prop="applicationMoment" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value | date: 'dd/MM/yyyy hh:mm:ss'}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.actor-id' | translate}}" prop="explorer_Id"
+                    [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.trip-id' | translate}}" prop="trip_Id"
+                    [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="" prop="trip_Id" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        <button type="button" class="btn btn-primary" routerLink="/trips/{{value}}">
+                            <i class="fa fa-plane" aria-hidden="true"></i>
+                            {{'buttons.go_to_trip' | translate}}
+                        </button>
+                        <!--
+                                                <button type="button" class="btn btn-primary" routerLink="/applications/{{application.id}}">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            {{'buttons.more' | translate}}
+                        </button>
+                         -->
+                    </ng-template>
+                </ngx-datatable-column>
+
+            </ngx-datatable>
+        </div>
+    </div>
+</div>
+
+<div class="accordion" id="statusRejectedAccordion">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="statusRejected">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRejected"
+                aria-expanded="true" aria-controls="collapseRejected">
+                {{'applications.status.rejected' | translate}}
+            </button>
+        </h2>
+    </div>
+    <div id="collapseRejected" class="accordion-collapse collapse" data-parent="statusRejectedAccordion">
+        <div class="accordion-body" *ngIf="rejectedApplications.length < 1">
+            <p>{{'applications.messages.rejected-applications-not-found' | translate}}</p>
+        </div>
+        <div>
+            <ngx-datatable [rows]="rejectedApplications" #rejectedTable class="bootstrap expandable"
+                [loadingIndicator]="true" [headerHeight]="40" [footerHeight]="80" [limit]="10" [rowHeight]="'auto'"
+                [columnMode]="'force'" [scrollbarH]="true">
+
+                <ngx-datatable-row-detail [rowHeight]="500" [scrollLeft]="true" #rejectedCommentsRow
+                    (toggle)="onDetailToggle($event)">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                        <div style="padding-left: 1%;">
+                            <div><strong>{{'applications.comments' | translate}}</strong></div>
+                            <div *ngIf="row.getComments().length >= 1 && row.getComments()[0] != ' '"> 
+                                <div *ngFor="let comment of row.getComments(); let i = index" >
+                                    <p>{{i+1}} - {{comment}}</p>
+                                </div>
+                            </div>
+                            <div *ngIf="row.getComments().length == 1 && row.getComments()[0] == ' '"> 
+                                {{'applications.messages.comments-not-found' | translate}}
+                            </div>
+                        </div>
+
+                    </ng-template>
+                </ngx-datatable-row-detail>
+
+                <ngx-datatable-column [resizeable]="false" [sortable]="false" [draggable]="false"
+                    [canAutoResize]="false" [canAutoResize]="true">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                        <a href="javascript:void(0)"
+                            title="{{'applications.messages.expand-collapse-comments' | translate}}"
+                            (click)="toggleExpandRejectedRow(row)">
+                            <i class="fa-solid fa-comments"></i>
+                        </a>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.title-sing' | translate}}" prop="id" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        #{{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <!--<ngx-datatable-column name="{{'applications.status.title' | translate}}" prop="status" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>-->
+        
+                 <ngx-datatable-column name="{{'applications.moment' | translate}}" prop="applicationMoment" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value | date: 'dd/MM/yyyy hh:mm:ss'}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.actor-id' | translate}}" prop="explorer_Id"
+                    [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.trip-id' | translate}}" prop="trip_Id"
+                    [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.rejection_reason' | translate}}" prop="rejected_reason"
+                    [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="" prop="trip_Id" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        <button type="button" class="btn btn-primary" routerLink="/trips/{{value}}">
+                            <i class="fa fa-plane" aria-hidden="true"></i>
+                            {{'buttons.go_to_trip' | translate}}
+                        </button>
+                        <!--
+                                                <button type="button" class="btn btn-primary" routerLink="/applications/{{application.id}}">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            {{'buttons.more' | translate}}
+                        </button>
+                         -->
+                    </ng-template>
+                </ngx-datatable-column>
+
+            </ngx-datatable>
+        </div>
+    </div>
+</div>
+
+<div class="accordion" id="statusPendingAccordion">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="statusPending">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePending"
+                aria-expanded="true" aria-controls="collapsePending">
+                {{'applications.status.pending' | translate}}
+            </button>
+        </h2>
+    </div>
+    <div id="collapsePending" class="accordion-collapse collapse" data-parent="statusPendingAccordion">
+        <div class="accordion-body" *ngIf="pendingApplications.length < 1">
+            <p>{{'applications.messages.pending-applications-not-found' | translate}}</p>
+        </div>
+        <div>
+            <ngx-datatable [rows]="pendingApplications" #pendingTable class="bootstrap expandable"
+                [loadingIndicator]="true" [headerHeight]="40" [footerHeight]="80" [limit]="10" [rowHeight]="'auto'"
+                [columnMode]="'force'" [scrollbarH]="true">
+
+                <ngx-datatable-row-detail [rowHeight]="500" [scrollLeft]="true" #pendingCommentsRow
+                    (toggle)="onDetailToggle($event)">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                        <div style="padding-left: 1%;">
+                            <div *ngIf="activeRole == 'MANAGER'" style="padding-bottom: 1%;">
+                                <b>{{'applications.rejection_reason' | translate}}*</b>:
+                                <form class="form-horizontal" (ngSubmit)="onApplicationReject(row.id, f)" #f="ngForm">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="rejected_reason{{row.id}}"
+                                            name="rejected_reason" required #rejected_reason="ngModel" ngModel>
+                                    </div>
+                                    <div *ngIf="rejected_reason!.errors?.['required'] && rejected_reason.dirty"
+                                        class="alert alert-danger">
+                                        {{'applications.messages.rejection-reason-required' | translate}}
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-danger"
+                                            [disabled]="rejected_reason!.errors?.['required']">
+                                            <i class="fa-solid fa-ban"></i>
+                                            {{'applications.reject' | translate}}
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div><strong>{{'applications.comments' | translate}}</strong></div>
+                            <div *ngIf="row.getComments().length >= 1 && row.getComments()[0] != ' '"> 
+                                <div *ngFor="let comment of row.getComments(); let i = index" >
+                                    <p>{{i+1}} - {{comment}}</p>
+                                </div>
+                            </div>
+                            <div *ngIf="row.getComments().length == 1 && row.getComments()[0] == ' '"> 
+                                {{row.getComments()}}
+                                {{'applications.messages.comments-not-found' | translate}}
+                            </div>
+                        </div>
+
+                    </ng-template>
+                </ngx-datatable-row-detail>
+
+                <ngx-datatable-column *ngIf="activeRole == 'MANAGER'" [resizeable]="false" [sortable]="false"
+                    [draggable]="false" [canAutoResize]="false" [canAutoResize]="true">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                        <a href="javascript:void(0)"
+                            title="{{'applications.messages.expand-collapse-comments-reject' | translate}}"
+                            (click)="toggleExpandPendingRow(row)">
+                            <i class="fa-solid fa-comments"></i>
+                            <br>
+                            <i class="fa-solid fa-ban"></i>
+                        </a>
+                    </ng-template>
+                </ngx-datatable-column>
+
+
+                <ngx-datatable-column *ngIf="activeRole == 'EXPLORER'" [resizeable]="false" [sortable]="false"
+                    [draggable]="false" [canAutoResize]="false" [canAutoResize]="true">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                        <a href="javascript:void(0)"
+                            title="{{'applications.messages.expand-collapse-comments' | translate}}"
+                            (click)="toggleExpandPendingRow(row)">
+                            <i class="fa-solid fa-comments"></i>
+                        </a>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.title-sing' | translate}}" prop="id" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        #{{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <!--<ngx-datatable-column name="{{'applications.status.title' | translate}}" prop="status" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>-->
+        
+                 <ngx-datatable-column name="{{'applications.moment' | translate}}" prop="applicationMoment" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value | date: 'dd/MM/yyyy hh:mm:ss'}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.actor-id' | translate}}" prop="explorer_Id"
+                    [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.trip-id' | translate}}" prop="trip_Id"
+                    [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="" prop="trip_Id" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        <button type="button" class="btn btn-primary" routerLink="/trips/{{value}}">
+                            <i class="fa fa-plane" aria-hidden="true"></i>
+                            {{'buttons.go_to_trip' | translate}}
+                        </button>
+                        <!--
+                                                <button type="button" class="btn btn-primary" routerLink="/applications/{{application.id}}">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            {{'buttons.more' | translate}}
+                        </button>
+                         -->
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="" *ngIf="activeRole == 'EXPLORER'" prop="id" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        <button type="button" (click)="onApplicationCancel(value)" class="btn btn-danger"
+                            *ngIf="activeRole == 'EXPLORER'">
+                            <i class="fa-regular fa-rectangle-xmark"></i>
+                            {{'applications.cancel' | translate}}
+                        </button>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="" *ngIf="activeRole == 'MANAGER'" prop="id" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        <button type="button" (click)="onApplicationAccept(value)" class="btn btn-success"
+                            *ngIf="activeRole == 'MANAGER'">
+                            <i class="fa-solid fa-check"></i>
+                            {{'applications.accept' | translate}}
+                        </button>
+                    </ng-template>
+                </ngx-datatable-column>
+
+            </ngx-datatable>
+        </div>
+    </div>
+</div>
+
+<div class="accordion" id="statusDueAccordion">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="statusDue">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDue"
+                aria-expanded="true" aria-controls="collapseDue">
+                {{'applications.status.due' | translate}}
+            </button>
+        </h2>
+    </div>
+    <div id="collapseDue" class="accordion-collapse collapse" data-parent="statusDueAccordion">
+        <div class="accordion-body" *ngIf="dueApplications.length < 1">
+            <p>{{'applications.messages.due-applications-not-found' | translate}}</p>
+        </div>
+        <div>
+            <ngx-datatable [rows]="dueApplications" #dueTable class="bootstrap expandable" [loadingIndicator]="true"
+                [headerHeight]="40" [footerHeight]="80" [limit]="10" [rowHeight]="'auto'" [columnMode]="'force'"
+                [scrollbarH]="true">
+
+                <ngx-datatable-row-detail [rowHeight]="350" [scrollLeft]="true" #dueCommentsRow
+                    (toggle)="onDetailToggle($event)">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                        <div style="padding-left: 1%;">
+                            <div><strong>{{'applications.comments' | translate}}</strong></div>
+                            <div *ngIf="row.getComments().length >= 1 && row.getComments()[0] != ' '"> 
+                                <div *ngFor="let comment of row.getComments(); let i = index" >
+                                    <p>{{i+1}} - {{comment}}</p>
+                                </div>
+                            </div>
+                            <div *ngIf="row.getComments().length == 1 && row.getComments()[0] == ' '"> 
+                                {{'applications.messages.comments-not-found' | translate}}
+                            </div>
+                        </div>
+
+                    </ng-template>
+                </ngx-datatable-row-detail>
+
+                <ngx-datatable-column [resizeable]="false" [sortable]="false" [draggable]="false"
+                    [canAutoResize]="false" [canAutoResize]="true">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                        <a href="javascript:void(0)"
+                            title="{{'applications.messages.expand-collapse-comments' | translate}}"
+                            (click)="toggleExpandDueRow(row)">
+                            <i class="fa-solid fa-comments"></i>
+                        </a>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.title-sing' | translate}}" prop="id" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        #{{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <!--<ngx-datatable-column name="{{'applications.status.title' | translate}}" prop="status" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>-->
+        
+                 <ngx-datatable-column name="{{'applications.moment' | translate}}" prop="applicationMoment" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value | date: 'dd/MM/yyyy hh:mm:ss'}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.actor-id' | translate}}" prop="explorer_Id"
+                    [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.trip-id' | translate}}" prop="trip_Id"
+                    [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'trips.price' | translate}}" prop="tripPrice" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="" prop="trip_Id" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        <button type="button" class="btn btn-primary" routerLink="/trips/{{value}}">
+                            <i class="fa fa-plane" aria-hidden="true"></i>
+                            {{'buttons.go_to_trip' | translate}}
+                        </button>
+                        <!--
+                                                <button type="button" class="btn btn-primary" routerLink="/applications/{{application.id}}">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            {{'buttons.more' | translate}}
+                        </button>
+                         -->
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="" *ngIf="activeRole == 'EXPLORER'" prop="id" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        <button type="button" (click)="onApplicationCancel(value)" class="btn btn-danger"
+                            *ngIf="activeRole == 'EXPLORER'">
+                            <i class="fa-regular fa-rectangle-xmark"></i>
+                            {{'applications.cancel' | translate}}
+                        </button>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="" *ngIf="activeRole == 'EXPLORER'" [canAutoResize]="true">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <button type="button" (click)="onApplicationPay(row)" class="btn btn-success"
+                            *ngIf="activeRole == 'EXPLORER'">
+                            <i class="fa-regular fa-credit-card"></i>
+                            {{'applications.pay' | translate}}
+                        </button>
+                    </ng-template>
+                </ngx-datatable-column>
+
+            </ngx-datatable>
+        </div>
+    </div>
+</div>
+
+<div class="accordion" id="statusAcceptedAccordion">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="statusAccepted">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAccepted"
+                aria-expanded="true" aria-controls="collapseAccepted">
+                {{'applications.status.accepted' | translate}}
+            </button>
+        </h2>
+    </div>
+    <div id="collapseAccepted" class="accordion-collapse collapse" data-parent="statusAcceptedAccordion">
+        <div class="accordion-body" *ngIf="acceptedApplications.length < 1">
+            <p>{{'applications.messages.accepted-applications-not-found' | translate}}</p>
+        </div>
+        <div>
+            <ngx-datatable [rows]="acceptedApplications" #acceptedTable class="bootstrap expandable"
+                [loadingIndicator]="true" [headerHeight]="40" [footerHeight]="80" [limit]="10" [rowHeight]="'auto'"
+                [columnMode]="'force'" [scrollbarH]="true">
+
+                <ngx-datatable-row-detail [rowHeight]="500" [scrollLeft]="true" #acceptedCommentsRow
+                    (toggle)="onDetailToggle($event)">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                        <div style="padding-left: 1%;">
+                            <div><strong>{{'applications.comments' | translate}}</strong></div>
+                            <div *ngIf="row.getComments().length >= 1 && row.getComments()[0] != ' '"> 
+                                <div *ngFor="let comment of row.getComments(); let i = index" >
+                                    <p>{{i+1}} - {{comment}}</p>
+                                </div>
+                            </div>
+                            <div *ngIf="row.getComments().length == 1 && row.getComments()[0] == ' '"> 
+                                {{'applications.messages.comments-not-found' | translate}}
+                            </div>
+                        </div>
+
+                    </ng-template>
+                </ngx-datatable-row-detail>
+
+                <ngx-datatable-column [resizeable]="false" [sortable]="false" [draggable]="false"
+                    [canAutoResize]="false" [canAutoResize]="true">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                        <a href="javascript:void(0)"
+                            title="{{'applications.messages.expand-collapse-comments' | translate}}"
+                            (click)="toggleExpandAcceptedRow(row)">
+                            <i class="fa-solid fa-comments"></i>
+                        </a>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.title-sing' | translate}}" prop="id" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        #{{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <!--<ngx-datatable-column name="{{'applications.status.title' | translate}}" prop="status" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>-->
+        
+                 <ngx-datatable-column name="{{'applications.moment' | translate}}" prop="applicationMoment" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value | date: 'dd/MM/yyyy hh:mm:ss'}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.actor-id' | translate}}" prop="explorer_Id"
+                    [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="{{'applications.trip-id' | translate}}" prop="trip_Id"
+                    [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value}}
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="" prop="trip_Id" [canAutoResize]="true">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                        <button type="button" class="btn btn-primary" routerLink="/trips/{{value}}">
+                            <i class="fa fa-plane" aria-hidden="true"></i>
+                            {{'buttons.go_to_trip' | translate}}
+                        </button>
+                        <!--
+                                                <button type="button" class="btn btn-primary" routerLink="/applications/{{application.id}}">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            {{'buttons.more' | translate}}
+                        </button>
+                         -->
+                    </ng-template>
+                </ngx-datatable-column>
+
+            </ngx-datatable>
+        </div>
+    </div>
+</div>

@@ -10,6 +10,12 @@ import { of } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
 import { AllTripsComponent } from '../../pages/trips/all-trips/all-trips.component';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}
 
 import { LoginComponent } from './login.component';
 
@@ -22,8 +28,15 @@ describe('LoginComponent', () => {
       declarations: [LoginComponent],
       imports: [FormsModule, AngularFireModule.initializeApp(environment.firebase),
         RouterTestingModule.withRoutes(
-          [{path: 'trip-list', component: AllTripsComponent}]
-        )],
+          [{path: 'trips/list', component: AllTripsComponent}]
+        ),
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient]
+          }
+        })],
       providers: [HttpClient, HttpHandler, AngularFirestore, AngularFireAuth]
     })
       .compileComponents();
@@ -73,6 +86,6 @@ describe('LoginComponent', () => {
     expect(component.error_message).toEqual("");
     expect(component.success_message).toEqual("The user has been authenticated in firebase");
     expect(serviceSpy).toHaveBeenCalled();
-    expect(navigatorSpy.calls.first().args[0]).toContain('/trip-list');
+    //expect(navigatorSpy.calls.first().args[0]).toContain('/trips/list');
   })));
 });

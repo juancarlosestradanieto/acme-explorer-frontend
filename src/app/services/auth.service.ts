@@ -3,12 +3,15 @@ import { Actor } from '../models/actor.model';
 
 import { environment } from 'src/environments/environment';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, firstValueFrom, Observable, Subject } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import * as firebase from 'firebase/compat/app';
 import { User as FirebaseUser } from "firebase/auth";
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  headers: new HttpHeaders({ 
+    'Content-Type': 'application/json',
+    'Accept-Language': 'es'
+  }),
 };
 
 @Injectable({
@@ -22,110 +25,203 @@ export class AuthService {
 
   //para controlar el login y el logout
   firebase_user_is_logged_in: boolean = false;
+  private currentActor!: Actor | null;
+  private loginStatus = new Subject<Boolean>();
 
-  constructor(private http: HttpClient, private afAuth: AngularFireAuth) 
-  {
-    //? const actor: any = localStorage.getItem('user');
-    //? this.user =
-    //?   localStorage.getItem('user') !== null ? JSON.parse(actor) : null;
-    //? this.auth.next(this.user);
+  constructor(private http: HttpClient, private afAuth: AngularFireAuth) {
 
     //para controlar el login y el logout
     this.afAuth.onAuthStateChanged((user) => {
 
-      if (user) 
-      {
+      if (user) {
         this.firebase_user_is_logged_in = true;
-      } 
-      else
-      {
+      }
+      else {
         this.firebase_user_is_logged_in = false;
         user = null;
       }
-      console.log("AuthService constructor onAuthStateChanged this.firebase_user_is_logged_in", this.firebase_user_is_logged_in);
-      
-      localStorage.setItem('user', JSON.stringify(user));
+      //console.log("AuthService constructor onAuthStateChanged this.firebase_user_is_logged_in", this.firebase_user_is_logged_in);
+
+      localStorage.setItem('loggedIn', JSON.stringify(this.firebase_user_is_logged_in));
+      localStorage.setItem('firebaseUser', JSON.stringify(user));
 
     });
 
   }
 
   //para controlar el login y el logout
-  public isLoggedIn(): boolean 
-  {
+  public isLoggedIn(): boolean {
     return this.firebase_user_is_logged_in;
   }
 
-  async registerUser(actor: Actor) {
-
-
-    //? localStorage.removeItem('token');
-    //? localStorage.removeItem('user');
-    //? this.user = null;
+  async registerUser(actor: any) {
     
     return new Promise<any>((resolve, reject) => {
       this.afAuth.createUserWithEmailAndPassword(
         actor.email,
         actor.password
       )
-      .then((response1) => {
+        .then((response1) => {
 
-        console.log('AuthService->registerUser->createUserWithEmailAndPassword then response', response1);
+          console.log('AuthService->registerUser->createUserWithEmailAndPassword then response', response1);
 
-        const headers = new HttpHeaders();
-        headers.append('Content-Type', 'application/json');
-        const url = `${environment.backendApiBaseURL + '/actors'}`;
-        const body = JSON.stringify(actor);
+          const url = `${environment.backendApiBaseURL + '/actors'}`;
+          const body = JSON.stringify(actor);
 
-        this.http.post<any>(url, body, httpOptions).subscribe({
-          next: (response2) => {
+          this.http.post<any>(url, body, httpOptions).subscribe({
+            next: (response2) => {
 
-            console.log('AuthService->registerUser post next response', response2);
-            console.log('Registro Realizado Correctamente!');
+              console.log('AuthService->registerUser post next response', response2);
+              console.log('Registro Realizado Correctamente!');
+              console.log('Firebase login automatically after creating an account, so it has to be logged out explicitly because it is not the desired behaviour');
+              this.logout();
 
-            resolve(response2);
+              resolve(response2);
 
-          },
-          error: (error2) => {
+            },
+            error: (error2) => {
 
-            console.error('AuthService->registerUser post error', error2);
-            reject(error2);
-          }
+              console.error('AuthService->registerUser post error2', error2);
+              console.log("The user created in firebase has to be deleted because the attemp to create it in backend failed");
+
+              this.afAuth.currentUser.then((user) => {
+                user?.delete()
+                .then((response3) => {
+                  
+                  console.log("AuthService->registerUser->currentUser->delete then response3 ", response3);
+                  reject(error2);
+            
+                })
+                .catch((error3) => {
+            
+                  console.error("AuthService->registerUser->currentUser->delete error3 ", error3);
+                  reject(error3);
+            
+                });
+              });
+
+            }
+          });
+
+        })
+        .catch((error1) => {
+            
+          console.error('AuthService->registerUser->createUserWithEmailAndPassword catch error', error1);
+          reject(error1);
+
         });
-
-      })
-      .catch((error1) => {
-
-        console.error('AuthService->registerUser->createUserWithEmailAndPassword catch error', error1);
-        reject(error1);
-
-      });
     });
 
   }
 
   getRoles(): string[] {
-    return ['EXPLORER', 'MANAGER', 'ADMINISTRATOR'];
+    return ['EXPLORER', 'MANAGER', 'ADMINISTRATOR', 'SPONSOR'];
   }
 
   login(email: string, password: string) {
 
-    console.log(email + " - " + password);
+    //console.log(email + " - " + password);
+    const url = environment.backendApiBaseURL + '/login?email=' + email + '&password='+password;
 
     return new Promise<any>((resolve, reject) => {
-      this.afAuth.signInWithEmailAndPassword(email, password)
-        .then(response => {
+      this.http.get<Actor[]>(url, httpOptions).subscribe({
+        next: (response1: any) => {
 
-          console.log("AuthService->login: then response ", response);
-          resolve(response.user);
+          console.log('AuthService->login get next response1', response1);
+          this.currentActor = response1;
+          let customToken = response1.customToken;
 
-        }).catch(err => {
+          this.afAuth.signInWithCustomToken(customToken)
+          .then((response2) => {
 
-          console.log("AuthService->login: catch err", err);
-          reject(err);
+            let userCredential = response2;
 
-        });
+            // Signed in
+            let user = userCredential.user;
+            console.log('afAuth->signInWithCustomToken then userCredential', userCredential);
+
+            user?.getIdToken()
+            .then((response3) => {
+              let idToken = response3;
+              //console.log('user->getIdToken then idToken', idToken);
+
+              let actor: any = this.currentActor;
+
+              //console.log('user->getIdToken then actor.hasOwnProperty password', actor.hasOwnProperty('password'));
+              if (actor.hasOwnProperty('password')) {
+                delete actor['password'];
+                //console.log('user->getIdToken then actor', actor);
+              }
+
+              //console.log('user->getIdToken then actor.hasOwnProperty address', actor.hasOwnProperty('address'));
+              if (actor.hasOwnProperty('address')) {
+                delete actor['address'];
+                //console.log('user->getIdToken then actor', actor);
+              }
+
+              //console.log('user->getIdToken then actor.hasOwnProperty phone', actor.hasOwnProperty('phone'));
+              if (actor.hasOwnProperty('phone')) {
+                delete actor['phone'];
+                //console.log('user->getIdToken then actor', actor);
+              }
+
+              //console.log('user->getIdToken then actor.hasOwnProperty customToken', actor.hasOwnProperty('customToken'));
+              if (actor.hasOwnProperty('customToken')) {
+                delete actor['customToken'];
+                //console.log('user->getIdToken then actor', actor);
+              }
+
+
+              localStorage.setItem('currentActor', JSON.stringify(actor));
+              localStorage.setItem('idToken', idToken);
+
+              this.loginStatus.next(true);
+
+              resolve(this.currentActor);
+
+            })
+            .catch((error3) => {
+              //let errorCode = error3.code;
+              //let errorMessage = error3.message;
+              console.error('user->getIdToken catch error3', error3);
+              reject(error3);
+            });
+
+          })
+          .catch((error2) => {
+            //let errorCode = error2.code;
+            //let errorMessage = error2.message;
+            console.error('afAuth->signInWithCustomToken catch error2', error2);
+            reject(error2);
+          });
+
+        },
+        error: (error1: any) => {
+
+          console.error('AuthService->login get error1', error1);
+          reject(error1);
+        }
+      });
     });
+
+  }
+
+  getCurrentActor(): Actor | null {
+
+    let loggedIn_stored = localStorage.getItem('loggedIn');
+    let loggedIn: boolean;
+    let user: Actor | null = null;
+    //console.log("HeaderComponent->ngAfterViewChecked user_stored", loggedIn_stored);
+
+    if (loggedIn_stored != null) {
+      loggedIn = JSON.parse(loggedIn_stored);
+      if (loggedIn) {
+        let user_stored = localStorage.getItem('currentActor');
+        user = Actor.castJsonActor(JSON.parse(user_stored!));
+      }
+    }
+
+    return user;
 
   }
 
@@ -136,21 +232,37 @@ export class AuthService {
 
     return new Promise<any>((resolve, reject) => {
       this.afAuth.signOut()
-      .then(response => {
+        .then(response => {
 
-        console.log("AuthService->logout: then response ", response);
-        resolve(response);
+          console.log("AuthService->logout: then response ", response);
+          console.log("AuthService->logout loginStatus ", this.loginStatus);
 
+          this.loginStatus.next(false);
+          this.currentActor = null;
+          localStorage.setItem('currentActor', JSON.stringify(this.currentActor));
+          localStorage.removeItem('idToken');
 
-      }).catch(err => {
+          resolve(response);
 
-        console.log("AuthService->logout: catch err", err);
-        reject(err);
+        }).catch(err => {
 
-      });
+          console.log("AuthService->logout: catch err", err);
+          reject(err);
+
+        });
     });
+  }
 
+  getStatus(): Observable<Boolean> {
+    let loggedIn_stored = localStorage.getItem('loggedIn');
+    let loggedIn: boolean = false;
+    if (loggedIn_stored != null) {
+      loggedIn = JSON.parse(loggedIn_stored);
+      //console.log("AuthService->loggedIn:", loggedIn);
+    }
+    this.loginStatus.next(loggedIn);
 
+    return this.loginStatus.asObservable();
   }
 
 }

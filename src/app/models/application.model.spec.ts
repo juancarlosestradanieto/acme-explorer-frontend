@@ -2,6 +2,6 @@ import { Application } from './application.model';
 
 describe('Application', () => {
   it('should create an instance', () => {
-    expect(new Application()).toBeTruthy();
+    expect(new Application(null)).toBeTruthy();
   });
 });

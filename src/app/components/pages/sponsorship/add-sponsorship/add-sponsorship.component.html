@@ -1,0 +1,31 @@
+<br/>
+<h3>{{'sponsorships.create' | translate}}</h3>
+
+<app-go-back-button></app-go-back-button>
+
+<form [formGroup]="sponsorshipForm" (ngSubmit)="onSubmit()">
+  <br/>
+  <div class="form-group">
+    <label for="tripTicker">Trip Ticker</label>
+    <input type="text" class="form-control" formControlName="tripTicker" id="tripTicker" readonly/>
+    <small class="text-danger" *ngIf="sponsorshipForm.get('tripTicker')?.hasError('required')">{{"Messages.field_required" | translate}}</small>
+  </div>
+  <br/>
+
+  <div class="form-group">
+    <label for="page">{{'sponsorships.page' | translate}}</label>
+    <input type="text" class="form-control" formControlName="page" id="page"/>
+    <small class="text-danger" *ngIf="sponsorshipForm.get('page')?.hasError('required')">{{"Messages.field_required" | translate}}</small>
+
+  </div>
+  <br/>
+  <div class="form-group">
+    <label for="banner">{{'sponsorships.banner' | translate}}</label>
+    <input type="text" class="form-control" formControlName="banner" id="banner"/>
+    <small class="text-danger" *ngIf="sponsorshipForm.get('banner')?.hasError('required')">{{"Messages.field_required" | translate}}</small>
+
+  </div>
+  <br/>
+
+  <button type="submit" class="btn btn-primary" [disabled]="sponsorshipForm.invalid">{{'sponsorships.confirm_sponsorship' | translate}}</button>
+</form>

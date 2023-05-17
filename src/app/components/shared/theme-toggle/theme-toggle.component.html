@@ -1,0 +1,16 @@
+<div class="theme-switcher-wrap">
+    <p>
+        <img src="../../../../assets/images/sun-moon.jpg" alt="sun-moon" class="img-size-fix">
+    </p>   
+    <label
+        class="theme-switcher"
+        [ngClass]="(storedTheme === 'dark')? 'theme-switcher active':'theme-switcher'"
+        (click)="setTheme()"
+    >
+    <div class="switch-path">
+        <div class="switch-handle">
+        </div>
+    </div>
+</label>
+
+</div>

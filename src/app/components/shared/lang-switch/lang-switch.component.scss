@@ -1,0 +1,25 @@
+.flags-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 2px;
+}
+
+.flag{
+    width: 20px;
+    height: 20px;
+}
+
+button{
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    width: 26px;
+    border: none;
+    background: #FFFFFF;
+
+    
+}
+button:hover{
+    transform: scale(1.3);
+}

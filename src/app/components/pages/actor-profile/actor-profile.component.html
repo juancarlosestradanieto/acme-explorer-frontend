@@ -1,0 +1,42 @@
+<div class="row center">
+  <div class="col-md-4 col-xs-12">
+    <div class="card mt-4" *ngIf="actor">
+      <img src="assets/images/user-nano.jpg" class="card-img-top" alt="..." />
+      <div class="card-body" >
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+          <b>{{'actor.name' | translate}}:</b>
+          {{actor.name}}
+          </li>
+          <li class="list-group-item">
+          <b>{{'actor.surname' | translate}}:</b>
+          {{actor.surname}}
+          </li>
+        </ul>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <b>{{'actor.email' | translate}}:</b> 
+            {{actor.email}}
+          </li>
+          <li class="list-group-item">
+           <b>{{'REGISTER.ADDRESS' | translate}}</b>
+           {{actor.address}}
+          </li>
+          <li class="list-group-item">
+            <b>{{'actor.role.title' | translate}}:</b> 
+            {{actor.role}}
+          </li>
+          <li class="list-group-item">
+           <b>{{'REGISTER.PHONE' | translate}}</b>
+           {{actor.phone_number}}
+          </li>
+          <li class="list-group-item">
+            <button class="btn btn-success" (click)=" goEdit()"><i class="fa-solid fa-pencil"></i>{{'trips.buttons.edit' | translate}}</button>
+          </li>
+        </ul>
+      </div>
+      </div>
+  </div>
+</div>
+<app-go-back-button></app-go-back-button>
+

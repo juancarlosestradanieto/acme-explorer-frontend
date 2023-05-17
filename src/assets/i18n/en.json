@@ -1,0 +1,324 @@
+{
+  "REGISTER": {
+    "REGISTER": "Register",
+    "NEW_ACTOR": "Register a new actor",
+    "ROLE": "Role",
+    "MANAGER-SPONSOR":"Role. You can select MANAGER or SPONSOR",
+    "NAME": "Name",
+    "SURNAME": "Surname",
+    "PHONE": "Telephone Number",
+    "ADDRESS": "Address",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "ALREADY_REGISTER": "Already Registered?",
+    "LOGIN": "Log In!"
+  },
+  "LOGIN": {
+    "LOGIN_ACTION": "Log In",
+    "LOGIN": "Login",
+    "EMAIL": "Introduce your email",
+    "PASSWORD": "Introduce your password",
+    "NOT_ALREADY_REGISTER": "Not already registered?",
+    "REGISTER_NOW": "Register right now!"
+  },
+  "Home": "Home",
+  "Trips": "Trips",
+  "auth": {
+    "register": "Register",
+    "login": "Login",
+    "logout": "Logout",
+    "errors": {
+      "access-denied": "Restricted access to resource"
+    }
+  },
+  "home": "Home",
+  "trips": {
+    "title": "Trips",
+    "title-control": "Title",
+    "description": "Description",
+    "price": "Price",
+    "stage": "stage",
+    "stages": "Stages",
+    "startDate": "Start date",
+    "endDate": "End date",
+    "requirement": "Requirement",
+    "requirements": "Requirements",
+    "favourites": "Favourite trips",
+    "finder": "Trip finder",
+    "add": "Add",
+    "delete": "Delete",
+    "pictures": "Pictures",
+    "picture": "Picture",
+    "previous-pictures": "Previously uploaded pictures.",
+    "starting":"Starting Time Left",
+    "out_time":"Out of Time",
+    "search":"Search",
+    "search-reset":"Reset",
+    "keyWord":"Keyword",
+    "priceLowerBound":"Price lower bound",
+    "priceUpperBound":"Price upper bound",
+    "dateLowerBound":"Date lower bound",
+    "dateUpperBound":"Date upper bound",
+    "buttons": {
+      "add-favourite": "Add to favourites",
+      "remove-favourite": "Remove from favourites",
+      "add": "Add trip",
+      "more": "More",
+      "edit": "Edit",
+      "delete": "Delete",
+      "cancel":"Cancel",
+      "publish":"Publish"
+    },
+    "messages": {
+      "trips-available": "Available trips just for you!",
+      "favourite-trips-available": "Available favourite trips just for you!",
+      "favourite-trips-not-found": "There are no favourite trips found",
+      "disabled-trip": "The trip has already started or has been cancelled",
+      "trip-saved": "Trip successfully saved",
+      "start-soon": "Soon!",
+      "delete-trip-confirmation": "Are you sure to delete?, this action can't be undone.",
+      "publish-trip-confirmation": "Are you sure to publish?",
+      "cancel-trip-confirmation": "Are you sure to cancel?",
+      "cancel-trip-reason-request": "Please enter the cancel reason",
+      "cancel-trip-denied": "A trip may be cancelled as long as it is done at least one week in advance of its starting date."
+    },
+    "validations": {
+      "required": "This field is required.",
+      "minimum": "The minimum accepted value is",
+      "maximum": "The maximum accepted value is",
+      "keyword_pattern": "The keyword must be a single word",
+      "price_range_invalid": "The price range is invalid",
+      "date_range_invalid": "The date range is invalid"
+    }
+  },
+  "footer": {
+    "terms": "Terms and conditions"
+  },
+  "termsandconditions": {
+    "init": "This agreement describes the terms and conditions applicable to the use of the content, products and/or services of the Acme Explorer website. To make use of the content, products and/or services of the website, the user must abide by these terms and conditions.",
+    "last": "Acme Explorer is not responsible for the improper use of the content, products and/or services of the website and for the breach of these terms and conditions.",
+    "first": {
+      "title": "I. OBJECT",
+      "description": "The purpose is to regulate the access and use of the content, products and/or services available to the general public in the domain https://www.acmeexplorer.com. The owner reserves the right to make any type of modification to the website at any time and without prior notice, the user accepts said modifications. Access to the website by the user is free and free, the use of the content, products and/or services implies a subscription cost for the user. The website only admits access to people of legal age and is not responsible for the breach of this. The website is aimed at users residing in Spain and complies with the legislation established in said country. If the user resides in another country and decides to access the website, they will do so at their own risk. The administration of the website can be exercised by third parties, that is, people other than the owner, without affecting these terms and conditions."
+    },
+    "second": {
+      "title": "II. USER",
+      "description": "User activity on the website such as posts or comments will be subject to these terms and conditions. The user agrees to use the content, products and/or services lawfully, without breaching morality or public order, refraining from any act that affects the rights of third parties or the operation of the website. The user agrees to provide true information in the forms on the website. Access to the website does not imply a relationship between the user and the owner of the website. The user declares to be of legal age and have the legal capacity to abide by these terms and conditions."
+    },
+    "third": {
+      "title": "III. ACCESS AND NAVIGATION ON THE WEBSITE",
+      "description": "The owner does not guarantee the continuity and availability of the content, products and/or services on the website, it will carry out actions that promote the proper functioning of said website without any responsibility. The owner is not responsible for the software being free of errors that may cause damage to the software and/or hardware of the equipment from which the user accesses the website. Likewise, it is not responsible for damages caused by access and/or use of the website."
+    },
+    "fourth": {
+      "title": "IV. PRIVACY POLICY AND DATA PROTECTION",
+      "description": "In accordance with the provisions of the General Law on the Protection of Personal Data Held by Private Parties, the owner undertakes to take the necessary measures to guarantee the user's safety, preventing the improper use of the personal data that the user provides in the website. The owner will verify that the personal data contained in the databases are correct, true and current, as well as that they are used only for the purpose for which they were collected. Acme Explorer reserves the right to make any type of modification to the Privacy Notice at any time and without prior notice, according to its needs or changes in the applicable legislation, the user accepts said modifications. The website involves the use of cookies that are small amounts of information that are stored in the browser used by the user such as login data, user preferences, date and time the website is accessed, sites visited and IP address, this information is anonymous and will only be used to improve the website. Cookies make browsing easier and more user-friendly, however, the user can deactivate them at any time from their browser with the understanding that this may affect some functions of the website."
+    },
+    "fifth": {
+      "title": "V. LINKS POLICY",
+      "description": "The website may contain links to other Internet sites belonging to third parties for which it is not responsible."
+    },
+    "sixth": {
+      "title": "VI. INTELLECTUAL AND INDUSTRIAL PROPERTY POLICY",
+      "description": "The owner declares to have the intellectual and industrial property rights of the website including images, audio or video files, logos, trademarks, colors, structures, fonts, designs and other elements that distinguish it, protected by Spanish and international legislation on the subject. of intellectual and industrial property. The user undertakes to respect the industrial and intellectual property rights of the owner, being able to view the elements of the website, store them, copy them and print them exclusively for personal use."
+    },
+    "seventh": {
+      "title": "VI. INTELLECTUAL AND INDUSTRIAL PROPERTY POLICY",
+      "description": "The relationship between the user and the owner will be governed by the laws applicable in Spain."
+    }
+  },
+  "actor": {
+    "profile": "Profile",
+    "control_panel":"Actors Panel",
+    "add_manager":"Register new Manager/Sponsor",
+    "back_actors_control_panel":"Back to Actors Panel",
+    "name":"Name",
+    "surname":"Surname",
+    "email":"Email",
+    "address":"Address",
+    "phone_number":"Phone Number",
+    "actions":"Actions",
+    "profile_edition":"User Profile Edition",
+    "confirm_edition":"Confirm User Profile",
+    "role": {
+      "title": "Role",
+      "explorer": "Explorer",
+      "manager": "Manager",
+      "sponsor": "Sponsor",
+      "admin": "Administrator"
+    }
+  },
+  "customize-ui": "Customize UI",
+  "applications": {
+    "title-plural": "Applications",
+    "title-sing": "Application",
+    "moment": "Creation",
+    "id": "Id",
+    "trip-id": "Trip Id",
+    "actor-id": "Explorer Id",
+    "comments": "Comments",
+    "rejection_reason": "Rejection reason",
+    "create": "Create new application",
+    "list-by-explorer": "Explorer applications",
+    "list-by-trip": "Trip applications",
+    "accept": "Accept",
+    "reject": "Reject",
+    "pay": "Pay",
+    "cancel": "Cancel",
+    "apply-for": "Apply for",
+    "edit-comments": "Edit comments",
+    "add-comment": "Add comment",
+    "remove-comment": "Remove comment",
+    "status": {
+      "title": "Status",
+      "cancelled": "Cancelled",
+      "pending": "Pending",
+      "rejected": "Rejected",
+      "due": "Due",
+      "accepted": "Accepted"
+    },
+    "messages": {
+      "expand-collapse-comments": "Expand/collapse Comments",
+      "expand-collapse-comments-reject": "Expandir/Colapsar Comentarios and Rejection",
+      "rejection-reason-required": "A rejection reason is needed",
+      "comments-not-found": "There are no comments found",
+      "cancelled-applications-not-found": "There are no cancelled applications found",
+      "pending-applications-not-found": "There are no pending applications found",
+      "rejected-applications-not-found": "There are no rejected applications found",
+      "due-applications-not-found": "There are no due applications found",
+      "accepted-applications-not-found": "There are no accepted applications found",
+      "payed-application": "The application has been payed successfully",
+      "payed-application-error": "An error has been found during the payment",
+      "payed-sponsorship": "The sponsorship has been payed successfully",
+      "payed-sponsorship-error": "An error has been found during the payment",
+      "comments-empty": "Comments cannot be empty",
+      "application-exists": "Multiple applications cannot be created for the same trip",
+      "application-created": "Application created successfully",
+      "trip-started": "Trip has already started",
+      "cancel-application-confirmation": "Are you sure to cancel this application?",
+      "accept-application-confirmation": "Are you sure to accept this application?",
+      "reject-application-confirmation": "Are you sure to reject this application?",
+      "cancel-application-error": "An error has been encountered during the cancel process",
+      "accept-application-error": "An error has been encountered during the accept process",
+      "reject-application-error": "An error has been encountered during the reject process"
+    }
+  },
+  "favourite_lists": {
+    "buttons": {
+      "new": "New list",
+      "create": "Create list",
+      "update": "Update list",
+      "cancel": "Cancel"
+    },
+    "messages": {
+      "favourite-trips-available": "Available favourite trips just for you!",
+      "favourite-trips-not-found": "There are no favourite trip lists found",
+      "created": "The list has been created successfully",
+      "already-exists": "A list with that name already exists",
+      "no-lists": "You must create a list before proceding",
+      "reference-required": "A name is required for the list",
+      "no-changes": "There were no changes done",
+      "update-success": "The update was done successfully",
+      "list-filter-placeholder": "Filter the favourite lists"
+    }
+  },
+  "sponsorships": {
+    "title": "Sponsorships",
+    "sponsorship":"Sponsorship",
+    "my_sponsorhips":"My sponsorhips",
+    "all_sponsorships":"All sponsorships",
+    "isPayed":"It is payed?",
+    "all_sponsorships_title":"These are all the sponsorships",
+    "all_sponsorships_sponsor":"These are your sponsorships",
+    "all_sponsorships_text":"To modify and/or delete sponsorships, please navigate to 'My Sponsorships'",
+    "create":"Create new sponsorship",
+    "delete":"Delete",
+    "edit":"Modify",
+    "edit_sponsorship":"Modify sponsorship",
+    "detail":"View details",
+    "page":"Page",
+    "banner":"Banner",
+    "add_banner":"Add banner",
+    "delete_banner":"Delete banner",
+    "confirm_sponsorship":"Confirm creation of sponsorhip",
+    "operation_successfull":"New sponsorship created!",
+    "operation_alreadycreated":"The sponsorsip has been already created. Try with another trip.",
+    "confirm_edit_sponsorship":"Confirm edit of sponsorhip",
+    "operation_edit_successfull":"Sponsorship modified!",
+    "operation_delete_successfull":"Sponsorship deleted correctly!",
+    "detail_sponsorship":"Sponsorship detail view"   
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "trip_by_manager": "Number of trips managed per manager",
+    "applications_by_trip": "Number of applications per trip",
+    "price_of_trips": "Price of the trips",
+    "applications_by_status": "Ratio of applications grouped by status",
+    "price_range_in_finder": "Average price range in finders",
+    "top10_in_finder": "Top 10 keywords in finders",
+    "avg": "Average",
+    "min": "Minimum",
+    "max": "Maximum",
+    "desv": "Standard desviation"
+  },
+  "system-parameters": {
+    "title": "System parameters",
+    "title-create": "Create system parameters",
+    "title-update": "Update system parameters",
+    "maxFinderResults": "Maximum amount of results shown in finders",
+    "flatRateSponsorships": "Flat rate cost of sponsorships",
+    "cacheHour": "Maximum cache duration in hours",
+    "messages": {
+      "created": "System parameters created successfully",
+      "updated": "System parameters updated successfully"
+    }
+  },
+  "dark": "Dark theme activated",
+  "light": "Light theme activated",
+  "buttons": {
+    "create": "Create",
+    "update": "Update",
+    "edit-mode": "Edit mode",
+    "more": "More",
+    "go_to_trip": "Go to trip",
+    "back":"Go back"
+  },
+  "Messages": {
+    "field_required": "This field is required.",
+    "9_digits_required": "This field requires 9 digits.",
+    "email_required": "This field requires an email syntax.",
+    "10_digits_alphanumeric": "This field requires a minimum of ten alphanumeric characters.",
+    "positive-number": "This field requires a positive number.",
+    "something-went-wrong": "Something went wrong"
+  },
+  "pagination": {
+    "next": "Next",
+    "prev": "Previous",
+    "page": "Page"
+  },
+  "finders":{
+    "in-force-finders": "In force finders",
+    "expiration-date": "Expiration date",
+    "buttons":{
+      "save": "Save finder",
+      "show-results": "Show results"
+    },
+    "messages":{
+      "finder-config-saved": "Finder config successfully saved",
+      "finder-saved": "Finder successfully saved"
+    }
+  },
+  "explorers-stats":{
+    "menu-link": "Explorers stats",
+    "explorer-id": "explorer id",
+    "month-expense": "month expense",
+    "year-expense": "year expense",
+    "money": "money",
+    "month": "month",
+    "year": "year",
+    "start-date": "start date",
+    "end-date": "end date",
+    "money-spent": "money spent",
+    "comparison": "comparison",
+    "search": "search"
+  }
+}

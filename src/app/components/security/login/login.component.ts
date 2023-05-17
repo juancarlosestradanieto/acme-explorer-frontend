@@ -1,29 +1,33 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
   error_message!: string;
   success_message!: string;
+  private returnUrl!: string;
 
   @ViewChild(NgForm)
   f!: NgForm;
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
 
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+  }
 
   goRegister() {
     this.router.navigate(['/register']);
@@ -31,7 +35,7 @@ export class LoginComponent implements OnInit {
 
   onLogin(form: NgForm) {
 
-    console.log("Formulario de login -> ", form)
+    //console.log("Formulario de login -> ", form)
 
     this.success_message = "";
     this.error_message = "";
@@ -39,21 +43,27 @@ export class LoginComponent implements OnInit {
     const email = form.value.email;
     const password = form.value.password;
 
-    console.log("LoginComponent->onlogin email", email);
-    console.log("LoginComponent->onlogin password", password);
+    //console.log("LoginComponent->onlogin email", email);
+    //console.log("LoginComponent->onlogin password", password);
 
+    this.authService.login(email, password);
+    
     this.authService.login(email, password)
       .then(response => {
 
         console.log("LoginComponent->onlogin then response", response);
-        let refreshToken = response.refreshToken;
-        console.log("LoginComponent->onlogin refreshToken", refreshToken);
+        let idToken = response.idToken;
+        //console.log("LoginComponent->onlogin idToken", idToken);
 
         this.success_message = `The user has been authenticated in firebase`;
 
         form.reset();
 
-        this.goToTripList();
+        //console.log("LoginComponent->returning to", this.returnUrl);
+
+        this.router.navigateByUrl(this.returnUrl);
+
+        //this.goToTripList();
 
       }).catch((err) => {
 
@@ -61,11 +71,12 @@ export class LoginComponent implements OnInit {
         this.error_message = err.message;
 
       });
+      
 
   }
 
   goToTripList() {
-    this.router.navigate(['/trip-list']);
+    this.router.navigate(['/trips/list']);
   }
 
 }

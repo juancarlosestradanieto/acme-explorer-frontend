@@ -1,0 +1,104 @@
+body,
+.card-body {
+  --background: #fafafa;
+  --background-contrast: #fafafa;
+  --background-secondary: #dae3e5;
+  --font-color: #212529;
+  --font-color-constrast: #fff;
+  --selected-color: #e0e0e0;
+  --shadow-color: rgba(208, 208, 208, 0.5);
+
+  --color-primary: #a1c6ea;
+  --color-secondary-dark: #507dbc;
+  --color-tertiary-dark: #04080f;
+  --color-secondary-light: #bbd1ea;
+  --color-tertiary-light: #dae3e5;
+  --color-success: #20c997;
+  --color-warning: #f39c12;
+  --color-error: #e74c3c;
+
+  --font-size-normal: 14px;
+  --font-size-small: 12px;
+  --font-size-large: 16px;
+  --font-size-xlarge: 18px;
+  --font-size-xxlarge: 24px;
+
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-bold: 600;
+}
+
+body.dark-mode,
+.card-body.dark-mode{
+  --background: #212529;
+  --background-contrast: #2d3338;
+  --background-secondary: #2d3338;
+  --font-color: #fff;
+  --font-color-constrast: #212529;
+  --selected-color: #99aabb;
+  --shadow-color: rgba(208, 208, 208, 0.5);
+
+  --color-primary: #a1c6ea;
+  --color-secondary-dark: #507dbc;
+  --color-tertiary-dark: #04080f;
+  --color-secondary-light: #bbd1ea;
+  --color-tertiary-light: #dae3e5;
+  --color-success: #20c997;
+  --color-warning: #f39c12;
+  --color-error: #e74c3c;
+
+  --font-size-normal: 14px;
+  --font-size-small: 12px;
+  --font-size-large: 16px;
+  --font-size-xlarge: 18px;
+  --font-size-xxlarge: 24px;
+
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-bold: 600;
+}
+
+body.font-size-small {
+  --font-size-normal: 12px;
+  --font-size-small: 10px;
+  --font-size-large: 14px;
+  --font-size-xlarge: 16px;
+  --font-size-xxlarge: 18px;
+}
+
+body.font-size-medium {
+  --font-size-normal: 14px;
+  --font-size-small: 12px;
+  --font-size-large: 16px;
+  --font-size-xlarge: 18px;
+  --font-size-xxlarge: 24px;
+}
+
+body.font-size-large {
+  --font-size-normal: 16px;
+  --font-size-small: 14px;
+  --font-size-large: 20px;
+  --font-size-xlarge: 26px;
+}
+
+body.font-size-xlarge {
+  --font-size-normal: 18px;
+  --font-size-small: 16px;
+  --font-size-large: 22px;
+  --font-size-xlarge: 28px;
+}
+
+body.font-size-xxlarge {
+  --font-size-normal: 24px;
+  --font-size-small: 18px;
+  --font-size-large: 26px;
+  --font-size-xlarge: 32px;
+}
+
+body.currency-euros {
+  --currency-symbol: €;
+}
+
+body.currency-usd {
+  --currency-symbol: $;
+}

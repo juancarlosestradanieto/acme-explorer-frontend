@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
 
@@ -21,7 +21,7 @@ export class RegisterComponent {
     private fb: FormBuilder,
     private router: Router
   ) {
-    this.roleList = this.authService.getRoles();
+    this.roleList = ["EXPLORER"];
     this.registrationForm = this.createForm();
   }
 
@@ -33,14 +33,14 @@ export class RegisterComponent {
     console.log("production ", production);
 
     return this.fb.group({
-      name: (production == true) ? '' : 'test',
-      surname: (production == true) ? '' : 'test',
-      email: (production == true) ? '' : 'test@test.test',
-      password: (production == true) ? '' : '123456',
-      phone: (production == true) ? '' : 'test',
-      address: (production == true) ? '' : 'test',
-      role: (production == true) ? [] : ['EXPLORER'],
-      validated: true
+      name: [(production == true) ? '' : 'test',Validators.required],
+      surname: [(production == true) ? '' : 'test', Validators.required],
+      email: [(production == true) ? '' : 'test'+(new Date().getTime())+'@gmail.com',[Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}')]],
+      password: [(production == true) ? '' : '1234567890', [Validators.required, Validators.minLength(10)]],
+      phone_number: [(production == true) ? '' : '123456789'],
+      address: [(production == true) ? '' : 'test'],
+      role: [(production == true) ? [] : ['EXPLORER']],
+      isActive: [true]
     });
   }
 
@@ -53,16 +53,28 @@ export class RegisterComponent {
     .then((response) => {
 
       console.log("RegisterComponent->onRegister then response ", response);
-      this.success_message = "User registered and logged in successfully"; 
+      
+      this.success_message = "User with email '"+response.email+"' registered successfully"; 
+      
       this.cleanForm();
-
-      this.goToTripList();
 
     })
     .catch((error) => {
 
       console.error("RegisterComponent->onRegister error ", error);
+        
       this.error_message = error.message;
+
+      console.error("RegisterComponent->onRegister error.status ", error.status);
+      console.error("RegisterComponent->onRegister error.error.message ", error.error.message);
+      if(error.status === 422 && typeof error.error.message !== 'undefined')
+      {
+        this.error_message = error.error.message;
+      }
+      if(error.status === 403 && typeof error.error !== 'undefined')
+      {
+        this.error_message = error.error;
+      }
 
     });
       
@@ -75,7 +87,7 @@ export class RegisterComponent {
 
   goToTripList() 
   {
-    this.router.navigate(['/trip-list']);
+    this.router.navigate(['/trips/list']);
   }
 
 }

@@ -1,0 +1,524 @@
+<p>{{title}}</p>
+
+<form [formGroup]="tripForm" (ngSubmit)="onSubmit()" >
+
+    <!--TITLE START-->
+    <div class="form-group has-danger">
+
+        <label for="title" class="form-control-label">{{'trips.title-control' | translate}}:</label>
+
+        <input 
+        id="title"
+        type="text"
+        class="form-control" 
+        formControlName="title"
+        [class.is-valid]="tripForm.get('title')?.valid && 
+        ( tripForm.get('title')?.dirty || tripForm.get('title')?.touched )"
+        [class.is-invalid]="tripForm.get('title')?.invalid && 
+        ( tripForm.get('title')?.dirty || tripForm.get('title')?.touched )" 
+        />
+
+    </div>
+
+    <div *ngIf="tripForm.get('title')?.invalid && 
+        tripForm.get('title')?.errors && 
+        ( tripForm.get('title')?.dirty || tripForm.get('title')?.touched )" 
+    >
+
+        <small class="text-danger" *ngIf="tripForm.get('title')?.hasError('required')">
+            {{'trips.validations.required' | translate}}
+        </small>
+
+    </div>
+    <!--TITLE END-->
+
+    <!--DESCRIPTION START-->
+    <div class="form-group has-danger">
+        
+        <label for="description" class="form-control-label">{{'trips.description' | translate}}:</label>
+
+        <input 
+        id="description"
+        type="text"
+        class="form-control" 
+        formControlName="description"
+        [class.is-valid]="tripForm.get('description')?.valid && 
+        ( tripForm.get('description')?.dirty || tripForm.get('description')?.touched )"
+        [class.is-invalid]="tripForm.get('description')?.invalid && 
+        ( tripForm.get('description')?.dirty || tripForm.get('description')?.touched )" 
+        />
+
+    </div>
+
+    <div *ngIf="tripForm.get('description')?.invalid && 
+        tripForm.get('description')?.errors && 
+        ( tripForm.get('description')?.dirty || tripForm.get('description')?.touched )" 
+    >
+
+        <small class="text-danger" *ngIf="tripForm.get('description')?.hasError('required')">
+            {{'trips.validations.required' | translate}}
+        </small>
+
+    </div>
+    <!--DESCRIPTION END-->
+
+    <!--PRICE START-->
+    <div class="form-group has-danger">
+        
+        <label for="price" class="form-control-label">{{'trips.price' | translate}}:</label>
+    
+        <input 
+        id="price"
+        type="number"
+        class="form-control" 
+        formControlName="price"
+        [class.is-valid]="tripForm.get('price')?.valid && 
+        ( tripForm.get('price')?.dirty || tripForm.get('price')?.touched )"
+        [class.is-invalid]="tripForm.get('price')?.invalid && 
+        ( tripForm.get('price')?.dirty || tripForm.get('price')?.touched )" 
+        [readonly]="true"
+        />
+    
+    </div>
+    
+    <div *ngIf="tripForm.get('price')?.invalid && 
+        tripForm.get('price')?.errors && 
+        ( tripForm.get('price')?.dirty || tripForm.get('price')?.touched )" 
+    >
+
+        <small class="text-danger" *ngIf="tripForm.get('price')?.hasError('required')">
+            {{'trips.validations.required' | translate}}
+        </small>
+        <small class="text-danger" *ngIf="tripForm.get('price')?.hasError('min')">
+            {{'trips.validations.minimum' | translate}} 1.
+        </small>
+        <small class="text-danger" *ngIf="tripForm.get('price')?.hasError('max')">
+            {{'trips.validations.maximum' | translate}} 999999.
+        </small>
+
+    </div>
+    <!--PRICE END-->
+
+    <hr>
+
+    <!--REQUIREMENTS START-->
+    <div class="form-group has-danger">
+
+        <label for="requirements" class="form-control-label">{{'trips.requirements' | translate}}:</label>
+    
+        <button type="button" class="btn btn-success" (click)="onAddRequirement()">
+            <i class="fa-solid fa-plus"></i>
+            {{'trips.add' | translate}}
+        </button>
+        
+        <div class="col-md-10 offset-md-2 ">
+    
+            <div formArrayName="requirements">
+                <div *ngFor="let row of tripForm.controls.requirements.controls; let i=index">
+                    <div [formGroupName]="i">
+
+                        <label >{{'trips.requirement' | translate}} {{i + 1}}</label>
+
+                        <div class="form-group">
+    
+                            <label for="requirement[{{i}}]" class="form-control-label" >{{'trips.requirement' | translate}}</label>
+    
+                            <input
+                            id="requirement[{{i}}]"
+                            type="text"
+                            class="form-control requirement" 
+                            formControlName="requirement"
+                            [class.is-valid]="row.get('requirement')?.valid && 
+                            ( row.get('requirement')?.dirty || row.get('requirement')?.touched )"
+                            [class.is-invalid]="row.get('requirement')?.invalid && 
+                            ( row.get('requirement')?.dirty || row.get('requirement')?.touched )" 
+                            />
+                            
+                            <div *ngIf="row.get('requirement')?.invalid && 
+                                row.get('requirement')?.errors && 
+                                ( row.get('requirement')?.dirty || row.get('requirement')?.touched )" 
+                            >
+
+                                <small class="text-danger" *ngIf="row.get('requirement')?.hasError('required')">
+                                    {{'trips.validations.required' | translate}}
+                                </small>
+
+                            </div>
+    
+                        </div>
+                        <button class="btn btn-danger" (click)="onRemoveRequirement(i)">
+                            <i class="fa-solid fa-trash"></i>
+                            {{'trips.delete' | translate}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    
+    </div>
+    <!--REQUIREMENTS END-->
+
+    <hr>
+    
+    <!--START DATE START-->
+    <div class="form-group has-danger">
+        
+        <label for="startDate" class="form-control-label">{{'trips.startDate' | translate}}:</label>
+    
+        <input 
+        id="startDate"
+        type="date"
+        class="form-control" 
+        formControlName="startDate"
+        [class.is-valid]="tripForm.get('startDate')?.valid && 
+        ( tripForm.get('startDate')?.dirty || tripForm.get('startDate')?.touched )"
+        [class.is-invalid]="tripForm.get('startDate')?.invalid && 
+        ( tripForm.get('startDate')?.dirty || tripForm.get('startDate')?.touched )" 
+        />
+    
+    </div>
+    
+    <div *ngIf="tripForm.get('startDate')?.invalid && 
+        tripForm.get('startDate')?.errors && 
+        ( tripForm.get('startDate')?.dirty || tripForm.get('startDate')?.touched )"
+    >
+
+        <small class="text-danger" *ngIf="tripForm.get('startDate')?.hasError('required')">
+            {{'trips.validations.required' | translate}}
+        </small>
+
+    </div>
+    <!--START DATE END-->
+
+    <!--END DATE START-->
+    <div class="form-group has-danger">
+        
+        <label for="endDate" class="form-control-label">{{'trips.endDate' | translate}}:</label>
+    
+        <input 
+        id="endDate"
+        type="date"
+        class="form-control" 
+        placeholder="Indicate trip's endDate"
+        formControlName="endDate"
+        [class.is-valid]="tripForm.get('endDate')?.valid && 
+        ( tripForm.get('endDate')?.dirty || tripForm.get('endDate')?.touched )"
+        [class.is-invalid]="tripForm.get('endDate')?.invalid && 
+        ( tripForm.get('endDate')?.dirty || tripForm.get('endDate')?.touched )" 
+        />
+    
+    </div>
+    
+    <div *ngIf="tripForm.get('endDate')?.invalid && 
+        tripForm.get('endDate')?.errors && 
+        ( tripForm.get('endDate')?.dirty || tripForm.get('endDate')?.touched )"
+    >
+
+        <small class="text-danger" *ngIf="tripForm.get('endDate')?.hasError('required')">
+            {{'trips.validations.required' | translate}}
+        </small>
+
+    </div>
+    <!--END DATE END-->
+
+    <!--PUBLICATION DATE START-->
+
+    <!--
+    <div class="form-group has-danger">
+        
+        <label for="publicationDate" class="form-control-label">publicationDate:</label>
+    
+        <input 
+        id="publicationDate"
+        type="date"
+        class="form-control" 
+        placeholder="Indicate trip's publicationDate"
+        formControlName="publicationDate"
+        [class.is-valid]="tripForm.get('publicationDate')?.valid && 
+        ( tripForm.get('publicationDate')?.dirty || tripForm.get('publicationDate')?.touched )"
+        [class.is-invalid]="tripForm.get('publicationDate')?.invalid && 
+        ( tripForm.get('publicationDate')?.dirty || tripForm.get('publicationDate')?.touched )" 
+        />
+    
+    </div>
+    
+    <div *ngIf="tripForm.get('publicationDate')?.invalid && 
+        tripForm.get('publicationDate')?.errors && 
+        ( tripForm.get('publicationDate')?.dirty || tripForm.get('publicationDate')?.touched )"
+    >
+
+        <small class="text-danger" *ngIf="tripForm.get('publicationDate')?.hasError('required')">
+            This field is required.
+        </small>
+
+    </div>
+    -->
+    
+    <!--PUBLICATION DATE END-->
+
+    <hr>
+
+    <!--PICTURES START-->
+    <div class="form-group has-danger">
+
+        <label for="pictures" class="form-control-label">{{'trips.pictures' | translate}}:</label>
+    
+        <button type="button" class="btn btn-success" (click)="onAddPicture()">
+            <i class="fa-solid fa-plus"></i>
+            {{'trips.add' | translate}}
+        </button>
+        
+        <div class="col-md-10 offset-md-2 ">
+    
+            <div formArrayName="pictures">
+                <div *ngFor="let row of tripForm.controls.pictures.controls; let i=index">
+                    <div [formGroupName]="i">
+
+                        <label >{{'trips.picture' | translate}} {{i + 1}}</label>
+
+                        <div class="form-group">
+    
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="picture[{{i}}]" class="form-control-label" >{{'trips.picture' | translate}}</label>
+        
+                                    <input
+                                    id="picture[{{i}}]"
+                                    type="file"
+                                    accept="image/png, image/jpeg"
+                                    class="form-control" 
+                                    formControlName="picture"
+                                    [class.is-valid]="row.get('picture')?.valid && 
+                                    ( row.get('picture')?.dirty || row.get('picture')?.touched )"
+                                    [class.is-invalid]="row.get('picture')?.invalid && 
+                                    ( row.get('picture')?.dirty || row.get('picture')?.touched )" 
+        
+                                    (change)="selectFile($event, i)"
+                                    />
+                                    
+                                    <div *ngIf="row.get('picture')?.invalid && 
+                                        row.get('picture')?.errors && 
+                                        ( row.get('picture')?.dirty || row.get('picture')?.touched )" 
+                                    >
+        
+                                        <small class="text-danger" *ngIf="row.get('picture')?.hasError('required')">
+                                            {{'trips.validations.required' | translate}}
+                                        </small>
+        
+                                    </div>
+                                </div>
+        
+                                <div class="col-md-6">
+                                    <img id="picture-previsualization-{{i}}" class="image-previsualization" height="150" >
+                                </div>
+                            </div>
+    
+                        </div>
+                        <button class="btn btn-danger" (click)="onRemovePicture(i)">
+                            <i class="fa-solid fa-trash"></i>
+                            {{'trips.delete' | translate}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    
+    </div>
+
+    <hr>
+    
+    <div class="row" *ngIf="edit_mode == true && editing_trip">
+    
+        {{'trips.previous-pictures' | translate}}
+
+        <div class="row ">
+
+            <div class="col-md-3 text-center" *ngFor="let picture of editing_trip.getPictures(); let i=index">
+                <div class="card" style="width: 18rem;" >
+                    <div class="card-body">
+                        <img src="{{picture.getPicture()}}" class="rounded img-thumbnail" style="max-height: 100px;">
+                    </div>
+                    <div class="card-body">
+                        <button type="button" class="btn btn-danger" (click)="onRemovePreviouslySelectedPicture(picture)">
+                            <i class="fa-solid fa-trash"></i>
+                            {{'trips.delete' | translate}}
+                        </button>
+                    </div>
+                </div>
+                <br>
+            </div>
+
+
+        </div>
+        
+    </div>
+    <!--PICTURES END-->
+
+    <hr>
+
+    <!--STAGES START-->
+    <div class="form-group has-danger">
+
+        <label for="stages" class="form-control-label">{{'trips.stages' | translate}}:</label>
+    
+        <button type="button" class="btn btn-success" (click)="onAddStage()">
+            <i class="fa-solid fa-plus"></i>
+            {{'trips.add' | translate}}
+        </button>
+        
+        <div class="col-md-10 offset-md-2 ">
+    
+            <div formArrayName="stages">
+                <div *ngFor="let row of tripForm.controls.stages.controls; let i=index">
+                    <div [formGroupName]="i">
+
+                        <label >{{'trips.stage' | translate}} {{i + 1}}</label>
+
+                        <div class="form-group">
+    
+                            <label for="title[{{i}}]" class="form-control-label">{{'trips.title-control' | translate}}</label>
+    
+                            <input
+                            id="title[{{i}}]"
+                            type="text"
+                            class="form-control stage_title" 
+                            formControlName="title"
+                            [class.is-valid]="row.get('title')?.valid && 
+                            ( row.get('title')?.dirty || row.get('title')?.touched )"
+                            [class.is-invalid]="row.get('title')?.invalid && 
+                            ( row.get('title')?.dirty || row.get('title')?.touched )" 
+                            />
+                            
+                            <div *ngIf="row.get('title')?.invalid && 
+                                row.get('title')?.errors && 
+                                ( row.get('title')?.dirty || row.get('title')?.touched )" 
+                            >
+                            
+                                <small class="text-danger" *ngIf="row.get('title')?.hasError('required')">
+                                    {{'trips.validations.required' | translate}}
+                                </small>
+
+                            </div>
+    
+                        </div>
+
+                        <div class="form-group">
+    
+                            <label for="description[{{i}}]" class="form-control-label">{{'trips.description' | translate}}</label>
+    
+                            <input
+                            id="description[{{i}}]"
+                            type="text"
+                            class="form-control stage_description" 
+                            formControlName="description"
+                            [class.is-valid]="row.get('description')?.valid && 
+                            ( row.get('description')?.dirty || row.get('description')?.touched )"
+                            [class.is-invalid]="row.get('description')?.invalid && 
+                            ( row.get('description')?.dirty || row.get('description')?.touched )" 
+                            />
+                            
+                            <div *ngIf="row.get('description')?.invalid && 
+                                row.get('description')?.errors && 
+                                ( row.get('description')?.dirty || row.get('description')?.touched )" 
+                            >
+
+                                <small class="text-danger" *ngIf="row.get('description')?.hasError('required')">
+                                    {{'trips.validations.required' | translate}}
+                                </small>
+
+                            </div>
+    
+                        </div>
+
+                        <div class="form-group">
+    
+                            <label for="price[{{i}}]" class="form-control-label">{{'trips.price' | translate}}</label>
+    
+                            <input
+                            id="price[{{i}}]"
+                            type="number"
+                            class="form-control price" 
+                            formControlName="price"
+                            [class.is-valid]="row.get('price')?.valid && 
+                            ( row.get('price')?.dirty || row.get('price')?.touched )"
+                            [class.is-invalid]="row.get('price')?.invalid && 
+                            ( row.get('price')?.dirty || row.get('price')?.touched )" 
+                            (keyup)="updateTotalPrice()"
+                            />
+                            
+                            <div *ngIf="row.get('price')?.invalid && 
+                                row.get('price')?.errors && 
+                                ( row.get('price')?.dirty || row.get('price')?.touched )" 
+                            >
+
+                                <small class="text-danger" *ngIf="row.get('price')?.hasError('required')">
+                                    {{'trips.validations.required' | translate}}
+                                </small>
+
+                            </div>
+    
+                        </div>
+
+                        <button class="btn btn-danger" (click)="onRemoveStage(i)">
+                            <i class="fa-solid fa-trash"></i>
+                            {{'trips.delete' | translate}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    
+    </div>
+    <!--STAGES END-->
+
+    <!--MANAGER ID START-->
+    <div class="form-group has-danger " [hidden]="true" >
+    
+        <label for="managerId" class="form-control-label">managerId:</label>
+    
+        <input 
+        id="managerId"
+        type="text"
+        class="form-control" 
+        placeholder="Indicate trip's managerId"
+        formControlName="managerId"
+        [class.is-valid]="tripForm.get('managerId')?.valid && 
+        ( tripForm.get('managerId')?.dirty || tripForm.get('managerId')?.touched )"
+        [class.is-invalid]="tripForm.get('managerId')?.invalid && 
+        ( tripForm.get('managerId')?.dirty || tripForm.get('managerId')?.touched )" 
+        />
+    
+    </div>
+    
+    <div *ngIf="tripForm.get('managerId')?.invalid && 
+        tripForm.get('managerId')?.errors && 
+        ( tripForm.get('managerId')?.dirty || tripForm.get('managerId')?.touched )"
+    >
+
+        <small class="text-danger" *ngIf="tripForm.get('managerId')?.hasError('required')">
+            {{'trips.validations.required' | translate}}
+        </small>
+
+    </div>
+    <!--MANAGER ID END-->
+
+    <button type="submit"id="add-trip-submit" class="btn btn-primary" 
+        [disabled]="tripForm.invalid
+        || tripForm.controls.requirements.controls.length < 1
+        || tripForm.controls.stages.controls.length < 1
+        ">
+        {{'trips.add' | translate}}
+    </button>
+
+    <div class="alert alert-success" *ngIf="success_message && success_message != ''">
+        {{success_message | translate}}
+    </div>
+
+    <div class="alert alert-danger" *ngIf="error_message && error_message != ''">
+        {{error_message | translate}}
+    </div>
+
+</form>

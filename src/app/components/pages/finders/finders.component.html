@@ -1,0 +1,141 @@
+<form [formGroup]="finderConfigForm" (ngSubmit)="setFinderConfig()" >
+
+    <div class="row">
+
+        <div class="col-md-12">
+        
+            <!--maxFinderResults start-->
+            <div class="form-group has-danger">
+                
+                <label for="maxFinderResults" class="form-control-label">{{'system-parameters.maxFinderResults' | translate}}:</label>
+
+                <input 
+                id="maxFinderResults"
+                type="number"
+                class="form-control" 
+                formControlName="maxFinderResults"
+                [class.is-valid]="finderConfigForm.get('maxFinderResults')?.valid && 
+                ( finderConfigForm.get('maxFinderResults')?.dirty || finderConfigForm.get('maxFinderResults')?.touched )"
+                [class.is-invalid]="finderConfigForm.get('maxFinderResults')?.invalid && 
+                ( finderConfigForm.get('maxFinderResults')?.dirty || finderConfigForm.get('maxFinderResults')?.touched )" 
+                />
+
+            </div>
+
+            <div *ngIf="finderConfigForm.get('maxFinderResults')?.invalid && 
+                finderConfigForm.get('maxFinderResults')?.errors && 
+                ( finderConfigForm.get('maxFinderResults')?.dirty || finderConfigForm.get('maxFinderResults')?.touched )" 
+            >
+
+                <small class="text-danger" *ngIf="finderConfigForm.get('maxFinderResults')?.hasError('required')">
+                    {{'trips.validations.required' | translate}}
+                </small>
+                <small class="text-danger" *ngIf="finderConfigForm.get('maxFinderResults')?.hasError('min')">
+                    {{'trips.validations.minimum' | translate}} 1.
+                </small>
+                <small class="text-danger" *ngIf="finderConfigForm.get('maxFinderResults')?.hasError('max')">
+                    {{'trips.validations.maximum' | translate}} 100.
+                </small>
+
+            </div>
+            <!--maxFinderResults end-->
+        
+        </div>
+
+        <div class="col-md-12">
+
+            <!--cacheHour start-->
+            <div class="form-group has-danger">
+                
+                <label for="cacheHour" class="form-control-label">{{'system-parameters.cacheHour' | translate}}:</label>
+
+                <input 
+                id="cacheHour"
+                type="number"
+                class="form-control" 
+                formControlName="cacheHour"
+                [class.is-valid]="finderConfigForm.get('cacheHour')?.valid && 
+                ( finderConfigForm.get('cacheHour')?.dirty || finderConfigForm.get('cacheHour')?.touched )"
+                [class.is-invalid]="finderConfigForm.get('cacheHour')?.invalid && 
+                ( finderConfigForm.get('cacheHour')?.dirty || finderConfigForm.get('cacheHour')?.touched )" 
+                />
+
+            </div>
+
+            <div *ngIf="finderConfigForm.get('cacheHour')?.invalid && 
+                finderConfigForm.get('cacheHour')?.errors && 
+                ( finderConfigForm.get('cacheHour')?.dirty || finderConfigForm.get('cacheHour')?.touched )" 
+            >
+
+                <small class="text-danger" *ngIf="finderConfigForm.get('cacheHour')?.hasError('required')">
+                    {{'trips.validations.required' | translate}}
+                </small>
+                <small class="text-danger" *ngIf="finderConfigForm.get('cacheHour')?.hasError('min')">
+                    {{'trips.validations.minimum' | translate}} 1.
+                </small>
+                <small class="text-danger" *ngIf="finderConfigForm.get('cacheHour')?.hasError('max')">
+                    {{'trips.validations.maximum' | translate}} 24.
+                </small>
+
+            </div>
+            <!--cacheHour end-->
+
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="finderConfigForm.invalid" >
+            {{"buttons.update" | translate}}
+        </button>
+
+        <div class="alert alert-success" *ngIf="success_message && success_message != ''">
+            {{success_message | translate}}
+        </div>
+
+    </div>
+
+</form>
+
+<div class="row">
+    <div class="col-md-12">
+        <br>
+        <h2>{{"finders.in-force-finders" | translate}}</h2>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-12">
+        <table class="table table-responsive table-hover">
+            <thead>
+                <tr>
+                    <th>{{"trips.keyWord" | translate}}</th>
+                    <th>{{"trips.priceLowerBound" | translate}}</th>
+                    <th>{{"trips.priceUpperBound" | translate}}</th>
+                    <th>{{"trips.dateLowerBound" | translate}}</th>
+                    <th>{{"trips.dateUpperBound" | translate}}</th>
+                    <th>{{"finders.expiration-date" | translate}}</th>
+                    <th>{{"finders.buttons.show-results" | translate}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let finder of finders">
+                    <td>{{finder.keyWord}}</td>
+                    <td>{{finder.priceLowerBound}}</td>
+                    <td>{{finder.priceUpperBound}}</td>
+                    <td>{{finder.dateLowerBound | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{finder.dateUpperBound | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{finder.expiration_date | date: 'dd/MM/yyyy H:mm:ss'}}</td>
+                    <td>
+                        <a 
+                            class="login" 
+                            routerLink="/trips/list"
+                            [queryParams]="{finder_id: finder._id}"
+                        >
+                            {{'finders.buttons.show-results' | translate}}
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
