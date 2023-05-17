@@ -751,10 +751,28 @@ export class AllTripsComponent implements OnInit {
 
     if(preCanceledTripsList){
 
-      // preCanceledTripsList = preCanceledTripsList.map((tripPreCancel:trip)=>{
-      //   return tripPreCancel.id != trip._id
-      // })
+      preCanceledTripsList = preCanceledTripsList.filter((tripPreCancel:tripPreCanceled)=>{
+        return tripPreCancel.id != trip._id
+      })
     }
+
+    localStorage.setItem("preCanceledTripsList",JSON.stringify(preCanceledTripsList))
+  }
+
+  verifyTripIsPreCanceled(trip:Trip):boolean{
+    let tripIsPreCanceled:boolean = false;
+    let preCanceledTripsList:tripPreCanceled[] = JSON.parse(localStorage.getItem("preCanceledTripsList"));
+
+    if(preCanceledTripsList){
+      preCanceledTripsList = preCanceledTripsList.filter((tripPreCancel:tripPreCanceled)=>{
+        return tripPreCancel.id == trip._id
+    })
+    if(preCanceledTripsList.length > 0){
+      tripIsPreCanceled = true
+      }
+    }
+    return tripIsPreCanceled
   }
 
 }
+

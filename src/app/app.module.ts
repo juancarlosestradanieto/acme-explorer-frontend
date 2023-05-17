@@ -69,6 +69,7 @@ import {MatSliderModule} from '@angular/material/slider';
 import { PaySponsorshipComponent } from './components/pages/sponsorship/pay-sponsorship/pay-sponsorship.component';
 import { ExplorersStatsComponent } from './components/pages/explorers-stats/explorers-stats.component';
 import { UpdateFavouriteListsComponent } from './components/pages/favorite-trips/update/update-favourite-lists/update-favourite-lists.component';
+import { PreCancelComponent } from './components/pages/pre-cancel/pre-cancel.component';
 
 
 let ANGULAR_MATERIAL_MODULES = [
@@ -124,7 +125,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     DetailSponsorshipComponent,
     PaySponsorshipComponent,
     UpdateFavouriteListsComponent,
-    ExplorersStatsComponent
+    ExplorersStatsComponent,
+    PreCancelComponent
   ],
   imports: [
     BrowserModule,

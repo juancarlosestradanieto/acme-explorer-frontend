@@ -315,9 +315,13 @@
                     {{'applications.title-plural' | translate}}
                 </button>
 
-                <button type="button" class="btn btn-warning" *ngIf="activeRole == 'MANAGER' " (click)="addTripToPreCancel(trip)">
+                <button type="button" class="btn btn-warning" *ngIf="activeRole == 'MANAGER' && verifyTripIsPreCanceled(trip) == false " (click)="addTripToPreCancel(trip)">
                     <i class="fa-solid fa-cross"></i>
                     PreCancelar Trip
+                </button>
+                <button type="button" class="btn btn-secondary" *ngIf="activeRole == 'MANAGER' && verifyTripIsPreCanceled(trip) == true" (click)="removeTripToPreCancel(trip)">
+                    <i class="fa-solid fa-cross"></i>
+                    Deseleccionar PreCancelación
                 </button>
 
                 <button type="button" class="btn btn-success" *ngIf="activeRole == 'EXPLORER'" routerLink="/trips/{{trip.id}}/favourites-lists">
