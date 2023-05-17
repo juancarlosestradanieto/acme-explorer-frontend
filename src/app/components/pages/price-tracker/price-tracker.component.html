@@ -1,1 +1,27 @@
-<p>price-tracker works!</p>
+<div class="row" >
+
+    <div class="col-md-12">
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <!-- <th>Descripcion</th> -->
+                    <th>Precio</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+                <tbody>
+                    <tr *ngFor="let trackingTrip of tripTrackingList">
+                        <th>{{trackingTrip.id}}</th>
+                        <th>{{trackingTrip.title}}</th>
+                        <!-- <th>{{trackingTrip.description}}</th> -->
+                        <th>{{trackingTrip.price}}</th>
+                        <th>{{trackingTrip.currentDate | date: 'dd/MM/yyyy H:mm:ss'}}</th>
+                    </tr>
+                </tbody>
+            <tbody>
+                </table>
+        </div>
+        <canvas  id="myChart" width="400" height="200"></canvas>
+</div>
