@@ -1,6 +1,10 @@
 
 <div class="row">
-    <div class="col-md-6"><p>{{'trips.messages.trips-available' | translate}}</p></div>
+    <div class="col-md-6"><p>{{'trips.messages.trips-available' | translate}}</p>
+        <button type="button" class="btn btn-primary" *ngIf="activeRole == 'MANAGER'" routerLink="/precancel">
+            <i class="fa-solid fa-cross"></i>
+            Ir a la vista de Pre-cancelación
+        </button></div>
     <div class="col-md-3 offset-md-3" *ngIf="showAddTripButton">
         <button type="button" class="btn btn-success" routerLink="/trips/add"  id="add-trip">
             <i class="fa-solid fa-plus"></i>
