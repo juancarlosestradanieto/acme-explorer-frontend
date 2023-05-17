@@ -1,6 +1,10 @@
 
 <div class="row">
-    <div class="col-md-6"><p>{{'trips.messages.trips-available' | translate}}</p></div>
+    <div class="col-md-6"><p>{{'trips.messages.trips-available' | translate}}</p>
+        <button type="button" class="btn btn-primary" *ngIf="activeRole == 'EXPLORER'" routerLink="/price-tracker">
+            <i class="fa-solid fa-glasses"></i>
+            {{'trips.go_to_tracking_app' | translate}}
+        </button></div>
     <div class="col-md-3 offset-md-3" *ngIf="showAddTripButton">
         <button type="button" class="btn btn-success" routerLink="/trips/add"  id="add-trip">
             <i class="fa-solid fa-plus"></i>
@@ -317,6 +321,14 @@
                 <button type="button" class="btn btn-success" *ngIf="activeRole == 'EXPLORER'" routerLink="/trips/{{trip.id}}/favourites-lists">
                     <i class="fa-solid fa-heart-circle-plus"></i>
                     {{'trips.buttons.add-favourite' | translate}}
+                </button>
+                <button type="button" class="btn btn-warning" *ngIf="activeRole == 'EXPLORER' && verifyTripIsTracked(trip) == false" (click)="addTriptoTracking(trip)">
+                    <i class="fa-solid fa-glasses"></i>
+                    {{'trips.buttons.add-tracking' | translate}}
+                </button>
+                <button type="button" class="btn btn-danger" *ngIf="activeRole == 'EXPLORER' && verifyTripIsTracked(trip) == true" (click)="removeTripFromTracking(trip)">
+                    <i class="fa-solid fa-glasses"></i>
+                    {{'trips.buttons.remove-tracking' | translate}}
                 </button>
             </div>
         </div>

@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms'
 import { FinderConfig, FindersService } from 'src/app/services/finders/finders.service';
 import { Finder } from 'src/app/models/finder/finder.model';
 import { ActivatedRoute } from '@angular/router';
+import { trackTrip } from 'src/app/interfaces/trackTrip';
 
 const PriceRangeValidator: ValidatorFn = (fg: FormGroup) => {
 
@@ -709,5 +710,54 @@ export class AllTripsComponent implements OnInit {
   {
     var hours = Math.abs(date1 - date2) / 36e5;
     return hours;
+  }
+
+  addTriptoTracking(trip:Trip):void{
+
+    let trackTrip:trackTrip = {
+      id: trip._id,
+      title: trip.getTitle(),
+      price: trip.getPrice(),
+      currentDate: new Date().toISOString()
+    }
+
+    let trackingTrips:trackTrip[] = JSON.parse(localStorage.getItem("trackingTripsList"));
+
+    if(trackingTrips){
+      trackingTrips.push(trackTrip)
+    }else{
+      trackingTrips = []
+      trackingTrips.push(trackTrip)
+    }
+
+    localStorage.setItem("trackingTripsList",JSON.stringify(trackingTrips))
+  }
+
+  removeTripFromTracking(trip:Trip):void{
+
+    let trackingTrips:trackTrip[] = JSON.parse(localStorage.getItem("trackingTripsList"));
+
+    if(trackingTrips){
+      trackingTrips = trackingTrips.filter((trackingTrip)=>{
+        return trackingTrip.id != trip._id
+      })
+    }
+    localStorage.setItem("trackingTripsList",JSON.stringify(trackingTrips))
+
+  }
+
+  verifyTripIsTracked(trip:Trip):boolean{
+    let tripIsTracked:boolean = false;
+    let trackingTrips:trackTrip[] = JSON.parse(localStorage.getItem("trackingTripsList"));
+
+    if(trackingTrips){
+      trackingTrips = trackingTrips.filter((trackingTrip)=>{
+        return trackingTrip.id == trip._id
+      })
+      if(trackingTrips.length > 0){
+        tripIsTracked = true;
+      }
+    }
+    return tripIsTracked
   }
 }

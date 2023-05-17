@@ -11,6 +11,7 @@ import { SponsorshipsService } from 'src/app/services/sponsorships.service';
 import { SponsorshipsResponse } from 'src/app/models/sponsorships-response.model';
 import { FavouriteTrips } from 'src/app/models/favourite-trips.model';
 import { TranslateService } from '@ngx-translate/core';
+import { trackTrip } from 'src/app/interfaces/trackTrip';
 
 @Component({
   selector: 'app-single-trip',
@@ -29,6 +30,9 @@ export class SingleTripComponent implements OnInit {
   error_message: string = "";
   success_message: string = "";
   sponsorshipNotCreated:boolean= true;
+
+  priceIncreased:boolean = false;
+  priceDecreased:boolean = false;
 
   protected user!: Actor | null;
   protected activeRole: string = 'anonymous';
@@ -149,6 +153,7 @@ export class SingleTripComponent implements OnInit {
         this.trip = casted_trip;
 
         this.getPaidSponsorships();
+        this.changesInCurrentTrip(this.trip);
       })
       .catch((error) => {
         this.sponsorships = [];
@@ -291,6 +296,37 @@ export class SingleTripComponent implements OnInit {
     this.router.navigate(['/actor/' + currentActorId + '/sponsorships/add-sponsorship']);
 
     
+  }
+
+  changesInCurrentTrip(trip:Trip){
+
+    let currentTrip:trackTrip = {
+      id: trip._id,
+      title: trip.getTitle(),
+      price: trip.getPrice(),
+      currentDate: new Date().toISOString()
+    }
+
+    let trackingTrips:trackTrip[] = JSON.parse(localStorage.getItem("trackingTripsList"))
+
+    if(trackingTrips){
+      trackingTrips.forEach((trackingTrip)=>{
+        if((currentTrip.id == trackingTrip.id ) && (currentTrip.price != trackingTrip.price) && (currentTrip.currentDate != trackingTrip.currentDate)){
+          if(currentTrip.price > trackingTrip.price){
+            console.log("El precio del trip ha subido respecto al anterior.")
+            this.priceIncreased = true;
+          }
+          if(currentTrip.price < trackingTrip.price){
+            console.log("El precio del trip ha bajado respecto al anterior.")
+            this.priceDecreased = true;
+          }
+          trackingTrips.push(currentTrip)
+          console.log(trackingTrips)
+          localStorage.setItem("trackingTripsList",JSON.stringify(trackingTrips))
+        }
+      })
+    }
+
   }
 
 }
