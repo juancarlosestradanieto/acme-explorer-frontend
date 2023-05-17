@@ -1,39 +1,43 @@
-<div class="row" >
+<div class="row"*ngIf="preCancelTrips">
 
     <div class="col-md-12">
-        <table class="table table-responsive">
+        <table class="table table-responsive" >
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Título</th>
-                    <th>Descripcion</th>
-                    <th>Precio</th>
-                    <th>Requisitos</th>
-                    <th>Fecha de inicio</th>
-                    <th>Fecha de Fin</th>
-                    <th>Fecha de publicación</th>
-                    <th>Fotos</th>
-                    <th>Estado</th>
+                    <th>{{'trips.title' | translate}}</th>
+                    <th>{{'trips.description' | translate}}</th>
+                    <th>{{'trips.price' | translate}}</th>
+                    <th>{{'trips.requirements' | translate}}</th>
+                    <th>{{'trips.startDate' | translate}}</th>
+                    <th>{{'trips.endDate' | translate}}</th>
+                    <th>Publication Date </th>
+                    <th>{{'trips.pictures' | translate}}</th>
+                    <th>{{'trips.stages' | translate}}</th>
                     <th>Manager ID</th>
+                    <th>¿cancelado?</th>
 
                 </tr>
             </thead>
                 <tbody>
-                    <tr *ngFor="let preCancelTrip of preCancelTrips">
-                        <th>{{preCancelTrip.id}}</th>
-                        <th>{{preCancelTrip.title}}</th>
-                        <th>{{preCancelTrip.description}}</th>
-                        <th>{{preCancelTrip.price}}</th>
-                        <th>{{preCancelTrip.requirements}}</th>
-                        <th>{{preCancelTrip.startDate}}</th>
-                        <th>{{preCancelTrip.endDate}}</th>
-                        <th>{{preCancelTrip.publicationDate}}</th>
-                        <th>{{preCancelTrip.pictures}}</th>
-                        <th>{{preCancelTrip.stages}}</th>
-                        <th>{{preCancelTrip.managerId}}</th>
+                    <tr *ngFor="let trip of preCancelTrips" >
+                        <th >{{trip.id}}</th>
+                        <th>{{trip.title}}</th>
+                        <th>{{trip.description}}</th>
+                        <th>{{trip.price}}</th>
+                        <th>{{trip.requirements}}</th>
+                        <th style="background-color: yellow;" *ngIf="getNowAndStartDateDiffInDays(trip) == true" >{{trip.startDate | date: 'dd/MM/yyyy'}}</th>
+                        <th>{{trip.endDate | date: 'dd/MM/yyyy'}}</th>
+                        <th>{{trip.publicationDate | date: 'dd/MM/yyyy'}}</th>
+                        <th>{{trip.pictures | json}}</th>
+                        <th>{{trip.stages | json}}</th>
+                        <th>{{trip.managerId}}</th>
+                        <th>{{trip.canceled}}</th>
+                        
                     </tr>
                 </tbody>
-            <tbody>
+                <tbody>
                 </table>
+                <button class="btn btn-danger" (click)="cancelTrip(preCancelTrips)">{{'cancelarTrips' | translate}}</button>
+            </div>
         </div>
-</div>

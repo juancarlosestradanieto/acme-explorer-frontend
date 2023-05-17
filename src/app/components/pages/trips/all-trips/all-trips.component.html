@@ -3,7 +3,7 @@
     <div class="col-md-6"><p>{{'trips.messages.trips-available' | translate}}</p>
         <button type="button" class="btn btn-primary" *ngIf="activeRole == 'MANAGER'" routerLink="/precancel">
             <i class="fa-solid fa-cross"></i>
-            Ir a la vista de Pre-cancelación
+           {{'irAPreCancelar' | translate}}
         </button></div>
     <div class="col-md-3 offset-md-3" *ngIf="showAddTripButton">
         <button type="button" class="btn btn-success" routerLink="/trips/add"  id="add-trip">
@@ -321,11 +321,11 @@
 
                 <button type="button" class="btn btn-warning" *ngIf="activeRole == 'MANAGER' && verifyTripIsPreCanceled(trip) == false " (click)="addTripToPreCancel(trip)">
                     <i class="fa-solid fa-cross"></i>
-                    PreCancelar Trip
+                    {{'precancelarTrip' | translate}}
                 </button>
                 <button type="button" class="btn btn-secondary" *ngIf="activeRole == 'MANAGER' && verifyTripIsPreCanceled(trip) == true" (click)="removeTripToPreCancel(trip)">
                     <i class="fa-solid fa-cross"></i>
-                    Deseleccionar PreCancelación
+                    {{'descancelarTrip' | translate}}
                 </button>
 
                 <button type="button" class="btn btn-success" *ngIf="activeRole == 'EXPLORER'" routerLink="/trips/{{trip.id}}/favourites-lists">

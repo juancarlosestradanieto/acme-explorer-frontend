@@ -8,6 +8,18 @@
 
 Para el subrayado en amarillo solo se pinta la columna de startDate. Si los viajes tienen una fecha de startDate superior a 7 días
 a la actual, no se subraya. Si tienen uno menor a 7 días, aunque haya concluido, sí estarían subrayados.
+
+Por lógica de negocio se pueden cancelar ciertos viajes, como aquellos que están próximos a la fecha o ya han pasado de la actual.
+EN ese caso consola devuelve un 403 forbidden.
+
+
+
+
+
+
+
+
+
 ## 1. Environment Variables
 
 Copy the environment variables file.

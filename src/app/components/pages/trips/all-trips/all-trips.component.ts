@@ -774,5 +774,6 @@ export class AllTripsComponent implements OnInit {
     return tripIsPreCanceled
   }
 
+  
 }
 

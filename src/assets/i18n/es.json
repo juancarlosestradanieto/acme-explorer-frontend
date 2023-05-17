@@ -1,4 +1,9 @@
 {
+  "cancelarTrips":"Cancelar los viajes",
+  "irAPreCancelar":"Ir a la vista de precancelaciones",
+  "descancelarTrip":"Desprecancelar viaje",
+  "precancelarTrip":"Precancelar Trip",
+
   "REGISTER": {
     "REGISTER": "Registrarse",
     "NEW_ACTOR": "Registro de nuevo actor",

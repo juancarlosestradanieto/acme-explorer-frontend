@@ -1,4 +1,8 @@
 {
+  "cancelarTrips":"Cancel All Trips",
+  "irAPreCancelar":"Go to Precancel Trip Component",
+  "descancelarTrip":"Reverse Precancel Trip",
+  "precancelarTrip":"Precancel Trip",
   "REGISTER": {
     "REGISTER": "Register",
     "NEW_ACTOR": "Register a new actor",
